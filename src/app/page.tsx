@@ -41,7 +41,7 @@ export default function Home() {
         <HeroSection />
         <AiSimplifies />
         <FeaturesSection />
-        <TimelineDemo />
+        {/* <TimelineDemo /> */}
         <PricingSection />
         <BrainBehindSection />
       </main>

@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import LanguageSwitcher from "../LanguageSwitcher";
+import { Button } from "@/components/ui/button";
 
 export function SiteHeader() {
   const [isVisible, setIsVisible] = useState(true);
@@ -47,7 +47,7 @@ export function SiteHeader() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 w-full bg-white z-50 transition-transform duration-300 border-green-600",
+        "fixed top-0 left-0 w-screen bg-white z-50 transition-transform duration-300",
         isVisible ? "translate-y-0" : "-translate-y-full"
       )}
     >
