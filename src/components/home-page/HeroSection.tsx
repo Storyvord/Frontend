@@ -1,8 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 export function HeroSection() {
+  const t = useTranslations("HomePage");
   return (
     <div className="container pt-36 grid grid-cols-12 gap-y-6 items-center text-center relative">
       <div className="gradient-03 z-50" />
@@ -17,7 +19,7 @@ export function HeroSection() {
       </div>
 
       <h1 className="col-start-2 col-span-10 text-3xl md:text-4xl lg:text-5xl font-poppins-bold mb-6 text-background-2 flex flex-col justify-center items-center">
-        <span>Revolutionising Film Production: From</span>
+        <span>{t("title")}</span>
         <span className=" mt-2">Planning to Budgeting in Minutes</span>
       </h1>
 

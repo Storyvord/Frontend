@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import LanguageSwitcher from "../LanguageSwitcher";
 
 export function SiteHeader() {
   const [isVisible, setIsVisible] = useState(true);
@@ -67,6 +68,7 @@ export function SiteHeader() {
           <Button className=" bg-background-2 text-white ">
             <Link href="/auth/sign-in">Get Started</Link>
           </Button>
+          <LanguageSwitcher />
         </nav>
       </div>
     </header>
