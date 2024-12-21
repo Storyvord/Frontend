@@ -1,33 +1,31 @@
-import { BarChart3, Users, FileText, Calendar } from "lucide-react";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 export function FeaturesSection() {
+  const t = useTranslations("HomePage.FeaturesSection");
+
   const features = [
     {
       icon: "/icons/budget.svg",
-      title: "AI Budget Forecasting",
-      description:
-        "Intelligent budget planning to optimize production costs with reliable predictions tailored to your project.",
+      title: t("features.0.title"),
+      description: t("features.0.description"),
     },
     {
       icon: "/icons/crew.svg",
-      title: "Crew Recommendations",
-      description:
-        "Find the ideal crew members based on project requirements, experience, and availability.",
+      title: t("features.1.title"),
+      description: t("features.1.description"),
     },
     {
       icon: "/icons/script.svg",
-      title: "Script Breakdown & Analysis",
-      description:
-        "Automated script analysis with AI-powered insights for enhanced planning and execution.",
+      title: t("features.2.title"),
+      description: t("features.2.description"),
     },
     {
       icon: "/icons/calendar.svg",
-      title: "Production Scheduling",
-      description:
-        "Streamline your production schedule with intelligent resource allocation and timeline management.",
+      title: t("features.3.title"),
+      description: t("features.3.description"),
     },
   ];
 
@@ -37,13 +35,10 @@ export function FeaturesSection() {
         variant="secondary"
         className="bg-white text-[#1e1e1e] px-4 py-1 text-sm font-medium shadow-[0px_1px_15px_rgba(0,255,0,0.3)] border-2 border-primary-green flex items-center gap-3 w-fit "
       >
-        Ready to Streamline Your Production?
+        {t("badgeText")}
       </Badge>
-      <p className=" text-xl font-poppins-medium mt-8">
-        Join thousands of filmmakers using our platform to create seamless productions.
-      </p>
+      <p className=" text-xl font-poppins-medium mt-8">{t("introText")}</p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mt-8 relative z-10">
-        {/* <div className="gradient-03 z-0" /> */}
         {features.map((feature, index) => (
           <div
             key={index}

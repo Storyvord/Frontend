@@ -4,53 +4,57 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Badge } from "../ui/badge";
 import { Description } from "@radix-ui/react-toast";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 export function PricingSection() {
+  const t = useTranslations("HomePage.PricingSection");
+
   const plans = [
     {
       icon: "/icons/price/indie.svg",
-      tag: "(ESSENTIAL)",
-      name: "INDIE PACKAGE",
-      description: "For independent filmmakers taking their first steps.",
-      price: "Free",
+      tag: t("plans.0.tag"),
+      name: t("plans.0.name"),
+      description: t("plans.0.description"),
+      price: t("plans.0.price"),
+      period: t("plans.0.period"),
       features: [
-        "1 User",
-        "3 Project Limit",
-        "Project Management Tools",
-        "Basic Human Producer (additional cost)",
+        t("plans.0.features.0"),
+        t("plans.0.features.1"),
+        t("plans.0.features.2"),
+        t("plans.0.features.3"),
       ],
     },
     {
       icon: "/icons/price/studio.svg",
-      tag: " (PROFESSIONAL)",
-      name: "STUDIO PACKAGE",
+      tag: t("plans.1.tag"),
+      name: t("plans.1.name"),
       popular: true,
-      description: "For independent filmmakers taking their first steps.",
-      price: "$7,600",
-      period: "annually",
+      description: t("plans.1.description"),
+      price: t("plans.1.price"),
+      period: t("plans.1.period"),
       features: [
-        "Everything from Indie Package",
-        "5 Users",
-        "20 Projects Limit",
-        "Marketplace Access (Crew and Suppliers)",
-        "Unlimited Support from Human Producer",
-        "Access to Mobile App",
+        t("plans.1.features.0"),
+        t("plans.1.features.1"),
+        t("plans.1.features.2"),
+        t("plans.1.features.3"),
+        t("plans.1.features.4"),
+        t("plans.1.features.5"),
       ],
     },
     {
       icon: "/icons/price/oscar.svg",
-      tag: " (ENTERPRISE)",
-      name: "OSCAR PACKAGE",
-      description: "For high-end productions and studios creating cinematic masterpieces.",
-      price: "$47,900",
-      period: "annually",
+      tag: t("plans.2.tag"),
+      name: t("plans.2.name"),
+      description: t("plans.2.description"),
+      price: t("plans.2.price"),
+      period: t("plans.2.period"),
       features: [
-        "Everything from Studio Package",
-        "Advanced Creative Tools",
-        "20+ Users",
-        "Departmental Tools for Specialized Inputs (VFX, Art, etc.)",
-        "Dedicated Account Representative",
-        "24/7 Premium Human Producer Support",
+        t("plans.2.features.0"),
+        t("plans.2.features.1"),
+        t("plans.2.features.2"),
+        t("plans.2.features.3"),
+        t("plans.2.features.4"),
+        t("plans.2.features.5"),
       ],
     },
   ];
@@ -70,10 +74,9 @@ export function PricingSection() {
               key={index}
               className={`flex flex-col text-[#170F49] pt-8 rounded-3xl hover-border-2 hover:border-primary-green transition-transform duration-300 hover:-translate-y-2 relative ${index === 1 ? "shadow-[0px_0px_30px_rgba(0,255,0,0.4)] " : ""}`}
             >
-              {plan.popular && (
+              {plan?.popular && (
                 <div className="absolute w-fit top-5 right-0 bg-gradient-to-r from-[#03256c] to-green-500 text-white text-center py-1 px-3 rounded-md">
-                  {" "}
-                  Popular
+                  {t("popular")}
                 </div>
               )}
               <CardHeader>
@@ -94,7 +97,7 @@ export function PricingSection() {
                   )}
                 </div>
                 <ul className="space-y-4">
-                  <p className=" text-start text-sm font-poppins-medium">What’s included</p>
+                  <p className=" text-start text-sm font-poppins-medium">{t("featuresHeading")}</p>
                   {plan.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-center">
                       <Check className="mr-2 h-4 w-4 text-green-500" />
@@ -105,7 +108,7 @@ export function PricingSection() {
               </CardContent>
               <CardFooter>
                 <Button variant="outline" className="w-full">
-                  Get Started
+                  {t("buttonText")}
                 </Button>
               </CardFooter>
             </Card>

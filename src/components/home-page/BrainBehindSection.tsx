@@ -1,11 +1,14 @@
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 
 export function BrainBehindSection() {
+  const t = useTranslations("HomePage.BrainBehindSection");
+
   return (
     <section className="py-20 bg-white mb-6">
       <div className="container grid grid-cols-12">
         <h2 className="text-5xl col-start-3 col-span-8 font-bold mb-12 text-center text-[#111111]">
-          Brain Behind Storyvord
+          {t("title")}
         </h2>
         <div className="flex flex-col md:flex-row items-center gap-2 border-b-2 border-t-2 border-primary-green col-start-2 col-span-10 pl-[20%] mt-[8%] relative">
           {/* Blur Element */}
@@ -28,17 +31,10 @@ export function BrainBehindSection() {
           </div>
 
           <div className="px-3">
-            <p className="text-gray-600 mb-2">
-              With 12+ years of global experience in film and video production, Gaurav has
-              contributed to blockbuster projects like Fast & Furious 7 and The Crown. A visionary
-              entrepreneur, he previously founded CamArt, a leading film equipment rental portal for
-              international producers. Armed with an MBA in International Business (UK) and business
-              certifications from Harvard University, Gaurav brings unmatched expertise to
-              revolutionize filmmaking with AI.
-            </p>
+            <p className="text-gray-600 mb-2">{t("bio")}</p>
             <div className=" flex items-center gap-3">
-              <h3 className="text-lg font-poppins-semibold">Gaurav Sharma</h3>
-              <p className="text-gray-600">Chief Executive Officer @Storyvord</p>
+              <h3 className="text-lg font-poppins-semibold">{t("name")}</h3>
+              <p className="text-gray-600">{t("role")}</p>
             </div>
           </div>
         </div>

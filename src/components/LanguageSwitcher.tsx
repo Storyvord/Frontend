@@ -29,6 +29,7 @@ const LanguageSwitcher = () => {
       <SelectContent>
         <SelectItem value="en">English</SelectItem>
         <SelectItem value="hi">हिंदी</SelectItem>
+        {/* <SelectItem value="zh-CN">中国</SelectItem> */}
       </SelectContent>
     </Select>
   );

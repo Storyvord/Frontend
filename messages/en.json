@@ -1,5 +1,103 @@
 {
   "HomePage": {
-    "title": "Welcome to the Homepage"
+    "home": "Home",
+    "product": "Product",
+    "clients": "Clients",
+    "about": "About",
+    "text": "AI-Powered Insights For Your Film Production",
+    "title1": "Revolutionising Film Production: From",
+    "title2": "Planning to Budgeting in Minutes",
+    "description": "Empower your filmmaking process with AI-driven insights and budget optimization.",
+    "button": "Get Started",
+
+    "AiSimplifies": {
+      "badgeText": "How AI Simplifies Filmmaking for You",
+      "title": "AI That Thinks Like a Producer",
+      "description": "From accurate budget calculations to intelligent crew recommendations, AI ensures your production is seamless, efficient, and creative.",
+      "trustedText": "Trusted by Leading Filmmakers Globally.",
+      "crewSuggestion": "AI suggests the perfect crew for you.",
+      "community": "Join our Community, We are waiting for you"
+    },
+
+    "FeaturesSection": {
+      "badgeText": "Ready to Streamline Your Production?",
+      "introText": "Join thousands of filmmakers using our platform to create seamless productions.",
+      "features": [
+        {
+          "title": "AI Budget Forecasting",
+          "description": "Intelligent budget planning to optimize production costs with reliable predictions tailored to your project."
+        },
+        {
+          "title": "Crew Recommendations",
+          "description": "Find the ideal crew members based on project requirements, experience, and availability."
+        },
+        {
+          "title": "Script Breakdown & Analysis",
+          "description": "Automated script analysis with AI-powered insights for enhanced planning and execution."
+        },
+        {
+          "title": "Production Scheduling",
+          "description": "Streamline your production schedule with intelligent resource allocation and timeline management."
+        }
+      ]
+    },
+    "PricingSection": {
+      "badgeText": "Our Price",
+      "popularTag": "Popular",
+      "plans": [
+        {
+          "tag": "(ESSENTIAL)",
+          "name": "INDIE PACKAGE",
+          "description": "For independent filmmakers taking their first steps.",
+          "price": "Free",
+          "period": "",
+          "features": [
+            "1 User",
+            "3 Project Limit",
+            "Project Management Tools",
+            "Basic Human Producer (additional cost)"
+          ]
+        },
+        {
+          "tag": "(PROFESSIONAL)",
+          "name": "STUDIO PACKAGE",
+          "description": "For independent filmmakers taking their first steps.",
+          "price": "$7,600",
+          "period": "annually",
+          "features": [
+            "Everything from Indie Package",
+            "5 Users",
+            "20 Projects Limit",
+            "Marketplace Access (Crew and Suppliers)",
+            "Unlimited Support from Human Producer",
+            "Access to Mobile App"
+          ]
+        },
+        {
+          "tag": "(ENTERPRISE)",
+          "name": "OSCAR PACKAGE",
+          "description": "For high-end productions and studios creating cinematic masterpieces.",
+          "price": "$47,900",
+          "period": "annually",
+          "features": [
+            "Everything from Studio Package",
+            "Advanced Creative Tools",
+            "20+ Users",
+            "Departmental Tools for Specialized Inputs (VFX, Art, etc.)",
+            "Dedicated Account Representative",
+            "24/7 Premium Human Producer Support"
+          ]
+        }
+      ],
+      "popular": "Popular",
+      "buttonText": "Get Started",
+      "featuresHeading": "What’s included"
+    },
+    "BrainBehindSection": {
+      "title": "Brain Behind Storyvord",
+      "bio": "With 12+ years of global experience in film and video production, Gaurav has contributed to blockbuster projects like Fast & Furious 7 and The Crown. A visionary entrepreneur, he previously founded CamArt, a leading film equipment rental portal for international producers. Armed with an MBA in International Business (UK) and business certifications from Harvard University, Gaurav brings unmatched expertise to revolutionize filmmaking with AI.",
+      "name": "Gaurav Sharma",
+      "role": "Chief Executive Officer @Storyvord"
+    }
   }
 }
