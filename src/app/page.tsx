@@ -31,7 +31,7 @@ import { Footer } from "@/components/home-page/Footer";
 import { HeroSection } from "@/components/home-page/HeroSection";
 import { PricingSection } from "@/components/home-page/PricingSection";
 import { SiteHeader } from "@/components/home-page/SiteHeader";
-import { ToolsSection } from "@/components/home-page/ToolsSection";
+import { TimelineDemo } from "@/components/home-page/TimelineDemo";
 
 export default function Home() {
   return (
@@ -41,7 +41,7 @@ export default function Home() {
         <HeroSection />
         <AiSimplifies />
         <FeaturesSection />
-        {/* <ToolsSection /> */}
+        <TimelineDemo />
         <PricingSection />
         <BrainBehindSection />
       </main>

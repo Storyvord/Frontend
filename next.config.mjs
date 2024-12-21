@@ -11,6 +11,7 @@ const nextConfig = {
       { protocol: "https", hostname: "content.skyscnr.com", pathname: "**" },
       { protocol: "https", hostname: "logos.skyscnr.com", pathname: "**" },
       { protocol: "https", hostname: "storyvordblob.blob.core.windows.net", pathname: "**" },
+      { protocol: "https", hostname: "assets.aceternity.com", pathname: "**" },
     ],
   },
   async headers() {
