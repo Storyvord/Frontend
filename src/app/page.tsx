@@ -24,6 +24,7 @@
 
 // export default Page;
 
+import AiSimplifies from "@/components/home-page/AiSimplifies";
 import { BrainBehindSection } from "@/components/home-page/BrainBehindSection";
 import { FeaturesSection } from "@/components/home-page/FeaturesSection";
 import { Footer } from "@/components/home-page/Footer";
@@ -38,8 +39,9 @@ export default function Home() {
       <SiteHeader />
       <main className="flex-1">
         <HeroSection />
+        <AiSimplifies />
         <FeaturesSection />
-        <ToolsSection />
+        {/* <ToolsSection /> */}
         <PricingSection />
         <BrainBehindSection />
       </main>

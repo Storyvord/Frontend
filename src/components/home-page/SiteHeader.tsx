@@ -36,32 +36,38 @@ export function SiteHeader() {
     }
   }, [lastScrollY]);
 
+  const navLinks = [
+    { href: "#", label: "Home" },
+    { href: "#", label: "Product" },
+    { href: "#", label: "Client" },
+    { href: "#", label: "About" },
+  ];
+
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 w-full bg-white z-50 transition-transform duration-300",
+        "fixed top-0 left-0 w-full bg-white z-50 transition-transform duration-300 border-green-600",
         isVisible ? "translate-y-0" : "-translate-y-full"
       )}
     >
-      <div className="container flex items-center justify-between py-4">
+      <div className="container flex items-center justify-between py-2">
         <Link href="/" className="text-xl font-bold">
-          <Image src="/logo.svg" width={130} height={50} alt="logo" />
+          <Image src="/logo.svg" width={130} height={50} alt="logo" className=" w-40" />
         </Link>
-        <nav className="hidden md:flex space-x-6 ">
-          <Link href="#" className="text-sm hover:text-gray-900 border-g">
-            Product
-          </Link>
-          <Link href="#" className="text-sm text-gray-600 hover:text-gray-900">
-            Cases
-          </Link>
-          <Link href="#" className="text-sm text-gray-600 hover:text-gray-900">
-            Client
-          </Link>
-          <Link href="#" className="text-sm text-gray-600 hover:text-gray-900">
-            About
-          </Link>
+        <nav className="hidden md:flex items-center gap-8 ">
+          {navLinks.map((link, index) => (
+            <Link
+              key={index}
+              href={link.href}
+              className="text-sm text-gray-600 hover:text-gray-900 relative transition-all duration-300 hover:border-b-2 hover:border-primary-green"
+            >
+              {link.label}
+            </Link>
+          ))}
+          <Button className=" bg-background-2 text-white ">
+            <Link href="/auth/sign-in">Get Started</Link>
+          </Button>
         </nav>
-        <Button className="bg-[#1e1e1e] text-white hover:bg-[#2e2e2e]">Get Started</Button>
       </div>
     </header>
   );
