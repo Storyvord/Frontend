@@ -17,6 +17,8 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         iconButton:
           "bg-iconButton text-iconButton-foreground font-poppins font-normal border border-[#111111] rounded-full hover:bg-iconButton/100",
+        storyvord:
+          "bg-gradient-to-r from-[#03256c] to-green-500 text-white hover:from-green-500 hover:to-[#03256c] transition-all duration-300",
       },
       size: {
         default: "h-12 px-4 py-2",

@@ -1,13 +1,24 @@
 import { NEW_API_URL_V2, USER_API } from "@/constant/constant";
 import { customFetch } from "./api";
 
-export const sentInvitationToCrew = async (formData: any) => {
-  return customFetch(`${USER_API}/api/referral/projects/add-crew/`, {
+export const sentInvitationToCrew = async ({
+  projectId,
+  userId,
+  roleId,
+}: {
+  projectId: string;
+  userId: number;
+  roleId?: string;
+}) => {
+  return customFetch(`${USER_API}/project/v2/projects/${projectId}/add_member/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(formData),
+    body: JSON.stringify({
+      user_id: userId,
+      role_id: roleId || "2",
+    }),
   });
 };
 
