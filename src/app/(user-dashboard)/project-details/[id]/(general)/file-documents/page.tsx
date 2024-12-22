@@ -14,6 +14,7 @@ import {
 import { RoomFormData } from "@/types";
 import { useGetCrewList } from "@/lib/react-query/queriesAndMutations/crew";
 import { useToast } from "@/components/ui/use-toast";
+import { useCrewOptions } from "@/hooks/useCrewOptions";
 
 type RoomDataType = {
   id: string;
@@ -49,13 +50,7 @@ const FileSection: FC = () => {
     isError: isErrorUpdateRoom,
   } = useUpdateRoom();
 
-  const { data: crewListData } = useGetCrewList(projectId);
-  const crewList = crewListData?.results.map(
-    (crew: { membership_id: string; user: { email: string } }) => ({
-      value: crew.membership_id,
-      label: crew.user.email,
-    })
-  );
+  const { crewList, isCrewLoading, isCrewError } = useCrewOptions(projectId);
 
   const handleCardClick = (roomId: string) => {
     router.push(`/project-details/${projectId}/file-documents/${roomId}`);

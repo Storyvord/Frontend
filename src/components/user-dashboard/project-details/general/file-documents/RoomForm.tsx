@@ -13,7 +13,7 @@ type RoomFormProps = {
   isError: boolean;
   open: boolean;
   onClose: () => void;
-  crewList?: { value: string; label: string }[];
+  crewList?: { value: number; label: string }[];
   mode: "create" | "edit";
   initialData?: RoomFormData | null;
 };

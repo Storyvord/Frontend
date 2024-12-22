@@ -17,6 +17,7 @@ import { ReturnAnnouncements } from "@/types";
 import { useParams } from "next/navigation";
 import { useGetCrewList } from "@/lib/react-query/queriesAndMutations/crew";
 import { useToast } from "@/components/ui/use-toast";
+import { useCrewOptions } from "@/hooks/useCrewOptions";
 
 const Announcements = () => {
   const [openDialog, setOpenDialog] = useState(false);
@@ -28,18 +29,8 @@ const Announcements = () => {
     isPending: isPendingCreate,
     isError: isErrorCreate,
   } = useCreateAnnouncement();
-  const {
-    data: crewListData,
-    isPending: isCrewLoading,
-    isError: isCrewError,
-  } = useGetCrewList(projectId);
 
-  const crewList = crewListData?.results.map(
-    (crew: { membership_id: string; user: { email: string } }) => ({
-      value: crew.membership_id,
-      label: crew.user.email,
-    })
-  );
+  const { crewList, isCrewLoading, isCrewError } = useCrewOptions(projectId);
 
   const createAnnouncement = async (data: AnnouncementFormType) => {
     try {

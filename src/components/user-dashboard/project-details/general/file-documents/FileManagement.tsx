@@ -93,10 +93,10 @@ const FileManagement = () => {
         <Button variant="outline" className="flex flex-row" onClick={handleOpenModal}>
           +<span className="ml-2">Upload File</span>
         </Button>
-        <AccessRights
+        {/* <AccessRights
           handleSubmit={handleSubmitAccessRightsForm}
           isLoading={isLoadingAccessRights}
-        />
+        /> */}
       </div>
 
       <div className="mt-8 grid gap-6 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">

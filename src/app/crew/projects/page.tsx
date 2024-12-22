@@ -11,10 +11,11 @@ import React, { useState, useEffect } from "react";
 
 const tabs = ["In Progress", "Invitations", "Rejected"];
 export type Project = {
-  project: string;
+  project_id: string;
   project_name: string;
+  project_status: string;
   id: string;
-  status: "PENDING" | "REJECTED" | "ACCEPTED";
+  invites: { status: "PENDING" | "REJECTED" | "ACCEPTED"; id: string }[];
   created_at: string;
   message: string;
 };
@@ -46,16 +47,16 @@ const Projects = () => {
       const accepted: Project[] = [];
       const rejected: Project[] = [];
 
-      projects.forEach((project: Project) => {
-        if (project.status === "PENDING") {
+      projects?.data?.forEach((project: Project) => {
+        if (project?.invites?.at(0)?.status === "PENDING") {
           pending.push(project);
-        } else if (project.status === "ACCEPTED") {
+        } else if (project?.invites?.at(0)?.status === "ACCEPTED") {
           accepted.push(project);
-        } else if (project.status === "REJECTED") {
+        } else if (project?.invites?.at(0)?.status === "REJECTED") {
           rejected.push(project);
         }
       });
-
+      console.log(projects?.data);
       setPendingProjects(pending);
       setAcceptedProjects(accepted);
       setRejectedProjects(rejected);
@@ -91,7 +92,7 @@ const Projects = () => {
               <p className="text-gray-600 font-semibold">No project found</p>
             )}
             {acceptedProjects?.map((project: Project) => (
-              <ProjectCard key={project.id} project={project} />
+              <ProjectCard key={project.project_id} project={project} />
             ))}
           </>
         )}
@@ -102,7 +103,7 @@ const Projects = () => {
             )}
             {pendingProjects?.map((project: Project) => (
               <ProjectCard
-                key={project.id}
+                key={project.project_id}
                 project={project}
                 handleAccept={handleAccept}
                 handleReject={handleReject}
@@ -119,7 +120,7 @@ const Projects = () => {
               <p className="text-gray-600 font-semibold">No project found</p>
             )}
             {rejectedProjects?.map((project: Project) => (
-              <ProjectCard key={project.id} project={project} />
+              <ProjectCard key={project.project_id} project={project} />
             ))}
           </>
         )}
