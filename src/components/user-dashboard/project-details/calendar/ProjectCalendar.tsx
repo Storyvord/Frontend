@@ -12,6 +12,7 @@ import {
 import { useGetCrewList } from "@/lib/react-query/queriesAndMutations/crew";
 import CalendarComponent from "@/components/calender/CalendarComponent";
 import { CalenderFormFieldType } from "@/types";
+import { useCrewOptions } from "@/hooks/useCrewOptions";
 
 const ProjectCalendar = ({
   openFormDialog,
@@ -37,11 +38,7 @@ const ProjectCalendar = ({
   } = useGetAllCalenderEvents(projectId);
 
   // Fetch crew list
-  const {
-    data: crewListData,
-    isPending: isCrewLoading,
-    isError: isCrewError,
-  } = useGetCrewList(projectId);
+  const { crewList, isCrewLoading, isCrewError } = useCrewOptions(projectId);
 
   // Create calendar event mutation
   const {
@@ -66,13 +63,6 @@ const ProjectCalendar = ({
   //     label: crew.firstName,
   //   })
   // );
-
-  const crewList = crewListData?.results.map(
-    (crew: { membership_id: string; user: { email: string } }) => ({
-      value: crew.membership_id,
-      label: crew.user.email,
-    })
-  );
 
   const handleCreateEvent = async (formData: CalenderFormFieldType) => {
     await createCalenderEvent({ eventData: formData, projectId });

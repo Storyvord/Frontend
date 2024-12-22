@@ -20,7 +20,7 @@ interface TaskCardProps {
   completeTask: (task: taskType) => void;
   deleteTask: (id: number) => void;
   editTask: (id: number, task: any) => void;
-  crewList: [{ value: number; label: string }];
+  crewList: { value: number; label: string }[];
   approveTaskCompletion: (taskId: number) => void;
   isLoading: boolean;
 }

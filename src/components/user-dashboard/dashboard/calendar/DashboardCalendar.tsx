@@ -7,7 +7,7 @@ import DatePickerWithRange from "./DatePickerWithRange";
 import { Button } from "@/components/ui/button";
 
 type Props = {
-  employeeList: { value: string; label: string }[];
+  employeeList: { value: number; label: string }[];
 };
 
 const DashboardCalendar = ({ employeeList }: Props) => {

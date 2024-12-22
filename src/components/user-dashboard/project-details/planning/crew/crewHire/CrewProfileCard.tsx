@@ -49,7 +49,7 @@ const CrewProfileCard: React.FC<CrewProfileCardProps> = ({
           <CgProfile className=" w-20 h-20 text-gray-600" />
         )}
         <div>
-          <CardTitle className="text-xl font-semibold text-gray-800">{name}</CardTitle>
+          <CardTitle className="text-xl font-poppins-semibold text-gray-800">{name}</CardTitle>
           <CardDescription className="text-sm text-gray-500">{location}</CardDescription>
         </div>
       </CardHeader>
@@ -59,7 +59,7 @@ const CrewProfileCard: React.FC<CrewProfileCardProps> = ({
       </CardContent>
 
       <CardFooter className="px-4 py-3 mt-auto flex justify-between items-center bg-gray-50 border-t border-gray-200">
-        <p className="text-lg font-semibold text-primary">{rate}</p>
+        <p className="text-base font-poppins-semibold text-primary">{rate}</p>
         <Button
           onClick={() => handleSendInvitation(id)}
           className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"

@@ -57,7 +57,7 @@ export const announcementFormDefaultValues = {
 type Props = {
   openDialog: boolean;
   setOpenDialog: (value: boolean) => void;
-  crewList: { value: string; label: string }[];
+  crewList: { value: number; label: string }[];
   createAnnouncement: (data: AnnouncementFormType) => void;
   isPending: boolean;
   isError: boolean;

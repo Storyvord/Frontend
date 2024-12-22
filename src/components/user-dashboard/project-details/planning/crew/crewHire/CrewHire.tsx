@@ -71,11 +71,11 @@ const CrewHire = () => {
     defaultValues,
   });
 
-  const onSubmit = async (data: ValidationSchemaType) => {
-    const transFormData = { ...data, project_id: projectId };
-    const res = await mutateAsync(transFormData);
-    if (res) setOpenDialog(false);
-  };
+  // const onSubmit = async (data: ValidationSchemaType) => {
+  //   const transFormData = { ...data, project_id: projectId };
+  //   const res = await mutateAsync(transFormData);
+  //   if (res) setOpenDialog(false);
+  // };
 
   return (
     <div>
@@ -85,18 +85,18 @@ const CrewHire = () => {
         searchValue={searchValue}
         setSearchValue={setSearchValue}
       />
-      <CrewList data={crewList} isLoading={isLoadingCrewList} />
+      <CrewList data={crewList?.data} isLoading={isLoadingCrewList} />
       <Dialog open={openDialog} onOpenChange={() => setOpenDialog(!openDialog)}>
         <DialogContent className="lg:w-[800px] w-[95%]">
           <DialogHeader>
             <DialogTitle> Invite </DialogTitle>
-            <CustomForm
+            {/* <CustomForm
               form={form}
               formFields={formFields}
               onSubmit={onSubmit}
               isLoading={isLoadingInvitation}
               isError={isErrorInvitation}
-            />
+            /> */}
           </DialogHeader>
         </DialogContent>
       </Dialog>

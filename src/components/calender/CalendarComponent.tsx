@@ -19,7 +19,7 @@ import { eventColors } from "@/constant/eventColor";
 type CalendarComponentProps = {
   events: CalenderEventType[];
   calendarType: "month" | "week" | "day" | "agenda";
-  crewList: { value: string; label: string }[] | undefined;
+  crewList: { value: number; label: string }[] | undefined;
   isCreateLoading: boolean;
   isCreateError: boolean;
   isDeleteLoading: boolean;
@@ -108,9 +108,9 @@ const CalendarComponent: React.FC<CalendarComponentProps> = ({
     return {
       style: {
         backgroundColor: eventColors[colorIndex],
-        borderRadius: '4px',
-        color: 'rgb(236, 228, 228)',
-      }
+        borderRadius: "4px",
+        color: "rgb(236, 228, 228)",
+      },
     };
   };
 
@@ -120,8 +120,8 @@ const CalendarComponent: React.FC<CalendarComponentProps> = ({
       // Parse UTC strings directly to local time
       return {
         ...event,
-        start: new Date(event.start.replace('Z', '')),
-        end: new Date(event.end.replace('Z', '')),
+        start: new Date(event.start.replace("Z", "")),
+        end: new Date(event.end.replace("Z", "")),
       };
     });
     setTransformEvents(transformed);

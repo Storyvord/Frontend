@@ -4,9 +4,10 @@ import Select, { MultiValue } from "react-select";
 import { Button } from "./ui/button";
 import Loader from "./Loader";
 import { useGetCrewList } from "@/lib/react-query/queriesAndMutations/crew";
+import { useCrewOptions } from "@/hooks/useCrewOptions";
 
 type OptionType = {
-  value: string;
+  value: number;
   label: string;
 };
 
@@ -19,11 +20,7 @@ const AccessRights = ({ handleSubmit, isLoading }: Props) => {
   const { id: projectId }: { id: string } = useParams();
   const [selectedOption, setSelectedOption] = useState<OptionType[]>([]);
 
-  const { data: crewListData } = useGetCrewList(projectId);
-  const crewList = crewListData?.results.map((crew: { id: number; user: string }) => ({
-    value: crew.id,
-    label: crew.user,
-  }));
+  const { crewList, isCrewLoading, isCrewError } = useCrewOptions(projectId);
 
   const handleSubmitAccessRightsForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
