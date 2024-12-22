@@ -1,11 +1,16 @@
-"use client"
-import { userLogout } from '@/lib/api/auth/auth'
-import React from 'react'
+"use client";
+import { userLogout } from "@/lib/api/auth/auth";
+import React from "react";
 
 const LogoutButton = () => {
   return (
-    <p className='text-center mx-auto cursor-pointer' onClick={() => userLogout()}>Logout</p>
-  )
-}
+    <button
+      className="text-center mx-auto cursor-pointer font-poppins-semibold"
+      onClick={() => userLogout()}
+    >
+      Logout
+    </button>
+  );
+};
 
-export default LogoutButton
+export default LogoutButton;

@@ -80,16 +80,22 @@ const ChatWindow: React.FC<ChatWindowProps> = ({
         <ConversationList conversations={conversationsList} senderId={senderId} />
       </section>
       <section className="flex-1 flex flex-col justify-between relative">
-        <ChatHeader
-          receiverName={receiverName}
-          isReceiverOnline={isReceiverOnline}
-          onMenuClick={toggleConversationList}
-        />
-
-        <DisplayMessage messages={messages} messagesEndRef={messagesEndRef} senderId={senderId} />
-
         {receiverName && (
-          <MessageInput message={message} setMessage={setMessage} sendMessage={sendMessage} />
+          <>
+            <ChatHeader
+              receiverName={receiverName}
+              isReceiverOnline={isReceiverOnline}
+              onMenuClick={toggleConversationList}
+            />
+
+            <DisplayMessage
+              messages={messages}
+              messagesEndRef={messagesEndRef}
+              senderId={senderId}
+            />
+
+            <MessageInput message={message} setMessage={setMessage} sendMessage={sendMessage} />
+          </>
         )}
       </section>
     </main>
