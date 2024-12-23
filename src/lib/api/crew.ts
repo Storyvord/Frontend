@@ -29,7 +29,7 @@ export const getInvitedCrewList = async (projectId: string) => {
 };
 
 export const getCrewFullProfile = async (crewId: string) => {
-  return customFetch(`${USER_API}/api/crew/crew-list/${crewId}/`, {
+  return customFetch(`${NEW_API_URL_V2}/crew/crew-list/${crewId}/`, {
     method: "GET",
   });
 };
@@ -43,10 +43,15 @@ export const searchCrew = async ({
   service: string;
   name: string;
 }) => {
-  return customFetch(
-    `${NEW_API_URL_V2}/crew/crew-profile/search/?location=${location}&skills=${service}&name=${name}`,
-    {
-      method: "GET",
-    }
-  );
+  return customFetch(`${NEW_API_URL_V2}/crew/crew-profile/search/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      location,
+      skills: service,
+      name,
+    }),
+  });
 };
