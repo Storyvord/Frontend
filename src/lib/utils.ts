@@ -43,14 +43,38 @@ export const convertToBase64 = (
   });
 };
 
-
-export const  getFileTypeFromUrl = async (url: string) =>{
+export const getFileTypeFromUrl = async (url: string) => {
   try {
-    const response = await fetch(url, { method: 'HEAD' }); // Use 'HEAD' to fetch headers only
-    const contentType = response.headers.get('Content-Type');
+    const response = await fetch(url, { method: "HEAD" }); // Use 'HEAD' to fetch headers only
+    const contentType = response.headers.get("Content-Type");
     return contentType;
   } catch (error) {
-    console.error('Error fetching file type:', error);
+    console.error("Error fetching file type:", error);
     return null;
   }
+};
+
+export function formatError(error: unknown): { title: string; description: string } {
+  if (typeof error === "object" && error !== null && "data" in error) {
+    const { data, message } = error as {
+      message?: string;
+      data?: Record<string, string[]>;
+    };
+
+    const description = data
+      ? Object.entries(data)
+          .map(([key, messages]) => `${key}: ${messages.join(", ")}`)
+          .join("; ")
+      : "An unexpected error occurred.";
+
+    return {
+      title: message || "An error occurred",
+      description,
+    };
+  }
+
+  return {
+    title: "An unknown error occurred",
+    description: "Please try again",
+  };
 }

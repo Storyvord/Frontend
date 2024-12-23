@@ -15,10 +15,10 @@ const ProjectComponent: React.FC<ProjectProps> = ({
   projectLink,
 }) => {
   if (!imageUrl) {
-    return null; 
+    return null;
   }
   return (
-    <div className="relative flex flex-col bg-clip-border rounded-xl bg-transparent text-gray-700 shadow-none border">
+    <div className="relative flex flex-col bg-clip-border rounded-xl bg-transparent text-gray-700 shadow-none border p-2">
       <div className="relative bg-clip-border rounded-xl overflow-hidden text-white mx-0 mt-0 mb-4 h-64 xl:h-40">
         <Image
           src={imageUrl}

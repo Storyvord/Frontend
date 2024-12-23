@@ -28,7 +28,7 @@ const CrewPage: React.FC<CrewPageClientProps> = ({
   refetch,
 }) => {
   if (isPending) {
-    return <LoadingUi isPending={isPending} text="AI is matching the best-fit crew..." />;
+    return <LoadingUi isPending={isPending} text="AI is matching best-fit crew..." />;
   }
 
   if (isError && !isPending) {

@@ -6,6 +6,7 @@ import { useToast } from "@/components/ui/use-toast";
 import SignUpForm from "@/components/auth/SignUpForm";
 import { useRegisterUser } from "@/lib/react-query/queriesAndMutations/auth/auth";
 import SideBanner from "@/components/auth/SideBanner";
+import { formatError } from "@/lib/utils";
 
 const SignUpPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -13,7 +14,6 @@ const SignUpPage = () => {
   const { toast } = useToast();
 
   const { mutateAsync: registerUser } = useRegisterUser();
-
   const handleSignUp = async (data: any, isChecked: boolean) => {
     if (!isChecked) {
       toast({
@@ -32,8 +32,10 @@ const SignUpPage = () => {
         router.push("/auth/sign-in");
       }
     } catch (error: unknown) {
+      const { title, description } = formatError(error);
       toast({
-        title: error instanceof Error ? error.message : "An unknown error occurred.",
+        title,
+        description,
         variant: "destructive",
       });
     } finally {

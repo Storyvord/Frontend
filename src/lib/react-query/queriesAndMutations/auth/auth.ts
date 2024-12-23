@@ -15,7 +15,7 @@ export const useRegisterUser = () => {
       return data;
     },
     onError: (error) => {
-      console.error(error);
+      throw error;
     },
   });
 };
@@ -36,7 +36,7 @@ export const useUserSignIn = () => {
       return data;
     },
     onError: (error) => {
-      console.error(error);
+      throw error;
     },
   });
 };

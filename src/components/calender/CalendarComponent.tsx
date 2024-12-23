@@ -19,7 +19,7 @@ import { eventColors } from "@/constant/eventColor";
 type CalendarComponentProps = {
   events: CalenderEventType[];
   calendarType: "month" | "week" | "day" | "agenda";
-  crewList: { value: string; label: string }[] | undefined;
+  crewList: { value: number; label: string }[] | undefined;
   isCreateLoading: boolean;
   isCreateError: boolean;
   isDeleteLoading: boolean;
@@ -108,9 +108,9 @@ const CalendarComponent: React.FC<CalendarComponentProps> = ({
     return {
       style: {
         backgroundColor: eventColors[colorIndex],
-        borderRadius: '4px',
-        color: 'rgb(236, 228, 228)',
-      }
+        borderRadius: "4px",
+        color: "rgb(236, 228, 228)",
+      },
     };
   };
 
@@ -120,15 +120,15 @@ const CalendarComponent: React.FC<CalendarComponentProps> = ({
       // Parse UTC strings directly to local time
       return {
         ...event,
-        start: new Date(event.start.replace('Z', '')),
-        end: new Date(event.end.replace('Z', '')),
+        start: new Date(event.start.replace("Z", "")),
+        end: new Date(event.end.replace("Z", "")),
       };
     });
     setTransformEvents(transformed);
   }, [events]);
 
   return (
-    <div className="bg-white px-4 py-2">
+    <div className="bg-white md:px-4 px-2 py-2">
       <div className="h-[600px] bg-white mb-3">
         <Calendar
           localizer={localizer}
@@ -142,7 +142,7 @@ const CalendarComponent: React.FC<CalendarComponentProps> = ({
           date={currentDate}
           selectable
           eventPropGetter={eventPropGetter}
-          style={{ height: "100%" }}
+          style={{ height: "100%", width: "100%" }}
         />
       </div>
       <AddEvent

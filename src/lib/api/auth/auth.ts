@@ -25,7 +25,7 @@ export const registerUser = async (data: {
   });
   if (!res.ok) {
     const errorData = await res.json(); // Extract error message from response
-    throw new Error(errorData?.message?.email[0] || "An unknown error occurred");
+    throw errorData;
   }
   return res.json();
 };
@@ -41,7 +41,7 @@ export const userSignIn = async ({ email, password }: { email: string; password:
   });
   if (!res.ok) {
     const errorData = await res.json(); // Extract error message from response
-    throw new Error(errorData.message || "An unknown error occurred");
+    throw errorData;
   }
   return res.json();
 };

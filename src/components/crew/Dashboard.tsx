@@ -3,6 +3,7 @@ import React from "react";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { Card, CardDescription, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
+import { useGetUserProfile } from "@/lib/react-query/queriesAndMutations/auth/auth";
 
 const items = [
   {
@@ -41,11 +42,15 @@ const items = [
 ];
 
 const Dashboard = () => {
+  const { data } = useGetUserProfile();
   return (
     <div className="">
       <nav className=" sm:flex block justify-between">
         <div>
-          <h3 className=" text-md text-gray-500"> Welcome, Souvik</h3>
+          <h3 className=" text-md text-gray-500">
+            {" "}
+            Welcome, {data?.data?.personal_info.full_name}
+          </h3>
           <h2 className="sm:text-lg sm:font-semibold text-gray-700">
             Here&apos;s your Storyvord Glance
           </h2>
@@ -54,7 +59,7 @@ const Dashboard = () => {
           Manage your Profile <FaArrowRightLong />
         </Link>
       </nav>
-      <main className="grid grid-cols-4 grid-rows-2 gap-6 md:grid-cols-8 p-8">
+      <main className="grid grid-cols-4 grid-rows-2 gap-6 md:grid-cols-8 lg:p-8 mt-4 lg:mt-0">
         {items.map((item, index) => (
           <Link
             href={item.link}

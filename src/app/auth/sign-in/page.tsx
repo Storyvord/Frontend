@@ -7,6 +7,7 @@ import { toast } from "@/components/ui/use-toast";
 import SignInForm, { SignInFormData } from "@/components/auth/SignInForm";
 import { useUserSignIn } from "@/lib/react-query/queriesAndMutations/auth/auth";
 import SideBanner from "@/components/auth/SideBanner";
+import { formatError } from "@/lib/utils";
 
 const SignInPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -38,8 +39,10 @@ const SignInPage = () => {
         }
       }
     } catch (error) {
+      const { title, description } = formatError(error);
       toast({
-        title: error instanceof Error ? error.message : "An unexpected error occurred",
+        title,
+        description,
         variant: "destructive",
       });
     } finally {

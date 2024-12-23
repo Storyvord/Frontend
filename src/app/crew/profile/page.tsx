@@ -19,9 +19,10 @@ import {
   useGetProfile,
   useGetSocialLink,
 } from "@/lib/react-query/queriesAndMutations/crew/profile";
+import { useGetUserProfile } from "@/lib/react-query/queriesAndMutations/auth/auth";
 
 const ProfilePage = () => {
-  const { data: profileData } = useGetProfile();
+  const { data: profileData } = useGetUserProfile();
   const { data: portfolioData } = useGetPortfolio();
   const { data: educationData } = useGetEducation();
   const { data: socialLinksData } = useGetSocialLink();
@@ -50,29 +51,29 @@ const ProfilePage = () => {
 
   return (
     <div className="container mx-auto p-6 space-y-6">
-      <Profile profile={profileData} />
+      <Profile profile={profileData?.data} />
       <Portfolio
-        portfolioData={portfolioData}
+        portfolioData={portfolioData?.data}
         deletePortfolio={deletePortfolio}
         isLoadingDeletePortfolio={isLoadingDeletePortfolio}
       />
       <Education
-        educationData={educationData}
+        educationData={educationData?.data}
         deleteEducation={deleteEducation}
         isLoadingDeleteEducation={isLoadingDeleteEducation}
       />
       <Endorsements
-        endorsementData={endorsementData}
+        endorsementData={endorsementData?.data}
         deleteEndorsement={deleteEndorsement}
         isLoadingDeleteEndorsement={isLoadingDeleteEndorsement}
       />
       <Credit
-        creditsData={creditsData}
+        creditsData={creditsData?.data}
         deleteCredit={deleteCredit}
         isLoadingDeleteCredit={isLoadingDeleteCredit}
       />
       <SocialLinks
-        socialLinksData={socialLinksData}
+        socialLinksData={socialLinksData?.data}
         deleteSocialLink={deleteSocialLink}
         isLoadingDeleteSocialLinks={isLoadingDeleteSocialLinks}
       />

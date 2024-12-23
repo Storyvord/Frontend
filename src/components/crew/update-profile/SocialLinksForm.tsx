@@ -13,6 +13,7 @@ import {
 import { useToast } from "@/components/ui/use-toast";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import CustomForm from "@/components/form-component/CustomForm";
+import { useGetUserProfile } from "@/lib/react-query/queriesAndMutations/auth/auth";
 
 const socialLinksFormFields: FormFieldConfig<SocialLinkFormType>[] = [
   {
@@ -34,10 +35,10 @@ type Props = {
 };
 
 const SocialLinksForm = ({ openDialog, setOpenDialog, fieldId }: Props) => {
-  const { data: profileData } = useGetProfile();
+  const { data: profileData } = useGetUserProfile();
   const [crewProfileId, setCrewProfileId] = useState();
   useEffect(() => {
-    setCrewProfileId(profileData?.id);
+    setCrewProfileId(profileData?.data?.crew_profile?.id);
   }, [profileData]);
   const { toast } = useToast();
 
@@ -45,7 +46,7 @@ const SocialLinksForm = ({ openDialog, setOpenDialog, fieldId }: Props) => {
   const { mutateAsync: updateSocialLink } = useUpdateSocialLink();
   const { data } = useGetSocialLink();
 
-  const editableData = data?.find((item: SocialLinkFormType) => item.id === fieldId);
+  const editableData = data?.data.find((item: SocialLinkFormType) => item.id === fieldId);
 
   const form = useForm({
     resolver: zodResolver(socialLinksFormValidationSchema),
@@ -86,7 +87,7 @@ const SocialLinksForm = ({ openDialog, setOpenDialog, fieldId }: Props) => {
 
   return (
     <Dialog open={openDialog} onOpenChange={() => setOpenDialog(!openDialog)}>
-      <DialogContent>
+      <DialogContent className=" max-w-[700px] mx-auto">
         <DialogHeader>
           <DialogTitle>Social Links</DialogTitle>
         </DialogHeader>

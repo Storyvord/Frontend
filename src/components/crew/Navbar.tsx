@@ -45,7 +45,7 @@ const Navbar = () => {
           <Link href="/crew/home">
             <Image src={logo} alt="logo" className="sm:h-10 h-8 w-auto cursor-pointer" />
           </Link>
-          <div className="hidden md:flex gap-8">
+          <div className="hidden md:flex md:items-center lg:gap-8 gap-4">
             {navLinks.map((link) => (
               <Link key={link.name} href={link.link}>
                 {link.name}
@@ -87,24 +87,24 @@ const Navbar = () => {
         <DropdownMenuContent className=" mr-4">
           {navLinks.map((link) => (
             <DropdownMenuItem key={link.name}>
-              <Link href={link.link} className="w-full py-2 mt-2">
+              <Link href={link.link} className="w-full">
                 {link.name}
               </Link>
             </DropdownMenuItem>
           ))}
 
           <DropdownMenuItem>
-            <Link href={"/crew/find-work"} className="w-full py-2 mt-2">
+            <Link href={"/crew/find-work"} className="w-full">
               Find Work
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Link href={"/crew/profile"} className="py-2 w-full text-center">
+            <Link href={"/crew/profile"} className="w-full">
               Profile
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <MdNotificationsActive className="w-8 h-8 mx-auto py-2" />
+            <LogoutButton />
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

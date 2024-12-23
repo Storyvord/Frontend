@@ -40,7 +40,7 @@ type Props = {
   createCalenderEvent: (formData: CalenderFormFieldType) => void;
   isLoading: boolean;
   isError: boolean;
-  crewList?: { value: string; label: string }[];
+  crewList?: { value: number; label: string }[];
   isEdit?: boolean;
 };
 

@@ -13,6 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useFieldArray, useForm } from "react-hook-form";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import CustomForm from "@/components/form-component/CustomForm";
+import { useGetUserProfile } from "@/lib/react-query/queriesAndMutations/auth/auth";
 
 const endorsementFormFields: FormFieldConfig<EndorsementFormType>[] = [
   {
@@ -41,10 +42,10 @@ type Props = {
 };
 
 const EndorsementsForm = ({ openDialog, setOpenDialog, fieldId }: Props) => {
-  const { data: profileData } = useGetProfile();
+  const { data: profileData } = useGetUserProfile();
   const [crewProfileId, setCrewProfileId] = useState();
   useEffect(() => {
-    setCrewProfileId(profileData?.id);
+    setCrewProfileId(profileData?.data?.crew_profile?.id);
   }, [profileData]);
 
   const { toast } = useToast();
@@ -53,7 +54,9 @@ const EndorsementsForm = ({ openDialog, setOpenDialog, fieldId }: Props) => {
   const { mutateAsync: updateEndorsement } = useUpdateEndorsement();
   const { data: endorsementData } = useGetEndorsement();
 
-  const editableData = endorsementData?.find((item: EndorsementFormType) => item.id === fieldId);
+  const editableData = endorsementData?.data.find(
+    (item: EndorsementFormType) => item.id === fieldId
+  );
 
   const form = useForm({
     resolver: zodResolver(endorsementFormValidationSchema),
@@ -96,7 +99,7 @@ const EndorsementsForm = ({ openDialog, setOpenDialog, fieldId }: Props) => {
 
   return (
     <Dialog open={openDialog} onOpenChange={() => setOpenDialog(!openDialog)}>
-      <DialogContent>
+      <DialogContent className=" max-w-[700px] mx-auto">
         <DialogHeader>
           <DialogTitle>Endorsement Details</DialogTitle>
         </DialogHeader>

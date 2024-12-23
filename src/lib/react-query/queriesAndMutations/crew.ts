@@ -12,6 +12,9 @@ export const useSentInvitationToCrew = () => {
     onSuccess: (data) => {
       return data;
     },
+    onError: (error) => {
+      throw error;
+    },
   });
 };
 
@@ -29,9 +32,14 @@ export const useGetCrewFullProfile = (crewId: string) => {
   });
 };
 
-export const useSearchCrew = ({ location, service }: { location: string; service: string }) => {
-  return useQuery({
-    queryKey: ["searchCrew"],
-    queryFn: () => searchCrew({ location, service }),
+export const useSearchCrew = () => {
+  return useMutation({
+    mutationFn: searchCrew,
+    onSuccess: (data) => {
+      return data;
+    },
+    onError: (error) => {
+      throw error;
+    },
   });
 };

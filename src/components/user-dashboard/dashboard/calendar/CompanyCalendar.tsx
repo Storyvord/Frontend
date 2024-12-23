@@ -28,7 +28,7 @@ const CompanyCalender = ({
   handleNavigate?: (date: Date) => void;
   currentDate?: Date;
   calendarType: "month" | "week" | "day" | "agenda";
-  employeeList: { value: string; label: string }[];
+  employeeList: { value: number; label: string }[];
 }) => {
   const [openEventDialog, setOpenEventDialog] = useState(false);
   // Fetch all calendar events

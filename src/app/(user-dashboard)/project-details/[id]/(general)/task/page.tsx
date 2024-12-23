@@ -16,6 +16,7 @@ import {
   useCompleteTask,
   useTaskCompletionApproval,
 } from "@/lib/react-query/queriesAndMutations/tasks";
+import { useCrewOptions } from "@/hooks/useCrewOptions";
 
 const TaskPage = ({ params }: { params: { id: string } }) => {
   const { data: tasksList, isPending: isLoadingTask } = useGetTasks(params.id);
@@ -24,18 +25,7 @@ const TaskPage = ({ params }: { params: { id: string } }) => {
   const { mutateAsync: completeTaskMutation } = useCompleteTask();
   const { mutateAsync: taskApprovalMutation, isPending: isLoadingApprovedTask } =
     useTaskCompletionApproval();
-  const {
-    data: crewListData,
-    isPending: isCrewLoading,
-    isError: isCrewError,
-  } = useGetCrewList(params.id);
-
-  const crewList = crewListData?.results.map(
-    (crew: { membership_id: string; user: { email: string } }) => ({
-      value: crew.membership_id,
-      label: crew.user.email,
-    })
-  );
+  const { crewList, isCrewLoading, isCrewError } = useCrewOptions(params.id);
 
   const [tasks, setTasks] = useState<taskType[]>([]);
   const { toast } = useToast();

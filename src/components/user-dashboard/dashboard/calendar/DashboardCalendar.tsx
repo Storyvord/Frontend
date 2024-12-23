@@ -7,7 +7,7 @@ import DatePickerWithRange from "./DatePickerWithRange";
 import { Button } from "@/components/ui/button";
 
 type Props = {
-  employeeList: { value: string; label: string }[];
+  employeeList: { value: number; label: string }[];
 };
 
 const DashboardCalendar = ({ employeeList }: Props) => {
@@ -31,19 +31,19 @@ const DashboardCalendar = ({ employeeList }: Props) => {
   };
 
   return (
-    <div className="mt-8">
+    <div className="mt-4">
       <header className="flex justify-between items-center">
         <span className="flex gap-2 items-center">
           <Image width={27} height={27} src="/icons/calendar.svg" alt="Calendar Icon" />
           <h1 className="text-lg md:text-xl">Calendar</h1>
         </span>
         <Button onClick={() => setOpenFormDialog(true)} className="flex gap-2">
-          <Image width={25} height={25} src="/icons/plus-2.svg" alt="Add Icon" /> Add Event
+          <Image width={20} height={20} src="/icons/plus-2.svg" alt="Add Icon" /> Add Event
         </Button>
       </header>
       <main className="flex xl:flex-row flex-col md:items-start gap-3 mt-4">
         <DatePickerWithRange onSelectRange={handleSelectRange} />
-        <div className="px-4 py-2 rounded-xl flex-1 border bg-white">
+        <div className="md:px-4 py-2 rounded-xl flex-1 border bg-white">
           <h2 className=" text-md md:text-lg pb-2 p-4 font-semibold text-gray-700 ">My Schedule</h2>
           <CompanyCalendar
             openFormDialog={openFormDialog}

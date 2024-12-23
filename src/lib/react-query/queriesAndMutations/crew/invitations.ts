@@ -18,6 +18,9 @@ export const useAcceptInvitation = () => {
       });
       return data;
     },
+    onError: (error) => {
+      throw error;
+    },
   });
 };
 
@@ -30,6 +33,9 @@ export const useRejectInvitation = () => {
         queryKey: ["getInvitations"],
       });
       return data;
+    },
+    onError: (error) => {
+      throw error;
     },
   });
 };

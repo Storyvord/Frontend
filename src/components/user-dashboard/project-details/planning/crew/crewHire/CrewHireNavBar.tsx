@@ -26,13 +26,13 @@ const CrewHireNavBar = ({ setOpenDialog, openDialog, searchValue, setSearchValue
           <Image src="/icons/download.svg" width={16} height={16} alt="download" />
           Export
         </Button>
-        <Button
+        {/* <Button
           onClick={() => setOpenDialog(!openDialog)}
           className="flex gap-3 font-semibold bg-green-500"
         >
           <Image src="/icons/plus-3.svg" width={16} height={16} alt="download" />
           Add
-        </Button>
+        </Button> */}
         <Button variant="outline" className="flex gap-3 font-semibold border border-gray-500">
           <Image src="/icons/edit.svg" width={16} height={16} alt="download" />
           Edit

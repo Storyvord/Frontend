@@ -109,7 +109,9 @@ const Register = () => {
           )}
 
           {step === 2 && userType === 2 && (
-            <CrewProfileForm prevStep={prevStep} onSuccessStep={onSuccessStep} />
+            <div className="w-full lg:w-3/5">
+              <CrewProfileForm prevStep={prevStep} onSuccessStep={onSuccessStep} />
+            </div>
           )}
           {step === 3 && userType === 2 && (
             <CrewPortfolio prevStep={prevStep} handleSkipOnBoard={handleSkipOnBoard} />

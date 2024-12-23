@@ -23,7 +23,7 @@ const EquipmentPage: React.FC<EquipmentPageProps> = ({
   refetch,
 }) => {
   if (isPending) {
-    return <LoadingUi isPending={isPending} text="AI is matching the best-fit suppliers..." />;
+    return <LoadingUi isPending={isPending} text="AI is matching best-fit suppliers..." />;
   }
 
   if (isError && !isPending) {

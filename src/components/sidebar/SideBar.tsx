@@ -8,17 +8,26 @@ import SideBarButton from "./components/SideBarButton";
 import SideBarCloseButton from "./components/SideBarCloseButton";
 import { useParams, useSelectedLayoutSegments } from "next/navigation";
 import { cn } from "@/lib/utils";
+import React, { useState } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 const SideBar = () => {
   const { isSideBarOpen } = useSideBarControl();
   const { setProject } = useProjectControl();
   const { id: projectId } = useParams();
   const segment = useSelectedLayoutSegments();
-  console.log(segment);
+  const [collapsedSections, setCollapsedSections] = useState<{ [key: string]: boolean }>({});
+
+  const toggleSection = (title: string) => {
+    setCollapsedSections((prevState) => ({
+      ...prevState,
+      [title]: !prevState[title],
+    }));
+  };
 
   return (
     <aside
-      className={`${isSideBarOpen ? "translate-x-0" : "-translate-x-80"} overflow-y-auto bg-white shadow-sm fixed inset-0 z-50 h-100vh w-60 xl:w-72 transition-transform duration-300 md:translate-x-0 border border-blue-gray-100 font-poppins`}
+      className={`${isSideBarOpen ? "translate-x-0" : "-translate-x-80"} overflow-y-auto bg-white shadow-sm fixed inset-0 z-50 h-100vh w-60 xl:w-72 transition-transform duration-300 md:translate-x-0 border border-blue-gray-100 font-poppins pb-8`}
     >
       <div className="relative">
         <SideBarCloseButton />
@@ -51,8 +60,6 @@ const SideBar = () => {
               : "text-[#607D8B] hover:bg-[#607D8B]/10 active:bg-[#607D8B]/30"
           )}
         >
-          <Image src="/icons/dashboard-icon.svg" alt="" width={17} height={17} />
-
           <p className="block antialiased text-base leading-relaxed text-inherit font-medium capitalize truncate overflow-hidden whitespace-nowrap text-ellipsis">
             Project Details
           </p>
@@ -60,17 +67,38 @@ const SideBar = () => {
 
         {projectdetailsItems.map((details) => (
           <div key={details.title} className="flex flex-col gap-1">
-            <h1 className=" pl-2 text-sm text-gray-400 mt-4 uppercase">{details.title}</h1>
-            {details.items.map((item) => (
-              <li key={item.text} className="list-none">
-                <SideBarButton
-                  Icon={item.icon}
-                  link={item.link}
-                  root="project-details"
-                  text={item.text}
-                />
-              </li>
-            ))}
+            {/* Section Title */}
+            <h1
+              className="pl-2 text-sm text-gray-500 mt-4 uppercase cursor-pointer flex justify-between items-center font-poppins-medium"
+              onClick={() => toggleSection(details.title)}
+            >
+              {details.title}
+              <span className="text-gray-400">
+                {collapsedSections[details.title] ? (
+                  <ChevronDown className=" w-5 h-5" />
+                ) : (
+                  <ChevronUp className=" w-5 h-5" />
+                )}
+              </span>
+            </h1>
+            {/* Section Items (collapsible with animation) */}
+            <ul
+              className={cn(
+                "overflow-hidden transition-all duration-300 ease-in-out",
+                collapsedSections[details.title] ? "max-h-0" : "max-h-[500px]"
+              )}
+            >
+              {details.items.map((item) => (
+                <li key={item.text} className="list-none">
+                  <SideBarButton
+                    Icon={item.icon}
+                    link={item.link}
+                    root="project-details"
+                    text={item.text}
+                  />
+                </li>
+              ))}
+            </ul>
           </div>
         ))}
       </div>

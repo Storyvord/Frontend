@@ -19,7 +19,7 @@ type Props = {
   isError?: boolean;
   isEditLoading: boolean;
   isEditError: boolean;
-  crewList?: { value: string; label: string }[];
+  crewList?: { value: number; label: string }[];
 };
 
 const EventDialog = ({

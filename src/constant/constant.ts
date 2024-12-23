@@ -135,6 +135,11 @@ export const projectdetailsItems: projectDetailItem[] = [
         icon: FaTasks,
       },
       {
+        text: "calendar",
+        link: "calendar",
+        icon: SlCalender,
+      },
+      {
         text: "announcements",
         link: "announcements",
         icon: GrAnnounce,
@@ -142,7 +147,7 @@ export const projectdetailsItems: projectDetailItem[] = [
     ],
   },
   {
-    title: "planning",
+    title: "Project Management",
     items: [
       {
         text: "crew",
@@ -169,15 +174,10 @@ export const projectdetailsItems: projectDetailItem[] = [
         link: "call-sheets",
         icon: LuFileSpreadsheet,
       },
-      {
-        text: "calendar",
-        link: "calendar",
-        icon: SlCalender,
-      },
     ],
   },
   {
-    title: "breakdowns & more",
+    title: "creative hub",
     items: [
       {
         text: "script",
@@ -207,7 +207,7 @@ export const projectdetailsItems: projectDetailItem[] = [
     ],
   },
   {
-    title: "department specific",
+    title: "department hub",
     items: [
       {
         text: "cast",

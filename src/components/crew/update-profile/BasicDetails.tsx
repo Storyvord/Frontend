@@ -11,6 +11,7 @@ import { FormFieldConfig, ProfileFormData } from "@/types/crew";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import CrewProfileForm from "@/app/auth/onboard/components/CrewProfileForm";
 
 const profileFormFields: FormFieldConfig<ProfileFormData>[] = [
   {
@@ -133,18 +134,12 @@ const BasicDetails = ({ openDialog, setOpenDialog }: Props) => {
 
   return (
     <Dialog open={openDialog} onOpenChange={() => setOpenDialog(!openDialog)}>
-      <DialogContent>
+      <DialogContent className=" max-w-[800px] mx-auto border">
         <DialogHeader>
           <DialogTitle>Basic Details</DialogTitle>
         </DialogHeader>
-        <div className=" max-h-[80vh] overflow-y-auto px-2">
-          <CustomForm
-            form={form}
-            formFields={profileFormFields}
-            onSubmit={onSubmit}
-            isLoading={isPending}
-            isError={isError}
-          />
+        <div className=" max-h-[80vh] overflow-y-auto">
+          <CrewProfileForm />
         </div>
       </DialogContent>
     </Dialog>

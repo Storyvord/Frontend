@@ -42,7 +42,7 @@ const SideBarButton = ({
         )}
       >
         {Icon && <Icon className="w-6 h-6" />}
-        <p className="block antialiased text-base leading-relaxed text-inherit font-medium capitalize truncate overflow-hidden whitespace-nowrap text-ellipsis">
+        <p className="block antialiased text-base leading-relaxed text-inherit font-poppins-medium capitalize truncate overflow-hidden whitespace-nowrap text-ellipsis">
           {text}
         </p>
       </button>
