@@ -44,7 +44,7 @@ const CrewProfile = () => {
   const { data } = useGetCrewFullProfile(profileId);
 
   useEffect(() => {
-    setProfile(data?.at(0).crew_profile);
+    setProfile(data?.data?.at(0)?.crew_profile);
   }, [data]);
 
   return (
@@ -146,7 +146,8 @@ const CrewProfile = () => {
               </p>
             </div>
             <Link
-              href={`/dashboard/message/?receiverId=${profile?.id}&name=${profile?.name}`}
+              // href={`/dashboard/message/?receiverId=${profile?.id}&name=${profile?.name}`}
+              href="#"
               className=" mt-4 flex justify-between cursor-pointer rounded-2xl shadow-xl bg-white p-2"
             >
               {profile?.image && (
@@ -259,7 +260,8 @@ const CrewProfile = () => {
           </div>
 
           <Link
-            href={`/dashboard/message/?receiverId=${profile?.id}&name=${profile?.name}`}
+            // href={`/dashboard/message/?receiverId=${profile?.id}&name=${profile?.name}`}
+            href="#"
             className=" mt-4 flex justify-between cursor-pointer rounded-2xl shadow-xl bg-white p-2"
           >
             {profile?.image && (
