@@ -79,7 +79,7 @@ const ProjectCalendar = ({
   };
 
   return (
-    <div className="bg-white px-4 py-2">
+    <div className="bg-white md:px-4 py-2">
       {(isEventsError || isCrewError) && (
         <p className="text-center my-1 text-red-500">Error loading data.</p>
       )}

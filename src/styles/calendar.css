@@ -18,3 +18,15 @@
   color: white !important;
   font-size: 14px !important;
 }
+
+@media screen and (max-width: 768px) {
+  .rbc-btn-group > button {
+    font-size: 0.9rem !important;
+  }
+  .rbc-toolbar-label {
+    font-size: 0.9rem !important;
+  }
+  .rbc-timeslot-group > .rbc-time-slot > .rbc-label {
+    font-size: 0.9rem !important;
+  }
+}

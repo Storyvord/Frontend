@@ -128,7 +128,7 @@ const CalendarComponent: React.FC<CalendarComponentProps> = ({
   }, [events]);
 
   return (
-    <div className="bg-white px-4 py-2">
+    <div className="bg-white md:px-4 px-2 py-2">
       <div className="h-[600px] bg-white mb-3">
         <Calendar
           localizer={localizer}
@@ -142,7 +142,7 @@ const CalendarComponent: React.FC<CalendarComponentProps> = ({
           date={currentDate}
           selectable
           eventPropGetter={eventPropGetter}
-          style={{ height: "100%" }}
+          style={{ height: "100%", width: "100%" }}
         />
       </div>
       <AddEvent
