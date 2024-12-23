@@ -10,6 +10,7 @@ import InputField from "@/components/auth/InputField";
 import PasswordField from "@/components/auth/PasswordField";
 import OAuthButtons from "@/components/auth/OAuthButtons";
 import { signinFormSchema } from "@/lib/validation/auth";
+import { useTranslations } from "next-intl";
 
 export type SignInFormData = {
   email: string;
@@ -22,6 +23,7 @@ type SignInFormProps = {
 };
 
 const SignInForm: React.FC<SignInFormProps> = ({ onSubmit, isLoading }) => {
+  const t = useTranslations("Auth.loginSection");
   const {
     register,
     handleSubmit,
@@ -44,23 +46,23 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSubmit, isLoading }) => {
       onSubmit={handleSubmit(handleFormSubmit)}
     >
       <h3 className="text-3xl leading-[3rem] font-medium text-[#111111] font-poppins md:text-left text-center">
-        Log in
+        {t("heading")}
       </h3>
       <p className="text-base font-normal text-[#111111] font-poppins md:text-left text-center">
-        Don&apos;t have an account?{" "}
+        {t("paragraph.text")} {""}
         <Link href="/auth/sign-up" className="underline">
-          Sign up
+          {t("paragraph.linkText")}
         </Link>
       </p>
       <InputField
-        label="Your Email"
+        label={t("email")}
         type="email"
         name="email"
         register={register}
         error={errors.email}
       />
       <PasswordField
-        label="Your Password"
+        label={t("password")}
         name="password"
         register={register}
         error={errors.password}
@@ -71,13 +73,13 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSubmit, isLoading }) => {
           href="#"
           className="underline text-base font-normal text-[#111111] font-poppins"
         >
-          Forget your password
+          {t("forgotPassword")}
         </Link>
       </div>
       <Button className="mt-6 w-full" type="submit" disabled={isLoading}>
-        {isLoading ? <Loader /> : "Log in"}
+        {isLoading ? <Loader /> : t("button")}
       </Button>
-      <OAuthButtons />
+      {/* <OAuthButtons /> */}
     </form>
   );
 };

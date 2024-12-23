@@ -12,11 +12,13 @@ export default getRequestConfig(async () => {
   // Dynamically import all JSON files for the current locale
   const commonMessages = (await import(`./locales/${locale}/common.json`)).default;
   const homeMessages = (await import(`./locales/${locale}/home.json`)).default;
+  const authMessages = (await import(`./locales/${locale}/auth.json`)).default;
 
   // Merge all messages into a single object
   const messages = {
     ...commonMessages,
     ...homeMessages,
+    ...authMessages,
   };
 
   return {
