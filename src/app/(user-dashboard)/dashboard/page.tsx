@@ -26,7 +26,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (projects) {
-      const filteredPastProjects = projects?.results.filter((project: ProjectType) =>
+      const filteredPastProjects = projects?.results?.filter((project: ProjectType) =>
         ["COMPLETED", "CANCELLED", "POST_PRODUCTION"].includes(project.status)
       );
       const filteredOngoingProjects = projects?.results.filter(
@@ -34,8 +34,8 @@ const Dashboard = () => {
           !["COMPLETED", "CANCELLED", "POST_PRODUCTION"].includes(project.status)
       );
 
-      // setPastProjects(filteredPastProjects);
-      setOngoingProjects(projects.results);
+      setPastProjects(filteredPastProjects);
+      setOngoingProjects(filteredOngoingProjects);
     }
   }, [projects]);
 

@@ -82,11 +82,22 @@ const ProjectDetails: React.FC = () => {
   };
 
   // Handle status change for the project
-  const handleChangeStatus = (selectedOption: any) => {
+  const handleChangeStatus = async (selectedOption: any) => {
     setSelectedStatus(selectedOption); // Update local state with the selected status
 
     // Call mutation to update project status in the backend
-    editProjectStatus({ status: selectedOption.value, projectId });
+    try {
+      await editProjectStatus({ status: selectedOption.value, projectId });
+      toast({
+        title: "Status updated successfully",
+        description: `Project status changed to ${selectedOption.label}`,
+      });
+    } catch (e) {
+      toast({
+        title: "Failed to update status",
+        // description: `Project status not changed to ${selectedOption.label}`,
+      });
+    }
   };
 
   // Navigate to the edit form for the current project

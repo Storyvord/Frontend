@@ -117,7 +117,7 @@ export const editProjectStatus = async ({
   status: ProjectFormFieldType;
   projectId: string;
 }) => {
-  return customFetch(`${NEW_API_URL_V2}/api/project/projects/${projectId}/`, {
+  return customFetch(`${NEW_API_URL_V2}/project/v2/projects/${projectId}/`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
