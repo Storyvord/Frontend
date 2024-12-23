@@ -1,7 +1,10 @@
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 
 export function Footer() {
+  const t = useTranslations("HomePage.Footer");
+  const currentYear = new Date().getFullYear();
   return (
     <footer className=" bg-[#FAFAFA] py-6 flex items-center justify-between">
       <div className="container flex flex-col md:flex-row justify-between items-center">
@@ -11,7 +14,7 @@ export function Footer() {
           </Link>
         </div>
         <div className="container mt-4 text-center text-sm text-gray-600">
-          © 2024 Storyvord.com All Rights Reserved
+          © {currentYear} {t("rights")}
         </div>
         <div className="flex items-center space-x-6 mt-4 ">
           <Link href="#" className="text-gray-600 hover:text-gray-900">

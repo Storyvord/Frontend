@@ -34,7 +34,10 @@ export function HeroSection() {
 
       {/* Button Section */}
       <div className="col-span-12">
-        <Button className="bg-background-2 text-white hover:bg-[#2e2e2e] text-sm md:text-lg px-6 md:px-8 py-4 md:py-6 mx-auto">
+        <Button
+          className="  text-sm md:text-lg px-6 md:px-8 py-4 md:py-6 mx-auto"
+          variant="storyvord"
+        >
           <Link href="/auth/sign-in">{t("button")}</Link>
         </Button>
       </div>

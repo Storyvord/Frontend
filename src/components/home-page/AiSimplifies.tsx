@@ -35,7 +35,7 @@ const AiSimplifies = () => {
       {/* Crew Suggestion Section */}
       <div className="mt-0 sm:-mt-[2%] md:-mt-[27%] p-4 rounded-xl bg-[#0A0A41] text-white col-span-12 md:col-start-9 md:col-span-4 mx-auto md:mx-0">
         <h2 className="text-lg sm:text-xl md:text-heading-2">{t("crewSuggestion")}</h2>
-        <div className="flex gap-3 items-center">
+        <div className="flex flex-col lg:flex-row gap-3 items-center mt-4">
           <Image
             src="/profile-group.svg"
             width={130}
