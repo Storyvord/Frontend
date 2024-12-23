@@ -111,7 +111,8 @@ const ProjectDetailsNavBar = () => {
             onClick={() => setToggleMenu(!toggleMenu)}
             className=" flex sm:hidden cursor-pointer gap-3 items-center"
           >
-            <Image width={35} height={35} src={"/profile.png"} className="w-[35]" alt="profile" />
+            {/* <Image width={30} height={30} src={"/profile.png"} alt="profile" /> */}
+            <CgProfile className=" w-8 h-8 text-gray-500" />
             {toggleMenu ? (
               <Image
                 width={12}

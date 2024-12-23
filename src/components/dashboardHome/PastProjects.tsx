@@ -14,6 +14,10 @@ import { Project } from "@/types/project";
 import LoadingSkeleton from "./LoadingSkeleton";
 import Link from "next/link";
 import Image from "next/image";
+import {
+  useGetProjectRequirements,
+  useGetShootDetails,
+} from "@/lib/react-query/queriesAndMutations/project";
 
 type Props = {
   projects: Project[];
@@ -22,6 +26,8 @@ type Props = {
 };
 
 const PastProjects = ({ projects, isLoading, isError }: Props) => {
+  // const { data: projectRequirements } = useGetProjectRequirements(projects?.project_id);
+  // const { data: shootDetails } = useGetShootDetails(projects?.project_id);
   if (isLoading) {
     return <LoadingSkeleton />;
   }
@@ -56,39 +62,39 @@ const PastProjects = ({ projects, isLoading, isError }: Props) => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {projects.map((project) => (
+              {projects?.map((project) => (
                 <TableRow key={project.project_id}>
                   <TableCell>
                     <Link
                       href={`/project-details/${project.project_id}`}
                       className="block antialiased text-base leading-relaxed text-blue-gray-900 font-[800]"
                     >
-                      {project.name}
+                      {project?.name}
                     </Link>
                   </TableCell>
                   <TableCell>
                     <p className="block antialiased text-base leading-relaxed text-blue-gray-900 font-light">
-                      {project.location_details[0].start_date}
+                      {project?.location_details?.at(0)?.start_date}
                     </p>
                   </TableCell>
                   <TableCell>
                     <p className="block antialiased text-base leading-relaxed text-blue-gray-900 font-light">
-                      {project.location_details[0].end_date}
+                      {project?.location_details?.at(0)?.end_date}
                     </p>
                   </TableCell>
                   <TableCell>
                     <p className="block antialiased text-base leading-relaxed text-blue-gray-600 font-[600]">
-                      {project.budget_amount}
+                      {project?.budget_amount}
                     </p>
                   </TableCell>
                   <TableCell>
                     <p className="block antialiased text-base leading-relaxed text-blue-gray-600 font-[600]">
-                      {project.location_details[0].location}
+                      {project?.location_details?.at(0)?.location}
                     </p>
                   </TableCell>
                   <TableCell>
                     <p className="block antialiased text-base leading-relaxed  text-green-500 font-[600]">
-                      {project.status}
+                      {project?.status}
                     </p>
                   </TableCell>
                 </TableRow>

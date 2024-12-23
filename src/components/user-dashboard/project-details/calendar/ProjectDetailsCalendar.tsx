@@ -27,7 +27,7 @@ const ProjectDetailsCalendar = () => {
   };
 
   return (
-    <div className="mt-8">
+    <div className="mt-8 px-3">
       <header className="flex justify-between items-center">
         <span className="flex gap-2 items-center">
           <Image width={27} height={27} src="/icons/calendar.svg" alt="Calendar Icon" />
@@ -39,7 +39,7 @@ const ProjectDetailsCalendar = () => {
       </header>
       <main className="flex xl:flex-row flex-col md:items-start gap-3 mt-4">
         <DatePickerWithRange onSelectRange={handleSelectRange} />
-        <div className="px-4 py-2 rounded-xl flex-1 border bg-white">
+        <div className="md:px-4 py-2 rounded-xl flex-1 border bg-white">
           <h2 className=" text-md md:text-lg pb-2 p-4 font-semibold text-gray-700 ">My Schedule</h2>
           <ProjectCalendar
             calendarType="week"

@@ -119,7 +119,7 @@ const DashboardNavbar = () => {
           {(path === "/dashboard" || path.includes("message")) && (
             <Link href="/dashboard">
               <Image
-                className=" w-[125px] sm:w-[150px]"
+                className=" w-[125px]"
                 src={"/logo.svg"}
                 width={50}
                 height={10}
@@ -145,8 +145,8 @@ const DashboardNavbar = () => {
         <section className=" flex items-center gap-3 sm:gap-10">
           <NavigationMenu>
             <NavigationMenuList>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className=" text-base font-poppins-normal">
+              <NavigationMenuItem className=" hidden sm:block">
+                <NavigationMenuTrigger className=" text-sm sm:text-base font-poppins-normal">
                   Select Project
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
@@ -154,7 +154,7 @@ const DashboardNavbar = () => {
                 </NavigationMenuContent>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuTrigger className=" text-base font-poppins-normal">
+                <NavigationMenuTrigger className=" text-sm sm:text-base font-poppins-normal">
                   Org
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
@@ -201,9 +201,10 @@ const DashboardNavbar = () => {
           {/* mobile menu */}
           <button
             onClick={() => setToggleMenu(!toggleMenu)}
-            className=" flex sm:hidden cursor-pointer gap-3 items-center"
+            className=" flex sm:hidden cursor-pointer gap-1 sm:gap-3 items-center"
           >
-            <Image width={30} height={30} src={"/profile.png"} alt="profile" />
+            {/* <Image width={30} height={30} src={"/profile.png"} alt="profile" /> */}
+            <CgProfile className=" w-8 h-8 text-gray-500" />
             {toggleMenu ? (
               <Image
                 width={15}

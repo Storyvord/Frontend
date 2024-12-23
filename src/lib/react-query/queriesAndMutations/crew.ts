@@ -32,17 +32,14 @@ export const useGetCrewFullProfile = (crewId: string) => {
   });
 };
 
-export const useSearchCrew = ({
-  location,
-  service,
-  name,
-}: {
-  location: string;
-  service: string;
-  name: string;
-}) => {
-  return useQuery({
-    queryKey: ["searchCrew"],
-    queryFn: () => searchCrew({ location, service, name }),
+export const useSearchCrew = () => {
+  return useMutation({
+    mutationFn: searchCrew,
+    onSuccess: (data) => {
+      return data;
+    },
+    onError: (error) => {
+      throw error;
+    },
   });
 };

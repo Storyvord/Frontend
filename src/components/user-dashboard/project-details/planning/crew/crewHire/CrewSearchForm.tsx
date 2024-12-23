@@ -10,9 +10,15 @@ type CrewSearchFormProps = {
   };
   ifFormValid: boolean;
   onSubmit: (formData: { name: string; service: string; location: string }) => void;
+  isPending: boolean;
 };
 
-const CrewSearchForm: FC<CrewSearchFormProps> = ({ formData, ifFormValid, onSubmit }) => {
+const CrewSearchForm: FC<CrewSearchFormProps> = ({
+  formData,
+  ifFormValid,
+  onSubmit,
+  isPending,
+}) => {
   const [localFormData, setLocalFormData] = React.useState(formData);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -21,33 +27,37 @@ const CrewSearchForm: FC<CrewSearchFormProps> = ({ formData, ifFormValid, onSubm
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="sm:w-[500px] sm:mx-auto mt-8 flex flex-col md:flex-row items-center gap-4"
-    >
-      <Input
-        placeholder="Crew name"
-        value={localFormData.name}
-        onChange={(e) => setLocalFormData({ ...localFormData, name: e.target.value })}
-        className="h-12"
-      />
-      <Input
-        placeholder="Service"
-        value={localFormData.service}
-        onChange={(e) => setLocalFormData({ ...localFormData, service: e.target.value })}
-        className="h-12"
-      />
-      <Input
-        placeholder="Location"
-        value={localFormData.location}
-        onChange={(e) => setLocalFormData({ ...localFormData, location: e.target.value })}
-        className="h-12"
-      />
-      <Button type="submit" className="mx-auto px-8">
-        Search
-      </Button>
-      {ifFormValid && <p className="text-center text-red-500 my-2">Please fill all the fields</p>}
-    </form>
+    <>
+      <form
+        onSubmit={handleSubmit}
+        className="lg:w-[700px] sm:mx-auto mt-8 flex flex-col md:flex-row items-center gap-4"
+      >
+        <Input
+          placeholder="Crew name"
+          value={localFormData.name}
+          onChange={(e) => setLocalFormData({ ...localFormData, name: e.target.value })}
+          className="h-12"
+        />
+        <Input
+          placeholder="Service"
+          value={localFormData.service}
+          onChange={(e) => setLocalFormData({ ...localFormData, service: e.target.value })}
+          className="h-12"
+        />
+        <Input
+          placeholder="Location"
+          value={localFormData.location}
+          onChange={(e) => setLocalFormData({ ...localFormData, location: e.target.value })}
+          className="h-12"
+        />
+        <Button disabled={isPending} type="submit" className="mx-auto px-8">
+          Search
+        </Button>
+      </form>
+      {ifFormValid && (
+        <p className="text-center text-red-500 my-2">Please fill at least one field</p>
+      )}
+    </>
   );
 };
 

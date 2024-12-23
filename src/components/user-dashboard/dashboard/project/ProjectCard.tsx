@@ -1,12 +1,13 @@
+import { format } from "date-fns/format";
 import Image from "next/image";
 import React from "react";
 
 type Props = {
   name: string;
   status: string;
-  location: string;
+  date: string;
 };
-const ProjectCard = ({ name, status, location }: Props) => {
+const ProjectCard = ({ name, status, date }: Props) => {
   return (
     <div className=" w-80 md:min-h-full border rounded-2xl p-4 bg-white flex flex-col gap-4 cursor-pointer">
       <div className=" flex justify-between">
@@ -18,7 +19,9 @@ const ProjectCard = ({ name, status, location }: Props) => {
         <h4>Storyvord</h4>
       </span>
       {/* <Image height={40} width={40} className=" mt-auto" src="/profile-2.png" alt="icon" /> */}
-      <p className=" mt-auto text-sm text-gray-600">{location}</p>
+      {date && (
+        <p className=" mt-auto text-sm text-gray-600">{format(new Date(date), "dd MMM yyyy")}</p>
+      )}
     </div>
   );
 };

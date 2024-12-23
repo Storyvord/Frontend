@@ -41,14 +41,14 @@ const Project = ({ onGoingProjects }: { onGoingProjects: any }) => {
 
   return (
     <section className=" group">
-      <header className="flex justify-between">
-        <span className="flex items-center gap-3 mb-4">
+      <header className="flex justify-between mb-4">
+        <span className="flex items-center gap-3">
           <Image height={27} width={27} src="/icons/project-2.svg" alt="plus-icon" />
           <h1 className=" text-lg md:text-xl">Your Projects</h1>
         </span>
         <Link href="/dashboard/new-project">
-          <Button className="md:hidden flex gap-2" size="sm">
-            <Image height={27} width={27} src="/icons/plus-2.svg" alt="plus-icon" /> New Project
+          <Button className="md:hidden flex gap-2">
+            <Image height={20} width={20} src="/icons/plus-2.svg" alt="plus-icon" /> New Project
           </Button>
         </Link>
       </header>
@@ -80,8 +80,8 @@ const Project = ({ onGoingProjects }: { onGoingProjects: any }) => {
               <ProjectCard
                 key={project.project_id}
                 name={project.name}
-                status={"Ongoing"}
-                location={"N/A"}
+                status={project.status}
+                date={project.created_at}
               />
             </Link>
           ))}
