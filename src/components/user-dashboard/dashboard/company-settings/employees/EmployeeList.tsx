@@ -36,6 +36,7 @@ const tabs = ["Accepted", "Pending", "Rejected"];
 const EmployeeList = ({ data, isLoading }: Props) => {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState(tabs[0]);
+
   const handleRedirectToMessagePage = (id: number, firstName: string, lastName: string) => {
     router.push(`/dashboard/message/?receiverId=${id}&name=${firstName}%20${lastName}`);
   };
@@ -44,11 +45,11 @@ const EmployeeList = ({ data, isLoading }: Props) => {
   const getCurrentList = () => {
     switch (activeTab) {
       case "Accepted":
-        return data?.accepted;
+        return data?.accepted || [];
       case "Pending":
-        return data?.pending;
+        return data?.pending || [];
       case "Rejected":
-        return data?.rejected;
+        return data?.rejected || [];
       default:
         return [];
     }
@@ -61,42 +62,52 @@ const EmployeeList = ({ data, isLoading }: Props) => {
     <>
       <Tabs activeTab={activeTab} setActiveTab={setActiveTab} tabs={tabs} />
       {isLoading && <p className="w-full text-center">Loading...</p>}
-      <Table className="mt-4 bg-white p-2">
-        <TableHeader>
-          <TableRow className="hover:bg-white">
-            {headers.map((header, index) => (
-              <TableHead key={index}>{header}</TableHead>
-            ))}
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {currentList?.map((item: ProfileData) => (
-            <TableRow key={item.id} className="hover:bg-white">
-              <TableCell>{item.firstName}</TableCell>
-              <TableCell>{item.lastName}</TableCell>
-              <TableCell>{item.employee_email}</TableCell>
-              <TableCell
-                className={cn(
-                  "font-semibold",
-                  item.status === "accepted" && "text-green-500",
-                  item.status === "pending" && "text-yellow-500",
-                  item.status === "rejected" && "text-red-500"
-                )}
-              >
-                {item.status}
-              </TableCell>
-              <TableCell>
-                <BiMessageDetail
-                  onClick={() =>
-                    handleRedirectToMessagePage(item.invited_user.id, item.firstName, item.lastName)
-                  }
-                  className="w-6 h-6 hover:text-gray-600 cursor-pointer"
-                />
-              </TableCell>
+      {!isLoading && currentList.length === 0 && (
+        <p className="w-full text-center text-gray-500 mt-8">No staff found</p>
+      )}
+      {currentList.length > 0 && (
+        <Table className="mt-4 bg-white p-2 border-b">
+          <TableHeader>
+            <TableRow className="hover:bg-white">
+              {headers.map((header, index) => (
+                <TableHead key={index}>{header}</TableHead>
+              ))}
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {currentList.map((item: ProfileData) => (
+              <TableRow key={item.id} className="hover:bg-white">
+                <TableCell>{item.firstName}</TableCell>
+                <TableCell>{item.lastName}</TableCell>
+                <TableCell>{item.employee_email}</TableCell>
+                <TableCell
+                  className={cn(
+                    "font-semibold",
+                    item.status === "accepted" && "text-green-500",
+                    item.status === "pending" && "text-yellow-500",
+                    item.status === "rejected" && "text-red-500"
+                  )}
+                >
+                  {item.status}
+                </TableCell>
+                <TableCell>
+                  <BiMessageDetail
+                    // TODO: will be uncommented when the api is fully ready
+                    // onClick={() =>
+                    //   handleRedirectToMessagePage(
+                    //     item?.invited_user?.id,
+                    //     item.firstName,
+                    //     item.lastName
+                    //   )
+                    // }
+                    className="w-6 h-6 hover:text-gray-600 cursor-pointer"
+                  />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      )}
     </>
   );
 };
