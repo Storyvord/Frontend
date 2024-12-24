@@ -15,6 +15,7 @@ import AddEvent from "@/components/calender/AddEvent";
 import EventDialog from "@/components/calender/EventDialog";
 import { usePathname } from "next/navigation";
 import { eventColors } from "@/constant/eventColor";
+import { cn } from "@/lib/utils";
 
 type CalendarComponentProps = {
   events: CalenderEventType[];
@@ -35,6 +36,7 @@ type CalendarComponentProps = {
   handleDeleteEvent: (eventId: number) => void;
   handleNavigate?: (date: Date) => void;
   currentDate?: Date;
+  height?: string;
 };
 
 const locales = {
@@ -69,6 +71,7 @@ const CalendarComponent: React.FC<CalendarComponentProps> = ({
   handleEditEvent,
   handleNavigate,
   currentDate,
+  height,
 }) => {
   const [eventToDisplay, setEventToDisplay] = useState<CalenderEventType | null>(null);
   const [transformEvents, setTransformEvents] = useState<any>([]);
@@ -129,7 +132,7 @@ const CalendarComponent: React.FC<CalendarComponentProps> = ({
 
   return (
     <div className="bg-white md:px-4 px-2 py-2">
-      <div className="h-[600px] bg-white mb-3">
+      <div className={cn("bg-white mb-3", height ? `h-[${height}]` : "h-[600px]")}>
         <Calendar
           localizer={localizer}
           events={transformEvents}

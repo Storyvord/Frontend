@@ -20,12 +20,14 @@ const ProjectCalendar = ({
   handleNavigate,
   currentDate,
   calendarType,
+  height,
 }: {
   openFormDialog: boolean;
   setOpenFormDialog: (value: boolean) => void;
   handleNavigate?: (date: Date) => void;
   currentDate?: Date;
   calendarType: "month" | "week" | "day" | "agenda";
+  height?: string;
 }) => {
   const [openEventDialog, setOpenEventDialog] = useState(false);
   const { id: projectId } = useParams<{ id: string }>();
@@ -103,6 +105,7 @@ const ProjectCalendar = ({
         handleEditEvent={handleEditEvent}
         handleNavigate={handleNavigate}
         currentDate={currentDate}
+        height={height}
       />
     </div>
   );

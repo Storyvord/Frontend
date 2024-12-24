@@ -22,6 +22,7 @@ const CompanyCalender = ({
   currentDate,
   calendarType,
   employeeList,
+  height,
 }: {
   openFormDialog: boolean;
   setOpenFormDialog: (value: boolean) => void;
@@ -29,6 +30,7 @@ const CompanyCalender = ({
   currentDate?: Date;
   calendarType: "month" | "week" | "day" | "agenda";
   employeeList: { value: number; label: string }[];
+  height?: string;
 }) => {
   const [openEventDialog, setOpenEventDialog] = useState(false);
   // Fetch all calendar events
@@ -95,6 +97,7 @@ const CompanyCalender = ({
         handleEditEvent={handleEditEvent}
         handleNavigate={handleNavigate}
         currentDate={currentDate}
+        height={height}
       />
     </div>
   );

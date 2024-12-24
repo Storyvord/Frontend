@@ -46,7 +46,7 @@ const Dashboard = () => {
       <div className=" grid grid-cols-1 lg:grid-cols-4 gap-4">
         <section className="md:col-span-3 h-full py-3 md:pr-2">
           <Project onGoingProjects={onGoingProjects} />
-          <DashboardCalendar employeeList={employeeList} />
+          <DashboardCalendar employeeList={employeeList} height="600px" />
         </section>
         <section className=" h-full pl-1 space-y-6">
           <Tasks employeeList={employeeList} />
