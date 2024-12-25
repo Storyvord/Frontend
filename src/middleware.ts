@@ -17,6 +17,9 @@ export async function middleware(request: NextRequest) {
     return path.startsWith(clientPath);
   });
   if (!token) {
+    if (request.nextUrl.pathname === "/") {
+      return NextResponse.next(); // Allow access to the "/" route
+    }
     return NextResponse.redirect(new URL("/auth/sign-in", request.url));
     // return NextResponse.next();
   } else if (isClient === "true") {

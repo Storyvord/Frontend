@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+const { default: flattenColorPalette } = require("tailwindcss/lib/util/flattenColorPalette");
 
 const config = {
   darkMode: ["class"],
@@ -46,11 +47,17 @@ const config = {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
+        background: {
+          DEFAULT: "hsl(var(--background))",
+          "1": "#FFFFFF",
+          "2": "#0A0A41",
+        },
         foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          green: "#22CB67",
+          main: "#111111",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -112,7 +119,7 @@ const config = {
         jacquard: ["Jacquard 12"],
         poppins: ["Poppins", "sans-serif"],
       },
-      boxShadow: {},
+      boxShadow: { "3xl": "0 35px 60px -15px green" },
       screens: {
         xxs: "325px",
         xsm: "400px",
@@ -132,6 +139,18 @@ const config = {
         bold: "700", // Poppins Bold
         extrabold: "800", // Poppins ExtraBold
         black: "900", // Poppins Black
+      },
+      fontSize: {
+        "heading-1": ["32px", { fontWeight: "500" }], // Poppins Medium
+        "heading-2": ["24px", { fontWeight: "600" }], // Poppins SemiBold
+        "heading-3": ["16px", { fontWeight: "600" }], // Poppins SemiBold
+        "paragraph-1": ["20px", { fontWeight: "600" }], // Poppins SemiBold
+        "paragraph-2-medium": ["16px", { fontWeight: "500" }], // Poppins Medium
+        "paragraph-2-regular": ["16px", { fontWeight: "400" }], // Poppins Regular
+        "paragraph-3-medium": ["12px", { fontWeight: "500" }], // Poppins Medium
+        "paragraph-3-regular": ["12px", { fontWeight: "400" }], // Poppins Regular
+        "paragraph-3-small-medium": ["10px", { fontWeight: "500" }], // Poppins Medium
+        "paragraph-3-small-regular": ["10px", { fontWeight: "400" }], // Poppins Regular
       },
     },
   },
@@ -183,7 +202,20 @@ const config = {
       addUtilities(newUtilities, ["responsive", "hover"]);
     },
     require("tailwindcss-animate"),
+    addVariablesForColors,
   ],
 } satisfies Config;
+
+// This plugin adds each Tailwind color as a global CSS variable, e.g. var(--gray-200).
+function addVariablesForColors({ addBase, theme }: any) {
+  let allColors = flattenColorPalette(theme("colors"));
+  let newVars = Object.fromEntries(
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+  );
+
+  addBase({
+    ":root": newVars,
+  });
+}
 
 export default config;

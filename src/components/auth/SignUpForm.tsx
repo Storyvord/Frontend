@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import Loader from "@/components/Loader";
 import { signUpFormSchema } from "@/lib/validation/auth";
+import { useTranslations } from "next-intl";
 
 interface SignUpFormProps {
   onSubmit: (data: any, isChecked: boolean) => Promise<void>;
@@ -28,7 +29,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit, isLoading }) => {
   const [isChecked, setIsChecked] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
+  const t = useTranslations("Auth.signupSection");
   const {
     register,
     handleSubmit,
@@ -47,23 +48,23 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit, isLoading }) => {
       onSubmit={handleSubmit(handleFormSubmit)}
     >
       <h3 className="text-3xl leading-[3rem] font-medium text-[#111111] font-poppins md:text-left text-center">
-        Create an account
+        {t("heading")}
       </h3>
       <p className="text-base font-normal text-[#111111] font-poppins md:text-left text-center">
-        Already have an account?{" "}
+        {t("paragraph.text")}{" "}
         <Link href="/auth/sign-in" className="underline">
-          Log in
+          {t("paragraph.linkText")}
         </Link>
       </p>
       <InputField
-        label="Email Address"
+        label={t("email")}
         type="text"
         name="email"
         register={register}
         error={errors.email}
       />
       <PasswordField
-        label="Password"
+        label={t("password")}
         name="password"
         register={register}
         error={errors.password}
@@ -71,7 +72,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit, isLoading }) => {
         toggleShowPassword={() => setShowPassword(!showPassword)}
       />
       <PasswordField
-        label="Confirm Password"
+        label={t("confirmPassword")}
         name="confirmPassword"
         register={register}
         error={errors.confirmPassword}
@@ -80,14 +81,12 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit, isLoading }) => {
       />
       <div className="flex items-center space-x-3 mt-4">
         <Checkbox checked={isChecked} onClick={() => setIsChecked(!isChecked)} />
-        <p className="font-poppins font-normal text-[#666666] text-sm">
-          By creating an account, you agree to our Terms of use and Privacy Policy
-        </p>
+        <p className="font-poppins font-normal text-[#666666] text-sm">{t("termsAndConditions")}</p>
       </div>
       <Button className="mt-6 w-full" type="submit" disabled={isLoading}>
-        {isLoading ? <Loader /> : "Create an account"}
+        {isLoading ? <Loader /> : t("button")}
       </Button>
-      <OAuthButtons />
+      {/* <OAuthButtons /> */}
     </form>
   );
 };

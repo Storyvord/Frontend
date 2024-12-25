@@ -4,22 +4,25 @@ import "./globals.css";
 import { ReactQueryClientProvider } from "@/lib/react-query/ReactQueryClientProvider";
 import UserContextProvider from "@/context/UserContext";
 import { Toaster } from "@/components/ui/toaster";
+import { NextIntlClientProvider } from "next-intl";
+import { cookies } from "next/headers";
+import { getMessages } from "next-intl/server";
 import Script from "next/script";
+
 
 export const metadata: Metadata = {
   title: "Storyvord",
-  description: "",
+  description: "WE HELP BRANDS AND FILMMAKERS TO SHOOT CONTENT WORLDWIDE",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const locale = cookies().get("locale")?.value || "en"; // Default to "en" if no locale cookie
+  const messages = await getMessages({ locale });
+
   return (
     <UserContextProvider>
       <ReactQueryClientProvider>
-        <html lang="en">
+        <html lang={locale}>
           <head>
             {/* Google tag (gtag.js) */}
             <Script async src="https://www.googletagmanager.com/gtag/js?id=G-M7P4WLNXPJ"></Script>
@@ -34,8 +37,10 @@ export default function RootLayout({
           </head>
 
           <body className=" font-poppins">
-            {children}
-            <Toaster />
+            <NextIntlClientProvider messages={messages}>
+              {children}
+              <Toaster />
+            </NextIntlClientProvider>
           </body>
         </html>
       </ReactQueryClientProvider>

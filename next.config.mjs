@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
+import createNextIntlPlugin from "next-intl/plugin";
+
+const withNextIntl = createNextIntlPlugin();
 
 const nextConfig = {
   reactStrictMode: false,
@@ -11,6 +14,7 @@ const nextConfig = {
       { protocol: "https", hostname: "content.skyscnr.com", pathname: "**" },
       { protocol: "https", hostname: "logos.skyscnr.com", pathname: "**" },
       { protocol: "https", hostname: "storyvordblob.blob.core.windows.net", pathname: "**" },
+      { protocol: "https", hostname: "assets.aceternity.com", pathname: "**" },
     ],
   },
   async headers() {
@@ -28,4 +32,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);
