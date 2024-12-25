@@ -18,7 +18,7 @@ const SideBar = () => {
   const { setProject } = useProjectControl();
   const { id: projectId } = useParams();
   const segment = useSelectedLayoutSegments();
-  const t = useTranslations();
+  const t = useTranslations("common");
   const [collapsedSections, setCollapsedSections] = useState<{ [key: string]: boolean }>({});
 
   const toggleSection = (title: string) => {

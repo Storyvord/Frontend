@@ -38,7 +38,7 @@ export function HeroSection() {
           className="  text-sm md:text-lg px-6 md:px-8 py-4 md:py-6 mx-auto"
           variant="storyvord"
         >
-          <Link href="/auth/sign-in">{t("button")}</Link>
+          <Link href="/auth/sign-in">{t("button.getStarted")}</Link>
         </Button>
       </div>
 

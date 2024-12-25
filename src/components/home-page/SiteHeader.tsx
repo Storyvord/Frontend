@@ -4,13 +4,14 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import LanguageSwitcher from "../LanguageSwitcher";
 import { Button } from "@/components/ui/button";
 import { useGetUserProfile } from "@/lib/react-query/queriesAndMutations/auth/auth";
+import { useTranslations } from "next-intl";
 
 export function SiteHeader() {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const t = useTranslations("HomePage");
 
   const { data: userDetails } = useGetUserProfile();
 
@@ -63,7 +64,7 @@ export function SiteHeader() {
             <Link
               key={index}
               href={link.href}
-              className="text-sm text-gray-600 hover:text-gray-900 relative transition-all duration-300 hover:border-b-2 hover:border-primary-green"
+              className="text-sm md:text-base text-gray-600 hover:text-gray-900 relative transition-all duration-300 hover:border-b-2 hover:border-primary-green font-poppins-medium"
             >
               {link.label}
             </Link>
@@ -75,15 +76,14 @@ export function SiteHeader() {
               // user_type === 1  Represents a client
               // user_type === 2  Represents a crew member
               <Link href={userDetails?.data?.user?.user_type === 1 ? "/dashboard" : "/crew/home"}>
-                Dashboard
+                {t("button.dashboard")}
               </Link>
             )}
             {userDetails && !userDetails?.data?.user?.step && (
-              <Link href="/auth/onboard">Complete Onboarding</Link>
+              <Link href="/auth/onboard">{t("button.completeOnboarding")}</Link>
             )}
-            {!userDetails && <Link href="/auth/sign-in">Get Started</Link>}
+            {!userDetails && <Link href="/auth/sign-in">{t("button.getStarted")}</Link>}
           </Button>
-          <LanguageSwitcher />
         </nav>
       </div>
     </header>

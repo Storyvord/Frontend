@@ -16,7 +16,7 @@ const DashboardSidebar = () => {
   const { isSideBarOpen } = useSideBarControl();
   const { setProject } = useProjectControl();
   const [collapsedSections, setCollapsedSections] = useState<{ [key: string]: boolean }>({});
-  const t = useTranslations();
+  const t = useTranslations("common");
 
   const toggleSection = (title: string) => {
     setCollapsedSections((prevState) => ({

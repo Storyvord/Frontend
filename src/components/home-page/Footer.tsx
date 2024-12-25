@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
+import LanguageSwitcher from "../LanguageSwitcher";
 
 export function Footer() {
   const t = useTranslations("HomePage.Footer");
@@ -44,6 +45,9 @@ export function Footer() {
               className=" w-6 h-6"
             />
           </Link>
+        </div>
+        <div className=" justify-self-end pt-4 pl-4">
+          <LanguageSwitcher />
         </div>
       </div>
     </footer>

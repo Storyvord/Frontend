@@ -6,11 +6,14 @@ import { Project as ProjectType } from "@/types/project";
 import { useGetProjects } from "@/lib/react-query/queriesAndMutations/project";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 const Project = ({ onGoingProjects }: { onGoingProjects: any }) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null); // Main container reference
   const scrollContentRef = useRef<HTMLDivElement>(null); // Inner div reference for project cards
   const [showArrows, setShowArrows] = useState(false); // State to toggle arrows
+
+  const t = useTranslations("Dashboard");
 
   useEffect(() => {
     // Check if scrollable content is wider than the container
@@ -44,11 +47,12 @@ const Project = ({ onGoingProjects }: { onGoingProjects: any }) => {
       <header className="flex justify-between mb-4">
         <span className="flex items-center gap-3">
           <Image height={27} width={27} src="/icons/project-2.svg" alt="plus-icon" />
-          <h1 className=" text-lg md:text-xl">Your Ongoing Projects</h1>
+          <h1 className=" text-lg md:text-xl">{t("your-ongoing-projects")}</h1>
         </span>
         <Link href="/dashboard/new-project">
           <Button className="md:hidden flex gap-2">
-            <Image height={20} width={20} src="/icons/plus-2.svg" alt="plus-icon" /> New Project
+            <Image height={20} width={20} src="/icons/plus-2.svg" alt="plus-icon" />{" "}
+            {t("button.new-project")}
           </Button>
         </Link>
       </header>
@@ -65,11 +69,8 @@ const Project = ({ onGoingProjects }: { onGoingProjects: any }) => {
           >
             <Image height={27} width={27} src="/icons/plus.svg" alt="plus icon" />
             <span>
-              <h2 className="font-semibold text-lg mb-1">Create New Project</h2>
-              <p>
-                A project is a work order between you and a creator. Start a project directly with a
-                creator, or put up a posting to hire from the marketplace.
-              </p>
+              <h2 className="font-semibold text-lg mb-1">{t("createProject.title")}</h2>
+              <p>{t("createProject.description")}</p>
             </span>
           </Link>
           {onGoingProjects?.length === 0 && (

@@ -27,7 +27,7 @@ const LanguageSwitcher = () => {
         <SelectValue placeholder="Select Language" />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="en">en</SelectItem>
+        <SelectItem value="en">English</SelectItem>
         <SelectItem value="hi">हिंदी</SelectItem>
         {/* <SelectItem value="zh-CN">中国</SelectItem> */}
       </SelectContent>
