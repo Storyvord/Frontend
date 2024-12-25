@@ -37,7 +37,7 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col max-w-[2000px] mx-auto">
       <SiteHeader />
-      <main className="flex-1 px-6 lg:px-10 xl:px-28">
+      <main className="flex-1 px-4 md:px-6 lg:px-10 xl:px-28">
         <HeroSection />
         <AiSimplifies />
         <FeaturesSection />
