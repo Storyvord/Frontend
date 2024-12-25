@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   useCreateCompanyCalenderEvents,
@@ -33,12 +33,20 @@ const CompanyCalender = ({
   height?: string;
 }) => {
   const [openEventDialog, setOpenEventDialog] = useState(false);
+  const [calendarId, setCalendarId] = useState<number | null>(null);
+
   // Fetch all calendar events
   const {
     data: events,
     isPending: isEventsLoading,
     isError: isEventsError,
   } = useGetCompanyCalenderEvents();
+
+  useEffect(() => {
+    if (events) {
+      setCalendarId(events?.data?.id);
+    }
+  }, [events]);
 
   // Create calendar event mutation
   const {
@@ -98,6 +106,7 @@ const CompanyCalender = ({
         handleNavigate={handleNavigate}
         currentDate={currentDate}
         height={height}
+        calendarId={calendarId}
       />
     </div>
   );

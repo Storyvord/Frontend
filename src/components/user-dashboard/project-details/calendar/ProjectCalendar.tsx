@@ -30,6 +30,7 @@ const ProjectCalendar = ({
   height?: string;
 }) => {
   const [openEventDialog, setOpenEventDialog] = useState(false);
+  const [calendarId, setCalendarId] = useState<number | null>(null);
   const { id: projectId } = useParams<{ id: string }>();
 
   // Fetch all calendar events
@@ -106,6 +107,7 @@ const ProjectCalendar = ({
         handleNavigate={handleNavigate}
         currentDate={currentDate}
         height={height}
+        calendarId={calendarId}
       />
     </div>
   );
