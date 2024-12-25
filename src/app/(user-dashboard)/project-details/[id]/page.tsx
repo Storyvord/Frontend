@@ -147,7 +147,7 @@ const ProjectDetails: React.FC = () => {
           <ShootingSchedule />
           <WhatsGoingOn />
         </section>
-        <ProjectDetailsCalendar />
+        <ProjectDetailsCalendar height="400px" />
       </main>
     </>
   );

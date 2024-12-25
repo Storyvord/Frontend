@@ -108,9 +108,9 @@ export type CalenderEventType = {
   id: number;
   title: string;
   description: string | null;
-  document: string | null;
+  document?: string | null;
   location: string | null;
-  calender: number;
+  calendar: number;
   participants: number[];
 };
 

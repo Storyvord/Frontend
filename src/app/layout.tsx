@@ -7,10 +7,12 @@ import { Toaster } from "@/components/ui/toaster";
 import { NextIntlClientProvider } from "next-intl";
 import { cookies } from "next/headers";
 import { getMessages } from "next-intl/server";
+import Script from "next/script";
+
 
 export const metadata: Metadata = {
   title: "Storyvord",
-  description: "",
+  description: "WE HELP BRANDS AND FILMMAKERS TO SHOOT CONTENT WORLDWIDE",
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
@@ -21,7 +23,20 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <UserContextProvider>
       <ReactQueryClientProvider>
         <html lang={locale}>
-          <body className="font-poppins">
+          <head>
+            {/* Google tag (gtag.js) */}
+            <Script async src="https://www.googletagmanager.com/gtag/js?id=G-M7P4WLNXPJ"></Script>
+            <Script id="gtag" strategy="lazyOnload">
+              {`
+               window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-M7P4WLNXPJ');
+                `}
+            </Script>
+          </head>
+
+          <body className=" font-poppins">
             <NextIntlClientProvider messages={messages}>
               {children}
               <Toaster />

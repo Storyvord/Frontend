@@ -20,6 +20,7 @@ type Props = {
   isEditLoading: boolean;
   isEditError: boolean;
   crewList?: { value: number; label: string }[];
+  calendarId?: number | null;
 };
 
 const EventDialog = ({
@@ -33,6 +34,7 @@ const EventDialog = ({
   isEditLoading,
   isEditError,
   crewList,
+  calendarId,
 }: Props) => {
   const [isEditing, setIsEditing] = useState(false);
 
@@ -104,26 +106,28 @@ const EventDialog = ({
           </div>
           {isError && <p className="my-2 text-red-600">Failed to delete event</p>}
           {isEditError && <p className="my-2 text-red-600">Failed to edit event</p>}
-          <div className="flex flex-wrap justify-between gap-1 w-full mt-4">
-            <Button
-              className="flex items-center gap-4 font-poppins-semibold"
-              onClick={handleOpenEditDialog}
-              variant="outline"
-            >
-              <Edit className="w-5 h-5" />
-              Edit
-            </Button>
-            {deleteEvent && (
+          {event.calendar === calendarId && (
+            <div className="flex flex-wrap justify-between gap-1 w-full mt-4">
               <Button
-                disabled={isLoading}
-                onClick={() => deleteEvent(event.id)}
-                className="w-[150px] font-bold"
-                variant="destructive"
+                className="flex items-center gap-4 font-poppins-semibold"
+                onClick={handleOpenEditDialog}
+                variant="outline"
               >
-                {isLoading ? <Loader /> : "Delete"}
+                <Edit className="w-5 h-5" />
+                Edit
               </Button>
-            )}
-          </div>
+              {deleteEvent && (
+                <Button
+                  disabled={isLoading}
+                  onClick={() => deleteEvent(event.id)}
+                  className="w-[150px] font-bold"
+                  variant="destructive"
+                >
+                  {isLoading ? <Loader /> : "Delete"}
+                </Button>
+              )}
+            </div>
+          )}
         </DialogContent>
       </Dialog>
       <AddEvent

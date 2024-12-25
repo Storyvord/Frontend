@@ -5,7 +5,7 @@ import React from "react";
 
 const MyNetwork = () => {
   return (
-    <div className=" p-2">
+    <div className=" p-2 pt-6">
       <header className=" flex justify-between items-center">
         <span className=" flex gap-2 items-center">
           <Image width={25} height={25} src="/icons/network.svg" alt="" />
@@ -17,7 +17,7 @@ const MyNetwork = () => {
       </header>
       <main>
         <div className=" bg-white rounded-xl mt-2 p-3">
-          {/* temporary code, this is only for demo. will change after apis will create */}
+          {/* TODO: temporary code, this is only for demo. will change after apis will create */}
           <section className="space-y-3">
             <div className=" flex justify-between items-center ">
               <Image

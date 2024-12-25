@@ -36,6 +36,9 @@ export const useCreateCompanyCalenderEvents = () => {
       queryClient.invalidateQueries({
         queryKey: ["getCompanyCalenderEvents"],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["getAllCalenderEvents"],
+      });
       return data;
     },
   });
@@ -57,6 +60,9 @@ export const useDeleteCompanyCalenderEvent = () => {
       queryClient.invalidateQueries({
         queryKey: ["getCompanyCalenderEvents"],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["getAllCalenderEvents"],
+      });
       return data;
     },
   });
@@ -69,6 +75,9 @@ export const useEditCompanyCalenderEvent = () => {
     onSuccess: (data) => {
       queryClient.invalidateQueries({
         queryKey: ["getCompanyCalenderEvents"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["getAllCalenderEvents"],
       });
       return data;
     },

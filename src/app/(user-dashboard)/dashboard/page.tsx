@@ -10,6 +10,7 @@ import { Project as ProjectType } from "@/types/project";
 import DashboardCalendar from "@/components/user-dashboard/dashboard/calendar/DashboardCalendar";
 import { useGetCompanySettings } from "@/lib/react-query/queriesAndMutations/company/settings";
 import { useGetOnBoardedEmployeeList } from "@/lib/react-query/queriesAndMutations/company/employee";
+import AllProjects from "@/components/user-dashboard/dashboard/all-projects/AllProjects";
 
 const Dashboard = () => {
   const [pastProjects, setPastProjects] = useState<ProjectType[]>([]);
@@ -45,15 +46,16 @@ const Dashboard = () => {
       <div className=" grid grid-cols-1 lg:grid-cols-4 gap-4">
         <section className="md:col-span-3 h-full py-3 md:pr-2">
           <Project onGoingProjects={onGoingProjects} />
-          <DashboardCalendar employeeList={employeeList} />
+          <DashboardCalendar employeeList={employeeList} height="600px" />
         </section>
         <section className=" h-full pl-1 space-y-6">
           <Tasks employeeList={employeeList} />
           <MyNetwork />
-          <Posting />
+          <AllProjects projects={projects} />
+          {/* <Posting /> */}
         </section>
       </div>
-      <PastProjects projects={pastProjects} isLoading={isPending} isError={isError} />
+      {/* <PastProjects projects={pastProjects} isLoading={isPending} isError={isError} /> */}
     </main>
   );
 };

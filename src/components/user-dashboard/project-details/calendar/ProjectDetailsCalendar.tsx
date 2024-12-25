@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import DatePickerWithRange from "../../dashboard/calendar/DatePickerWithRange";
 import ProjectCalendar from "./ProjectCalendar";
 
-const ProjectDetailsCalendar = () => {
+const ProjectDetailsCalendar = ({ height }: { height: string }) => {
   const [openFormDialog, setOpenFormDialog] = useState(false);
 
   const [selectedRange, setSelectedRange] = useState<any | undefined>({
@@ -47,6 +47,7 @@ const ProjectDetailsCalendar = () => {
             setOpenFormDialog={setOpenFormDialog}
             handleNavigate={handleNavigate}
             currentDate={currentDate}
+            height={height}
           />
         </div>
       </main>
