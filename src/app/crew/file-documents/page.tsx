@@ -1,8 +1,8 @@
 "use client";
-import { Card, CardTitle } from "@/components/ui/card";
-import { useGetInvitations } from "@/lib/react-query/queriesAndMutations/crew/invitations";
-import { useRouter } from "next/navigation";
 import React from "react";
+import { useRouter } from "next/navigation";
+import { useGetInvitations } from "@/lib/react-query/queriesAndMutations/crew/invitations";
+import { Card, CardTitle } from "@/components/ui/card";
 import { Project } from "../projects/page";
 import Loader from "@/components/Loader";
 
@@ -12,7 +12,7 @@ const FileDocument = () => {
 
   return (
     <div>
-      <h1 className=" text-center font-poppins-semibold text-xl text-gray-700">FileDocument</h1>
+      <h1 className=" text-center font-poppins-semibold text-xl text-gray-700">File & Document</h1>
       {isPending && (
         <div className="w-full grid place-items-center mt-8">
           <Loader />
@@ -28,7 +28,7 @@ const FileDocument = () => {
             key={item.id}
             className=" cursor-pointer mb-4 mx-auto max-w-4xl"
           >
-            <CardTitle className="text-xl"> {item.project_name}</CardTitle>
+            <CardTitle className="text-lg font-poppins-semibold"> {item.project_name}</CardTitle>
             <p className=" text-sm text-gray-400">
               Created At: {new Date(item.created_at).toLocaleString()}
             </p>
