@@ -54,18 +54,23 @@ export const getFileTypeFromUrl = async (url: string) => {
   }
 };
 
-export function formatError(error: unknown): { title: string; description: string } {
-  if (typeof error === "object" && error !== null && "data" in error) {
+export function formatError(error: unknown): { title: string; description?: string } {
+  console.log("Error: " + error);
+  if (typeof error === "object" && error !== null) {
     const { data, message } = error as {
       message?: string;
       data?: Record<string, string[]>;
     };
 
-    const description = data
-      ? Object.entries(data)
-          .map(([key, messages]) => `${key}: ${messages.join(", ")}`)
-          .join("; ")
-      : "An unexpected error occurred.";
+    if (!data) {
+      return {
+        title: message || "An error occurred",
+      };
+    }
+
+    const description = Object.entries(data)
+      .map(([key, messages]) => `${key}: ${messages.join(", ")}`)
+      .join("; ");
 
     return {
       title: message || "An error occurred",

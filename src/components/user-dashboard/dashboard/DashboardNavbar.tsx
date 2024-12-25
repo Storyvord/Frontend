@@ -119,7 +119,7 @@ const DashboardNavbar = () => {
           {(path === "/dashboard" || path.includes("message")) && (
             <Link href="/dashboard">
               <Image
-                className=" w-[125px]"
+                className=" w-[125px] md:w-[150px]"
                 src={"/logo.svg"}
                 width={50}
                 height={10}

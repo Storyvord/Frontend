@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   useCreateCompanyCalenderEvents,
@@ -22,6 +22,7 @@ const CompanyCalender = ({
   currentDate,
   calendarType,
   employeeList,
+  height,
 }: {
   openFormDialog: boolean;
   setOpenFormDialog: (value: boolean) => void;
@@ -29,14 +30,23 @@ const CompanyCalender = ({
   currentDate?: Date;
   calendarType: "month" | "week" | "day" | "agenda";
   employeeList: { value: number; label: string }[];
+  height?: string;
 }) => {
   const [openEventDialog, setOpenEventDialog] = useState(false);
+  const [calendarId, setCalendarId] = useState<number | null>(null);
+
   // Fetch all calendar events
   const {
     data: events,
     isPending: isEventsLoading,
     isError: isEventsError,
   } = useGetCompanyCalenderEvents();
+
+  useEffect(() => {
+    if (events) {
+      setCalendarId(events?.data?.id);
+    }
+  }, [events]);
 
   // Create calendar event mutation
   const {
@@ -95,6 +105,8 @@ const CompanyCalender = ({
         handleEditEvent={handleEditEvent}
         handleNavigate={handleNavigate}
         currentDate={currentDate}
+        height={height}
+        calendarId={calendarId}
       />
     </div>
   );

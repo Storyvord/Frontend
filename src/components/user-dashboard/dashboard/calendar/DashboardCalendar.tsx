@@ -8,9 +8,10 @@ import { Button } from "@/components/ui/button";
 
 type Props = {
   employeeList: { value: number; label: string }[];
+  height: string;
 };
 
-const DashboardCalendar = ({ employeeList }: Props) => {
+const DashboardCalendar = ({ employeeList, height }: Props) => {
   const [openFormDialog, setOpenFormDialog] = useState(false);
 
   const [selectedRange, setSelectedRange] = useState<any | undefined>({
@@ -52,6 +53,7 @@ const DashboardCalendar = ({ employeeList }: Props) => {
             currentDate={currentDate}
             calendarType="week"
             employeeList={employeeList}
+            height={height}
           />
         </div>
       </main>
