@@ -20,6 +20,7 @@ import { useProjectControl } from "@/context/ProjectContext";
 import { useSideBarControl } from "@/context/SideBarContext";
 import { Button } from "@/components/ui/button";
 import { CgProfile } from "react-icons/cg";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const ProjectDetailsNavBar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -103,6 +104,7 @@ const ProjectDetailsNavBar = () => {
                 >
                   Logout
                 </button>
+                <LanguageSwitcher />
               </DropdownMenuContent>
             </DropdownMenu>
           </div>

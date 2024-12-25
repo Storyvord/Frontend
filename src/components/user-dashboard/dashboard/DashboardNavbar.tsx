@@ -32,6 +32,8 @@ import {
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
 import { CgProfile } from "react-icons/cg";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { getLocalizedString } from "@/i18n/utils";
 
 const DashboardNavbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -57,17 +59,19 @@ const DashboardNavbar = () => {
     }
   }, [projects]);
 
-  const companyInformation = companySettingsMenuItems.slice(0, 3).map((item) => (
+  const companyInformation = companySettingsMenuItems.slice(0, 3).map((details) => (
     <>
-      <h2 className=" text-md font-semibold sm:mt-3 mt-1">{item.title}</h2>
-      {item.items.map((item) => (
+      <h2 className=" text-md font-semibold sm:mt-3 mt-1">
+        {getLocalizedString(`DashboardMenuItems.${details.title}.title`)}
+      </h2>
+      {details.items.map((item) => (
         <Link
           key={item.text}
           href={`/dashboard/${item.link}`}
           className=" text-gray-500 text-md flex items-center gap-2 cursor-pointer hover:bg-gray-100 rounded-md sm:p-2 p-1 "
         >
           <item.icon />
-          <h3> {item.text} </h3>
+          <h3> {getLocalizedString(`DashboardMenuItems.${details.title}.items.${item.link}`)} </h3>
         </Link>
       ))}
     </>
@@ -194,6 +198,7 @@ const DashboardNavbar = () => {
                 >
                   Logout
                 </button>
+                <LanguageSwitcher />
               </DropdownMenuContent>
             </DropdownMenu>
           </div>

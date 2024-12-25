@@ -10,12 +10,15 @@ import { useParams, useSelectedLayoutSegments } from "next/navigation";
 import { cn } from "@/lib/utils";
 import React, { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { getLocalizedString } from "@/i18n/utils";
+import { useTranslations } from "next-intl";
 
 const SideBar = () => {
   const { isSideBarOpen } = useSideBarControl();
   const { setProject } = useProjectControl();
   const { id: projectId } = useParams();
   const segment = useSelectedLayoutSegments();
+  const t = useTranslations();
   const [collapsedSections, setCollapsedSections] = useState<{ [key: string]: boolean }>({});
 
   const toggleSection = (title: string) => {
@@ -48,7 +51,7 @@ const SideBar = () => {
           className=" flex items-center gap-4 py-3 hover:text-text-color-1 pl-4 w-full text-gray-500 font-semibold"
         >
           <Image src="/icons/left-arrow.svg" alt="" width={17} height={17} />
-          Dashboard
+          {t("dashboard")}
         </Link>
 
         <Link
@@ -61,26 +64,29 @@ const SideBar = () => {
           )}
         >
           <p className="block antialiased text-base leading-relaxed text-inherit font-medium capitalize truncate overflow-hidden whitespace-nowrap text-ellipsis">
-            Project Details
+            {t("project-details")}
           </p>
         </Link>
 
         {projectdetailsItems.map((details) => (
           <div key={details.title} className="flex flex-col gap-1">
-            {/* Section Title */}
+            {/* Section Title (localized) */}
             <h1
-              className="pl-2 text-sm text-gray-500 mt-4 uppercase cursor-pointer flex justify-between items-center font-poppins-medium"
+              className="pl-2 text-sm text-gray-500 mt-4 uppercase cursor-pointer 
+                       flex justify-between items-center font-poppins-medium"
               onClick={() => toggleSection(details.title)}
             >
-              {details.title}
+              {getLocalizedString(`ProjectDetailsItems.${details.title}.title`)}
+
               <span className="text-gray-400">
                 {collapsedSections[details.title] ? (
-                  <ChevronDown className=" w-5 h-5" />
+                  <ChevronDown className="w-5 h-5" />
                 ) : (
-                  <ChevronUp className=" w-5 h-5" />
+                  <ChevronUp className="w-5 h-5" />
                 )}
               </span>
             </h1>
+
             {/* Section Items (collapsible with animation) */}
             <ul
               className={cn(
@@ -88,16 +94,20 @@ const SideBar = () => {
                 collapsedSections[details.title] ? "max-h-0" : "max-h-[500px]"
               )}
             >
-              {details.items.map((item) => (
-                <li key={item.text} className="list-none">
-                  <SideBarButton
-                    Icon={item.icon}
-                    link={item.link}
-                    root="project-details"
-                    text={item.text}
-                  />
-                </li>
-              ))}
+              {details.items.map((item) => {
+                // e.g. "ProjectDetailsItems.general.items.report"
+                const itemKey = `ProjectDetailsItems.${details.title}.items.${item.link}`;
+                return (
+                  <li key={item.text} className="list-none">
+                    <SideBarButton
+                      Icon={item.icon}
+                      link={item.link}
+                      root="project-details"
+                      text={getLocalizedString(itemKey)}
+                    />
+                  </li>
+                );
+              })}
             </ul>
           </div>
         ))}

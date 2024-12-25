@@ -1,0 +1,81 @@
+{
+  "DashboardMenuItems": {
+    "general": {
+      "title": "General",
+      "items": {
+        "employees": "Employees & Staff",
+        "address-book": "Address Book",
+        "company-files": "Company Files",
+        "company-tasks": "Company Tasks",
+        "activity-logs": "Activity Logs"
+      }
+    },
+    "planning": {
+      "title": "Planning",
+      "items": {
+        "company-calendar": "Company Calendar",
+        "timesheets": "Time Sheets",
+        "resource-planning": "Resource Planning"
+      }
+    },
+    "database": {
+      "title": "Database",
+      "items": {
+        "actor-database": "Actor Database",
+        "location-database": "Location Database",
+        "costume-database": "Costume Database",
+        "prop-database": "Prop Database"
+      }
+    },
+    "administrative": {
+      "title": "Administrative",
+      "items": {
+        "settings": "Settings",
+        "subscriptions": "Subscriptions"
+      }
+    }
+  },
+
+  "ProjectDetailsItems": {
+    "general": {
+      "title": "General",
+      "items": {
+        "reports": "Reports",
+        "file-documents": "File & Documents",
+        "task": "Tasks",
+        "calendar": "Calendar",
+        "announcements": "Announcements"
+      }
+    },
+    "project management": {
+      "title": "Project Management",
+      "items": {
+        "crew": "Crew",
+        "resource": "Suppliers",
+        "compliance": "Compliance",
+        "budget": "Budget",
+        "call-sheets": "Call Sheets"
+      }
+    },
+    "creative hub": {
+      "title": "Creative Hub",
+      "items": {
+        "script": "Script",
+        "scenes": "Scenes",
+        "shots": "Shots",
+        "storyboard": "Storyboard",
+        "content-items": "Content Items"
+      }
+    },
+    "department hub": {
+      "title": "Department Hub",
+      "items": {
+        "cast": "Cast",
+        "costumes": "Costumes",
+        "makeup-hair": "Makeup & Hair",
+        "locations-sets": "Locations & Sets",
+        "production-design": "Production Design"
+      }
+    }
+  }
+}
