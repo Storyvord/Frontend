@@ -125,7 +125,7 @@ export const projectdetailsItems: projectDetailItem[] = [
         icon: RiRobot2Line,
       },
       {
-        text: "File & Documents",
+        text: "file & documents",
         link: "file-documents",
         icon: IoDocumentsSharp,
       },
@@ -147,7 +147,7 @@ export const projectdetailsItems: projectDetailItem[] = [
     ],
   },
   {
-    title: "Project Management",
+    title: "project management",
     items: [
       {
         text: "crew",
@@ -434,17 +434,17 @@ export const destn = [
 
 export const companySettingsMenuItems = [
   {
-    title: "General",
+    title: "general",
     items: [
       {
         link: "employees",
         icon: IoIosPeople,
-        text: "Employees & Staff",
+        text: "employees & staff",
       },
       {
         link: "address-book",
         icon: ImAddressBook,
-        text: "Address Book",
+        text: "address book",
       },
       {
         link: "company-files",

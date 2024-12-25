@@ -32,11 +32,16 @@ import {
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
 import { CgProfile } from "react-icons/cg";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { getLocalizedString } from "@/i18n/utils";
+import { useTranslations } from "next-intl";
 
 const DashboardNavbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const { data: projects, isPending, isError } = useGetProjects();
   const [onGoingProjects, setOngoingProjects] = useState<ProjectType[]>([]);
+
+  const t = useTranslations("Dashboard");
 
   const path = usePathname();
 
@@ -57,17 +62,19 @@ const DashboardNavbar = () => {
     }
   }, [projects]);
 
-  const companyInformation = companySettingsMenuItems.slice(0, 3).map((item) => (
+  const companyInformation = companySettingsMenuItems.slice(0, 3).map((details) => (
     <>
-      <h2 className=" text-md font-semibold sm:mt-3 mt-1">{item.title}</h2>
-      {item.items.map((item) => (
+      <h2 className=" text-md font-semibold sm:mt-3 mt-1">
+        {getLocalizedString(`DashboardMenuItems.${details.title}.title`)}
+      </h2>
+      {details.items.map((item) => (
         <Link
           key={item.text}
           href={`/dashboard/${item.link}`}
           className=" text-gray-500 text-md flex items-center gap-2 cursor-pointer hover:bg-gray-100 rounded-md sm:p-2 p-1 "
         >
           <item.icon />
-          <h3> {item.text} </h3>
+          <h3> {getLocalizedString(`DashboardMenuItems.${details.title}.items.${item.link}`)} </h3>
         </Link>
       ))}
     </>
@@ -95,8 +102,8 @@ const DashboardNavbar = () => {
 
       <span className=" text-gray-500 text-md flex items-center gap-2 cursor-pointer hover:bg-gray-100 rounded-md p-2">
         <Image width={20} height={20} className="w-[20px]" src={"/icons/back.svg"} alt="icon" />
-        <Link href="/dashboard/#past-project" className=" ml-4">
-          Past Projects
+        <Link href="/dashboard/#all-projects" className=" ml-4">
+          {t("all-projects")}
         </Link>
       </span>
     </>
@@ -147,7 +154,7 @@ const DashboardNavbar = () => {
             <NavigationMenuList>
               <NavigationMenuItem className=" hidden sm:block">
                 <NavigationMenuTrigger className=" text-sm sm:text-base font-poppins-normal">
-                  Select Project
+                  {t("select-project")}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="w-[400px]">{projectList}</ul>
@@ -155,7 +162,7 @@ const DashboardNavbar = () => {
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <NavigationMenuTrigger className=" text-sm sm:text-base font-poppins-normal">
-                  Org
+                  {t("org")}
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="w-[250px] px-3">{companyInformation}</ul>
@@ -194,6 +201,7 @@ const DashboardNavbar = () => {
                 >
                   Logout
                 </button>
+                <LanguageSwitcher />
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
@@ -228,7 +236,7 @@ const DashboardNavbar = () => {
               <Accordion type="single" collapsible>
                 <AccordionItem value="item-1">
                   <AccordionTrigger className=" p-2 bg-gray-100 border-none rounded-md">
-                    Project
+                    {t("all-projects")}
                   </AccordionTrigger>
                   <AccordionContent onClick={handleMenuItemClick} className=" px-4">
                     {projectList}
@@ -238,7 +246,7 @@ const DashboardNavbar = () => {
               <Accordion type="single" collapsible>
                 <AccordionItem value="item-1">
                   <AccordionTrigger className=" p-2 bg-gray-100 rounded-md">
-                    Org Name
+                    {t("org")}
                   </AccordionTrigger>
                   <AccordionContent onClick={handleMenuItemClick} className=" px-4">
                     {companyInformation}
@@ -247,25 +255,29 @@ const DashboardNavbar = () => {
               </Accordion>
               <h3 className=" p-2 bg-gray-100 rounded-md">
                 <Link onClick={handleMenuItemClick} href="/dashboard/profile">
-                  Profile
+                  {t("profile")}
                 </Link>
               </h3>
               <h3 className=" p-2 bg-gray-100 rounded-md">
                 <Link onClick={handleMenuItemClick} href="/dashboard/settings">
-                  Settings
+                  {t("settings")}
                 </Link>
               </h3>
               <h3 className=" p-2 bg-gray-100 rounded-md">
                 <Link onClick={handleMenuItemClick} href="/dashboard/subscriptions">
-                  Subscriptions
+                  {t("subscriptions")}
                 </Link>
               </h3>
-              <button
-                onClick={() => userLogout()}
-                className=" w-full border rounded-md mt-12 cursor-pointer"
-              >
-                Logout
-              </button>
+              <div className=" flex gap-2">
+                <LanguageSwitcher />
+
+                <button
+                  onClick={() => userLogout()}
+                  className=" w-full border rounded-md cursor-pointer"
+                >
+                  Logout
+                </button>
+              </div>
             </div>
           )}
         </section>

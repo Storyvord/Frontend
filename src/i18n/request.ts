@@ -13,12 +13,14 @@ export default getRequestConfig(async () => {
   const commonMessages = (await import(`./locales/${locale}/common.json`)).default;
   const homeMessages = (await import(`./locales/${locale}/home.json`)).default;
   const authMessages = (await import(`./locales/${locale}/auth.json`)).default;
+  const dashboardMessage = (await import(`./locales/${locale}/dashboard.json`)).default;
 
   // Merge all messages into a single object
   const messages = {
     ...commonMessages,
     ...homeMessages,
     ...authMessages,
+    ...dashboardMessage,
   };
 
   return {

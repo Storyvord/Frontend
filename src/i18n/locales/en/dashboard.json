@@ -1,0 +1,25 @@
+{
+  "Dashboard": {
+    "your-ongoing-projects": "Your Ongoing Projects",
+    "createProject": {
+      "title": "Create New Project",
+      "description": "A project is a work order between you and a creator. Start a project directly with a creator, or put up a posting to hire from the marketplace."
+    },
+    "my-tasks": "My Tasks",
+    "calendar": "Calendar",
+    "my-network": "My Network",
+    "all-projects": "All Projects",
+    "my-schedule": "My Schedule",
+    "select-project": "Select Project",
+    "org": "Org",
+    "profile": "Profile",
+    "settings": " Settings",
+    "subscriptions": " Subscriptions",
+    "button": {
+      "task": "Add Task",
+      "event": "Add Event",
+      "add": "Add",
+      "new-project": "New Project"
+    }
+  }
+}

@@ -8,8 +8,11 @@
     "title1": "Revolutionising Film Production: From",
     "title2": "Planning to Budgeting in Minutes",
     "description": "Empower your filmmaking process with AI-driven insights and budget optimization.",
-    "button": "Get Started",
-
+    "button": {
+      "dashboard": "Dashboard",
+      "completeOnboarding": "Complete Onboarding",
+      "getStarted": "Get Started"
+    },
     "AiSimplifies": {
       "badgeText": "How AI Simplifies Filmmaking for You",
       "title": "AI That Thinks Like a Producer",

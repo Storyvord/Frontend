@@ -8,11 +8,15 @@ import SideBarButton from "./components/SideBarButton";
 import SideBarCloseButton from "./components/SideBarCloseButton";
 import React, { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { getLocalizedString } from "@/i18n/utils";
+import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 const DashboardSidebar = () => {
   const { isSideBarOpen } = useSideBarControl();
   const { setProject } = useProjectControl();
   const [collapsedSections, setCollapsedSections] = useState<{ [key: string]: boolean }>({});
+  const t = useTranslations("common");
 
   const toggleSection = (title: string) => {
     setCollapsedSections((prevState) => ({
@@ -44,44 +48,56 @@ const DashboardSidebar = () => {
           className=" flex items-center gap-4 py-3 hover:text-text-color-1 pl-4 w-full text-[#607D8B] font-semibold"
         >
           <Image src="/icons/left-arrow.svg" alt="" width={17} height={17} />
-          Dashboard
+          {t("dashboard")}
         </Link>
 
-        {companySettingsMenuItems.map((details) => (
-          <div key={details.title} className="flex flex-col gap-1">
-            {/* Section Title */}
-            <h1
-              className="pl-2 text-sm text-gray-400 mt-4 uppercase cursor-pointer flex justify-between items-center font-poppins-medium"
-              onClick={() => toggleSection(details.title)}
-            >
-              {details.title}
-              <span className="text-gray-400">
-                {collapsedSections[details.title] ? (
-                  <ChevronDown className=" w-5 h-5" />
-                ) : (
-                  <ChevronUp className=" w-5 h-5" />
+        {companySettingsMenuItems.map((details) => {
+          // We'll build dynamic keys to match JSON structure
+          const sectionTitleKey = `DashboardMenuItems.${details.title}.title`;
+
+          return (
+            <div key={details.title} className="flex flex-col gap-1">
+              {/* Section Title */}
+              <h1
+                className="pl-2 text-sm text-gray-400 mt-4 uppercase cursor-pointer flex justify-between items-center font-poppins-medium"
+                onClick={() => toggleSection(details.title)}
+              >
+                {getLocalizedString(sectionTitleKey)}
+                <span className="text-gray-400">
+                  {collapsedSections[details.title] ? (
+                    <ChevronDown className="w-5 h-5" />
+                  ) : (
+                    <ChevronUp className="w-5 h-5" />
+                  )}
+                </span>
+              </h1>
+
+              {/* Section Items (collapsible with animation) */}
+              <ul
+                className={cn(
+                  "overflow-hidden transition-all duration-300 ease-in-out",
+                  collapsedSections[details.title] ? "max-h-0" : "max-h-[500px]"
                 )}
-              </span>
-            </h1>
-            {/* Section Items (collapsible with animation) */}
-            <ul
-              className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                collapsedSections[details.title] ? "max-h-0" : "max-h-[500px]"
-              }`}
-            >
-              {details.items.map((item) => (
-                <li key={item.text} className="list-none">
-                  <SideBarButton
-                    Icon={item.icon}
-                    link={item.link}
-                    root="project-details"
-                    text={item.text}
-                  />
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+              >
+                {details.items.map((item) => {
+                  // e.g. "DashboardMenuItems.general.items.employeesStaff"
+                  const itemKey = `DashboardMenuItems.${details.title}.items.${item.link}`;
+
+                  return (
+                    <li key={item.text} className="list-none">
+                      <SideBarButton
+                        Icon={item.icon}
+                        link={item.link}
+                        root="dashboard"
+                        text={getLocalizedString(itemKey)}
+                      />
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          );
+        })}
       </div>
     </aside>
   );

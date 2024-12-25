@@ -7,6 +7,7 @@ import CreateTask from "@/components/tasks/CreateTask";
 import { useCreateNewCompanyTask } from "@/lib/react-query/queriesAndMutations/company/tasks";
 import { useToast } from "@/components/ui/use-toast";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 type Props = {
   employeeList: { value: number; label: string }[];
@@ -15,6 +16,8 @@ type Props = {
 const Tasks = ({ employeeList }: Props) => {
   const [formOpen, setFormOpen] = useState(false);
   const { toast } = useToast();
+
+  const t = useTranslations("Dashboard");
 
   const { mutateAsync: createTaskMutation } = useCreateNewCompanyTask();
 
@@ -38,10 +41,11 @@ const Tasks = ({ employeeList }: Props) => {
       <header className="flex justify-between items-center">
         <span className="flex gap-2 items-center">
           <Image height={20} width={20} src="/icons/task.svg" alt="plus-icon" />
-          <h1 className="text-lg md:text-lg">My Task</h1>
+          <h1 className="text-lg md:text-lg">{t("my-tasks")}</h1>
         </span>
         <Button onClick={() => setFormOpen(true)} className="flex gap-2">
-          <Image height={20} width={20} src="/icons/plus-2.svg" alt="plus-icon" /> Add Task
+          <Image height={20} width={20} src="/icons/plus-2.svg" alt="plus-icon" />{" "}
+          {t("button.task")}
         </Button>
       </header>
       {/* Scrollable content */}

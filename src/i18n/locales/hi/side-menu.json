@@ -1,0 +1,81 @@
+{
+  "DashboardMenuItems": {
+    "general": {
+      "title": "सामान्य",
+      "items": {
+        "employees": "कर्मचारी और स्टाफ",
+        "address-book": "पता पुस्तिका",
+        "company-files": "कंपनी फ़ाइलें",
+        "company-tasks": "कंपनी कार्य",
+        "activity-logs": "गतिविधि लॉग"
+      }
+    },
+    "planning": {
+      "title": "योजना",
+      "items": {
+        "company-calendar": "कंपनी कैलेंडर",
+        "timesheets": "समय पत्रक",
+        "resource-planning": "संसाधन योजना"
+      }
+    },
+    "database": {
+      "title": "डेटाबेस",
+      "items": {
+        "actor-database": "कलाकार डेटाबेस",
+        "location-database": "लोकेशन डेटाबेस",
+        "costume-database": "कॉस्ट्यूम डेटाबेस",
+        "prop-database": "प्रॉप डेटाबेस"
+      }
+    },
+    "administrative": {
+      "title": "प्रशासनिक",
+      "items": {
+        "settings": "सेटिंग्स",
+        "subscriptions": "सदस्यताएँ"
+      }
+    }
+  },
+
+  "ProjectDetailsItems": {
+    "general": {
+      "title": "सामान्य",
+      "items": {
+        "reports": "रिपोर्ट्स",
+        "file-documents": "फ़ाइलें और दस्तावेज़",
+        "task": "कार्य",
+        "calendar": "कैलेंडर",
+        "announcements": "घोषणाएँ"
+      }
+    },
+    "project management": {
+      "title": "प्रोजेक्ट प्रबंधन",
+      "items": {
+        "crew": "क्रू",
+        "resource": "आपूर्तिकर्ता",
+        "compliance": "अनुपालन",
+        "budget": "बजट",
+        "call-sheets": "कॉल शीट्स"
+      }
+    },
+    "creative hub": {
+      "title": "रचनात्मक हब",
+      "items": {
+        "script": "स्क्रिप्ट",
+        "scenes": "दृश्य",
+        "shots": "शॉट्स",
+        "storyboard": "स्टोरीबोर्ड",
+        "content-items": "सामग्री आइटम"
+      }
+    },
+    "department hub": {
+      "title": "विभाग हब",
+      "items": {
+        "cast": "कलाकार",
+        "costumes": "कॉस्ट्यूम",
+        "makeup-hair": "मेकअप और हेयर",
+        "locations-sets": "लोकेशन और सेट",
+        "production-design": "प्रोडक्शन डिज़ाइन"
+      }
+    }
+  }
+}

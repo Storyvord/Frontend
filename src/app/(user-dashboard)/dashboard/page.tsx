@@ -11,6 +11,7 @@ import DashboardCalendar from "@/components/user-dashboard/dashboard/calendar/Da
 import { useGetCompanySettings } from "@/lib/react-query/queriesAndMutations/company/settings";
 import { useGetOnBoardedEmployeeList } from "@/lib/react-query/queriesAndMutations/company/employee";
 import AllProjects from "@/components/user-dashboard/dashboard/all-projects/AllProjects";
+import { useTranslations } from "next-intl";
 
 const Dashboard = () => {
   const [pastProjects, setPastProjects] = useState<ProjectType[]>([]);
@@ -19,6 +20,8 @@ const Dashboard = () => {
   const { data: projects, isPending, isError } = useGetProjects();
   const { data: companyProfile } = useGetCompanySettings();
   const { data: employeeListData } = useGetOnBoardedEmployeeList(companyProfile?.data?.id);
+
+  const t = useTranslations("common");
 
   const employeeList = employeeListData?.data.map((crew: { id: string; user_email: string }) => ({
     value: crew.id,
@@ -42,7 +45,7 @@ const Dashboard = () => {
 
   return (
     <main className=" p-2 sm:py-6 sm:px-10">
-      <h1 className="text-xl md:text-2xl font-semibold">Dashboard</h1>
+      <h1 className="text-xl md:text-2xl font-semibold">{t("dashboard")}</h1>
       <div className=" grid grid-cols-1 lg:grid-cols-4 gap-4">
         <section className="md:col-span-3 h-full py-3 md:pr-2">
           <Project onGoingProjects={onGoingProjects} />

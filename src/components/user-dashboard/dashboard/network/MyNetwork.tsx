@@ -1,18 +1,20 @@
 import { Button } from "@/components/ui/button";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 const MyNetwork = () => {
+  const t = useTranslations("Dashboard");
   return (
     <div className=" p-2 pt-6">
       <header className=" flex justify-between items-center">
         <span className=" flex gap-2 items-center">
           <Image width={25} height={25} src="/icons/network.svg" alt="" />
-          <h1 className=" text-lg md:text-lg">My Network</h1>
+          <h1 className=" text-lg md:text-lg">{t("my-network")}</h1>
         </span>
         <Button className=" flex gap-2">
-          <Image width={20} height={20} src="/icons/plus-2.svg" alt="" /> Add
+          <Image width={20} height={20} src="/icons/plus-2.svg" alt="" /> {t("button.add")}
         </Button>
       </header>
       <main>

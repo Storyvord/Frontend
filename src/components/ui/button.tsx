@@ -21,7 +21,7 @@ const buttonVariants = cva(
           "bg-gradient-to-r from-[#03256c] to-green-500 text-white hover:from-green-500 hover:to-[#03256c] transition-all duration-300",
       },
       size: {
-        default: "h-12 px-4 py-2",
+        default: "h-10 md:h-12 px-4 py-2 text-sm md:text-base",
         sm: "h-9 rounded-xl px-3 py-1",
         lg: "h-11 rounded-2xl px-8",
         icon: "h-10 w-10",

@@ -4,12 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import ProjectCard from "./ProjectCard";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 const AllProjects = ({ projects }: { projects: any }) => {
-  console.log(projects);
+  const t = useTranslations("Dashboard");
   return (
-    <div className="p-2 relative">
-      <h1 className="text-xl">All Projects</h1>
+    <div className="p-2 relative" id="all-projects">
+      <h1 className="text-xl">{t("all-projects")}</h1>
 
       <main className="bg-white mt-2 rounded-3xl border-2 overflow-y-scroll h-72 hide-scrollbar">
         <div className=" bg-white rounded-xl p-3">
@@ -23,11 +24,13 @@ const AllProjects = ({ projects }: { projects: any }) => {
               <p>{project.name}</p>
               <div>
                 {project?.status === "CANCELLED" && (
-                  <p className="text-sm sm:text-base text-red-500 font-poppins-medium">CANCELLED</p>
+                  <p className="text-sm sm:text-base text-red-500 font-poppins-medium">
+                    {project?.status}
+                  </p>
                 )}
                 {project?.status === "COMPLETED" && (
                   <p className="text-sm sm:text-base text-green-500 font-poppins-medium">
-                    COMPLETED
+                    {project?.status}
                   </p>
                 )}
                 {project?.status !== "COMPLETED" && project?.status !== "CANCELLED" && (
