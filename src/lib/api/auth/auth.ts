@@ -51,7 +51,10 @@ export const userLogout = () => {
   Cookies.remove("refreshToken");
   Cookies.remove("isClient");
   localStorage.clear();
-  location.replace("/auth/sign-in");
+
+  if (location.pathname !== "/") {
+    location.replace("/auth/sign-in");
+  }
 
   return null;
 };
