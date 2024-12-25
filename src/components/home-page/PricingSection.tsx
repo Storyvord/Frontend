@@ -61,7 +61,7 @@ export function PricingSection() {
 
   return (
     <section className="py-10">
-      <div className="container">
+      <div className="">
         <Badge
           variant="secondary"
           className="bg-white text-[#1e1e1e] px-4 py-1 text-sm font-medium shadow-[0px_1px_15px_rgba(0,255,0,0.3)] border-2 border-primary-green flex items-center gap-3 w-fit"

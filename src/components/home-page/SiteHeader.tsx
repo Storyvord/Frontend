@@ -6,10 +6,13 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import LanguageSwitcher from "../LanguageSwitcher";
 import { Button } from "@/components/ui/button";
+import { useGetUserProfile } from "@/lib/react-query/queriesAndMutations/auth/auth";
 
 export function SiteHeader() {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+
+  const { data: userDetails } = useGetUserProfile();
 
   useEffect(() => {
     const controlNavbar = () => {
@@ -47,11 +50,11 @@ export function SiteHeader() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 w-screen bg-white z-50 transition-transform duration-300",
+        "fixed top-0 left-0 w-[100%] bg-white z-50 transition-transform duration-300 px-6 lg:px-10 xl:px-28",
         isVisible ? "translate-y-0" : "-translate-y-full"
       )}
     >
-      <div className="container flex items-center justify-between py-2">
+      <div className="flex items-center justify-between py-2 max-w-[2000px] mx-auto">
         <Link href="/" className="text-xl font-bold">
           <Image src="/logo.svg" width={130} height={50} alt="logo" className=" w-40" />
         </Link>
@@ -65,8 +68,20 @@ export function SiteHeader() {
               {link.label}
             </Link>
           ))}
+
           <Button className=" bg-background-2 text-white ">
-            <Link href="/auth/sign-in">Get Started</Link>
+            {/* stage 2 = Onboarding process completed */}
+            {userDetails?.data?.user?.step && (
+              // user_type === 1  Represents a client
+              // user_type === 2  Represents a crew member
+              <Link href={userDetails?.data?.user?.user_type === 1 ? "/dashboard" : "/crew/home"}>
+                Dashboard
+              </Link>
+            )}
+            {userDetails && !userDetails?.data?.user?.step && (
+              <Link href="/auth/onboard">Complete Onboarding</Link>
+            )}
+            {!userDetails && <Link href="/auth/sign-in">Get Started</Link>}
           </Button>
           <LanguageSwitcher />
         </nav>

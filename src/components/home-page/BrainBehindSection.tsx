@@ -5,8 +5,8 @@ export function BrainBehindSection() {
   const t = useTranslations("HomePage.BrainBehindSection");
 
   return (
-    <section className="py-20 bg-white mb-6">
-      <div className="container grid grid-cols-12">
+    <section className="py-20 bg-white md:mb-6">
+      <div className=" grid grid-cols-12">
         <h2 className="text-5xl col-start-3 col-span-8 font-bold mb-12 text-center text-[#111111]">
           {t("title")}
         </h2>
@@ -30,9 +30,9 @@ export function BrainBehindSection() {
             <div className="absolute right-0 top-[-50%] h-[200%] w-[1px] bg-primary-green hidden md:block" />
           </div>
 
-          <div className="px-3">
+          <div className="md:px-3 text-justify mt-6 md:mt-0">
             <p className="text-gray-600 mb-2">{t("bio")}</p>
-            <div className=" flex items-center gap-3">
+            <div className=" flex flex-col md:flex-row items-center md:gap-3">
               <h3 className="text-lg font-poppins-semibold">{t("name")}</h3>
               <p className="text-gray-600">{t("role")}</p>
             </div>

@@ -7,28 +7,28 @@ import { Badge } from "@/components/ui/badge";
 export function HeroSection() {
   const t = useTranslations("HomePage");
   return (
-    <div className="container pt-24 md:pt-36 grid grid-cols-1 md:grid-cols-12 gap-y-6 items-center text-center relative">
+    <div className="pt-24 md:pt-32 grid grid-cols-1 md:grid-cols-12 gap-y-6 items-center text-center relative">
       <div className="gradient-03 z-50" />
 
       {/* Badge Section */}
       <div className="col-span-12 md:col-start-5 md:col-span-4">
         <Badge
           variant="secondary"
-          className="bg-white text-[#1e1e1e] px-4 py-1 text-sm font-medium shadow-[0px_1px_15px_rgba(0,255,0,0.3)] border-2 border-primary-green flex items-center gap-3 w-fit mx-auto"
+          className="bg-white text-[#1e1e1e] px-4 py-1 md:py-2 text-sm font-medium shadow-[0px_1px_15px_rgba(0,255,0,0.3)] border-2 border-primary-green flex items-center gap-3 w-fit mx-auto"
         >
           <Image src="/icons/ai.svg" alt="ai" width={10} height={10} className="w-6 h-6" />
-          {t("text")}
+          <p className=" text-[0.85rem] md:text-[0.9rem]">{t("text")}</p>
         </Badge>
       </div>
 
       {/* Title Section */}
-      <h1 className="col-span-12 md:col-start-2 md:col-span-10 text-2xl md:text-4xl lg:text-5xl font-poppins-bold md:mb-6 mb-2 text-background-2 flex flex-col justify-center items-center">
+      <h1 className="col-span-12 md:col-start-2 md:col-span-10 text-2xl md:text-4xl lg:text-5xl font-poppins-bold md:mb-4 mb-2 text-background-2 flex flex-col justify-center items-center">
         <span>{t("title1")}</span>
-        <span className="mt-2">{t("title2")}</span>
+        <span className="md:mt-4">{t("title2")}</span>
       </h1>
 
       {/* Description Section */}
-      <p className="col-span-12 md:col-start-3 md:col-span-7 text-base md:text-xl text-gray-600 mb-8 px-4 md:px-3 md:ml-[20%]">
+      <p className="col-span-12 md:col-start-3 md:col-span-7 text-base md:text-xl text-gray-600 md:px-3 md:ml-[20%]">
         {t("description")}
       </p>
 

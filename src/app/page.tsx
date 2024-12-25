@@ -35,9 +35,9 @@ import { TimelineDemo } from "@/components/home-page/TimelineDemo";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col max-w-[2000px] mx-auto">
       <SiteHeader />
-      <main className="flex-1">
+      <main className="flex-1 px-6 lg:px-10 xl:px-28">
         <HeroSection />
         <AiSimplifies />
         <FeaturesSection />

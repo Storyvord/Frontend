@@ -7,7 +7,7 @@ const AiSimplifies = () => {
   const t = useTranslations("HomePage.AiSimplifies");
 
   return (
-    <section className="container grid grid-cols-1 sm:grid-cols-1 md:grid-cols-12 gap-y-8 md:gap-y-12 pt-16 relative">
+    <section className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-12 gap-y-8 md:gap-y-12 pt-16 relative">
       <div className="gradient-02 z-50 rounded-full" />
 
       {/* Left Section: Badge, Title, Description */}
@@ -26,14 +26,14 @@ const AiSimplifies = () => {
       </div>
 
       {/* Right Section: Trusted Badge */}
-      <div className="p-6 rounded-xl bg-green-500 col-span-12 md:col-start-10 md:col-span-3 h-fit mx-auto md:mx-0">
+      <div className="p-6 rounded-xl bg-green-500 col-span-12 md:col-start-10 md:col-span-3 h-fit ml-auto md:mx-0 border w-[80%] md:w-[100%]">
         <h2 className="text-lg sm:text-xl text-white font-poppins-semibold tracking-wide">
           {t("trustedText")}
         </h2>
       </div>
 
       {/* Crew Suggestion Section */}
-      <div className="mt-0 sm:-mt-[2%] md:-mt-[27%] p-4 rounded-xl bg-[#0A0A41] text-white col-span-12 md:col-start-9 md:col-span-4 mx-auto md:mx-0">
+      <div className="mt-0 sm:-mt-[2%] md:-mt-[40%] p-4 rounded-xl bg-[#0A0A41] text-white col-span-12 md:col-start-9 md:col-span-4 mx-auto md:mx-0">
         <h2 className="text-lg sm:text-xl md:text-heading-2">{t("crewSuggestion")}</h2>
         <div className="flex flex-col lg:flex-row gap-3 items-center mt-4">
           <Image
