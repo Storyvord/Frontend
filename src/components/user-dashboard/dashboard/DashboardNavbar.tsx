@@ -35,6 +35,7 @@ import { CgProfile } from "react-icons/cg";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { getLocalizedString } from "@/i18n/utils";
 import { useTranslations } from "next-intl";
+import { cn } from "@/lib/utils";
 
 const DashboardNavbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -123,17 +124,18 @@ const DashboardNavbar = () => {
     <header className=" bg-white p-2 flex-col md:flex-row justify-between md:justify-end fixed w-screen  top-0 left-0 z-50 shadow-sm pr-4">
       <nav className="flex justify-between w-full mx-auto max-w-[2000]">
         <section className=" flex items-center gap-4 xl:gap-16 sm:ml-8">
-          {(path === "/dashboard" || path.includes("message")) && (
-            <Link href="/dashboard">
-              <Image
-                className=" w-[125px] md:w-[150px]"
-                src={"/logo.svg"}
-                width={50}
-                height={10}
-                alt="storyvord-logo"
-              />
-            </Link>
-          )}
+          <Link href="/dashboard">
+            <Image
+              className={cn(
+                " w-[125px] md:w-[150px]",
+                path === "/dashboard" || path.includes("message") ? "" : "lg:hidden"
+              )}
+              src={"/logo.svg"}
+              width={50}
+              height={10}
+              alt="storyvord-logo"
+            />
+          </Link>
           {/* temporary comment */}
           {/* <div className="hidden lg:flex gap-4 border p-2 rounded-lg h-10 lg:ml-16">
             <Image
