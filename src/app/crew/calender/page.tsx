@@ -16,6 +16,24 @@ import CalendarComponent from "@/components/calender/CalendarComponent";
 import { CalenderFormFieldType } from "@/types";
 import { useGetAllCrewCalenderEvents } from "@/lib/react-query/queriesAndMutations/crew/calendar";
 
+type CalendarEvent = {
+  id: number;
+  title: string;
+  description: string;
+  start: string;
+  end: string;
+  location?: string;
+  calendar: number;
+  participants?: number[];
+};
+
+type ProjectCalendar = {
+  id: number;
+  name: string;
+  project: string;
+  events: CalendarEvent[];
+};
+
 const CrewCalender = () => {
   const [openEventDialog, setOpenEventDialog] = useState(false);
   const [openFormDialog, setOpenFormDialog] = useState(false);
@@ -31,16 +49,24 @@ const CrewCalender = () => {
 
   useEffect(() => {
     if (allEvents) {
-      const userEvents = allEvents?.data?.user_calendar?.events || [];
-      const projectEvents = allEvents?.data?.project_calendars?.events || [];
+      // Extracting user calendar events
+      const userEvents = allEvents?.data?.user_calendar?.user_calendar_events || [];
+
+      // Extracting project calendars and their events
+      const projectCalendars = allEvents?.data?.project_calendars || [];
+      const projectEvents = projectCalendars.flatMap(
+        (calendar: ProjectCalendar) => calendar.events || []
+      );
 
       // Merging user and project events
       const mergedEvents = [...userEvents, ...projectEvents];
       setTransformEvents(mergedEvents);
 
-      setUserCalendarId(allEvents?.data?.user_calendar?.calendar?.id);
+      // Setting user calendar ID
+      setUserCalendarId(allEvents?.data?.user_calendar?.id);
     }
   }, [allEvents]);
+
   console.log(transformEvents);
   // Create calendar event mutation
   const {
