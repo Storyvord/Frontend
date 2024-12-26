@@ -1,14 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "next/navigation";
 
 import Tabs from "@/components/Tabs";
 import EquipmentPage from "@/components/report/EquipmentPage";
-import LogisticsPage from "@/components/report/logistics/LogisticsPage";
-import CompliancePage from "@/components/report/compliance/CompliancePage";
-import CulturePage from "@/components/report/culture/CulturePage";
-import BudgetPage from "@/components/report/BudgetPage";
 import { useGetProjectRequirements } from "@/lib/react-query/queriesAndMutations/project";
 import {
   useGetRequirements,
@@ -21,12 +17,6 @@ const tabs = ["Crew", "Suppliers", "Logistics", "Compliance", "Culture", "Budget
 
 const ReportsPage = () => {
   const [activeTab, setActiveTab] = useState("Crew");
-  const [crewRequirements, setCrewRequirements] = useState<any>(null);
-  const [equipmentRequirements, setEquipmentRequirements] = useState<any>(null);
-  // const [logisticsData, setLogisticsData] = useState<any>(null);
-  // const [complianceData, setComplianceData] = useState<any>(null);
-  // const [cultureData, setCultureData] = useState<any>(null);
-  // const [budgetData, setBudgetData] = useState<any>(null);
 
   const { id: project_id }: { id: string } = useParams();
 
@@ -39,35 +29,12 @@ const ReportsPage = () => {
     isError: isErrorRequirementsSuggestions,
     refetch: refetchRequirement,
   } = useGetRequirements(projectRequirements?.results[0]?.id);
-  console.log(getRequirementsSuggestions);
   const {
     data: suggestions,
     isPending: isPendingSuggestions,
     isError: isErrorSuggestions,
     refetch,
   } = useGetSuggestions(project_id);
-  console.log(suggestions);
-
-  // useEffect(() => {
-  //   if (suggestions?.data?.suggestion?.data) {
-  //     const logistics: any[] = [];
-  //     const compliance: any[] = [];
-  //     const culture: any[] = [];
-  //     const budget: any[] = [];
-
-  //     suggestions.data.suggestion.data.forEach((item: any) => {
-  //       logistics.push({ location: item.location, data: item.ai_suggestion[0].logistics });
-  //       compliance.push({ location: item.location, data: item.ai_suggestion[0].compliance });
-  //       culture.push({ location: item.location, data: item.ai_suggestion[0].culture });
-  //       budget.push({ location: item.location, data: item.ai_suggestion[0].budget });
-  //     });
-
-  //     setLogisticsData(logistics);
-  //     setComplianceData(compliance);
-  //     setCultureData(culture);
-  //     setBudgetData(budget);
-  //   }
-  // }, [suggestions]);
 
   return (
     <div className="container mx-auto p-4">

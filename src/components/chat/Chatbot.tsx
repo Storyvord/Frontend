@@ -94,7 +94,7 @@ export default function Chatbot() {
           width={30}
           height={30}
           alt="icon"
-          className=" md:w-20 w-12 md:h-20 h-12"
+          className=" md:w-20 w-16 md:h-20 h-16"
         />
       </button>
       {openChat && (
