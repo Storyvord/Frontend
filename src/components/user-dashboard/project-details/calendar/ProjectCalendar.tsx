@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
 import {
@@ -59,13 +59,9 @@ const ProjectCalendar = ({
 
   const { mutateAsync: editEvent, isPending: isEditLoading, isError: isEditError } = useEditEvent();
 
-  // Prepare crew list for the CalendarComponent
-  // const crewList = crewListData?.accepted.map(
-  //   (crew: { invited_user: { id: number }; firstName: string }) => ({
-  //     value: crew.invited_user?.id,
-  //     label: crew.firstName,
-  //   })
-  // );
+  useEffect(() => {
+    setCalendarId(events?.data?.calendar?.id);
+  }, [events]);
 
   const handleCreateEvent = async (formData: CalenderFormFieldType) => {
     await createCalenderEvent({ eventData: formData, projectId });
@@ -88,7 +84,7 @@ const ProjectCalendar = ({
       )}
       {(isEventsLoading || isCrewLoading) && <p className="text-center mt-10">Loading...</p>}
       <CalendarComponent
-        events={events?.data || []}
+        events={events?.data?.events || []}
         calendarType={calendarType}
         crewList={crewList}
         isCreateLoading={isCreateLoading}
