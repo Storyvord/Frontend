@@ -33,7 +33,10 @@ const ReportDetails = ({ isPending, isError, report, refetch }: ReportDetailsPro
   }
 
   return (
-    <div className="mt-6 space-y-4 px-4">
+    <div className="mt-6 space-y-4 px-4 relative">
+      {/* <Button onClick={() => refetch()} className=" absolute right-0 -top-2">
+        Regenerate
+      </Button> */}
       <Markdown
         components={{
           a({ children, href }) {
@@ -58,6 +61,30 @@ const ReportDetails = ({ isPending, isError, report, refetch }: ReportDetailsPro
                 {children}
               </strong>
             );
+          },
+          table({ children }) {
+            return (
+              <table className="w-full border-collapse border border-gray-300 my-4">
+                {children}
+              </table>
+            );
+          },
+          thead({ children }) {
+            return <thead className="bg-gray-100">{children}</thead>;
+          },
+          tbody({ children }) {
+            return <tbody>{children}</tbody>;
+          },
+          tr({ children }) {
+            return <tr className="border-t border-gray-300">{children}</tr>;
+          },
+          th({ children }) {
+            return (
+              <th className="px-4 py-2 text-left font-poppins-medium text-gray-700">{children}</th>
+            );
+          },
+          td({ children }) {
+            return <td className="px-4 py-2 text-gray-600">{children}</td>;
           },
         }}
         remarkPlugins={[remarkGfm]}
