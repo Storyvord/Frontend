@@ -14,5 +14,6 @@ export const useGetRequirements = (reqId: string) => {
     queryFn: () => getRequirements(reqId),
     // The query will not execute until the reqId exists
     enabled: !!reqId,
+    staleTime: 60000, // 2 minutes (data stays fresh for this duration)
   });
 };
