@@ -38,7 +38,7 @@ const Tasks = () => {
       )}
       {isLoadingTask && <TaskSkeleton />}
       {activeTab === tabs[0] &&
-        tasks?.map((task: taskType) => (
+        tasks?.data?.tasks?.map((task: taskType) => (
           <AssignTaskCard
             key={task.id}
             handleRequestApproval={handleRequestApproval}
@@ -47,8 +47,8 @@ const Tasks = () => {
           />
         ))}
       {activeTab === tabs[1] &&
-        tasks?.map((task: taskType) => {
-          if (!task.completed) {
+        tasks?.data?.tasks?.map((task: taskType) => {
+          if (!task?.is_completed) {
             return (
               <AssignTaskCard
                 key={task.id}
@@ -60,8 +60,8 @@ const Tasks = () => {
           }
         })}
       {activeTab === tabs[2] &&
-        tasks?.map((task: taskType) => {
-          if (task.completed) {
+        tasks?.data?.tasks?.map((task: taskType) => {
+          if (task?.is_completed) {
             return (
               <AssignTaskCard
                 key={task.id}

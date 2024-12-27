@@ -1,8 +1,8 @@
-import { USER_API } from "@/constant/constant";
+import { NEW_API_URL_V2, USER_API } from "@/constant/constant";
 import { customFetch } from "../api";
 
 export const getCrewTasks = async () => {
-  return customFetch(`${USER_API}/api/tasks/crew/tasks/`, {
+  return customFetch(`${NEW_API_URL_V2}/tasks/v2/tasks/`, {
     method: "GET",
   });
 };
