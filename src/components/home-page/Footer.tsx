@@ -7,7 +7,7 @@ export function Footer() {
   const t = useTranslations("HomePage.Footer");
   const currentYear = new Date().getFullYear();
   return (
-    <footer className=" bg-[#FAFAFA] py-6 flex items-center justify-between">
+    <footer className=" bg-[#FAFAFA] mt-6 py-3 flex items-center justify-between">
       <div className="container flex flex-col md:flex-row justify-between items-center">
         <div className=" md:mb-0">
           <Link href="/" className="text-xl font-bold">

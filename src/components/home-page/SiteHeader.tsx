@@ -70,20 +70,24 @@ export function SiteHeader() {
             </Link>
           ))}
 
-          <Button className=" bg-background-2 text-white ">
-            {/* stage 2 = Onboarding process completed */}
-            {userDetails?.data?.user?.step && (
-              // user_type === 1  Represents a client
-              // user_type === 2  Represents a crew member
-              <Link href={userDetails?.data?.user?.user_type === 1 ? "/dashboard" : "/crew/home"}>
-                {t("button.dashboard")}
-              </Link>
-            )}
-            {userDetails && !userDetails?.data?.user?.step && (
-              <Link href="/auth/onboard">{t("button.completeOnboarding")}</Link>
-            )}
-            {!userDetails && <Link href="/auth/sign-in">{t("button.getStarted")}</Link>}
-          </Button>
+          {/* stage 2 = Onboarding process completed */}
+          {userDetails?.data?.user?.step && (
+            // user_type === 1  Represents a client
+            // user_type === 2  Represents a crew member
+            <Link href={userDetails?.data?.user?.user_type === 1 ? "/dashboard" : "/crew/home"}>
+              <Button> {t("button.dashboard")}</Button>
+            </Link>
+          )}
+          {userDetails && !userDetails?.data?.user?.step && (
+            <Link href="/auth/onboard">
+              <Button>{t("button.completeOnboarding")}</Button>
+            </Link>
+          )}
+          {!userDetails && (
+            <Link href="/auth/sign-in">
+              <Button>{t("button.getStarted")}</Button>
+            </Link>
+          )}
         </nav>
       </div>
     </header>
