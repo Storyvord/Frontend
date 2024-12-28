@@ -10,11 +10,19 @@ const HelpAndSupportLayout = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const widgetElement = document.querySelector(".zsiq_floatmain");
+    const widgetPopup = document.querySelector(".zls-sptwndw");
     if (widgetElement && widgetElement instanceof HTMLElement) {
       if (!path.includes("help-support")) {
         widgetElement.style.display = "none";
       } else {
         widgetElement.style.display = "block";
+      }
+    }
+    if (widgetPopup && widgetPopup instanceof HTMLElement) {
+      if (!path.includes("help-support")) {
+        widgetPopup.style.display = "none";
+      } else {
+        widgetPopup.style.display = "block";
       }
     }
   }, [path]);

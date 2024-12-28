@@ -8,7 +8,7 @@ const Navbar: React.FC = () => {
   const router = useRouter();
   return (
     <nav className="flex justify-between items-center px-6 py-3 bg-white shadow-md fixed w-full">
-      <Link href="/dashboard" className=" flex gap-3 items-center">
+      <Link href="/help-support" className=" flex gap-3 items-center">
         <Image
           className=" w-[120px] md:w-[130px]"
           src={"/logo.svg"}
