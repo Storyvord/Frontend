@@ -81,9 +81,9 @@ export const projectFormSchema = z.object({
 
 export const taskFormSchema = z.object({
   title: z.string().min(1, { message: "Task title is required" }),
-  description: z.string(),
+  description: z.string().min(1, { message: "Description is required" }),
   due_date: z.string().date(),
-  assigned_to: z.array(z.number()),
+  assigned_to: z.array(z.number()).min(1, "Minimum 1 required"),
 });
 
 export const ClientProfileUpdateSchema = z.object({
