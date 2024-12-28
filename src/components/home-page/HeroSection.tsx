@@ -24,7 +24,7 @@ export function HeroSection() {
       {/* Title Section */}
       <h1 className="col-span-12 md:col-start-2 md:col-span-10 text-2xl md:text-4xl lg:text-5xl font-poppins-bold md:mb-4 mb-2 text-background-2 flex flex-col justify-center items-center">
         <span>{t("title1")}</span>
-        <span className="md:mt-4">{t("title2")}</span>
+        {/* <span className="md:mt-4">{t("title2")}</span> */}
       </h1>
 
       {/* Description Section */}

@@ -41,12 +41,8 @@ export function SiteHeader() {
     }
   }, [lastScrollY]);
 
-  const navLinks = [
-    { href: "#", label: "Home" },
-    { href: "#", label: "Product" },
-    { href: "#", label: "Client" },
-    { href: "#", label: "About" },
-  ];
+  const navLinksStyle =
+    "text-sm md:text-base text-gray-600 hover:text-gray-900 relative transition-all duration-300 hover:border-b-2 hover:border-primary-green font-poppins-medium";
 
   return (
     <header
@@ -60,15 +56,18 @@ export function SiteHeader() {
           <Image src="/logo.svg" width={130} height={50} alt="logo" className=" w-40" />
         </Link>
         <nav className="hidden md:flex items-center gap-8 ">
-          {navLinks.map((link, index) => (
-            <Link
-              key={index}
-              href={link.href}
-              className="text-sm md:text-base text-gray-600 hover:text-gray-900 relative transition-all duration-300 hover:border-b-2 hover:border-primary-green font-poppins-medium"
-            >
-              {link.label}
-            </Link>
-          ))}
+          <Link href="#" className={navLinksStyle}>
+            {t("home")}
+          </Link>
+          <Link href="#" className={navLinksStyle}>
+            {t("product")}
+          </Link>
+          <Link href="#" className={navLinksStyle}>
+            {t("client")}
+          </Link>
+          <Link href="#" className={navLinksStyle}>
+            {t("about")}
+          </Link>
 
           {/* stage 2 = Onboarding process completed */}
           {userDetails?.data?.user?.step && (

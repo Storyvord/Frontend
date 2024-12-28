@@ -176,7 +176,7 @@ const SelectInputWithQuantity: React.FC<SelectableFieldsProps> = ({ fieldName, o
               styles={{
                 control: (baseStyles, state) => ({
                   ...baseStyles,
-                  borderRadius: "0.5rem",
+                  borderRadius: "1rem",
                   borderColor: state.isFocused ? "black" : "#D1D5DB",
                   borderWidth: state.isFocused ? "2px" : "1px",
                   fontFamily: "'Poppins', sans-serif",

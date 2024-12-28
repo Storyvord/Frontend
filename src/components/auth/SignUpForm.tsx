@@ -13,6 +13,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import Loader from "@/components/Loader";
 import { signUpFormSchema } from "@/lib/validation/auth";
 import { useTranslations } from "next-intl";
+import TermsAndConditions from "../TermsAndConditions";
 
 interface SignUpFormProps {
   onSubmit: (data: any, isChecked: boolean) => Promise<void>;
@@ -29,6 +30,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit, isLoading }) => {
   const [isChecked, setIsChecked] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
   const t = useTranslations("Auth.signupSection");
   const {
     register,
@@ -81,12 +83,19 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit, isLoading }) => {
       />
       <div className="flex items-center space-x-3 mt-4">
         <Checkbox checked={isChecked} onClick={() => setIsChecked(!isChecked)} />
-        <p className="font-poppins font-normal text-[#666666] text-sm">{t("termsAndConditions")}</p>
+        <button
+          onClick={() => setOpenDialog(true)}
+          className="font-poppins font-normal text-[#666666] text-sm underline cursor-pointer"
+          type="button"
+        >
+          {t("termsAndConditions")}
+        </button>
       </div>
       <Button className="mt-6 w-full" type="submit" disabled={isLoading}>
         {isLoading ? <Loader /> : t("button")}
       </Button>
       {/* <OAuthButtons /> */}
+      <TermsAndConditions openDialog={openDialog} setOpenDialog={setOpenDialog} />
     </form>
   );
 };

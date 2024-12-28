@@ -244,6 +244,10 @@ export const content_type = [
     label: "Events",
   },
   {
+    value: "Documentary",
+    label: "Documentary",
+  },
+  {
     value: "People Stories",
     label: "People Stories",
   },
@@ -266,6 +270,7 @@ export const content_type = [
   { value: "Live Stream", label: "Live Stream" },
   { value: "Speaker", label: "Speaker" },
   { value: "Recruitment", label: "Recruitment" },
+  { value: "Other", label: "Other" },
 ];
 
 export const equipment_data = [
