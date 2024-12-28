@@ -11,6 +11,7 @@ import {
 } from "@/lib/react-query/queriesAndMutations/message";
 import Loader from "../Loader";
 import { useGetUserProfile } from "@/lib/react-query/queriesAndMutations/auth/auth";
+import { useToast } from "../ui/use-toast";
 
 type Message = {
   message: string;
@@ -26,6 +27,7 @@ const Message: React.FC = () => {
   const [isReceiverOnline, setIsReceiverOnline] = useState<boolean>(false);
   const clientRef = useRef<W3CWebSocket | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  const { toast } = useToast();
 
   const token = Cookies.get("accessToken");
   const searchParams = useSearchParams();
@@ -120,6 +122,9 @@ const Message: React.FC = () => {
       setIsErrorConnection(true);
       // console.error("WebSocket Error:", error);
       // alert("WebSocket connection failed. Please try again.");
+      toast({
+        title: "connection failed. Please try again.",
+      });
     };
 
     wsClient.onclose = (event) => {
@@ -155,7 +160,6 @@ const Message: React.FC = () => {
   };
   return (
     <div className="mx-auto -mt-3 sm:mt-1 w-full h-[89vh]">
-      {isErrorConnection && <p className=" w-full p-4 text-center">Failed to connect</p>}
       <ChatWindow
         receiverName={receiverName}
         messages={messages}

@@ -32,6 +32,10 @@ const ReportDetails = ({ isPending, isError, report, refetch }: ReportDetailsPro
     );
   }
 
+  const filteredData = report.includes("```markdown\n")
+    ? report.replace("```markdown\n", "")
+    : report;
+
   return (
     <div className="mt-6 space-y-4 px-4 relative">
       {/* <Button onClick={() => refetch()} className=" absolute right-0 -top-2">
@@ -89,7 +93,7 @@ const ReportDetails = ({ isPending, isError, report, refetch }: ReportDetailsPro
         }}
         remarkPlugins={[remarkGfm]}
       >
-        {report}
+        {filteredData}
       </Markdown>
     </div>
   );

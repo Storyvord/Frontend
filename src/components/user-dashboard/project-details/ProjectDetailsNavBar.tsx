@@ -50,13 +50,13 @@ const ProjectDetailsNavBar = () => {
   //   }
   // }, [projects]);
 
-  const profile = ["profile", "settings", "subscriptions"].map((item) => (
+  const profile = ["profile", "settings", "subscriptions", , "help & support"].map((item) => (
     <Link
-      href={`/dashboard/${item}`}
+      href={item === "help & support" ? "/help-support" : `/dashboard/${item}`}
       key={item}
-      className=" text-gray-500 text-md flex items-center gap-2 cursor-pointer hover:bg-gray-100 rounded-md p-2"
+      className=" text-gray-500 text-md flex items-center gap-2 cursor-pointer hover:bg-gray-100 rounded-md p-2 capitalize"
     >
-      {item.slice(0, 1).toUpperCase() + item.slice(1)}
+      {item}
     </Link>
   ));
 

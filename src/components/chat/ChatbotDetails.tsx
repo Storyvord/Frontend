@@ -6,12 +6,14 @@ import { ChatbotQuestions } from "./ChatbotQuestions";
 import { ChatbotSearch } from "./ChatbotSearch";
 import { useGetChatbotSessions } from "@/lib/react-query/queriesAndMutations/chatbot";
 import { ChatbotSidebar } from "./ChatbotSidebar";
+import { Cross1Icon } from "@radix-ui/react-icons";
 
 interface ChatbotDetailsProps {
   conversation: Array<ChatConversation> | [];
   sendMessage: (incomingQuestion: string) => void;
   prevSessions: Session[];
   setCurrentSession: React.Dispatch<React.SetStateAction<Session | undefined>>;
+  setOpenChat: (value: boolean) => void;
 }
 
 const initialResponse = {
@@ -23,6 +25,7 @@ export const ChatbotDetails: React.FC<ChatbotDetailsProps> = ({
   sendMessage,
   prevSessions,
   setCurrentSession,
+  setOpenChat,
 }) => {
   const [search, setSearch] = useState(""); // search chat
   const [expanded, setExpanded] = useState<Boolean>(false); // Chatbot size
@@ -81,9 +84,14 @@ export const ChatbotDetails: React.FC<ChatbotDetailsProps> = ({
           </Button>
         )}
         <Image className="w-[150px]" src="/storyvord-ai.svg" width={100} height={10} alt="" />
-        <button onClick={() => setExpanded(!expanded)}>
-          <Image className="w-[30px]" src={"/circle-expand.svg"} width={50} height={10} alt="" />
-        </button>
+        <div className=" flex items-center gap-4">
+          <button onClick={() => setExpanded(!expanded)}>
+            <Image className="w-[30px]" src={"/circle-expand.svg"} width={50} height={10} alt="" />
+          </button>
+          <button className=" hover:bg-gray-100 p-2 rounded-2xl" onClick={() => setOpenChat(false)}>
+            <Image className="w-[30px]" src={"/cancel.svg"} width={50} height={10} alt="" />
+          </button>
+        </div>
       </div>
       <div className="flex flex-grow overflow-hidden relative">
         {openHistory && !expanded && (

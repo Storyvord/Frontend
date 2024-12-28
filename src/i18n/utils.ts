@@ -1,13 +1,24 @@
 import Cookies from "js-cookie";
-import english from "./locales/en/side-menu.json";
-import hindi from "./locales/hi/side-menu.json";
+import englishMenu from "./locales/en/side-menu.json";
+import englishForm from "./locales/en/form/project.json";
+import hindiMenu from "./locales/hi/side-menu.json";
+import hindiForm from "./locales/hi/form/project.json";
 
 export const getLanguageFromCookies = (): "english" | "hindi" => {
   const lang = Cookies.get("locale");
   return lang === "hi" ? "hindi" : "english"; // default to "english" if not "hi"
 };
 
-const translations = { english, hindi };
+const translations = {
+  english: {
+    ...englishMenu,
+    ...englishForm,
+  },
+  hindi: {
+    ...hindiMenu,
+    ...hindiForm,
+  },
+};
 
 export const getLocalizedString = (key: string) => {
   const language = getLanguageFromCookies();

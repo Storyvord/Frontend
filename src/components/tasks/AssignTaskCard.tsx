@@ -25,7 +25,7 @@ const AssignTaskCard: FC<TaskCardProps> = ({ task, handleRequestApproval, isLoad
         <AccordionItem value="item-1">
           <div className="flex py-2 relative pl-6 gap-2 items-center">
             <div
-              className={`absolute top-2 left-2 h-[47px] w-[6px] ${task.completed ? "bg-green-500" : "bg-yellow-500"}`}
+              className={`absolute top-2 left-2 h-[47px] w-[6px] ${task.is_completed ? "bg-green-500" : "bg-yellow-500"}`}
             ></div>
             <div className="flex w-full h-full items-center gap-2 justify-between">
               <div className="flex items-center gap-3">
@@ -39,12 +39,12 @@ const AssignTaskCard: FC<TaskCardProps> = ({ task, handleRequestApproval, isLoad
                 </span>
               </div>
               <div className="flex gap-2 items-center">
-                {task.completion_requested && (
+                {task?.completion_requested && (
                   <p className=" my-2 text-center hidden lg:block text-sm font-bold text-orange-400">
                     You have requested this task for approval.
                   </p>
                 )}
-                {!task.completion_requested && !task.completed && (
+                {!task?.completion_requested && !task.is_completed && (
                   <Button
                     className="hidden md:block"
                     onClick={() => handleRequestApproval(task.id)}
@@ -55,7 +55,7 @@ const AssignTaskCard: FC<TaskCardProps> = ({ task, handleRequestApproval, isLoad
                   </Button>
                 )}
                 <span className=" text-gray-500 text-sm mr-4">
-                  {task.completed ? "Completed" : "Pending"}
+                  {task.is_completed ? "Completed" : "Pending"}
                 </span>
                 <div className="hidden sm:block font-sans mr-10 text-center">
                   <p className="text-black text-[10px]">Task Deadline</p>
@@ -66,7 +66,7 @@ const AssignTaskCard: FC<TaskCardProps> = ({ task, handleRequestApproval, isLoad
             <AccordionTrigger className=""></AccordionTrigger>
           </div>
           <AccordionContent>
-            {task.completion_requested && (
+            {task?.completion_requested && (
               <p className=" my-2 block lg:hidden text-center text-sm font-bold text-orange-400">
                 You have requested this task for approval.
               </p>
@@ -78,7 +78,7 @@ const AssignTaskCard: FC<TaskCardProps> = ({ task, handleRequestApproval, isLoad
                 </span>
                 {task.description}
               </p>
-              {!task.completion_requested && !task.completed && (
+              {!task?.completion_requested && !task.is_completed && (
                 <Button
                   className="md:hidden"
                   onClick={() => handleRequestApproval(task.id)}

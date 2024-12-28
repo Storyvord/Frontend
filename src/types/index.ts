@@ -139,6 +139,7 @@ export type taskType = {
   description: string;
   due_date: string;
   completed: boolean;
+  is_completed?: boolean;
   completion_requested: boolean;
   // project?: { name: string };
   assigned_to: number[];

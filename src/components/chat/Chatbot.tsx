@@ -9,6 +9,8 @@ import {
   useGetSessionDetails,
 } from "@/lib/react-query/queriesAndMutations/chatbot";
 import Image from "next/image";
+import { Cross } from "lucide-react";
+import { Cross1Icon } from "@radix-ui/react-icons";
 
 export default function Chatbot() {
   const [openChat, setOpenChat] = useState(false); //open or close modal
@@ -87,23 +89,18 @@ export default function Chatbot() {
     <div className="opacity-100">
       <button
         onClick={() => setOpenChat(!openChat)}
-        className="fixed bottom-5 right-5 lg:bottom-5 lg:right-10 grid place-items-center"
+        className="fixed bottom-0 lg:bottom-5 right-0 lg:right-5 grid place-items-center"
       >
-        <Image
-          src="/icons/ai-chat.svg"
-          width={30}
-          height={30}
-          alt="icon"
-          className=" md:w-20 w-16 md:h-20 h-16"
-        />
+        <Image src="/icons/ai-chat.svg" width={30} height={30} alt="icon" className=" w-20 h-20" />
       </button>
       {openChat && (
-        <div className="fixed bottom-20 lg:bottom-24 right-5 lg:right-10 z-50 shadow-xl">
+        <div className="fixed bottom-5 md:right-16 right-5  z-50 shadow-xl animate-slide-up">
           <ChatbotDetails
             conversation={conversation}
             sendMessage={sendMessage}
             prevSessions={prevSessions}
             setCurrentSession={setCurrentSession}
+            setOpenChat={setOpenChat}
           />
         </div>
       )}
