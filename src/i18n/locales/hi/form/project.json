@@ -1,0 +1,16 @@
+{
+  "CreateProjectForm": {
+    "projectName": {
+      "label": "प्रोजेक्ट का नाम",
+      "placeholder": "प्रोजेक्ट का नाम"
+    },
+    "budget": {
+      "label": "बजट",
+      "placeholder": "बजट दर्ज करें"
+    },
+    "crew": {
+      "label": "क्रू",
+      "placeholder": "क्रू का चयन करें"
+    }
+  }
+}

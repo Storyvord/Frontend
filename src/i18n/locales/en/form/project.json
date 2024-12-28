@@ -1,0 +1,16 @@
+{
+  "CreateProjectForm": {
+    "projectName": {
+      "label": "Project Name",
+      "placeholder": "Project name"
+    },
+    "budget": {
+      "label": "Budget",
+      "placeholder": "Enter budget"
+    },
+    "crew": {
+      "label": "Crew",
+      "placeholder": "Select crew"
+    }
+  }
+}
