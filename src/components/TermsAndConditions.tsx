@@ -24,7 +24,7 @@ const TermsAndConditions = ({ openDialog, setOpenDialog }: Props) => {
 
   return (
     <Dialog open={openDialog} onOpenChange={() => setOpenDialog(!openDialog)}>
-      <DialogContent className="min-h-[85%] w-[90%] max-w-[1000px]">
+      <DialogContent className="min-h-[85%] w-[90%] max-w-[1000px] z-[999]">
         <DialogHeader>
           <DialogTitle>Terms and Conditions</DialogTitle>
         </DialogHeader>
