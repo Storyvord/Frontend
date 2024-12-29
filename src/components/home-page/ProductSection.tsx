@@ -1,7 +1,8 @@
+"use client";
 import Image from "next/image";
 import React from "react";
-import { Timeline } from "../ui/timeline.tsx";
 import SequentialAnimation from "../SequentialAnimation";
+import { Timeline } from "../ui/timeline.tsx";
 
 const crew = [
   "/product/crew/crew1.svg",
@@ -33,7 +34,7 @@ const callsheet = [
   "/product/callsheet/callsheet3.svg",
 ];
 
-export function TimelineDemo() {
+export function ProductSection() {
   const data = [
     {
       subTitle: "Find Your Crew",
@@ -42,14 +43,14 @@ export function TimelineDemo() {
         "Match with the perfect team members based on skill, experience, and availability.",
       content: (
         <div>
-          <div className=" space-y-2 pb-4">
-            <Image src="/icons/crew.svg" alt="" width={30} height={30} className=" w-10 h-10" />
+          <div className="space-y-2 pb-4">
+            <Image src="/icons/crew.svg" alt="" width={30} height={30} className="w-10 h-10" />
             <h1 className="text-[#011821] dark:text-neutral-200 text-xs md:text-2xl font-poppins-semibold mb-8">
               Hold tight! AI is analyzing profiles to suggest your dream crew.
             </h1>
           </div>
           <div className="h-[80vh] w-full">
-            <SequentialAnimation svgs={crew} className=" bg-white" />
+            <SequentialAnimation svgs={crew} />
           </div>
         </div>
       ),
@@ -57,17 +58,17 @@ export function TimelineDemo() {
     {
       subTitle: "Optimize Budgets",
       title: "AI-powered forecasting at your fingertips",
-      description: "Transform hours of manual budget planning into just 15 minutes. ",
+      description: "Transform hours of manual budget planning into just 15 minutes.",
       content: (
         <div>
-          <div className=" space-y-2 pb-4">
-            <Image src="/icons/budget.svg" alt="" width={30} height={30} className=" w-10 h-10" />
+          <div className="space-y-2 pb-4">
+            <Image src="/icons/budget.svg" alt="" width={30} height={30} className="w-10 h-10" />
             <h1 className="text-[#011821] dark:text-neutral-200 text-xs md:text-2xl font-poppins-semibold mb-8">
-              AI is analyzing and optimizing your budget is almost ready!
+              AI is analyzing and optimizing your budget. It&apos;s almost ready!
             </h1>
           </div>
           <div className="h-[80vh] w-full">
-            <SequentialAnimation svgs={budget} className=" h-full" />
+            <SequentialAnimation svgs={budget} />
           </div>
         </div>
       ),
@@ -78,22 +79,8 @@ export function TimelineDemo() {
       description:
         "Streamline international filming with AI-powered tools that deliver real-time updates on local regulations and cultural nuances.",
       content: (
-        <div>
-          {/* <div className=" space-y-2 pb-4">
-            <Image
-              src="/icons/compliance.svg"
-              alt=""
-              width={30}
-              height={30}
-              className=" w-10 h-10"
-            />
-            <h1 className="text-[#011821] dark:text-neutral-200 text-xs md:text-2xl font-poppins-semibold mb-8">
-              Stay on top with effortless compliance solutions.
-            </h1>
-          </div> */}
-          <div className="h-[80vh] w-full">
-            <SequentialAnimation svgs={compliance} className=" h-full" />
-          </div>
+        <div className="h-[80vh] w-full">
+          <SequentialAnimation svgs={compliance} />
         </div>
       ),
     },
@@ -103,26 +90,13 @@ export function TimelineDemo() {
       description:
         "Simplify production planning with AI-driven call sheets that adapt to changes, ensuring accuracy and efficiency for every shoot.",
       content: (
-        <div>
-          {/* <div className=" space-y-2 pb-4">
-            <Image
-              src="/icons/callsheet.svg"
-              alt=""
-              width={30}
-              height={30}
-              className=" w-10 h-10"
-            />
-            <h1 className="text-[#011821] dark:text-neutral-200 text-xs md:text-2xl font-poppins-semibold mb-8">
-              AI is crafting the ultimate call sheet to simplify your production day.
-            </h1>
-          </div> */}
-          <div className="h-[80vh] w-full">
-            <SequentialAnimation svgs={callsheet} className=" h-full" />
-          </div>
+        <div className="h-[80vh] w-full">
+          <SequentialAnimation svgs={callsheet} />
         </div>
       ),
     },
   ];
+
   return (
     <div className="w-full pb-12 pt-10" id="product">
       <Timeline data={data} />
