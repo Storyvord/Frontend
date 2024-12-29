@@ -9,32 +9,37 @@ const ToolsSection = () => {
     {
       id: 1,
       title: "Script",
-      description: "Import your script",
+      description: "Store and annonate script",
     },
     {
       id: 2,
-      title: "Budget",
-      description: "Import your script",
+      title: "Storyboarding",
+      description: "Visualize Sequences",
     },
     {
       id: 3,
-      title: "Announcements",
-      description: "Import your script",
+      title: "Shooting Scheduling",
+      description: "Plan shoot  dates",
     },
     {
       id: 4,
-      title: "Shooting scheduling",
-      description: "Import your script",
+      title: "Suppliers",
+      description: "Manage Vendors",
     },
     {
       id: 5,
-      title: "Script",
-      description: "Import your script",
+      title: "Announcements",
+      description: "Post updates and news",
     },
     {
       id: 6,
-      title: "Budget",
-      description: "Import your script",
+      title: "Production Design",
+      description: "Oversee design elements",
+    },
+    {
+      id: 7,
+      title: "Production Calender",
+      description: "Coordinate specialized tasks",
     },
   ];
 
@@ -61,11 +66,9 @@ const ToolsSection = () => {
                 height={56}
                 className="h-9 sm:h-14 w-auto object-contain"
               /> */}
-              <div className="border p-4 rounded-xl bg-[#8DE1AF] h-full flex flex-col justify-between">
-                <h3 className="font-poppins-semibold text-lg truncate overflow-hidden whitespace-nowrap">
-                  {title}
-                </h3>
-                <p>{description}</p>
+              <div className="border text-background-2 p-4 rounded-xl bg-[#8DE1AF] h-full flex flex-col justify-start min-h-28">
+                <h3 className="font-poppins-semibold text-lg">{title}</h3>
+                <p className=" text-sm">{description}</p>
               </div>
             </CarouselItem>
           ))}
