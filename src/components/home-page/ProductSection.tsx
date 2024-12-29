@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 import SequentialAnimation from "../SequentialAnimation";
 import { Timeline } from "../ui/timeline.tsx";
+import { useTranslations } from "next-intl";
 
 const crew = [
   "/product/crew/crew1.svg",
@@ -35,12 +36,12 @@ const callsheet = [
 ];
 
 export function ProductSection() {
+  const t = useTranslations("HomePage.Products");
   const data = [
     {
-      subTitle: "Find Your Crew",
-      title: "Intelligent matches at your fingertips",
-      description:
-        "Match with the perfect team members based on skill, experience, and availability.",
+      subTitle: t("data.0.subTitle"),
+      title: t("data.0.title"),
+      description: t("data.0.description"),
       content: (
         <div>
           <div className="space-y-2 pb-4">
@@ -56,9 +57,9 @@ export function ProductSection() {
       ),
     },
     {
-      subTitle: "Optimize Budgets",
-      title: "AI-powered forecasting at your fingertips",
-      description: "Transform hours of manual budget planning into just 15 minutes.",
+      subTitle: t("data.1.subTitle"),
+      title: t("data.1.title"),
+      description: t("data.1.description"),
       content: (
         <div>
           <div className="space-y-2 pb-4">
@@ -74,23 +75,27 @@ export function ProductSection() {
       ),
     },
     {
-      subTitle: "Global Film Compliance",
-      title: "Effortless navigation at your fingertips",
-      description:
-        "Streamline international filming with AI-powered tools that deliver real-time updates on local regulations and cultural nuances.",
+      subTitle: t("data.2.subTitle"),
+      title: t("data.2.title"),
+      description: t("data.2.description"),
       content: (
         <div className="h-[80vh] w-full">
+          <h1 className="text-[#011821] dark:text-neutral-200 text-xs md:text-2xl font-poppins-semibold mb-8">
+            {t("data.2.content")}
+          </h1>
           <SequentialAnimation svgs={compliance} />
         </div>
       ),
     },
     {
-      subTitle: "Smart Call Sheets",
-      title: "Seamless scheduling",
-      description:
-        "Simplify production planning with AI-driven call sheets that adapt to changes, ensuring accuracy and efficiency for every shoot.",
+      subTitle: t("data.3.subTitle"),
+      title: t("data.3.title"),
+      description: t("data.3.description"),
       content: (
         <div className="h-[80vh] w-full">
+          <h1 className="text-[#011821] dark:text-neutral-200 text-xs md:text-2xl font-poppins-semibold mb-8">
+            {t("data.3.content")}
+          </h1>
           <SequentialAnimation svgs={callsheet} />
         </div>
       ),

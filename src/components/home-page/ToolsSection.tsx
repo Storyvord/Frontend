@@ -3,50 +3,52 @@ import React from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 const ToolsSection = () => {
+  const t = useTranslations("HomePage.Tools");
   const tools = [
     {
       id: 1,
-      title: "Script",
-      description: "Store and annonate script",
+      title: t("tool.0.title"),
+      description: t("tool.0.description"),
     },
     {
       id: 2,
-      title: "Storyboarding",
-      description: "Visualize Sequences",
+      title: t("tool.1.title"),
+      description: t("tool.1.description"),
     },
     {
       id: 3,
-      title: "Shooting Scheduling",
-      description: "Plan shoot  dates",
+      title: t("tool.2.title"),
+      description: t("tool.2.description"),
     },
     {
       id: 4,
-      title: "Suppliers",
-      description: "Manage Vendors",
+      title: t("tool.3.title"),
+      description: t("tool.3.description"),
     },
     {
       id: 5,
-      title: "Announcements",
-      description: "Post updates and news",
+      title: t("tool.4.title"),
+      description: t("tool.4.description"),
     },
     {
       id: 6,
-      title: "Production Design",
-      description: "Oversee design elements",
+      title: t("tool.5.title"),
+      description: t("tool.5.description"),
     },
     {
       id: 7,
-      title: "Production Calender",
-      description: "Coordinate specialized tasks",
+      title: t("tool.6.title"),
+      description: t("tool.6.description"),
     },
   ];
 
   return (
     <div className=" pb-12">
       <h1 className="text-2xl sm:text-3xl font-poppins-semibold mt-6 md:text-4xl">
-        Integrate the tools you already use
+        {t("heading")}
       </h1>
       <Carousel
         plugins={[

@@ -19,8 +19,8 @@ export function Footer() {
           </Link>
         </div>
         <div className="container mt-4 text-center text-sm text-gray-600 flex gap-10 items-center justify-center">
-          <button onClick={() => setOpenDialog(!openDialog)}>Privacy Policy</button>
-          <button onClick={() => setOpenDialog(!openDialog)}>Terms & Condtion</button>
+          <button onClick={() => setOpenDialog(!openDialog)}>{t("privacyPolicy")}</button>
+          <button onClick={() => setOpenDialog(!openDialog)}>{t("termsAndConditions")}</button>
         </div>
         <div className="flex items-center space-x-6 mt-4 ">
           <Link href="#" className="text-gray-600 hover:text-gray-900">
