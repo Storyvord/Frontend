@@ -31,8 +31,9 @@ import { FeaturesSection } from "@/components/home-page/FeaturesSection";
 import { Footer } from "@/components/home-page/Footer";
 import { HeroSection } from "@/components/home-page/HeroSection";
 import { PricingSection } from "@/components/home-page/PricingSection";
+import { ProductSection } from "@/components/home-page/ProductSection";
 import { SiteHeader } from "@/components/home-page/SiteHeader";
-import { TimelineDemo } from "@/components/home-page/TimelineDemo";
+import { Testimonials } from "@/components/home-page/Testimonials";
 import ToolsSection from "@/components/home-page/ToolsSection";
 
 export default function Home() {
@@ -43,11 +44,12 @@ export default function Home() {
         <HeroSection />
         <AiSimplifies />
         <FeaturesSection />
-        <TimelineDemo />
+        <ProductSection />
         <ToolsSection />
         <BrandSection />
         <PricingSection />
-        <BrainBehindSection />
+        <Testimonials />
+        {/* <BrainBehindSection /> */}
       </main>
       <Footer />
     </div>

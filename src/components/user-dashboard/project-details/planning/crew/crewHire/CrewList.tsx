@@ -1,5 +1,6 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   Table,
   TableBody,
@@ -8,91 +9,118 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useRouter } from "next/navigation";
 import Tabs from "@/components/Tabs";
 import { BiMessageDetail } from "react-icons/bi";
-import { CgProfile } from "react-icons/cg";
-import Link from "next/link";
-import { useGetUserProfile } from "@/lib/react-query/queriesAndMutations/auth/auth";
 
-const headers = ["Profile", "Name", "Position", "Location", "Message"];
+const headers = ["Name", "Position", "Location", "Email", "Message"];
+const tabs = ["Accepted", "Pending", "Rejected"];
 
-type PersonalInfo = {
-  full_name: string;
-  job_title: string;
-  location: string;
+type UserDetails = {
+  user_id: number;
+  full_name: string | null;
+  job_title: string | null;
+  location: string | null;
+  email: string | null;
 };
 
-type User = {
-  id: number;
-  personal_info: PersonalInfo;
-};
-
-type Profile = {
-  user: User;
+type Invite = {
+  invite_id: string;
+  status: string;
+  user_details: UserDetails;
 };
 
 type Props = {
-  data: Profile[];
+  data: {
+    invites: Invite[];
+  };
   isLoading?: boolean;
 };
 
-const tabs = ["Accepted", "Pending", "Rejected"];
-
 const CrewList = ({ data, isLoading }: Props) => {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState(tabs[0]);
-  const [filteredData, setFilteredData] = useState<Profile[]>([]);
-
-  const { data: profile } = useGetUserProfile();
-
-  // Filter data when `data` or `currentUserId` changes
-  useEffect(() => {
-    const currentUserId = profile?.data?.personal_info?.user;
-    if (data && currentUserId) {
-      setFilteredData(data?.filter((item) => item.user.id !== currentUserId));
-    }
-  }, [data, profile]);
+  const [activeTab, setActiveTab] = useState(tabs[1]); // Default to "Pending"
+  const [accepted, setAccepted] = useState<Invite[]>([]);
+  const [pending, setPending] = useState<Invite[]>([]);
+  const [rejected, setRejected] = useState<Invite[]>([]);
 
   const handleRedirectToMessagePage = (id: number, name: string) => {
-    router.push(`/dashboard/message/?receiverId=${id}&name=${name}`);
+    router.push(`/dashboard/message/?receiverId=${id}&name=${encodeURIComponent(name)}`);
   };
+
+  useEffect(() => {
+    const acceptedInvites: Invite[] = [];
+    const pendingInvites: Invite[] = [];
+    const rejectedInvites: Invite[] = [];
+
+    data?.invites?.forEach((item) => {
+      if (item.status === "ACCEPTED") {
+        acceptedInvites.push(item);
+      } else if (item.status === "PENDING") {
+        pendingInvites.push(item);
+      } else {
+        rejectedInvites.push(item);
+      }
+    });
+
+    setAccepted(acceptedInvites);
+    setPending(pendingInvites);
+    setRejected(rejectedInvites);
+  }, [data]);
+
+  const getCurrentList = () => {
+    switch (activeTab) {
+      case "Accepted":
+        return accepted || [];
+      case "Pending":
+        return pending || [];
+      case "Rejected":
+        return rejected || [];
+      default:
+        return [];
+    }
+  };
+
+  const currentList = getCurrentList();
 
   return (
     <>
-      <Tabs activeTab={activeTab} setActiveTab={setActiveTab} tabs={tabs} className="text-sm" />
+      <Tabs activeTab={activeTab} setActiveTab={setActiveTab} tabs={tabs} />
       {isLoading && <p className="w-full text-center">Loading...</p>}
-      <Table className="mt-4 bg-white p-2 border-b">
-        <TableHeader>
-          <TableRow className="hover:bg-white">
-            {headers.map((header, index) => (
-              <TableHead key={index}>{header}</TableHead>
-            ))}
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {filteredData?.map((item) => (
-            <TableRow key={item.user.id} className="hover:bg-white">
-              <TableCell>
-                <Link href={`crew/crew-profile/${item.user.id}`}>
-                  <CgProfile className="w-8 h-8 cursor-pointer hover:text-gray-700 text-gray-500" />
-                </Link>
-              </TableCell>
-              <TableCell>{item.user.personal_info.full_name}</TableCell>
-              <TableCell>{item.user.personal_info.job_title}</TableCell>
-              <TableCell>{item.user.personal_info.location}</TableCell>
-              <TableCell>
-                <BiMessageDetail
-                  onClick={() =>
-                    handleRedirectToMessagePage(item.user.id, item.user.personal_info.full_name)
-                  }
-                  className="w-6 h-6 hover:text-gray-600 cursor-pointer"
-                />
-              </TableCell>
+      {!isLoading && currentList.length === 0 && (
+        <p className="w-full text-center text-gray-500 mt-8">No crew members found</p>
+      )}
+      {currentList.length > 0 && (
+        <Table className="mt-4 bg-white p-2 border-b">
+          <TableHeader>
+            <TableRow className="hover:bg-white">
+              {headers.map((header, index) => (
+                <TableHead key={index}>{header}</TableHead>
+              ))}
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHeader>
+          <TableBody>
+            {currentList.map((invite) => (
+              <TableRow key={invite.invite_id} className="hover:bg-white">
+                <TableCell>{invite.user_details.full_name || "N/A"}</TableCell>
+                <TableCell>{invite.user_details.job_title || "N/A"}</TableCell>
+                <TableCell>{invite.user_details.location || "N/A"}</TableCell>
+                <TableCell>{invite.user_details.email || "N/A"}</TableCell>
+                <TableCell>
+                  <BiMessageDetail
+                    onClick={() =>
+                      handleRedirectToMessagePage(
+                        invite.user_details.user_id,
+                        invite.user_details.full_name || "Unknown"
+                      )
+                    }
+                    className="w-6 h-6 hover:text-gray-600 cursor-pointer"
+                  />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      )}
     </>
   );
 };

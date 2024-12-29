@@ -46,7 +46,7 @@ export function HeroSection() {
       <div className="col-span-12 relative">
         <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
         <Image
-          src="/project-dashboard.svg"
+          src="/project-dashboard.png"
           alt="Storyvord Dashboard"
           width={1000}
           height={600}

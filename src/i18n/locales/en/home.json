@@ -94,7 +94,8 @@
       ],
       "popular": "Popular",
       "buttonText": "Get Started",
-      "featuresHeading": "What’s included"
+      "featuresHeading": "What’s included",
+      "joinWaitList": "Join Waitlist"
     },
     "BrainBehindSection": {
       "title": "Brain Behind Storyvord",
@@ -103,7 +104,94 @@
       "role": "Chief Executive Officer @Storyvord"
     },
     "Footer": {
-      "rights": "Storyvord. All rights reserved."
+      "rights": "Storyvord. All rights reserved.",
+      "privacyPolicy": "Privacy Policy",
+      "termsAndConditions": "Terms & Condition"
+    },
+    "Brand": {
+      "heading": "Trusted by producers from leading brands",
+      "clients": "Our Clients"
+    },
+    "Tools": {
+      "heading": "Integrate the tools you already use",
+      "tool": [
+        {
+          "title": "Script",
+          "description": "Store and annonate script"
+        },
+        {
+          "title": "Storyboarding",
+          "description": "Visualize Sequences"
+        },
+        {
+          "title": "Shooting Scheduling",
+          "description": "Plan shoot  dates"
+        },
+        {
+          "title": "Suppliers",
+          "description": "Manage Vendors"
+        },
+        {
+          "title": "Announcements",
+          "description": "Post updates and news"
+        },
+        {
+          "title": "Production Design",
+          "description": "Oversee design elements"
+        },
+        {
+          "title": "Production Calender",
+          "description": "Coordinate specialized tasks"
+        }
+      ]
+    },
+    "Products": {
+      "data": [
+        {
+          "subTitle": "Find Your Crew",
+          "title": "Intelligent matches at your fingertips",
+          "description": "Match with the perfect team members based on skill, experience, and availability.",
+          "content": "Hold tight! AI is analyzing profiles to suggest your dream crew."
+        },
+        {
+          "subTitle": "Optimize Budgets",
+          "title": "AI-powered forecasting at your fingertips",
+          "description": "Transform hours of manual budget planning into just 15 minutes.",
+          "content": "AI is analyzing and optimizing your budget. It's almost ready!"
+        },
+        {
+          "subTitle": "Global Film Compliance",
+          "title": "Effortless navigation at your fingertips",
+          "description": "Streamline international filming with AI-powered tools that deliver real-time updates on local regulations and cultural nuances.",
+          "content": ""
+        },
+        {
+          "subTitle": "Smart Call Sheets",
+          "title": "Seamless scheduling",
+          "description": "Simplify production planning with AI-driven call sheets that adapt to changes, ensuring accuracy and efficiency for every shoot.",
+          "content": ""
+        }
+      ]
+    },
+    "Testimonials": {
+      "heading": "What People are saying",
+      "testimonials": [
+        {
+          "quote": "After integrating Storyvord’s product into our production process, we've seen a significant improvement in efficiency and output quality. The intuitive interface and robust features have streamlined our workflow, allowing us to focus more on creativity.",
+          "name": "Alex Johnson",
+          "designation": "Film Producer"
+        },
+        {
+          "quote": "Utilizing Storyvord has revolutionized the way we manage our projects. The collaborative tools and real-time updates have enhanced communication among our team, leading to timely project completions and satisfied clients.",
+          "name": "Maria Gonzalez",
+          "designation": "Video Production Manager"
+        },
+        {
+          "quote": "The transition to Storyvord’s AI suggestion was seamless and has greatly benefited our post-production phase. The advanced editing capabilities and user-friendly design have made it an indispensable tool in our arsenal.",
+          "name": "Liam Smith",
+          "designation": "Post-Production Supervisor"
+        }
+      ]
     }
   }
 }

@@ -1,8 +1,10 @@
 import React from "react";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 const BrandSection = () => {
+  const t = useTranslations("HomePage.Brand");
   const brandImages = [
     "nhs.svg",
     "terumo.svg",
@@ -26,10 +28,10 @@ const BrandSection = () => {
           variant="secondary"
           className="bg-white text-[#1e1e1e] px-4 py-1 text-sm font-medium shadow-[0px_1px_15px_rgba(0,255,0,0.3)] border-2 border-primary-green inline-flex items-center gap-3 w-fit mx-auto md:mx-0"
         >
-          Our Clients
+          {t("clients")}
         </Badge>
         <h2 className="text-2xl sm:text-3xl font-poppins-semibold mt-6 md:text-4xl">
-          Trusted by producers from leading brands
+          {t("heading")}
         </h2>
       </div>
 

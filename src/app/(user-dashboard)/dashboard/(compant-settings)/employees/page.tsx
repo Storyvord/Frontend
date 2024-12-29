@@ -18,6 +18,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import CustomForm from "@/components/form-component/CustomForm";
 import { z } from "zod";
+import { Input } from "@/components/ui/input";
+import { formatError } from "@/lib/utils";
 
 const validationSchema = z.object({
   employee_email: z.string().min(1, "This field may not be blank."), // Ensures the field is not empty
@@ -67,6 +69,7 @@ type Props = {
 
 const EmployeeAndStaff = () => {
   const [openDialog, setOpenDialog] = useState(false);
+  const [email, setEmail] = useState("");
   const { toast } = useToast();
   const {
     mutateAsync: inviteEmployeeAndStaff,
@@ -83,15 +86,22 @@ const EmployeeAndStaff = () => {
     defaultValues,
   });
 
-  const handleSendInvitation = async (data: ValidationSchemaType) => {
-    const res = await inviteEmployeeAndStaff(data);
-    if (res) {
-      toast({
-        title: "Invitation send to Employee",
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      await inviteEmployeeAndStaff({
+        employee_email: email,
       });
-    } else {
+      setOpenDialog(false);
       toast({
-        title: "Failed to send Invitation",
+        title: "Invitation sent to employee",
+        description: "Invitation sent successfully",
+      });
+    } catch (error) {
+      const { title, description } = formatError(error);
+      toast({
+        title,
+        description,
         variant: "destructive",
       });
     }
@@ -151,13 +161,15 @@ const EmployeeAndStaff = () => {
             <DialogHeader>
               <DialogTitle> Invite Employee </DialogTitle>
             </DialogHeader>
-            <CustomForm
-              form={form}
-              formFields={formFields}
-              onSubmit={handleSendInvitation}
-              isLoading={isLoadingInvitation}
-              isError={isErrorInvitation}
-            />
+            <form onSubmit={onSubmit} className=" flex items-center gap-2  mt-4">
+              <Input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder=" Enter crew email"
+                className=" h-12"
+              />
+              <Button>Sent</Button>
+            </form>
           </DialogContent>
         </Dialog>
       </div>

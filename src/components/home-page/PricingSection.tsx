@@ -66,7 +66,7 @@ export function PricingSection() {
           variant="secondary"
           className="bg-white text-[#1e1e1e] px-4 py-1 text-sm font-medium shadow-[0px_1px_15px_rgba(0,255,0,0.3)] border-2 border-primary-green flex items-center gap-3 w-fit"
         >
-          Our Price
+          {t("badgeText")}
         </Badge>
         <div className="grid gap-8 lg:grid-cols-3 grid-cols-1 md:grid-cols-2 mt-8 w-full">
           {plans.map((plan, index) => (
@@ -108,7 +108,7 @@ export function PricingSection() {
               </CardContent>
               <CardFooter>
                 <Button variant="outline" className="w-full">
-                  {t("buttonText")}
+                  {t("joinWaitList")}
                 </Button>
               </CardFooter>
             </Card>
