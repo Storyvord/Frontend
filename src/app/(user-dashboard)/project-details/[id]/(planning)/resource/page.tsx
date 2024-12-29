@@ -22,8 +22,8 @@ type Supplier = {
 
 const Suppliers: React.FC = () => {
   const [suppliers, setSuppliers] = useState<Supplier[]>([
-    { id: 1, name: "ABC Supplies", email: "abc@example.com", phone: "123-456-7890" },
-    { id: 2, name: "FilmGear Pro", email: "filmgear@example.com", phone: "987-654-3210" },
+    { id: 1, name: "emmefilms Supplies", email: "emmefilms@gmail.com", phone: "123-456-7890" },
+    { id: 2, name: "FilmGear Pro", email: "filmgear@outlook.com", phone: "987-654-3210" },
   ]);
 
   const { register, handleSubmit, reset } = useForm<Supplier>();

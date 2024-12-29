@@ -446,11 +446,11 @@ export const companySettingsMenuItems = [
         icon: IoIosPeople,
         text: "employees & staff",
       },
-      {
-        link: "address-book",
-        icon: ImAddressBook,
-        text: "address book",
-      },
+      // {
+      //   link: "address-book",
+      //   icon: ImAddressBook,
+      //   text: "address book",
+      // },
       {
         link: "company-files",
         icon: IoMdFolder,
