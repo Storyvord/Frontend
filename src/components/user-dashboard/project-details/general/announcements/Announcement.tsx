@@ -8,9 +8,10 @@ type AnnouncementProps = {
   title: string;
   message: string;
   id: number;
+  onEdit: () => void; // New prop for edit handler
 };
 
-const Announcement: React.FC<AnnouncementProps> = ({ title, message, id }) => {
+const Announcement: React.FC<AnnouncementProps> = ({ title, message, id, onEdit }) => {
   const { toast } = useToast();
   const { mutateAsync, isPending, isError } = useDeleteAnnouncement();
 
@@ -26,6 +27,10 @@ const Announcement: React.FC<AnnouncementProps> = ({ title, message, id }) => {
   const handleDelete = async () => {
     try {
       await mutateAsync(id);
+      toast({
+        variant: "default",
+        title: "Announcement deleted successfully!",
+      });
     } catch (error) {
       toast({
         variant: "destructive",
@@ -41,6 +46,7 @@ const Announcement: React.FC<AnnouncementProps> = ({ title, message, id }) => {
       message={message}
       isLoading={isPending}
       onDelete={handleDelete}
+      onEdit={onEdit} // Pass the edit handler to the card
     />
   );
 };

@@ -2,6 +2,7 @@ import {
   CreateAnnouncement,
   deleteAnnouncement,
   getAllAnnouncements,
+  updateAnnouncement,
 } from "@/lib/api/announcements";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -30,6 +31,18 @@ export const useCreateAnnouncement = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: CreateAnnouncement,
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: ["getAllAnnouncements"],
+      });
+      return data;
+    },
+  });
+};
+export const useUpdateAnnouncement = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: updateAnnouncement,
     onSuccess: (data) => {
       queryClient.invalidateQueries({
         queryKey: ["getAllAnnouncements"],

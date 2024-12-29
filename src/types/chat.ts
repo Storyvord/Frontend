@@ -7,7 +7,7 @@ type ChatConversation = {
 type Session = {
   id: Number;
   title?: string;
-  session_id: String;
+  session_id: string;
   user?: Number;
   created_at?: String;
 };

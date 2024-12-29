@@ -8,10 +8,10 @@ export const useGetChatbotSessions = () => {
   });
 };
 
-export const useGetSessionDetails = (id: Number) => {
+export const useGetSessionDetails = (id: string | "") => {
   return useQuery({
     queryKey: ["getSessionDetails"],
     queryFn: () => getSessionDetails(id),
-    enabled: id !== 0,
+    enabled: !!id,
   });
 };

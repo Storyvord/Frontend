@@ -1,9 +1,8 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { MdDelete } from "react-icons/md";
+import { MdDelete, MdEdit } from "react-icons/md";
 import Loader from "@/components/Loader";
 
 type AnnouncementCardProps = {
@@ -11,6 +10,7 @@ type AnnouncementCardProps = {
   message: string;
   isLoading: boolean;
   onDelete: () => void;
+  onEdit: () => void; // New onEdit prop
 };
 
 const AnnouncementCard: React.FC<AnnouncementCardProps> = ({
@@ -18,6 +18,7 @@ const AnnouncementCard: React.FC<AnnouncementCardProps> = ({
   message,
   isLoading,
   onDelete,
+  onEdit,
 }) => {
   return (
     <Card className="relative max-h-[40rem]">
@@ -29,11 +30,22 @@ const AnnouncementCard: React.FC<AnnouncementCardProps> = ({
           <PopoverTrigger>
             <BsThreeDotsVertical />
           </PopoverTrigger>
-          <PopoverContent className="w-fit">
+          <PopoverContent className="w-fit flex flex-col gap-2">
             {isLoading ? (
               <Loader />
             ) : (
-              <MdDelete onClick={onDelete} className="cursor-pointer text-red-500" />
+              <>
+                <MdEdit
+                  onClick={onEdit}
+                  className="cursor-pointer text-blue-500"
+                  title="Edit Announcement"
+                />
+                <MdDelete
+                  onClick={onDelete}
+                  className="cursor-pointer text-red-500"
+                  title="Delete Announcement"
+                />
+              </>
             )}
           </PopoverContent>
         </Popover>

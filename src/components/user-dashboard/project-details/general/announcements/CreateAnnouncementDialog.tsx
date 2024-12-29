@@ -61,6 +61,7 @@ type Props = {
   createAnnouncement: (data: AnnouncementFormType) => void;
   isPending: boolean;
   isError: boolean;
+  initialData: any;
 };
 
 const CreateAnnouncementDialog = ({
@@ -70,10 +71,15 @@ const CreateAnnouncementDialog = ({
   createAnnouncement,
   isPending,
   isError,
-}: Props) => {
+  mode,
+  initialData,
+}: Props & { mode: "create" | "edit"; initialData?: AnnouncementFormType }) => {
   useEffect(() => {
     announcementFormFields[2].options = crewList;
-  }, [crewList]);
+    if (initialData) {
+      form.reset(initialData);
+    }
+  }, [crewList, initialData]);
 
   const form = useForm({
     resolver: zodResolver(announcementFormSchema),
@@ -84,19 +90,19 @@ const CreateAnnouncementDialog = ({
     createAnnouncement(data);
   };
 
-  const isEdit = false;
-
   return (
     <Dialog open={openDialog} onOpenChange={() => setOpenDialog(!openDialog)}>
-      <DialogContent className=" w-[95%] lg:w-[1200px] p-0">
-        <DialogHeader className=" w-full p-4 bg-gray-200 rounded-tr-lg rounded-tl-lg max-h-16">
-          <DialogTitle>Announcement details</DialogTitle>
+      <DialogContent className="w-[95%] lg:w-[1200px] p-0">
+        <DialogHeader className="w-full p-4 bg-gray-200 rounded-tr-lg rounded-tl-lg max-h-16">
+          <DialogTitle>
+            {mode === "create" ? "Create Announcement" : "Edit Announcement"}
+          </DialogTitle>
         </DialogHeader>
-        <main className=" px-4 pb-4 -mt-4 max-h-[80vh] overflow-y-auto">
+        <main className="px-4 pb-4 -mt-4 max-h-[80vh] overflow-y-auto">
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className=" justify-center flex flex-col p-0 lg:px-4 lg:pr-10"
+              className="justify-center flex flex-col p-0 lg:px-4 lg:pr-10"
             >
               <section className=" grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="border-r border-black/20">
@@ -113,26 +119,18 @@ const CreateAnnouncementDialog = ({
                   <RenderFormFields form={form} formFields={announcementFormFields} />
                 </div>
               </section>
-
               {isError && (
                 <p className="text-center text-sm text-red-600 font-semibold">
-                  {/* {error?.detail} */}
-                  <br />
+                  Failed to save the announcement.
                 </p>
               )}
-              <DialogFooter className=" flex justify-end mt-2 gap-4 mb-4">
+              <DialogFooter className="flex justify-end mt-2 gap-4 mb-4">
                 <Button type="button" onClick={() => setOpenDialog(false)} variant="ghost">
                   Cancel
                 </Button>
-                {isEdit ? (
-                  <Button type="submit" disabled={isPending}>
-                    {isPending ? <Loader /> : "Update"}
-                  </Button>
-                ) : (
-                  <Button type="submit" disabled={isPending} className="">
-                    {isPending ? <Loader /> : "Save"}
-                  </Button>
-                )}
+                <Button type="submit" disabled={isPending}>
+                  {isPending ? "Saving..." : mode === "create" ? "Save" : "Update"}
+                </Button>
               </DialogFooter>
             </form>
           </Form>

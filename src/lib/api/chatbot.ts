@@ -10,7 +10,7 @@ export const getPreviousChatbotSessions = () => {
   });
 };
 
-export const getSessionDetails = (id: Number) => {
+export const getSessionDetails = (id: string) => {
   return customFetch(`${NEW_API_URL}/ai_chat/history/${id}/`, {
     method: "GET",
     headers: {
