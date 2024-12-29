@@ -4,8 +4,10 @@ import { useParams } from "next/navigation";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import CrewHireNavBar from "./CrewHireNavBar";
 import {
+  useGetCrewInviteLists,
   useGetCrewList,
   useSentInvitationToCrew,
+  useSentInvitationToCrewEmail,
 } from "@/lib/react-query/queriesAndMutations/crew";
 import CrewList from "./CrewList";
 import { FormFieldConfig } from "@/types";
@@ -13,69 +15,46 @@ import { z } from "zod";
 import CustomForm from "@/components/form-component/CustomForm";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
+import { formatError } from "@/lib/utils";
 
-const validationSchema = z.object({
-  crew_email: z.string().min(1, "This field may not be blank."), // Ensures the field is not empty
-  firstName: z.string().min(1, "This field is required."), // Ensures the field is required and not empty
-  lastName: z.string().min(1, "This field is required."), // Ensures the field is required and not empty
-  message: z.string().min(1, "This field is required."), // Ensures the field is required and not empty
-});
-type ValidationSchemaType = z.infer<typeof validationSchema>;
-
-const formFields: FormFieldConfig<ValidationSchemaType>[] = [
-  {
-    name: "crew_email",
-    label: "Crew Email",
-    type: "email",
-    placeholder: "Enter crew email",
-  },
-  {
-    name: "firstName",
-    label: "First Name",
-    type: "text",
-    placeholder: "Enter crew first name",
-  },
-  {
-    name: "lastName",
-    label: "Last Name",
-    type: "text",
-    placeholder: "Enter crew last name",
-  },
-  {
-    name: "message",
-    label: "Message",
-    type: "textarea",
-    placeholder: "message",
-  },
-];
-const defaultValues = {
-  crew_email: "",
-  firstName: "",
-  lastName: "",
-  message: "",
-};
 const CrewHire = () => {
   const [openDialog, setOpenDialog] = useState(false);
-
+  const { toast } = useToast();
   const { id: projectId }: { id: string } = useParams();
 
   const {
     mutateAsync,
     isPending: isLoadingInvitation,
     isError: isErrorInvitation,
-  } = useSentInvitationToCrew();
-  const { data: crewList, isPending: isLoadingCrewList } = useGetCrewList(projectId);
+  } = useSentInvitationToCrewEmail();
+  const { data, isLoading } = useGetCrewInviteLists(projectId);
   const [searchValue, setSearchValue] = useState("");
-  const form = useForm({
-    resolver: zodResolver(validationSchema),
-    defaultValues,
-  });
+  const [email, setEmail] = useState("");
 
-  // const onSubmit = async (data: ValidationSchemaType) => {
-  //   const transFormData = { ...data, project_id: projectId };
-  //   const res = await mutateAsync(transFormData);
-  //   if (res) setOpenDialog(false);
-  // };
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      await mutateAsync({
+        projectId,
+        email,
+      });
+      setOpenDialog(false);
+      toast({
+        title: "Invitation sent to crew",
+        description: "Invitation sent successfully",
+      });
+    } catch (error) {
+      const { title, description } = formatError(error);
+      toast({
+        title,
+        description,
+        variant: "destructive",
+      });
+    }
+  };
 
   return (
     <div>
@@ -85,18 +64,20 @@ const CrewHire = () => {
         searchValue={searchValue}
         setSearchValue={setSearchValue}
       />
-      <CrewList data={crewList?.data} isLoading={isLoadingCrewList} />
+      <CrewList data={data?.data?.at(0)} isLoading={isLoading} />
       <Dialog open={openDialog} onOpenChange={() => setOpenDialog(!openDialog)}>
         <DialogContent className="lg:w-[800px] w-[95%]">
           <DialogHeader>
-            <DialogTitle> Invite </DialogTitle>
-            {/* <CustomForm
-              form={form}
-              formFields={formFields}
-              onSubmit={onSubmit}
-              isLoading={isLoadingInvitation}
-              isError={isErrorInvitation}
-            /> */}
+            <DialogTitle>Sent invitation</DialogTitle>
+            <form onSubmit={onSubmit} className=" flex items-center gap-2  mt-4">
+              <Input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder=" Enter crew email"
+                className=" h-12"
+              />
+              <Button>Sent</Button>
+            </form>
           </DialogHeader>
         </DialogContent>
       </Dialog>

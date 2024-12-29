@@ -22,6 +22,27 @@ export const sentInvitationToCrew = async ({
   });
 };
 
+export const sentInvitationToCrewEmail = async ({
+  projectId,
+  email,
+  roleId,
+}: {
+  projectId: string;
+  email: string;
+  roleId?: string;
+}) => {
+  return customFetch(`${USER_API}/project/v2/projects/${projectId}/add_member/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      role_id: roleId || "2",
+    }),
+  });
+};
+
 export const getInvitedCrewList = async (projectId: string) => {
   return customFetch(`${NEW_API_URL_V2}/project/v2/memberships/?project_id=${projectId}`, {
     method: "GET",
@@ -30,6 +51,11 @@ export const getInvitedCrewList = async (projectId: string) => {
 
 export const getCrewFullProfile = async (crewId: string) => {
   return customFetch(`${NEW_API_URL_V2}/crew/crew-list/${crewId}/`, {
+    method: "GET",
+  });
+};
+export const getCrewInviteLists = async (projectId: string) => {
+  return customFetch(`${NEW_API_URL_V2}/project/v2/get_invites/?project_id=${projectId}`, {
     method: "GET",
   });
 };
