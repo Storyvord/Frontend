@@ -106,11 +106,17 @@ const config = {
           "0%": { transform: "translateY(50%)", opacity: "0" },
           "100%": { transform: "translateY(0)", opacity: "1" },
         },
+        fadeInStack: {
+          "0%": { opacity: "0", transform: "scale(0.9)" },
+          // "50%": { opacity: "1", transform: "scale(1)" },
+          "100%": { opacity: "1", transform: "scale(1)" }, // Stay visible
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "slide-up": "slide-up 0.3s ease-out",
+        fadeInStack: "fadeInStack 0s ease-in-out forwards",
       },
       fontFamily: {
         sans: ["Roboto", "sans-serif"],

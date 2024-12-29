@@ -1,154 +1,130 @@
 import Image from "next/image";
 import React from "react";
 import { Timeline } from "../ui/timeline.tsx";
+import SequentialAnimation from "../SequentialAnimation";
+
+const crew = [
+  "/product/crew/crew1.svg",
+  "/product/crew/crew2.svg",
+  "/product/crew/crew3.svg",
+  "/product/crew/crew4.svg",
+  "/product/crew/crew5.svg",
+];
+const budget = [
+  "/product/budget/budget1.svg",
+  "/product/budget/budget2.svg",
+  "/product/budget/budget3.svg",
+  "/product/budget/budget4.svg",
+  "/product/budget/budget5.svg",
+  "/product/budget/budget6.svg",
+  "/product/budget/budget7.svg",
+];
+const compliance = [
+  "/product/compliance/compliance1.svg",
+  "/product/compliance/compliance2.svg",
+  "/product/compliance/compliance3.svg",
+  "/product/compliance/compliance4.svg",
+  "/product/compliance/compliance5.svg",
+  "/product/compliance/compliance6.svg",
+];
+const callsheet = [
+  "/product/callsheet/callsheet1.svg",
+  "/product/callsheet/callsheet2.svg",
+  "/product/callsheet/callsheet3.svg",
+];
 
 export function TimelineDemo() {
   const data = [
     {
-      title: "Find Your Crew",
+      subTitle: "Find Your Crew",
+      title: "Intelligent matches at your fingertips",
+      description:
+        "Match with the perfect team members based on skill, experience, and availability.",
       content: (
         <div>
-          <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
-            Built and launched Aceternity UI and Aceternity UI Pro from scratch
-          </p>
-          <div className="grid grid-cols-2 gap-4">
-            <Image
-              src="https://assets.aceternity.com/templates/startup-1.webp"
-              alt="startup template"
-              width={500}
-              height={500}
-              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
-            />
-            <Image
-              src="https://assets.aceternity.com/templates/startup-2.webp"
-              alt="startup template"
-              width={500}
-              height={500}
-              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
-            />
-            <Image
-              src="https://assets.aceternity.com/templates/startup-3.webp"
-              alt="startup template"
-              width={500}
-              height={500}
-              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
-            />
-            <Image
-              src="https://assets.aceternity.com/templates/startup-4.webp"
-              alt="startup template"
-              width={500}
-              height={500}
-              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
-            />
+          <div className=" space-y-2 pb-4">
+            <Image src="/icons/crew.svg" alt="" width={30} height={30} className=" w-10 h-10" />
+            <h1 className="text-[#011821] dark:text-neutral-200 text-xs md:text-2xl font-poppins-semibold mb-8">
+              Hold tight! AI is analyzing profiles to suggest your dream crew.
+            </h1>
+          </div>
+          <div className="h-[80vh] w-full">
+            <SequentialAnimation svgs={crew} className=" bg-white" />
           </div>
         </div>
       ),
     },
     {
-      title: "Optimize Budgets",
+      subTitle: "Optimize Budgets",
+      title: "AI-powered forecasting at your fingertips",
+      description: "Transform hours of manual budget planning into just 15 minutes. ",
       content: (
         <div>
-          <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
-            I usually run out of copy, but when I see content this big, I try to integrate lorem
-            ipsum.
-          </p>
-          <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-8">
-            Lorem ipsum is for people who are too lazy to write copy. But we are not. Here are some
-            more example of beautiful designs I built.
-          </p>
-          <div className="grid grid-cols-2 gap-4">
-            <Image
-              src="https://assets.aceternity.com/pro/hero-sections.png"
-              alt="hero template"
-              width={500}
-              height={500}
-              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
-            />
-            <Image
-              src="https://assets.aceternity.com/features-section.png"
-              alt="feature template"
-              width={500}
-              height={500}
-              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
-            />
-            <Image
-              src="https://assets.aceternity.com/pro/bento-grids.png"
-              alt="bento template"
-              width={500}
-              height={500}
-              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
-            />
-            <Image
-              src="https://assets.aceternity.com/cards.png"
-              alt="cards template"
-              width={500}
-              height={500}
-              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
-            />
+          <div className=" space-y-2 pb-4">
+            <Image src="/icons/budget.svg" alt="" width={30} height={30} className=" w-10 h-10" />
+            <h1 className="text-[#011821] dark:text-neutral-200 text-xs md:text-2xl font-poppins-semibold mb-8">
+              AI is analyzing and optimizing your budget is almost ready!
+            </h1>
+          </div>
+          <div className="h-[80vh] w-full">
+            <SequentialAnimation svgs={budget} className=" h-full" />
           </div>
         </div>
       ),
     },
     {
-      title: "Streamline Production",
+      subTitle: "Global Film Compliance",
+      title: "Effortless navigation at your fingertips",
+      description:
+        "Streamline international filming with AI-powered tools that deliver real-time updates on local regulations and cultural nuances.",
       content: (
         <div>
-          <p className="text-neutral-800 dark:text-neutral-200 text-xs md:text-sm font-normal mb-4">
-            Deployed 5 new components on Aceternity today
-          </p>
-          <div className="mb-8">
-            <div className="flex gap-2 items-center text-neutral-700 dark:text-neutral-300 text-xs md:text-sm">
-              ✅ Card grid component
-            </div>
-            <div className="flex gap-2 items-center text-neutral-700 dark:text-neutral-300 text-xs md:text-sm">
-              ✅ Startup template Aceternity
-            </div>
-            <div className="flex gap-2 items-center text-neutral-700 dark:text-neutral-300 text-xs md:text-sm">
-              ✅ Random file upload lol
-            </div>
-            <div className="flex gap-2 items-center text-neutral-700 dark:text-neutral-300 text-xs md:text-sm">
-              ✅ Himesh Reshammiya Music CD
-            </div>
-            <div className="flex gap-2 items-center text-neutral-700 dark:text-neutral-300 text-xs md:text-sm">
-              ✅ Salman Bhai Fan Club registrations open
-            </div>
+          {/* <div className=" space-y-2 pb-4">
+            <Image
+              src="/icons/compliance.svg"
+              alt=""
+              width={30}
+              height={30}
+              className=" w-10 h-10"
+            />
+            <h1 className="text-[#011821] dark:text-neutral-200 text-xs md:text-2xl font-poppins-semibold mb-8">
+              Stay on top with effortless compliance solutions.
+            </h1>
+          </div> */}
+          <div className="h-[80vh] w-full">
+            <SequentialAnimation svgs={compliance} className=" h-full" />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+        </div>
+      ),
+    },
+    {
+      subTitle: "Smart Call Sheets",
+      title: "Seamless scheduling",
+      description:
+        "Simplify production planning with AI-driven call sheets that adapt to changes, ensuring accuracy and efficiency for every shoot.",
+      content: (
+        <div>
+          {/* <div className=" space-y-2 pb-4">
             <Image
-              src="https://assets.aceternity.com/pro/hero-sections.png"
-              alt="hero template"
-              width={500}
-              height={500}
-              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
+              src="/icons/callsheet.svg"
+              alt=""
+              width={30}
+              height={30}
+              className=" w-10 h-10"
             />
-            <Image
-              src="https://assets.aceternity.com/features-section.png"
-              alt="feature template"
-              width={500}
-              height={500}
-              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
-            />
-            <Image
-              src="https://assets.aceternity.com/pro/bento-grids.png"
-              alt="bento template"
-              width={500}
-              height={500}
-              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
-            />
-            <Image
-              src="https://assets.aceternity.com/cards.png"
-              alt="cards template"
-              width={500}
-              height={500}
-              className="rounded-lg object-cover h-20 md:h-44 lg:h-60 w-full shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]"
-            />
+            <h1 className="text-[#011821] dark:text-neutral-200 text-xs md:text-2xl font-poppins-semibold mb-8">
+              AI is crafting the ultimate call sheet to simplify your production day.
+            </h1>
+          </div> */}
+          <div className="h-[80vh] w-full">
+            <SequentialAnimation svgs={callsheet} className=" h-full" />
           </div>
         </div>
       ),
     },
   ];
   return (
-    <div className="w-full pb-12 pt-10">
+    <div className="w-full pb-12 pt-10" id="product">
       <Timeline data={data} />
     </div>
   );

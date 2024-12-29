@@ -20,7 +20,7 @@ export default function Chatbot() {
   const clientRef = useRef<W3CWebSocket | null>(null);
 
   const { data: prevSessions } = useGetChatbotSessions();
-  const { data: sessionsDetails } = useGetSessionDetails(currentSession?.id ?? 0);
+  const { data: sessionsDetails } = useGetSessionDetails(currentSession?.session_id ?? "");
 
   const token = Cookies.get("accessToken");
   useEffect(() => {
@@ -64,7 +64,7 @@ export default function Chatbot() {
   useEffect(() => {
     if (currentSession) {
       let localConversations: any = [];
-      sessionsDetails?.forEach((item: any) => {
+      sessionsDetails?.results?.forEach((item: any) => {
         localConversations.push(
           { data: item.user_message, queryType: "question" },
           { data: item.ai_response, queryType: "answer" }

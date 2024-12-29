@@ -26,12 +26,14 @@
 
 import AiSimplifies from "@/components/home-page/AiSimplifies";
 import { BrainBehindSection } from "@/components/home-page/BrainBehindSection";
+import BrandSection from "@/components/home-page/BrandSection";
 import { FeaturesSection } from "@/components/home-page/FeaturesSection";
 import { Footer } from "@/components/home-page/Footer";
 import { HeroSection } from "@/components/home-page/HeroSection";
 import { PricingSection } from "@/components/home-page/PricingSection";
 import { SiteHeader } from "@/components/home-page/SiteHeader";
 import { TimelineDemo } from "@/components/home-page/TimelineDemo";
+import ToolsSection from "@/components/home-page/ToolsSection";
 
 export default function Home() {
   return (
@@ -41,7 +43,9 @@ export default function Home() {
         <HeroSection />
         <AiSimplifies />
         <FeaturesSection />
-        {/* <TimelineDemo /> */}
+        <TimelineDemo />
+        <ToolsSection />
+        <BrandSection />
         <PricingSection />
         <BrainBehindSection />
       </main>

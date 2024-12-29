@@ -56,16 +56,16 @@ export function SiteHeader() {
           <Image src="/logo.svg" width={130} height={50} alt="logo" className=" w-40" />
         </Link>
         <nav className="hidden md:flex items-center gap-8 ">
-          <Link href="#" className={navLinksStyle}>
+          <Link href="#home" className={navLinksStyle}>
             {t("home")}
           </Link>
-          <Link href="#" className={navLinksStyle}>
+          <Link href="#product" className={navLinksStyle}>
             {t("product")}
           </Link>
-          <Link href="#" className={navLinksStyle}>
+          <Link href="#clients" className={navLinksStyle}>
             {t("client")}
           </Link>
-          <Link href="#" className={navLinksStyle}>
+          <Link href="#about" className={navLinksStyle}>
             {t("about")}
           </Link>
 
