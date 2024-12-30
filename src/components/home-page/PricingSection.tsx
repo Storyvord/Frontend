@@ -27,6 +27,7 @@ export function PricingSection() {
         t("plans.0.features.2"),
         t("plans.0.features.3"),
       ],
+      buttonText: t("buttonText"),
     },
     {
       icon: "/icons/price/studio.svg",
@@ -44,6 +45,7 @@ export function PricingSection() {
         t("plans.1.features.4"),
         t("plans.1.features.5"),
       ],
+      buttonText: t("buttonText"),
     },
     {
       icon: "/icons/price/oscar.svg",
@@ -60,6 +62,7 @@ export function PricingSection() {
         t("plans.2.features.4"),
         t("plans.2.features.5"),
       ],
+      buttonText: t("joinWaitList"),
     },
   ];
 
@@ -111,8 +114,16 @@ export function PricingSection() {
                 </ul>
               </CardContent>
               <CardFooter>
-                <Button onClick={() => setOpenDialog(true)} variant="outline" className="w-full">
-                  {t("joinWaitList")}
+                <Button
+                  onClick={() => {
+                    if (plan.buttonText === "Join Waitlist") {
+                      setOpenDialog(true);
+                    }
+                  }}
+                  variant="outline"
+                  className="w-full"
+                >
+                  {plan.buttonText}
                 </Button>
               </CardFooter>
             </Card>

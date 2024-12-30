@@ -66,7 +66,7 @@ const ContactForm = ({
 
   return (
     <Dialog open={openDialog} onOpenChange={() => setOpenDialog(!openDialog)}>
-      <DialogContent className="lg:w-[800px] w-[95%] ">
+      <DialogContent className="lg:w-[800px] w-[95%] z-[999]">
         <DialogHeader>
           <DialogTitle>Contact Us</DialogTitle>
         </DialogHeader>
