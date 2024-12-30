@@ -1,0 +1,193 @@
+{
+  "HomePage": {
+    "home": "首页",
+    "product": "产品",
+    "client": "客户",
+    "about": "关于",
+    "text": "为您的电影制作提供 AI 驱动的见解",
+    "title1": "您的 AI 联合制片人，助您轻松全球拍摄",
+    "title2": "从规划到预算，仅需几分钟",
+    "description": "在一个地方找到团队、管理物流、确保合规并提升您的创意流程，由人工智能提供支持",
+    "button": {
+      "dashboard": "仪表盘",
+      "completeOnboarding": "完成注册",
+      "getStarted": "开始"
+    },
+    "AiSimplifies": {
+      "badgeText": "AI 如何简化您的电影制作",
+      "title": "像制片人一样思考的 AI",
+      "description": "从准确的预算计算到智能团队推荐，AI 确保您的制作无缝、高效且充满创意。",
+      "trustedText": "受到全球领先电影制作人的信赖。",
+      "crewSuggestion": "AI 为您推荐最佳团队。",
+      "community": "加入我们的社区，我们在等你"
+    },
+    "FeaturesSection": {
+      "badgeText": "准备简化您的制作流程？",
+      "introText": "加入成千上万使用我们平台进行无缝制作的电影制片人。",
+      "features": [
+        {
+          "title": "AI 预算预测",
+          "description": "智能预算规划，通过可靠的预测优化您的制作成本，量身定制您的项目需求。"
+        },
+        {
+          "title": "团队推荐",
+          "description": "根据项目需求、经验和可用性找到理想的团队成员。"
+        },
+        {
+          "title": "脚本分解与分析",
+          "description": "利用 AI 提供的洞察力进行自动脚本分析，以提升规划和执行效果。"
+        },
+        {
+          "title": "制作计划",
+          "description": "通过智能资源分配和时间表管理简化您的制作计划。"
+        }
+      ]
+    },
+    "PricingSection": {
+      "badgeText": "我们的价格",
+      "popularTag": "热门",
+      "plans": [
+        {
+          "tag": "(基础)",
+          "name": "独立套餐",
+          "description": "适合首次拍摄的独立电影制作人。",
+          "price": "免费",
+          "period": "",
+          "features": ["1 用户", "3 个项目限制", "项目管理工具", "基础人工制片支持（额外费用）"]
+        },
+        {
+          "tag": "(专业)",
+          "name": "工作室套餐",
+          "description": "适合需要更高效率的独立电影制作人。",
+          "price": "$7,600",
+          "period": "每年",
+          "features": [
+            "包含独立套餐的所有功能",
+            "5 个用户",
+            "20 个项目限制",
+            "访问市场（团队和供应商）",
+            "无限人工制片支持",
+            "访问移动应用程序"
+          ]
+        },
+        {
+          "tag": "(企业)",
+          "name": "奥斯卡套餐",
+          "description": "适合制作高端电影和工作室。",
+          "price": "$47,900",
+          "period": "每年",
+          "features": [
+            "包含工作室套餐的所有功能",
+            "高级创意工具",
+            "20+ 用户",
+            "为专业输入（视觉特效、艺术等）提供部门工具",
+            "专属账户代表",
+            "24/7 高级人工制片支持"
+          ]
+        }
+      ],
+      "popular": "热门",
+      "buttonText": "开始",
+      "featuresHeading": "包含内容",
+      "joinWaitList": "加入候补名单"
+    },
+    "BrainBehindSection": {
+      "title": "Storyvord 的幕后大脑",
+      "bio": "拥有超过 12 年的全球电影和视频制作经验，Gaurav 曾参与《速度与激情 7》和《王冠》等热门项目。他是一位富有远见的企业家，曾创立领先的国际制片设备租赁门户网站 CamArt。Gaurav 拥有英国国际商务 MBA 学位和哈佛大学商业认证，致力于通过 AI 革新电影制作。",
+      "name": "Gaurav Sharma",
+      "role": "Storyvord 首席执行官"
+    },
+    "Footer": {
+      "rights": "故事沃德 留所有权利。",
+      "privacyPolicy": "隐私政策",
+      "termsAndConditions": "条款与条件"
+    },
+    "Brand": {
+      "heading": "被领先品牌的制片人信赖",
+      "clients": "我们的客户"
+    },
+    "Tools": {
+      "heading": "集成您已使用的工具",
+      "tool": [
+        {
+          "title": "脚本",
+          "description": "存储和注释脚本"
+        },
+        {
+          "title": "分镜",
+          "description": "可视化序列"
+        },
+        {
+          "title": "拍摄计划",
+          "description": "计划拍摄日期"
+        },
+        {
+          "title": "供应商",
+          "description": "管理供应商"
+        },
+        {
+          "title": "公告",
+          "description": "发布更新和新闻"
+        },
+        {
+          "title": "制作设计",
+          "description": "监督设计元素"
+        },
+        {
+          "title": "制作日历",
+          "description": "协调专业任务"
+        }
+      ]
+    },
+    "Products": {
+      "badge": "我们的产品",
+      "heading": "您所需的每个工具，尽在一个地方。",
+      "data": [
+        {
+          "subTitle": "寻找您的团队",
+          "title": "一键智能匹配",
+          "description": "根据技能、经验和可用性与最佳团队成员匹配。",
+          "content": "稍等！AI 正在分析个人资料，为您推荐理想团队。"
+        },
+        {
+          "subTitle": "优化预算",
+          "title": "AI 驱动的预算预测",
+          "description": "将数小时的手动预算规划缩短为 15 分钟。",
+          "content": "AI 正在分析和优化您的预算。即将完成！"
+        },
+        {
+          "subTitle": "全球电影合规性",
+          "title": "轻松导航",
+          "description": "通过 AI 驱动的工具简化国际拍摄，实时提供当地法规和文化细微差别的更新。",
+          "content": ""
+        },
+        {
+          "subTitle": "智能工作单",
+          "title": "无缝计划",
+          "description": "通过 AI 驱动的工作单简化生产计划，确保每次拍摄的准确性和效率。",
+          "content": ""
+        }
+      ]
+    },
+    "Testimonials": {
+      "heading": "人们怎么说",
+      "testimonials": [
+        {
+          "quote": "将 故事沃德 的产品集成到我们的制作流程后，我们的效率和输出质量显著提升。直观的界面和强大的功能简化了我们的工作流程，让我们可以更专注于创意。",
+          "name": "亚历克斯·约翰逊",
+          "designation": "电影制片人"
+        },
+        {
+          "quote": "利用 故事沃德 改变了我们管理项目的方式。协作工具和实时更新增强了我们团队之间的沟通，确保项目按时完成，客户满意。",
+          "name": "玛丽亚·冈萨雷斯",
+          "designation": "视频制作经理"
+        },
+        {
+          "quote": "采用 故事沃德 的 AI 建议是一个无缝的过渡，并极大地促进了我们的后期制作阶段。先进的编辑功能和用户友好的设计使其成为我们武器库中不可或缺的工具。",
+          "name": "利亚姆·史密斯",
+          "designation": "后期制作主管"
+        }
+      ]
+    }
+  }
+}

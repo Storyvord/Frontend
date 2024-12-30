@@ -3,10 +3,19 @@ import englishMenu from "./locales/en/side-menu.json";
 import englishForm from "./locales/en/form/project.json";
 import hindiMenu from "./locales/hi/side-menu.json";
 import hindiForm from "./locales/hi/form/project.json";
+import chineseMenu from "./locales/zh-CN/side-menu.json";
+import chineseForm from "./locales/zh-CN/form/project.json";
 
-export const getLanguageFromCookies = (): "english" | "hindi" => {
+export const getLanguageFromCookies = (): "english" | "hindi" | "chinese" => {
   const lang = Cookies.get("locale");
-  return lang === "hi" ? "hindi" : "english"; // default to "english" if not "hi"
+  switch (lang) {
+    case "hi":
+      return "hindi";
+    case "zh-CN":
+      return "chinese";
+    default:
+      return "english"; // default to English
+  }
 };
 
 const translations = {
@@ -17,6 +26,10 @@ const translations = {
   hindi: {
     ...hindiMenu,
     ...hindiForm,
+  },
+  chinese: {
+    ...chineseMenu,
+    ...chineseForm,
   },
 };
 

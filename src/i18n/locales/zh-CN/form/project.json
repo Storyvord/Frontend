@@ -1,0 +1,16 @@
+{
+  "CreateProjectForm": {
+    "projectName": {
+      "label": "项目名称",
+      "placeholder": "项目名称"
+    },
+    "budget": {
+      "label": "预算",
+      "placeholder": "输入预算"
+    },
+    "crew": {
+      "label": "团队",
+      "placeholder": "选择团队"
+    }
+  }
+}
