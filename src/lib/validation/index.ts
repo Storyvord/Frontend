@@ -212,10 +212,17 @@ export const updateProfileSchema = z.object({
 export const CallSheetFormSchema = z.object({
   // Project Information
   title: z.string().min(1, "Title is required"), // Required string, minimum 1 character
-  date: z.string().refine((val) => !isNaN(Date.parse(val)), {
-    // Validates as a date string
-    message: "Invalid date format, expected YYYY-MM-DD",
-  }),
+  date: z.string().refine(
+    (val) => {
+      const inputDate = new Date(val);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0); // Normalize to midnight
+      return !isNaN(inputDate.getTime()) && inputDate >= today;
+    },
+    {
+      message: "Date must be on or after today in the format DD-MM-YYYY",
+    }
+  ),
   calltime: timeSchema, // Time format HH:MM
   location: z.string().min(1, "Location is required"),
   nearest_hospital_address: z.string().optional(),

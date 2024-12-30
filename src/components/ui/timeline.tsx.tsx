@@ -2,6 +2,7 @@
 import { useMotionValueEvent, useScroll, useTransform, motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 import { Badge } from "./badge";
+import { useTranslations } from "next-intl";
 
 interface TimelineEntry {
   subTitle: string;
@@ -14,6 +15,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
   const ref = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
+  const t = useTranslations("HomePage.Products");
 
   useEffect(() => {
     if (ref.current) {
@@ -37,10 +39,10 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           variant="secondary"
           className="bg-white text-[#1e1e1e] px-4 py-1 text-sm font-medium shadow-[0px_1px_15px_rgba(0,255,0,0.3)] border-2 border-primary-green flex items-center gap-3 w-fit "
         >
-          Our Products
+          {t("badge")}
         </Badge>
         <h2 className="text-3xl md:text-5xl mb-4 text-background-2 dark:text-white max-w-4xl mt-10 font-bold">
-          Every Tool You Need, <br /> All in One Place.
+          {t("heading")}
         </h2>
       </div>
 

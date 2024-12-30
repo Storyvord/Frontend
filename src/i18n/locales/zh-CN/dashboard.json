@@ -1,0 +1,25 @@
+{
+  "Dashboard": {
+    "your-ongoing-projects": "您正在进行的项目",
+    "createProject": {
+      "title": "创建新项目",
+      "description": "项目是您与创作者之间的工作订单。直接与创作者启动项目，或发布招聘启事从市场雇佣人员。"
+    },
+    "my-tasks": "我的任务",
+    "calendar": "日历",
+    "my-network": "我的网络",
+    "all-projects": "所有项目",
+    "my-schedule": "我的日程",
+    "select-project": "选择项目",
+    "org": "组织",
+    "profile": "个人资料",
+    "settings": "设置",
+    "subscriptions": "订阅",
+    "button": {
+      "task": "添加任务",
+      "event": "添加事件",
+      "add": "添加",
+      "new-project": "新项目"
+    }
+  }
+}

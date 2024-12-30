@@ -146,6 +146,8 @@
       ]
     },
     "Products": {
+      "badge": " Our Products",
+      "heading": "Every Tool You Need, All in One Place.",
       "data": [
         {
           "subTitle": "Find Your Crew",

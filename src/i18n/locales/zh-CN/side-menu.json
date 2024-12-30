@@ -1,0 +1,81 @@
+{
+  "DashboardMenuItems": {
+    "general": {
+      "title": "通用",
+      "items": {
+        "employees": "员工与人员",
+        "address-book": "地址簿",
+        "company-files": "公司文件",
+        "company-tasks": "公司任务",
+        "activity-logs": "活动日志"
+      }
+    },
+    "planning": {
+      "title": "规划",
+      "items": {
+        "company-calendar": "公司日历",
+        "timesheets": "时间表",
+        "resource-planning": "资源规划"
+      }
+    },
+    "database": {
+      "title": "数据库",
+      "items": {
+        "actor-database": "演员数据库",
+        "location-database": "地点数据库",
+        "costume-database": "服装数据库",
+        "prop-database": "道具数据库"
+      }
+    },
+    "administrative": {
+      "title": "管理",
+      "items": {
+        "settings": "设置",
+        "subscriptions": "订阅"
+      }
+    }
+  },
+
+  "ProjectDetailsItems": {
+    "general": {
+      "title": "通用",
+      "items": {
+        "reports": "报告",
+        "file-documents": "文件与文档",
+        "task": "任务",
+        "calendar": "日历",
+        "announcements": "公告"
+      }
+    },
+    "project management": {
+      "title": "项目管理",
+      "items": {
+        "crew": "团队",
+        "resource": "供应商",
+        "compliance": "合规",
+        "budget": "预算",
+        "call-sheets": "工作单"
+      }
+    },
+    "creative hub": {
+      "title": "创意中心",
+      "items": {
+        "script": "脚本",
+        "scenes": "场景",
+        "shots": "镜头",
+        "storyboard": "分镜",
+        "content-items": "内容项"
+      }
+    },
+    "department hub": {
+      "title": "部门中心",
+      "items": {
+        "cast": "演员",
+        "costumes": "服装",
+        "makeup-hair": "化妆与发型",
+        "locations-sets": "地点与布景",
+        "production-design": "制作设计"
+      }
+    }
+  }
+}
