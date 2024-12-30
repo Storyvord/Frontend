@@ -50,7 +50,7 @@ export function ProductSection() {
               Hold tight! AI is analyzing profiles to suggest your dream crew.
             </h1>
           </div>
-          <div className="h-[80vh] w-full">
+          <div className="h-[50vh] md:h-[80vh] w-full">
             <SequentialAnimation svgs={crew} />
           </div>
         </div>
@@ -68,7 +68,7 @@ export function ProductSection() {
               AI is analyzing and optimizing your budget. It&apos;s almost ready!
             </h1>
           </div>
-          <div className="h-[80vh] w-full">
+          <div className="h-[50vh] md:h-[80vh] w-full">
             <SequentialAnimation svgs={budget} />
           </div>
         </div>
@@ -79,7 +79,7 @@ export function ProductSection() {
       title: t("data.2.title"),
       description: t("data.2.description"),
       content: (
-        <div className="h-[80vh] w-full">
+        <div className="h-[50vh] md:h-[80vh] w-full">
           <h1 className="text-[#011821] dark:text-neutral-200 text-xs md:text-2xl font-poppins-semibold mb-8">
             {t("data.2.content")}
           </h1>
@@ -92,7 +92,7 @@ export function ProductSection() {
       title: t("data.3.title"),
       description: t("data.3.description"),
       content: (
-        <div className="h-[80vh] w-full">
+        <div className="h-[50vh] md:h-[80vh] w-full">
           <h1 className="text-[#011821] dark:text-neutral-200 text-xs md:text-2xl font-poppins-semibold mb-8">
             {t("data.3.content")}
           </h1>
