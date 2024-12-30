@@ -55,20 +55,21 @@ export function SiteHeader() {
         <Link href="/" className="text-xl font-bold">
           <Image src="/logo.svg" width={130} height={50} alt="logo" className=" w-40" />
         </Link>
-        <nav className="hidden md:flex items-center gap-8 ">
-          <Link href="#home" className={navLinksStyle}>
-            {t("home")}
-          </Link>
-          <Link href="#product" className={navLinksStyle}>
-            {t("product")}
-          </Link>
-          <Link href="#clients" className={navLinksStyle}>
-            {t("client")}
-          </Link>
-          <Link href="#about" className={navLinksStyle}>
-            {t("about")}
-          </Link>
-
+        <div className="flex justify-between items-center gap-6">
+          <nav className="hidden md:flex items-center gap-8 ">
+            <Link href="#home" className={navLinksStyle}>
+              {t("home")}
+            </Link>
+            <Link href="#product" className={navLinksStyle}>
+              {t("product")}
+            </Link>
+            <Link href="#clients" className={navLinksStyle}>
+              {t("client")}
+            </Link>
+            <Link href="#about" className={navLinksStyle}>
+              {t("about")}
+            </Link>
+          </nav>
           {/* stage 2 = Onboarding process completed */}
           {userDetails?.data?.user?.step && (
             // user_type === 1  Represents a client
@@ -87,7 +88,7 @@ export function SiteHeader() {
               <Button>{t("button.getStarted")}</Button>
             </Link>
           )}
-        </nav>
+        </div>
       </div>
     </header>
   );

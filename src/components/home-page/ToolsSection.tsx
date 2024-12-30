@@ -69,7 +69,9 @@ const ToolsSection = () => {
                 className="h-9 sm:h-14 w-auto object-contain"
               /> */}
               <div className="border text-background-2 p-4 rounded-xl bg-[#8DE1AF] h-full flex flex-col justify-start min-h-28">
-                <h3 className="font-poppins-semibold text-lg">{title}</h3>
+                <h3 className="font-poppins-semibold text-lg whitespace-nowrap overflow-hidden text-ellipsis ">
+                  {title}
+                </h3>
                 <p className=" text-sm">{description}</p>
               </div>
             </CarouselItem>
