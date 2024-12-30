@@ -13,6 +13,7 @@ import { onboardingCrew } from "../_markdown/onboarding-crew";
 import { producerDashboard } from "../_markdown/dashboard-producer";
 import { crewDashboard } from "../_markdown/crew-dashboard";
 import { aiCopilot } from "../_markdown/ai-copilot";
+import { marketplace } from "../_markdown/marketplace";
 
 // Define types for the markdown file content
 type MarkdownFile = {
@@ -42,6 +43,7 @@ const markdownFiles: Record<string, MarkdownFile> = {
   "producer-dashboard": parseMarkdown(producerDashboard),
   "crew-dashboard": parseMarkdown(crewDashboard),
   "ai-copilot": parseMarkdown(aiCopilot),
+  marketplace: parseMarkdown(marketplace),
 };
 
 const ArticleDetail: React.FC = () => {

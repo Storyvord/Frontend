@@ -1,3 +1,4 @@
+"use client";
 import { Check, Divide } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -5,9 +6,12 @@ import { Badge } from "../ui/badge";
 import { Description } from "@radix-ui/react-toast";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import ContactForm from "../ContactForm";
+import { useState } from "react";
 
 export function PricingSection() {
   const t = useTranslations("HomePage.PricingSection");
+  const [openDialog, setOpenDialog] = useState(false);
 
   const plans = [
     {
@@ -107,7 +111,7 @@ export function PricingSection() {
                 </ul>
               </CardContent>
               <CardFooter>
-                <Button variant="outline" className="w-full">
+                <Button onClick={() => setOpenDialog(true)} variant="outline" className="w-full">
                   {t("joinWaitList")}
                 </Button>
               </CardFooter>
@@ -115,6 +119,7 @@ export function PricingSection() {
           ))}
         </div>
       </div>
+      <ContactForm openDialog={openDialog} setOpenDialog={setOpenDialog} />
     </section>
   );
 }
