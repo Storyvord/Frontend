@@ -12,17 +12,17 @@ interface SequentialAnimationProps {
 const SequentialAnimation: React.FC<SequentialAnimationProps> = ({ svgs, className }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // 1) Listen to scroll events in this container
+  // Listen to scroll events in this container
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
   });
 
-  // 2) Compress the range from 0..0.3
+  // Compress the range from 0..0.3
   //    So we don't need to scroll the full container for the last image
-  const indexRange = useTransform(scrollYProgress, [0, 0.3], [0, svgs.length - 1]);
+  const indexRange = useTransform(scrollYProgress, [0, 0.6], [0, svgs.length - 1]);
 
-  // 3) We'll store the activeIndex in local state
+  // We'll store the activeIndex in local state
   const [activeIndex, setActiveIndex] = useState(0);
   useMotionValueEvent(indexRange, "change", (latest) => {
     const roundedIndex = Math.round(latest);

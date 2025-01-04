@@ -7,7 +7,7 @@ const AiSimplifies = () => {
   const t = useTranslations("HomePage.AiSimplifies");
 
   return (
-    <section className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-12 gap-y-8 md:gap-y-12 pt-16 relative">
+    <section className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-12 gap-y-8 md:gap-y-12 pt-32 relative">
       <div className="gradient-02 z-50 rounded-full" />
 
       {/* Left Section: Badge, Title, Description */}
