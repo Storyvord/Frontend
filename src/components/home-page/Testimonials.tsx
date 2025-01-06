@@ -24,7 +24,7 @@ export function Testimonials() {
     },
   ];
   return (
-    <section className=" pt-16">
+    <section className=" pt-32">
       <h2 className="text-5xl col-start-3 col-span-8 font-bold mb-12 text-center text-background-2">
         {t("heading")}
       </h2>

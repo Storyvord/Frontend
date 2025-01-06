@@ -237,8 +237,8 @@ select:disabled {
   position: absolute;
   width: 150px;
   height: 75px;
-  right: -6%;
-  top: 2%;
+  right: -10%;
+  top: -5%;
   border-radius: 100% 100% 0 0;
 
   background: #22cb66e7;

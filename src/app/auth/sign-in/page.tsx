@@ -51,7 +51,7 @@ const SignInPage = () => {
   };
 
   return (
-    <section className="flex md:h-screen h-full justify-between pt-20 md:pt-0">
+    <section className="flex md:h-screen h-full justify-start">
       <SideBanner />
       <div className="md:w-6/12 md:h-screen h-full w-full flex items-center justify-center">
         <SignInForm onSubmit={handleLogin} isLoading={isLoading} />

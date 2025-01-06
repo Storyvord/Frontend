@@ -20,7 +20,7 @@ const BrandSection = () => {
   return (
     <section
       id="clients"
-      className="flex flex-col gap-8 pb-12 pt-2 lg:flex-row lg:items-end md:justify-between"
+      className="flex flex-col gap-8 pb-12 lg:flex-row lg:items-end md:justify-between px-4 md:px-6 lg:px-10 xl:px-28 relative"
     >
       {/* Text Section */}
       <div className="lg:flex-[0.25] text-center md:text-left">
@@ -52,6 +52,14 @@ const BrandSection = () => {
           </div>
         ))}
       </div>
+      {/* right carve */}
+      <Image
+        className=" hidden md:block -z-10 absolute top-14 right-0 w-64"
+        src="/curve-image/img4.svg"
+        alt=""
+        width={100}
+        height={100}
+      />
     </section>
   );
 };

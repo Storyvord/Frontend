@@ -14,6 +14,7 @@ import Loader from "@/components/Loader";
 import { signUpFormSchema } from "@/lib/validation/auth";
 import { useTranslations } from "next-intl";
 import TermsAndConditions from "../TermsAndConditions";
+import Image from "next/image";
 
 interface SignUpFormProps {
   onSubmit: (data: any, isChecked: boolean) => Promise<void>;
@@ -49,11 +50,14 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit, isLoading }) => {
       className="w-full max-w-[1000px] mx-auto px-5 py-4 lg:px-24 md:px-8 sm:px-8"
       onSubmit={handleSubmit(handleFormSubmit)}
     >
-      <h3 className="text-3xl leading-[3rem] font-medium text-[#111111] font-poppins md:text-left text-center">
+      <Link href="/">
+        <Image src="/logo.svg" alt="logo" width={135} height={100} className="md:hidden " />
+      </Link>
+      <h3 className=" text-2xl lg:text-3xl leading-[3rem] font-medium text-[#111111] font-poppins text-left mt-8 md:mt-0 ">
         {t("heading")}
       </h3>
-      <p className="text-base font-normal text-[#111111] font-poppins md:text-left text-center">
-        {t("paragraph.text")}{" "}
+      <p className="text-base font-normal text-[#111111] font-poppins text-left mt-2 mb-12 md:mb-4 ">
+        {t("paragraph.text")} {""}
         <Link href="/auth/sign-in" className="underline">
           {t("paragraph.linkText")}
         </Link>
