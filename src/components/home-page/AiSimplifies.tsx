@@ -7,8 +7,15 @@ const AiSimplifies = () => {
   const t = useTranslations("HomePage.AiSimplifies");
 
   return (
-    <section className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-12 gap-y-8 md:gap-y-12 pt-32 relative">
+    <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-12 gap-y-8 md:gap-y-12 pt-32 relative">
       <div className="gradient-02 z-50 rounded-full" />
+      {/* <Image
+        className=" absolute z-50 bottom-20 -left-32 rotate-12 w-56"
+        src="/curve-image/img1.svg"
+        alt=""
+        width={100}
+        height={100}
+      /> */}
 
       {/* Left Section: Badge, Title, Description */}
       <div className="flex flex-col gap-5 items-start col-span-12 md:col-start-1 md:col-span-7 px-4 sm:px-6 md:px-0">
@@ -46,7 +53,7 @@ const AiSimplifies = () => {
           <p>{t("community")}</p>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

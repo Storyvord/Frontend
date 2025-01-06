@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React from "react";
 import SequentialAnimation from "../SequentialAnimation";
-import { Timeline } from "../ui/timeline.tsx";
+import { Timeline } from "../ui/timeline";
 import { useTranslations } from "next-intl";
 
 const crew = [

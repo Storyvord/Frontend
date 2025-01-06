@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 export function HeroSection() {
   const t = useTranslations("HomePage");
   return (
-    <div className="pt-24 md:pt-32 grid grid-cols-1 md:grid-cols-12 gap-y-6 items-center text-center relative">
+    <div className=" grid grid-cols-1 md:grid-cols-12 gap-y-6 items-center text-center relative">
       <div className="gradient-03 z-50" />
 
       {/* Badge Section */}

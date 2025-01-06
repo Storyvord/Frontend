@@ -20,7 +20,7 @@ const BrandSection = () => {
   return (
     <section
       id="clients"
-      className="flex flex-col gap-8 pb-12 pt-16 lg:flex-row lg:items-end md:justify-between"
+      className="flex flex-col gap-8 pb-12 lg:flex-row lg:items-end md:justify-between"
     >
       {/* Text Section */}
       <div className="lg:flex-[0.25] text-center md:text-left">
