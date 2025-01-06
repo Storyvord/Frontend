@@ -12,7 +12,7 @@ const ToolsSection = () => {
       id: 1,
       title: t("tool.0.title"),
       description: t("tool.0.description"),
-      icon: "/icons/script.svg",
+      icon: "/icons/script2.svg",
     },
     {
       id: 2,
@@ -48,40 +48,42 @@ const ToolsSection = () => {
       id: 7,
       title: t("tool.6.title"),
       description: t("tool.6.description"),
-      icon: "/icons/calendar.svg",
+      icon: "/icons/production-calendar.svg",
     },
   ];
 
   return (
-    <div className=" pt-16">
-      <h1 className="text-2xl sm:text-3xl text-center font-poppins-semibold mt-6 md:text-4xl">
-        {t("heading")}
-      </h1>
-      <Carousel
-        plugins={[
-          Autoplay({
-            delay: 2000,
-          }),
-        ]}
-        className="w-full py-10"
-      >
-        <CarouselContent className="flex gap-0 md:gap-2 items-center">
-          {tools.map(({ title, id, description, icon }) => (
-            <CarouselItem key={id} className="basis-1/1 lg:basis-1/4 xl:basis-1/5 ">
-              <div className="border text-background-2 p-4 rounded-xl bg-[#8DE1AF] h-full flex items-start gap-3 min-h-28">
-                <Image src={icon} alt="" width={20} height={20} className=" mt-2 w-6 h-6" />
-                <div className="">
-                  <h3 className="font-poppins-semibold text-lg whitespace-nowrap overflow-hidden text-ellipsis ">
-                    {title}
-                  </h3>
-                  <p className=" text-sm">{description}</p>
+    <section className="px-4 md:px-6 relative">
+      <div className=" pt-16">
+        <h1 className="text-2xl sm:text-3xl text-center font-poppins-semibold mt-6 md:text-4xl">
+          {t("heading")}
+        </h1>
+        <Carousel
+          plugins={[
+            Autoplay({
+              delay: 2000,
+            }),
+          ]}
+          className="w-full py-10"
+        >
+          <CarouselContent className="flex gap-0 md:gap-2 items-center">
+            {tools.map(({ title, id, description, icon }) => (
+              <CarouselItem key={id} className="basis-1/1 lg:basis-1/4 xl:basis-1/5 ">
+                <div className="border text-white p-4 rounded-xl bg-[#57C38A] h-full flex items-start gap-3 min-h-28 z-30">
+                  <Image src={icon} alt="" width={20} height={20} className=" mt-2 w-6 h-6" />
+                  <div className="">
+                    <h3 className="font-poppins-semibold text-lg whitespace-nowrap overflow-hidden text-ellipsis ">
+                      {title}
+                    </h3>
+                    <p className=" text-sm">{description}</p>
+                  </div>
                 </div>
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-      </Carousel>
-    </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+      </div>
+    </section>
   );
 };
 

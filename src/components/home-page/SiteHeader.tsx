@@ -47,7 +47,7 @@ export function SiteHeader() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 w-[100%] bg-white z-50 transition-transform duration-300 px-6 lg:px-10 xl:px-28"
+        "fixed top-0 left-0 w-[100%] bg-white/90 z-50 transition-transform duration-300 px-6 lg:px-10 xl:px-28"
         // isVisible ? "translate-y-0" : "-translate-y-full"
       )}
     >

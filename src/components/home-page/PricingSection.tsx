@@ -67,7 +67,7 @@ export function PricingSection() {
   ];
 
   return (
-    <section className="pt-24">
+    <section className="pt-24 px-4 md:px-6 lg:px-10 xl:px-28">
       <div className="">
         <Badge
           variant="secondary"

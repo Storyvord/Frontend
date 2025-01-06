@@ -103,8 +103,10 @@ export function ProductSection() {
   ];
 
   return (
-    <div className="w-full pb-12 pt-10" id="product">
-      <Timeline data={data} />
-    </div>
+    <section className="px-4 md:px-6 lg:px-10 xl:px-28">
+      <div className="w-full pb-12 pt-10" id="product">
+        <Timeline data={data} />
+      </div>
+    </section>
   );
 }
