@@ -3,6 +3,10 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import ComplianceCategory from "@/components/user-dashboard/project-details/planning/compliance/ComplianceCategory";
+import { useParams } from "next/navigation";
+import { useGetSuggestions } from "@/lib/react-query/queriesAndMutations/aiSuggestions";
+import Tabs from "@/components/Tabs";
+import ReportDetails from "@/components/report/ReportDetails";
 
 // Define the type for each compliance task
 type ComplianceTask = {
@@ -26,9 +30,19 @@ const initialCategories = {
     { id: 2, description: "Establish emergency contact protocols", completed: false },
   ],
 };
+const tabs = ["Overview", "Ai Response"];
 
 const CompliancePage: React.FC = () => {
   const [compliance, setCompliance] = useState(initialCategories);
+  const [activeTab, setActiveTab] = useState(tabs[0]);
+  const { id: project_id }: { id: string } = useParams();
+
+  const {
+    data: suggestions,
+    isPending: isPendingSuggestions,
+    isError: isErrorSuggestions,
+    refetch,
+  } = useGetSuggestions(project_id);
 
   const handleUpdate = (category: string, updatedTasks: ComplianceTask[]) => {
     setCompliance((prev) => ({ ...prev, [category]: updatedTasks }));
@@ -43,31 +57,44 @@ const CompliancePage: React.FC = () => {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6">Compliance Overview</h1>
+      <Tabs activeTab={activeTab} setActiveTab={setActiveTab} tabs={tabs} className=" ml-3"></Tabs>
+      {activeTab === tabs[0] && (
+        <>
+          <h1 className="text-2xl font-bold my-6">Compliance Overview</h1>
 
-      {/* Render Compliance Categories */}
-      <ComplianceCategory
-        title="Permits"
-        tasks={compliance.permits}
-        onUpdate={(tasks) => handleUpdate("permits", tasks)}
-      />
-      <ComplianceCategory
-        title="Insurance"
-        tasks={compliance.insurance}
-        onUpdate={(tasks) => handleUpdate("insurance", tasks)}
-      />
-      <ComplianceCategory
-        title="Health & Safety"
-        tasks={compliance.healthSafety}
-        onUpdate={(tasks) => handleUpdate("healthSafety", tasks)}
-      />
+          {/* Render Compliance Categories */}
+          <ComplianceCategory
+            title="Permits"
+            tasks={compliance.permits}
+            onUpdate={(tasks) => handleUpdate("permits", tasks)}
+          />
+          <ComplianceCategory
+            title="Insurance"
+            tasks={compliance.insurance}
+            onUpdate={(tasks) => handleUpdate("insurance", tasks)}
+          />
+          <ComplianceCategory
+            title="Health & Safety"
+            tasks={compliance.healthSafety}
+            onUpdate={(tasks) => handleUpdate("healthSafety", tasks)}
+          />
 
-      {/* Display Completion Status */}
-      <div className="mt-8 flex justify-between items-center">
-        <span className="text-lg font-semibold">Overall Compliance Completion:</span>
-        <span className="text-xl font-bold">{calculateCompletion()}%</span>
-      </div>
-      <Button className="mt-4">Save Compliance Status</Button>
+          {/* Display Completion Status */}
+          <div className="mt-8 flex justify-between items-center">
+            <span className="text-lg font-semibold">Overall Compliance Completion:</span>
+            <span className="text-xl font-bold">{calculateCompletion()}%</span>
+          </div>
+          <Button className="mt-4">Save Compliance Status</Button>
+        </>
+      )}
+      {activeTab === tabs[1] && (
+        <ReportDetails
+          report={suggestions?.data?.report.compliance}
+          isPending={isPendingSuggestions}
+          isError={isErrorSuggestions}
+          refetch={refetch}
+        />
+      )}
     </div>
   );
 };

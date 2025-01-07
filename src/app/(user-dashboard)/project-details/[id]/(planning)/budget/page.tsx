@@ -2,6 +2,10 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import BudgetCategory from "@/components/user-dashboard/project-details/planning/budget/BudgetCategory";
+import Tabs from "@/components/Tabs";
+import { useGetSuggestions } from "@/lib/react-query/queriesAndMutations/aiSuggestions";
+import { useParams } from "next/navigation";
+import ReportDetails from "@/components/report/ReportDetails";
 
 type BudgetItem = {
   id: number;
@@ -23,9 +27,19 @@ const initialCategories = {
     { id: 2, description: "Subtitles and Translation", cost: 400 },
   ],
 };
+const tabs = ["Overview", "Ai Response"];
 
 const BudgetPage: React.FC = () => {
   const [budget, setBudget] = useState(initialCategories);
+  const [activeTab, setActiveTab] = useState(tabs[0]);
+  const { id: project_id }: { id: string } = useParams();
+
+  const {
+    data: suggestions,
+    isPending: isPendingSuggestions,
+    isError: isErrorSuggestions,
+    refetch,
+  } = useGetSuggestions(project_id);
 
   // Update budget based on category and updated items
   const handleUpdate = (category: string, updatedItems: BudgetItem[]) => {
@@ -41,29 +55,44 @@ const BudgetPage: React.FC = () => {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6 text-center">Budget Overview</h1>
+      <Tabs activeTab={activeTab} setActiveTab={setActiveTab} tabs={tabs} className=" ml-3"></Tabs>
 
-      <BudgetCategory
-        title="Pre-Production"
-        items={budget.preProduction}
-        onUpdate={(items) => handleUpdate("preProduction", items)}
-      />
-      <BudgetCategory
-        title="Production"
-        items={budget.production}
-        onUpdate={(items) => handleUpdate("production", items)}
-      />
-      <BudgetCategory
-        title="Post-Production"
-        items={budget.postProduction}
-        onUpdate={(items) => handleUpdate("postProduction", items)}
-      />
+      {activeTab === tabs[0] && (
+        <>
+          <h1 className="text-2xl font-bold my-6 text-center">Budget Overview</h1>
 
-      <div className="mt-8 flex justify-between items-center">
-        <span className="text-lg font-semibold">Total Budget:</span>
-        <span className="text-xl font-bold">${calculateTotal().toLocaleString()}</span>
-      </div>
-      <Button className="mt-4">Save Budget</Button>
+          <BudgetCategory
+            title="Pre-Production"
+            items={budget.preProduction}
+            onUpdate={(items) => handleUpdate("preProduction", items)}
+          />
+          <BudgetCategory
+            title="Production"
+            items={budget.production}
+            onUpdate={(items) => handleUpdate("production", items)}
+          />
+          <BudgetCategory
+            title="Post-Production"
+            items={budget.postProduction}
+            onUpdate={(items) => handleUpdate("postProduction", items)}
+          />
+
+          <div className="mt-8 flex justify-between items-center">
+            <span className="text-lg font-semibold">Total Budget:</span>
+            <span className="text-xl font-bold">${calculateTotal().toLocaleString()}</span>
+          </div>
+          <Button className="mt-4">Save Budget</Button>
+        </>
+      )}
+
+      {activeTab === tabs[1] && (
+        <ReportDetails
+          report={suggestions?.data?.report.budget}
+          isPending={isPendingSuggestions}
+          isError={isErrorSuggestions}
+          refetch={refetch}
+        />
+      )}
     </div>
   );
 };
