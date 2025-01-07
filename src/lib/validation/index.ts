@@ -57,8 +57,12 @@ export const projectFormSchema = z.object({
     z
       .object({
         location: z.string().min(1, { message: "Location is required" }),
-        start_date: z.string().date(),
-        end_date: z.string().date(),
+        start_date: z.string().refine((date) => !isNaN(Date.parse(date)), {
+          message: "Invalid start date",
+        }),
+        end_date: z.string().refine((date) => !isNaN(Date.parse(date)), {
+          message: "Invalid end date",
+        }),
         mode_of_shooting: z.enum(["indoor", "outdoor", "both"], {
           errorMap: () => ({ message: "Select a mode of shooting" }),
         }),
