@@ -86,7 +86,6 @@ export default function SelectUserType({ userProfile, onSuccessStep }: SelectUse
           title: error.message,
           variant: "destructive",
         });
-        console.log(error.message, "error message");
       } else {
         // Handle unknown error case
         toast({
@@ -98,8 +97,6 @@ export default function SelectUserType({ userProfile, onSuccessStep }: SelectUse
     }
     setIsLoading(false);
   };
-
-  console.log(selectedUserType, "selectedUserType");
 
   return (
     <div>

@@ -10,7 +10,6 @@ const CallSheetTemplate = forwardRef<HTMLDivElement, { id: number }>((props, ref
   const weather = "Sunny, 25°C";
 
   const { data } = useGetCallSheetDetails(props.id);
-  console.log(data);
 
   useEffect(() => {
     setLocation(data?.data?.location?.split(","));

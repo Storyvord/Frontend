@@ -154,42 +154,44 @@ const CreateProjectForm = ({
 
             {/* Render locationDetails fields dynamically */}
             <h3 className="text-center font-semibold text-xl underline">Location Details</h3>
-            {fields.map((field, index) => (
-              <div key={field.id} className="border px-6 py-2 rounded-md mb-4 relative">
-                {/* Accordion Header */}
-                {fields.length > 1 && (
-                  <button
-                    type="button"
-                    onClick={() => toggleAccordion(index)}
-                    className="w-full text-left font-poppins-semibold text-lg mb-2"
-                  >
-                    {`Location ${index + 1}`}
-                  </button>
-                )}
+            {fields.map((field, index) => {
+              return (
+                <div key={field.id} className="border px-6 py-2 rounded-md mb-4 relative">
+                  {/* Accordion Header */}
+                  {fields.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => toggleAccordion(index)}
+                      className="w-full text-left font-poppins-semibold text-lg mb-2"
+                    >
+                      {field.location ? field.location : `Location ${index + 1}`}
+                    </button>
+                  )}
 
-                {/* Accordion Content */}
-                {(activeAccordion === index || fields.length === 1) && (
-                  <>
-                    <RenderFormFields
-                      form={form}
-                      formFields={formFields.slice(8, 13).map((fieldConfig) => ({
-                        ...fieldConfig,
-                        name: `locationDetails.${index}.${fieldConfig.name.split(".")[2]}` as keyof ProjectFormFieldType,
-                      }))}
-                    />
-                    {fields.length > 1 && (
-                      <button
-                        type="button"
-                        className="absolute right-2 top-1 text-red-700 hover:text-red-500 mt-2"
-                        onClick={() => remove(index)}
-                      >
-                        <BsTrash className="w-4 h-4" />
-                      </button>
-                    )}
-                  </>
-                )}
-              </div>
-            ))}
+                  {/* Accordion Content */}
+                  {(activeAccordion === index || fields.length === 1) && (
+                    <>
+                      <RenderFormFields
+                        form={form}
+                        formFields={formFields.slice(8, 13).map((fieldConfig) => ({
+                          ...fieldConfig,
+                          name: `locationDetails.${index}.${fieldConfig.name.split(".")[2]}` as keyof ProjectFormFieldType,
+                        }))}
+                      />
+                      {fields.length > 1 && (
+                        <button
+                          type="button"
+                          className="absolute right-2 top-1 text-red-700 hover:text-red-500 mt-2"
+                          onClick={() => remove(index)}
+                        >
+                          <BsTrash className="w-4 h-4" />
+                        </button>
+                      )}
+                    </>
+                  )}
+                </div>
+              );
+            })}
 
             <Button
               type="button"

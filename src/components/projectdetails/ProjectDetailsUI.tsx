@@ -53,7 +53,6 @@ const ProjectDetailsUI: React.FC<ProjectDetailsUIProps> = ({
   handleEditForm,
   shootDetails,
 }) => {
-  console.log(projectDetails?.name);
   return (
     <div className="flex w-full h-auto px-4">
       <Accordion type="single" collapsible defaultValue="project-details" className=" w-full">

@@ -50,8 +50,6 @@ const markdownFiles = [
 const HelpAndSupport: React.FC = () => {
   const [filteredArticles, setFilteredArticles] = useState(markdownFiles);
 
-  console.log(filteredArticles);
-
   const handleSearch = (query: string) => {
     const filtered = markdownFiles.filter((file) =>
       file.title.toLowerCase().includes(query.toLowerCase())

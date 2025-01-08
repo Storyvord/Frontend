@@ -9,21 +9,17 @@ interface FilePreviewProps {
   onClose: () => void;
 }
 
-const FilePreview: React.FC<FilePreviewProps> = ({
-  fileUrl,
-  fileName,
-  onClose,
-}) => {
-  useEffect(() => {
-    console.log('File URL:', fileUrl);
-  }, [fileUrl]);
+const FilePreview: React.FC<FilePreviewProps> = ({ fileUrl, fileName, onClose }) => {
+  // useEffect(() => {
+  //   console.log('File URL:', fileUrl);
+  // }, [fileUrl]);
 
   (async function getMimeType(url: string): Promise<string | null> {
     try {
       const response = await fetch(url, { method: "HEAD" });
       if (response.ok) {
         const mimeType = response.headers.get("Content-Type");
-        console.log("MIME Type:", mimeType);
+        // console.log("MIME Type:", mimeType);
         return mimeType;
       } else {
         console.error("Failed to fetch the URL:", response.status, response.statusText);
@@ -34,12 +30,16 @@ const FilePreview: React.FC<FilePreviewProps> = ({
       return null;
     }
   })(fileUrl);
-  
-  
 
   const renderFilePreview = () => {
     // Images (png, jpg, jpeg, gif)
-    if (fileUrl.includes("png") || fileUrl.includes("jpg") || fileUrl.includes("jpeg") || fileUrl.includes("gif") || fileUrl.includes("svg")) {
+    if (
+      fileUrl.includes("png") ||
+      fileUrl.includes("jpg") ||
+      fileUrl.includes("jpeg") ||
+      fileUrl.includes("gif") ||
+      fileUrl.includes("svg")
+    ) {
       return (
         <div className="flex items-center justify-center h-full bg-[#f5f5f5] rounded-lg">
           <div className="relative w-full h-full">
@@ -47,7 +47,7 @@ const FilePreview: React.FC<FilePreviewProps> = ({
               src={fileUrl}
               alt={fileName}
               fill
-              style={{ objectFit: 'contain' }}
+              style={{ objectFit: "contain" }}
               className="p-4"
             />
           </div>
@@ -59,20 +59,19 @@ const FilePreview: React.FC<FilePreviewProps> = ({
     if (fileUrl.includes("pdf")) {
       return (
         <div className="w-full h-full">
-          <iframe 
-            src={fileUrl}
-            className="w-full h-full border-0"
-            title="PDF Preview"
-          />
+          <iframe src={fileUrl} className="w-full h-full border-0" title="PDF Preview" />
         </div>
       );
     }
 
     // Word documents (doc, docx)
-    if (fileUrl.includes("msword") || fileUrl.includes("officedocument.wordprocessingml.document")) {
+    if (
+      fileUrl.includes("msword") ||
+      fileUrl.includes("officedocument.wordprocessingml.document")
+    ) {
       return (
         <div className="w-full h-full">
-          <iframe 
+          <iframe
             src={`https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(fileUrl)}`}
             className="w-full h-full border-0"
             title="Word Document Preview"
@@ -82,10 +81,13 @@ const FilePreview: React.FC<FilePreviewProps> = ({
     }
 
     // PowerPoint files (ppt, pptx)
-    if (fileUrl.includes("ms-powerpoint") || fileUrl.includes("officedocument.presentationml.presentation")) {
+    if (
+      fileUrl.includes("ms-powerpoint") ||
+      fileUrl.includes("officedocument.presentationml.presentation")
+    ) {
       return (
         <div className="w-full h-full">
-          <iframe 
+          <iframe
             src={`https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(fileUrl)}`}
             className="w-full h-full border-0"
             title="PowerPoint Preview"
@@ -98,7 +100,7 @@ const FilePreview: React.FC<FilePreviewProps> = ({
     if (fileUrl.includes("ms-excel") || fileUrl.includes("officedocument.spreadsheetml.sheet")) {
       return (
         <div className="w-full h-full">
-          <iframe 
+          <iframe
             src={`https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(fileUrl)}`}
             className="w-full h-full border-0"
             title="Excel Preview"
@@ -111,11 +113,7 @@ const FilePreview: React.FC<FilePreviewProps> = ({
     if (fileUrl.includes("txt")) {
       return (
         <div className="w-full h-full">
-          <iframe 
-            src={fileUrl}
-            className="w-full h-full border-0"
-            title="Text Preview"
-          />
+          <iframe src={fileUrl} className="w-full h-full border-0" title="Text Preview" />
         </div>
       );
     }
@@ -141,25 +139,13 @@ const FilePreview: React.FC<FilePreviewProps> = ({
         {/* Header */}
         <div className="flex justify-between items-center p-4 border-b">
           <h2 className="text-xl font-semibold">{fileName}</h2>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={onClose}
-            className="hover:bg-gray-100"
-          >
-            <Image
-              src="/cancel.svg"
-              alt="Close"
-              width={24}
-              height={24}
-            />
+          <Button variant="ghost" size="icon" onClick={onClose} className="hover:bg-gray-100">
+            <Image src="/cancel.svg" alt="Close" width={24} height={24} />
           </Button>
         </div>
 
         {/* Preview Content */}
-        <div className="flex-1 overflow-auto p-4">
-          {renderFilePreview()}
-        </div>
+        <div className="flex-1 overflow-auto p-4">{renderFilePreview()}</div>
       </div>
     </div>
   );

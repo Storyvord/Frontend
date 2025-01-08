@@ -34,7 +34,6 @@ const CreateScenes = ({ openDialog, setOpenDialog }: Props) => {
   const isEdit = false;
 
   const onSubmit = (data: ScenesFormType) => {
-    console.log(data);
     //api call
     form.reset();
   };
