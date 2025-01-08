@@ -1,12 +1,13 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { BsFiletypePdf } from "react-icons/bs";
+import { BsFiletypeExe, BsFiletypePdf, BsFiletypePpt } from "react-icons/bs";
 import { MdDelete } from "react-icons/md";
 import { FaRegFileImage } from "react-icons/fa";
 import { GrDocumentTxt } from "react-icons/gr";
 import { BsFiletypeDocx } from "react-icons/bs";
 import { Skeleton } from "@/components/ui/skeleton";
+import { File } from "lucide-react";
 
 const renderFilePreview = (fileUrl: string) => {
   if (!fileUrl) {
@@ -34,10 +35,14 @@ const renderFilePreview = (fileUrl: string) => {
     return <BsFiletypePdf className="w-12 h-12" />;
   } else if (fileUrl.includes("plain")) {
     return <GrDocumentTxt className="w-12 h-12" />;
-  } else if (fileUrl.includes("msword") || fileUrl.includes("vnd")) {
+  } else if (fileUrl.includes("msword") || fileUrl.includes("wordprocessingml.document")) {
     return <BsFiletypeDocx className="w-12 h-12" />;
+  } else if (fileUrl.includes("ms-powerpoint") || fileUrl.includes("presentationml.presentation")) {
+    return <BsFiletypePpt className="w-12 h-12" />;
+  } else if (fileUrl.includes("ms-excel") || fileUrl.includes("spreadsheetml.sheet")) {
+    return <BsFiletypeExe className="w-12 h-12" />;
   } else {
-    return <FaRegFileImage className="w-12 h-12" />;
+    return <File className="w-12 h-12" />;
   }
 };
 
