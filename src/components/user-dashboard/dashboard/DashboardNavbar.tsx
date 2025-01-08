@@ -154,7 +154,7 @@ const DashboardNavbar = () => {
             />
           </div> */}
         </section>
-        <section className=" flex items-center gap-3 sm:gap-10">
+        <section className=" flex items-center gap-3 sm:gap-5">
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem className=" hidden sm:block">
@@ -180,7 +180,7 @@ const DashboardNavbar = () => {
             <Image
               width={20}
               height={20}
-              className="w-[20px] sm:w-[24px] cursor-pointer"
+              className="w-6 cursor-pointer"
               src={"/icons/message.svg"}
               alt="message"
             />
@@ -188,7 +188,7 @@ const DashboardNavbar = () => {
           <Image
             width={20}
             height={20}
-            className="w-[20px] sm:w-[24px] cursor-pointer"
+            className="w-6 cursor-pointer"
             src={"/icons/notification.svg"}
             alt="notification"
           />
