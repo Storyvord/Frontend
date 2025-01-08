@@ -20,11 +20,22 @@ export const ChatbotSearch: React.FC<ChatbotSearchProps> = ({
 
   // Handle submit
   const handleSubmit = () => {
-    if (currentQuestion) {
-      setCurrentQuestion("");
+    if (currentQuestion && !isLoading) {
       sendMessage(currentQuestion);
+      setCurrentQuestion("");
     }
   };
+
+  // Handle enter key - prevent sending when loading
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault(); // Always prevent default enter behavior
+      if (!isLoading && currentQuestion.length > 0) {
+        handleSubmit();
+      }
+    }
+  };
+
   return (
     <>
       {/* <div className="flex gap-2 overflow-auto">
@@ -43,11 +54,7 @@ export const ChatbotSearch: React.FC<ChatbotSearchProps> = ({
           type="text"
           name="question"
           className="w-full p-1 focus:outline-none"
-          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-            if (e.key === "Enter" && !disabled) {
-              handleSubmit();
-            }
-          }}
+          onKeyDown={handleKeyPress}
           value={currentQuestion}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setCurrentQuestion(e.target.value);
@@ -55,8 +62,16 @@ export const ChatbotSearch: React.FC<ChatbotSearchProps> = ({
           placeholder="Type message here"
         />
 
-        <button className="h-10 w-10" onClick={handleSubmit} disabled={disabled}>
-          <Image className="w-[30px]" src={"/send.svg"} width={50} height={10} alt="" />
+        <button
+          className={`h-10 w-10 transition-opacity ${isLoading ? "opacity-50 cursor-not-allowed" : "hover:opacity-80"}`}
+          onClick={handleSubmit}
+          disabled={disabled}
+        >
+          {isLoading ? (
+            <div className="w-6 h-6 mx-auto animate-spin rounded-full border-2 border-gray-300 border-t-gray-600" />
+          ) : (
+            <Image className="w-[30px]" src={"/send.svg"} width={50} height={10} alt="" />
+          )}
         </button>
       </div>
     </>

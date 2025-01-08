@@ -14,6 +14,8 @@ interface ChatbotDetailsProps {
   prevSessions: Session[];
   setCurrentSession: React.Dispatch<React.SetStateAction<Session | undefined>>;
   setOpenChat: (value: boolean) => void;
+  setConversation: React.Dispatch<React.SetStateAction<Array<ChatConversation>>>;
+  isLoading: boolean;
 }
 
 const initialResponse = {
@@ -26,6 +28,8 @@ export const ChatbotDetails: React.FC<ChatbotDetailsProps> = ({
   prevSessions,
   setCurrentSession,
   setOpenChat,
+  setConversation,
+  isLoading,
 }) => {
   const [search, setSearch] = useState(""); // search chat
   const [expanded, setExpanded] = useState<Boolean>(false); // Chatbot size
@@ -95,22 +99,24 @@ export const ChatbotDetails: React.FC<ChatbotDetailsProps> = ({
       </div>
       <div className="flex flex-grow overflow-hidden relative">
         {openHistory && !expanded && (
-          <div className="absolute left-0 w-[60%] h-[calc(70vh_-_7rem)] overflow-y-scroll">
+          <div className="absolute left-0 w-[50%] h-[calc(70vh_-_7rem)] overflow-y-scroll">
             <ChatbotSidebar
               data={prevSessions}
               setCurrentSession={setCurrentSession}
               setOpenHistory={setOpenHistory}
               expanded={expanded}
+              setConversation={setConversation}
             />
           </div>
         )}
         {openHistory && expanded && (
-          <div className="w-[30%] overflow-y-scroll">
+          <div className="w-[25%] overflow-y-scroll">
             <ChatbotSidebar
               data={prevSessions}
               setCurrentSession={setCurrentSession}
               setOpenHistory={setOpenHistory}
               expanded={expanded}
+              setConversation={setConversation}
             />
           </div>
         )}
@@ -140,7 +146,11 @@ export const ChatbotDetails: React.FC<ChatbotDetailsProps> = ({
         </div>
       </div>
       <div className="h-14 w-[100%] ">
-        <ChatbotSearch suggestedQueries={[]} isLoading={false} sendMessage={sendMessage} />
+        <ChatbotSearch 
+          suggestedQueries={[]} 
+          sendMessage={sendMessage} 
+          isLoading={isLoading}
+        />
       </div>
     </div>
   );

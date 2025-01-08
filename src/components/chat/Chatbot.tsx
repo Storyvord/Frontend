@@ -17,6 +17,7 @@ export default function Chatbot() {
   const [conversation, setConversation] = useState<Array<ChatConversation>>([]); //store conversation
   const [currentSession, setCurrentSession] = useState<Session>();
   const [wsClient, setWsClient] = useState<W3CWebSocket | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const clientRef = useRef<W3CWebSocket | null>(null);
   const { data: prevSessions } = useGetChatbotSessions();
@@ -25,8 +26,16 @@ export default function Chatbot() {
   const token = Cookies.get("accessToken");
 
   // Initialize WebSocket connection when sending first message
-  const initializeWebSocket = () => {
-    const wsUrl = `wss://api-dev.storyvord.com:8001/ws/ai_assistant/?token=${token}&agent=1`;
+  const initializeWebSocket = (sessionId?: string) => {
+    // Close existing connection if any
+    if (clientRef.current?.readyState === W3CWebSocket.OPEN) {
+      clientRef.current.close();
+    }
+
+    const wsUrl = sessionId
+      ? `wss://api-dev.storyvord.com:8001/ws/ai_assistant/?session_id=${sessionId}&token=${token}`
+      : `wss://api-dev.storyvord.com:8001/ws/ai_assistant/?token=${token}&agent=1`;
+
     const newWsClient = new W3CWebSocket(wsUrl);
     clientRef.current = newWsClient;
     setWsClient(newWsClient);
@@ -40,17 +49,21 @@ export default function Chatbot() {
             ...prevConvo,
             { queryType: "answer", data: dataFromServer.ai_response },
           ]);
+          setIsLoading(false);
         }
       } catch (error) {
         console.error("Error parsing WebSocket message:", error);
+        setIsLoading(false);
       }
     };
 
     newWsClient.onerror = (error) => {
       alert("WebSocket connection failed. Please try again.");
+      setIsLoading(false);
     };
   };
 
+  // Cleanup WebSocket on unmount
   useEffect(() => {
     return () => {
       if (clientRef.current?.readyState === W3CWebSocket.OPEN) {
@@ -61,6 +74,7 @@ export default function Chatbot() {
     };
   }, []);
 
+  // Load conversation history when selecting a session
   useEffect(() => {
     if (currentSession) {
       let localConversations: any = [];
@@ -78,9 +92,11 @@ export default function Chatbot() {
   const sendMessage = (question: string) => {
     // Update conversation immediately to show user's message
     setConversation((prevConvo) => [...prevConvo, { queryType: "question", data: question }]);
+    setIsLoading(true);
 
+    // Initialize WebSocket if not exists
     if (!wsClient) {
-      initializeWebSocket();
+      initializeWebSocket(currentSession?.session_id);
     }
     
     const sendMessageToServer = () => {
@@ -89,6 +105,7 @@ export default function Chatbot() {
         clientRef.current.send(outgoingMessage);
       } else {
         console.log("WebSocket connection failed.");
+        setIsLoading(false);
       }
     };
 
@@ -100,10 +117,24 @@ export default function Chatbot() {
     }
   };
 
+  // Clear chat state when opening chat or starting new chat
+  const handleChatOpen = () => {
+    // Close existing WebSocket connection
+    if (clientRef.current?.readyState === W3CWebSocket.OPEN) {
+      clientRef.current.close();
+    }
+    clientRef.current = null;
+    setWsClient(null);
+    setCurrentSession(undefined);
+    setConversation([]);
+    setIsLoading(false);
+    setOpenChat(!openChat);
+  };
+
   return (
     <div className="opacity-100">
       <button
-        onClick={() => setOpenChat(!openChat)}
+        onClick={handleChatOpen}
         className="fixed bottom-0 lg:bottom-5 right-0 lg:right-5 grid place-items-center"
       >
         <Image src="/icons/ai-chat.svg" width={30} height={30} alt="icon" className=" w-20 h-20" />
@@ -116,6 +147,8 @@ export default function Chatbot() {
             prevSessions={prevSessions}
             setCurrentSession={setCurrentSession}
             setOpenChat={setOpenChat}
+            setConversation={setConversation}
+            isLoading={isLoading}
           />
         </div>
       )}
