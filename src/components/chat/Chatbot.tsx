@@ -16,51 +16,65 @@ export default function Chatbot() {
   const [openChat, setOpenChat] = useState(false); //open or close modal
   const [conversation, setConversation] = useState<Array<ChatConversation>>([]); //store conversation
   const [currentSession, setCurrentSession] = useState<Session>();
+  const [wsClient, setWsClient] = useState<W3CWebSocket | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const clientRef = useRef<W3CWebSocket | null>(null);
-
   const { data: prevSessions } = useGetChatbotSessions();
   const { data: sessionsDetails } = useGetSessionDetails(currentSession?.session_id ?? "");
 
   const token = Cookies.get("accessToken");
-  useEffect(() => {
-    let wsUrl = "";
-    if (!currentSession) {
-      wsUrl = `wss://api-dev.storyvord.com:8001/ws/ai_assistant/?token=${token}&agent=1`;
-    } else {
-      wsUrl = `wss://api-dev.storyvord.com:8001/ws/ai_assistant/?session_id=${currentSession.session_id}&token=${token}`;
+
+  // Initialize WebSocket connection when sending first message
+  const initializeWebSocket = (sessionId?: string) => {
+    // Close existing connection if any
+    if (clientRef.current?.readyState === W3CWebSocket.OPEN) {
+      clientRef.current.close();
     }
-    const wsClient = new W3CWebSocket(wsUrl);
-    clientRef.current = wsClient;
+
+    const wsUrl = sessionId
+      ? `wss://api-dev.storyvord.com:8001/ws/ai_assistant/?session_id=${sessionId}&token=${token}`
+      : `wss://api-dev.storyvord.com:8001/ws/ai_assistant/?token=${token}&agent=1`;
+
+    const newWsClient = new W3CWebSocket(wsUrl);
+    clientRef.current = newWsClient;
+    setWsClient(newWsClient);
 
     // WebSocket message handler
-    wsClient.onmessage = (messageEvent: IMessageEvent) => {
+    newWsClient.onmessage = (messageEvent: IMessageEvent) => {
       try {
         const dataFromServer = JSON.parse(messageEvent.data as string);
-        // Check for response
         if (dataFromServer.ai_response) {
           setConversation((prevConvo) => [
             ...prevConvo,
             { queryType: "answer", data: dataFromServer.ai_response },
           ]);
+          setIsLoading(false);
         }
       } catch (error) {
         console.error("Error parsing WebSocket message:", error);
+        setIsLoading(false);
       }
     };
 
-    wsClient.onerror = (error) => {
+    newWsClient.onerror = (error) => {
       alert("WebSocket connection failed. Please try again.");
+      setIsLoading(false);
     };
+  };
 
+  // Cleanup WebSocket on unmount
+  useEffect(() => {
     return () => {
       if (clientRef.current?.readyState === W3CWebSocket.OPEN) {
         clientRef.current.close();
       }
       clientRef.current = null;
+      setWsClient(null);
     };
-  }, [token, currentSession]);
+  }, []);
 
+  // Load conversation history when selecting a session
   useEffect(() => {
     if (currentSession) {
       let localConversations: any = [];
@@ -76,31 +90,65 @@ export default function Chatbot() {
 
   // Handle sending messages
   const sendMessage = (question: string) => {
-    if (clientRef.current && clientRef.current.readyState === W3CWebSocket.OPEN) {
-      const outgoingMessage = JSON.stringify({ message: question });
-      clientRef.current.send(outgoingMessage);
-      setConversation((prevConvo) => [...prevConvo, { queryType: "question", data: question }]);
-    } else {
-      console.log("WebSocket is not open.");
+    // Update conversation immediately to show user's message
+    setConversation((prevConvo) => [...prevConvo, { queryType: "question", data: question }]);
+    setIsLoading(true);
+
+    // Initialize WebSocket if not exists
+    if (!wsClient) {
+      initializeWebSocket(currentSession?.session_id);
     }
+    
+    const sendMessageToServer = () => {
+      if (clientRef.current?.readyState === W3CWebSocket.OPEN) {
+        const outgoingMessage = JSON.stringify({ message: question });
+        clientRef.current.send(outgoingMessage);
+      } else {
+        console.log("WebSocket connection failed.");
+        setIsLoading(false);
+      }
+    };
+
+    if (clientRef.current?.readyState === W3CWebSocket.OPEN) {
+      sendMessageToServer();
+    } else {
+      // If WebSocket is not ready yet, wait for a brief moment and try again
+      setTimeout(sendMessageToServer, 500);
+    }
+  };
+
+  // Clear chat state when opening chat or starting new chat
+  const handleChatOpen = () => {
+    // Close existing WebSocket connection
+    if (clientRef.current?.readyState === W3CWebSocket.OPEN) {
+      clientRef.current.close();
+    }
+    clientRef.current = null;
+    setWsClient(null);
+    setCurrentSession(undefined);
+    setConversation([]);
+    setIsLoading(false);
+    setOpenChat(!openChat);
   };
 
   return (
     <div className="opacity-100">
       <button
-        onClick={() => setOpenChat(!openChat)}
+        onClick={handleChatOpen}
         className="fixed bottom-0 lg:bottom-5 right-0 lg:right-5 grid place-items-center"
       >
         <Image src="/icons/ai-chat.svg" width={30} height={30} alt="icon" className=" w-20 h-20" />
       </button>
       {openChat && (
-        <div className="fixed bottom-5 md:right-16 right-5  z-50 shadow-xl animate-slide-up">
+        <div className="fixed bottom-5 md:right-16 right-5 z-50 shadow-xl animate-slide-up">
           <ChatbotDetails
             conversation={conversation}
             sendMessage={sendMessage}
             prevSessions={prevSessions}
             setCurrentSession={setCurrentSession}
             setOpenChat={setOpenChat}
+            setConversation={setConversation}
+            isLoading={isLoading}
           />
         </div>
       )}
