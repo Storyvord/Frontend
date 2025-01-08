@@ -22,7 +22,6 @@ type Props = {
   isLoadingDelete: boolean;
 };
 const CallSheetCard = ({ title, date, time, id, deleteCallSheet, isLoadingDelete }: Props) => {
-  console.log(id)
   const templateRef = useRef(null);
   const { id: projectId } = useParams();
   const router = useRouter();

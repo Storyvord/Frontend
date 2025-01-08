@@ -13,7 +13,7 @@ const CallSheetTemplate = forwardRef<HTMLDivElement, { id: number }>((props, ref
   console.log(data);
 
   useEffect(() => {
-    setLocation(data?.location?.split(","));
+    setLocation(data?.data?.location?.split(","));
   }, [data]);
 
   // Generate the Google Maps Embed URL
@@ -33,19 +33,19 @@ const CallSheetTemplate = forwardRef<HTMLDivElement, { id: number }>((props, ref
                 <td className="border px-2 py-1">
                   <strong>Breakfast Time:</strong>
                 </td>
-                <td className="border px-2 py-1">{data?.breakfast}</td>
+                <td className="border px-2 py-1">{data?.data?.events?.at(0)?.time}</td>
               </tr>
               <tr>
                 <td className="border px-2 py-1">
                   <strong>Lunch Time:</strong>
                 </td>
-                <td className="border px-2 py-1">{data?.lunch}</td>
+                <td className="border px-2 py-1">{data?.data?.events?.at(1)?.time}</td>
               </tr>
               <tr>
                 <td className="border px-2 py-1">
                   <strong>Dinner Time:</strong>
                 </td>
-                <td className="border px-2 py-1">{data?.dinner}</td>
+                <td className="border px-2 py-1">{data?.data?.events?.at(2)?.time}</td>
               </tr>
             </tbody>
           </table>
@@ -53,9 +53,9 @@ const CallSheetTemplate = forwardRef<HTMLDivElement, { id: number }>((props, ref
 
         <div className="w-1/5 text-center">
           <Image src={Logo} alt="Logo" className="mx-auto -my-2 size-18" />
-          <h1 className="text-md font-normal mb-2">{data?.title}</h1>
+          <h1 className="text-md font-normal mb-2">{data?.data?.title}</h1>
           <p className="text-lg font-semibold border-2 border-black rounded-full">
-            {data?.calltime}
+            {data?.data?.calltime}
           </p>
         </div>
         <div className="w-1/3 border p-2">
@@ -92,16 +92,16 @@ const CallSheetTemplate = forwardRef<HTMLDivElement, { id: number }>((props, ref
         <div className="w-1/2 border p-2 text-sm flex flex-col gap-3 pt-4">
           <p>
             <strong>Address: </strong>
-            {data?.location}
+            {data?.data?.location}
           </p>
           <p>
-            <strong>Nearest Police Station:</strong> {data?.nearest_police_station}
+            <strong>Nearest Police Station:</strong> {data?.data?.nearest_police_station}
           </p>
           <p>
-            <strong>Nearest Fire Station:</strong> {data?.nearest_fire_station}
+            <strong>Nearest Fire Station:</strong> {data?.data?.nearest_fire_station}
           </p>
           <p>
-            <strong>Nearest Hospital:</strong> {data?.nearest_hospital_address}
+            <strong>Nearest Hospital:</strong> {data?.data?.nearest_hospital_address}
           </p>
         </div>
       </div>
@@ -119,7 +119,7 @@ const CallSheetTemplate = forwardRef<HTMLDivElement, { id: number }>((props, ref
           </tr>
         </thead>
         <tbody>
-          {data?.call_time?.map((item: any) => (
+          {data?.data?.call_time?.map((item: any) => (
             <tr key={item.id}>
               <td className="border px-2 py-1">{item.position}</td>
               <td className="border px-2 py-1">{item.name}</td>
@@ -141,7 +141,7 @@ const CallSheetTemplate = forwardRef<HTMLDivElement, { id: number }>((props, ref
         </thead>
         <tbody>
           <tr>
-            <td className="border px-2 py-5 text-center">{data?.production_notes}</td>
+            <td className="border px-2 py-5 text-center">{data?.data?.production_notes}</td>
           </tr>
         </tbody>
       </table>
@@ -155,7 +155,7 @@ const CallSheetTemplate = forwardRef<HTMLDivElement, { id: number }>((props, ref
         </thead>
         <tbody>
           <tr>
-            <td className="border px-2 py-5 text-center">{data?.additional_notes}</td>
+            <td className="border px-2 py-5 text-center">{data?.data?.additional_notes}</td>
           </tr>
         </tbody>
       </table>
