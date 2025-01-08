@@ -7,7 +7,7 @@ const CompanyCalendarPage = () => {
   const [openFormDialog, setOpenFormDialog] = useState(false);
 
   return (
-    <div className=" pt-2 px-4 h-screen">
+    <div className=" pt-2 px-1 md:px-4 h-screen">
       <Button
         onClick={() => setOpenFormDialog(true)}
         className=" uppercase bg-green-500 hover:bg-green-700 font-bold mb-4"
