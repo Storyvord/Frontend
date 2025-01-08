@@ -2,6 +2,7 @@ import {
   completeTask,
   createNewTask,
   deleteTask,
+  getProjectTasks,
   getTasks,
   taskCompletionApproval,
 } from "@/lib/api/tasks";
@@ -17,13 +18,23 @@ export const useGetTasks = (projectId: string) => {
   });
 };
 
+export const useGetProjectTasks = (projectId: string) => {
+  return useQuery({
+    queryKey: ["getProjectTasks", projectId],
+    queryFn: ({ queryKey }) => {
+      const [_key, projectId] = queryKey;
+      return getProjectTasks(projectId);
+    },
+  });
+};
+
 export const useCreateNewTask = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: createNewTask,
     onSuccess: (data) => {
       queryClient.invalidateQueries({
-        queryKey: ["getTasks"],
+        queryKey: ["getProjectTasks"],
       });
       return data;
     },
@@ -36,7 +47,7 @@ export const useDeleteTask = () => {
     mutationFn: deleteTask,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["getTasks"],
+        queryKey: ["getProjectTasks"],
       });
     },
   });
@@ -48,7 +59,7 @@ export const useCompleteTask = () => {
     mutationFn: completeTask,
     onSuccess: (data) => {
       queryClient.invalidateQueries({
-        queryKey: ["getTasks"],
+        queryKey: ["getProjectTasks"],
       });
       return data;
     },
@@ -61,7 +72,7 @@ export const useTaskCompletionApproval = () => {
     mutationFn: taskCompletionApproval,
     onSuccess: (data) => {
       queryClient.invalidateQueries({
-        queryKey: ["getTasks"],
+        queryKey: ["getProjectTasks"],
       });
       return data;
     },

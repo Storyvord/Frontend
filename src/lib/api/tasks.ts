@@ -11,6 +11,12 @@ export const getTasks = async (project_id: string) => {
   });
 };
 
+export const getProjectTasks = async (projectId: string) => {
+  return customFetch(`${NEW_API_URL_V2}/tasks/v2/tasks/${projectId}/`, {
+    method: "GET",
+  });
+};
+
 export const createNewTask = async ({
   taskData,
   projectId,
