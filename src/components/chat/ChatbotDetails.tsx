@@ -34,6 +34,24 @@ export const ChatbotDetails: React.FC<ChatbotDetailsProps> = ({
   const [search, setSearch] = useState(""); // search chat
   const [expanded, setExpanded] = useState<Boolean>(false); // Chatbot size
   const [openHistory, setOpenHistory] = useState<Boolean>(false); // show previous sessions
+  const sidebarRef = useRef<HTMLDivElement>(null);
+
+  // Handle click outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
+        setOpenHistory(false);
+      }
+    };
+
+    if (openHistory) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [openHistory]);
 
   // Ref to scroll to bottom
   const messagesEndRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
@@ -99,7 +117,7 @@ export const ChatbotDetails: React.FC<ChatbotDetailsProps> = ({
       </div>
       <div className="flex flex-grow overflow-hidden relative">
         {openHistory && !expanded && (
-          <div className="absolute left-0 w-[50%] h-[calc(70vh_-_7rem)] overflow-y-scroll">
+          <div ref={sidebarRef} className="absolute left-0 w-[50%] h-[calc(70vh_-_7rem)] overflow-y-scroll">
             <ChatbotSidebar
               data={prevSessions}
               setCurrentSession={setCurrentSession}
@@ -110,7 +128,7 @@ export const ChatbotDetails: React.FC<ChatbotDetailsProps> = ({
           </div>
         )}
         {openHistory && expanded && (
-          <div className="w-[25%] overflow-y-scroll">
+          <div ref={sidebarRef} className="w-[25%] overflow-y-scroll">
             <ChatbotSidebar
               data={prevSessions}
               setCurrentSession={setCurrentSession}
