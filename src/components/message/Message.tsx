@@ -143,13 +143,17 @@ const Message: React.FC = () => {
   // Handle sending messages
   const sendMessage = (e: FormEvent) => {
     e.preventDefault();
+
+    // Check if the message is empty or contains only whitespace
+    if (!message.trim()) return;
+
     if (clientRef.current && clientRef.current.readyState === W3CWebSocket.OPEN) {
-      const outgoingMessage = JSON.stringify({ message });
+      const outgoingMessage = JSON.stringify({ message: message.trim() });
       clientRef.current.send(outgoingMessage);
 
       // Add message to local state with current user as sender
       const newMessage: Message = {
-        message: message,
+        message: message.trim(),
         sender: Number(senderId),
       };
       setMessages((prevMessages) => [...prevMessages, newMessage]);
@@ -158,6 +162,7 @@ const Message: React.FC = () => {
       console.log("WebSocket is not open.");
     }
   };
+
   return (
     <div className="mx-auto -mt-3 sm:mt-1 w-full h-[89vh]">
       <ChatWindow
