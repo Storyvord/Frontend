@@ -16,6 +16,7 @@ export default function Chatbot() {
   const [openChat, setOpenChat] = useState(false); //open or close modal
   const [conversation, setConversation] = useState<Array<ChatConversation>>([]); //store conversation
   const [currentSession, setCurrentSession] = useState<Session>();
+  const [wsClient, setWsClient] = useState<W3CWebSocket | null>(null);
 
   const clientRef = useRef<W3CWebSocket | null>(null);
 
@@ -23,21 +24,18 @@ export default function Chatbot() {
   const { data: sessionsDetails } = useGetSessionDetails(currentSession?.session_id ?? "");
 
   const token = Cookies.get("accessToken");
-  useEffect(() => {
-    let wsUrl = "";
-    if (!currentSession) {
-      wsUrl = `wss://api-dev.storyvord.com:8001/ws/ai_assistant/?token=${token}&agent=1`;
-    } else {
-      wsUrl = `wss://api-dev.storyvord.com:8001/ws/ai_assistant/?session_id=${currentSession.session_id}&token=${token}`;
-    }
-    const wsClient = new W3CWebSocket(wsUrl);
-    clientRef.current = wsClient;
+
+  // Initialize WebSocket connection when sending first message
+  const initializeWebSocket = () => {
+    const wsUrl = `wss://api-dev.storyvord.com:8001/ws/ai_assistant/?token=${token}&agent=1`;
+    const newWsClient = new W3CWebSocket(wsUrl);
+    clientRef.current = newWsClient;
+    setWsClient(newWsClient);
 
     // WebSocket message handler
-    wsClient.onmessage = (messageEvent: IMessageEvent) => {
+    newWsClient.onmessage = (messageEvent: IMessageEvent) => {
       try {
         const dataFromServer = JSON.parse(messageEvent.data as string);
-        // Check for response
         if (dataFromServer.ai_response) {
           setConversation((prevConvo) => [
             ...prevConvo,
@@ -49,17 +47,20 @@ export default function Chatbot() {
       }
     };
 
-    wsClient.onerror = (error) => {
+    newWsClient.onerror = (error) => {
       alert("WebSocket connection failed. Please try again.");
     };
+  };
 
+  useEffect(() => {
     return () => {
       if (clientRef.current?.readyState === W3CWebSocket.OPEN) {
         clientRef.current.close();
       }
       clientRef.current = null;
+      setWsClient(null);
     };
-  }, [token, currentSession]);
+  }, []);
 
   useEffect(() => {
     if (currentSession) {
@@ -76,12 +77,27 @@ export default function Chatbot() {
 
   // Handle sending messages
   const sendMessage = (question: string) => {
-    if (clientRef.current && clientRef.current.readyState === W3CWebSocket.OPEN) {
-      const outgoingMessage = JSON.stringify({ message: question });
-      clientRef.current.send(outgoingMessage);
-      setConversation((prevConvo) => [...prevConvo, { queryType: "question", data: question }]);
+    // Update conversation immediately to show user's message
+    setConversation((prevConvo) => [...prevConvo, { queryType: "question", data: question }]);
+
+    if (!wsClient) {
+      initializeWebSocket();
+    }
+    
+    const sendMessageToServer = () => {
+      if (clientRef.current?.readyState === W3CWebSocket.OPEN) {
+        const outgoingMessage = JSON.stringify({ message: question });
+        clientRef.current.send(outgoingMessage);
+      } else {
+        console.log("WebSocket connection failed.");
+      }
+    };
+
+    if (clientRef.current?.readyState === W3CWebSocket.OPEN) {
+      sendMessageToServer();
     } else {
-      console.log("WebSocket is not open.");
+      // If WebSocket is not ready yet, wait for a brief moment and try again
+      setTimeout(sendMessageToServer, 500);
     }
   };
 
@@ -94,7 +110,7 @@ export default function Chatbot() {
         <Image src="/icons/ai-chat.svg" width={30} height={30} alt="icon" className=" w-20 h-20" />
       </button>
       {openChat && (
-        <div className="fixed bottom-5 md:right-16 right-5  z-50 shadow-xl animate-slide-up">
+        <div className="fixed bottom-5 md:right-16 right-5 z-50 shadow-xl animate-slide-up">
           <ChatbotDetails
             conversation={conversation}
             sendMessage={sendMessage}
