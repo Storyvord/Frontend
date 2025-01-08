@@ -10,7 +10,7 @@ export const useGetChatbotSessions = () => {
 
 export const useGetSessionDetails = (id: string | "") => {
   return useQuery({
-    queryKey: ["getSessionDetails"],
+    queryKey: ["getSessionDetails", id],
     queryFn: () => getSessionDetails(id),
     enabled: !!id,
   });

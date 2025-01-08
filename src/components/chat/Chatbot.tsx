@@ -19,7 +19,6 @@ export default function Chatbot() {
   const [wsClient, setWsClient] = useState<W3CWebSocket | null>(null);
 
   const clientRef = useRef<W3CWebSocket | null>(null);
-
   const { data: prevSessions } = useGetChatbotSessions();
   const { data: sessionsDetails } = useGetSessionDetails(currentSession?.session_id ?? "");
 
