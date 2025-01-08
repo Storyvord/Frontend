@@ -1,74 +1,165 @@
 "use client";
-import React from "react";
-import { IoMdClose } from "react-icons/io";
+import React, { useEffect } from "react";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { FiDownload } from "react-icons/fi";
 
 interface FilePreviewProps {
-  fileName: string;
   fileUrl: string;
+  fileName: string;
   onClose: () => void;
 }
 
-const FilePreview = ({ fileName, fileUrl, onClose }: FilePreviewProps) => {
-  const handleDownload = async () => {
-    try {
-      const response = await fetch(fileUrl);
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = fileName;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(url); // Clean up the URL object
-    } catch (error) {
-      console.error("Failed to download file:", error);
-    }
-  };
+const FilePreview: React.FC<FilePreviewProps> = ({
+  fileUrl,
+  fileName,
+  onClose,
+}) => {
+  useEffect(() => {
+    console.log('File URL:', fileUrl);
+  }, [fileUrl]);
 
-  const renderPreviewContent = (url: string) => {
-    if (url.includes("png") || url.includes("jpg") || url.includes("jpeg")) {
+  (async function getMimeType(url: string): Promise<string | null> {
+    try {
+      const response = await fetch(url, { method: "HEAD" });
+      if (response.ok) {
+        const mimeType = response.headers.get("Content-Type");
+        console.log("MIME Type:", mimeType);
+        return mimeType;
+      } else {
+        console.error("Failed to fetch the URL:", response.status, response.statusText);
+        return null;
+      }
+    } catch (error) {
+      console.error("Error fetching MIME type:", error);
+      return null;
+    }
+  })(fileUrl);
+  
+  
+
+  const renderFilePreview = () => {
+    // Images (png, jpg, jpeg, gif)
+    if (fileUrl.includes("png") || fileUrl.includes("jpg") || fileUrl.includes("jpeg") || fileUrl.includes("gif") || fileUrl.includes("svg")) {
       return (
-        <div className="relative w-full h-full">
-          <Image
-            src={`${url}`}
-            alt={fileName}
-            layout="fill"
-            objectFit="contain"
-            className="rounded-lg"
+        <div className="flex items-center justify-center h-full bg-[#f5f5f5] rounded-lg">
+          <div className="relative w-full h-full">
+            <Image
+              src={fileUrl}
+              alt={fileName}
+              fill
+              style={{ objectFit: 'contain' }}
+              className="p-4"
+            />
+          </div>
+        </div>
+      );
+    }
+
+    // PDF files
+    if (fileUrl.includes("pdf")) {
+      return (
+        <div className="w-full h-full">
+          <iframe 
+            src={fileUrl}
+            className="w-full h-full border-0"
+            title="PDF Preview"
           />
         </div>
       );
-    } else if (url.includes("pdf")) {
-      return <iframe src={url} className="w-full h-full border-0" title="PDF Preview"></iframe>;
-    } else {
+    }
+
+    // Word documents (doc, docx)
+    if (fileUrl.includes("msword") || fileUrl.includes("officedocument.wordprocessingml.document")) {
       return (
-        <p>File preview not supported for this file type. Please download the file to view it.</p>
+        <div className="w-full h-full">
+          <iframe 
+            src={`https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(fileUrl)}`}
+            className="w-full h-full border-0"
+            title="Word Document Preview"
+          />
+        </div>
       );
     }
+
+    // PowerPoint files (ppt, pptx)
+    if (fileUrl.includes("ms-powerpoint") || fileUrl.includes("officedocument.presentationml.presentation")) {
+      return (
+        <div className="w-full h-full">
+          <iframe 
+            src={`https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(fileUrl)}`}
+            className="w-full h-full border-0"
+            title="PowerPoint Preview"
+          />
+        </div>
+      );
+    }
+
+    // Excel files (xls, xlsx)
+    if (fileUrl.includes("ms-excel") || fileUrl.includes("officedocument.spreadsheetml.sheet")) {
+      return (
+        <div className="w-full h-full">
+          <iframe 
+            src={`https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(fileUrl)}`}
+            className="w-full h-full border-0"
+            title="Excel Preview"
+          />
+        </div>
+      );
+    }
+
+    // Text files
+    if (fileUrl.includes("txt")) {
+      return (
+        <div className="w-full h-full">
+          <iframe 
+            src={fileUrl}
+            className="w-full h-full border-0"
+            title="Text Preview"
+          />
+        </div>
+      );
+    }
+
+    // Default: Download link for unsupported files
+    return (
+      <div className="flex flex-col items-center justify-center h-full">
+        <p className="text-gray-600 mb-4">Preview not available for this file type</p>
+        <a
+          href={fileUrl}
+          download={fileName}
+          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+        >
+          Download File
+        </a>
+      </div>
+    );
   };
 
   return (
-    <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50 py-8">
-      <div className="bg-white p-8 rounded-lg shadow-xl w-full sm:w-5/6 md:w-4/6 lg:w-3/6 xl:w-2/6 h-full max-h-screen mx-auto flex flex-col transform transition-transform duration-300">
-        <div className="flex justify-between items-center pb-2 mb-4 border-b border-gray-200">
-          <h2 className="text-lg md:text-xl font-medium">{fileName}</h2>
-          <div className="flex items-center space-x-2">
-            <button
-              onClick={handleDownload}
-              className="text-blue-500 hover:text-blue-700 flex items-center space-x-1"
-            >
-              <FiDownload size={24} />
-              <span>Download</span>
-            </button>
-            <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
-              <IoMdClose className="w-8 h-8" />
-            </button>
-          </div>
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+      <div className="bg-white rounded-lg w-[90vw] md:w-[70vw] h-[90vh] flex flex-col">
+        {/* Header */}
+        <div className="flex justify-between items-center p-4 border-b">
+          <h2 className="text-xl font-semibold">{fileName}</h2>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onClose}
+            className="hover:bg-gray-100"
+          >
+            <Image
+              src="/cancel.svg"
+              alt="Close"
+              width={24}
+              height={24}
+            />
+          </Button>
         </div>
-        <div className="flex-grow overflow-auto">{renderPreviewContent(fileUrl)}</div>
+
+        {/* Preview Content */}
+        <div className="flex-1 overflow-auto p-4">
+          {renderFilePreview()}
+        </div>
       </div>
     </div>
   );

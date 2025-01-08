@@ -20,27 +20,25 @@ const EditCallSheetContent = () => {
   const searchParams = useSearchParams();
   const id = Number(searchParams.get("id"));
 
-  const { data } = useGetCallSheetDetails(id);
+  const { data, isError: getDataIsError, refetch } = useGetCallSheetDetails(id);
   const { mutateAsync: editCallSheet, isPending, isError } = useEditCallSheet();
-
   const defaultValues = {
-    title: data?.title,
-    date: data?.date,
-    calltime: data?.calltime,
-    location: data?.location,
-    nearest_hospital_address: data?.nearest_hospital_address,
-    nearest_police_station: data?.nearest_police_station,
-    nearest_fire_station: data?.nearest_fire_station,
-    breakfast: data?.breakfast,
-    lunch: data?.lunch,
-    dinner: data?.dinner,
+    title: data?.data?.title,
+    date: data?.data?.date,
+    calltime: data?.data?.calltime,
+    location: data?.data?.location,
+    nearest_hospital_address: data?.data?.nearest_hospital_address,
+    nearest_police_station: data?.data?.nearest_police_station,
+    nearest_fire_station: data?.data?.nearest_fire_station,
+    breakfast: data?.data?.breakfast,
+    lunch: data?.data?.lunch,
+    dinner: data?.data?.dinner,
 
-    call_time: data?.call_time,
+    call_time: data?.data?.call_time,
 
-    additional_notes: data?.additional_notes,
-    production_notes: data?.production_notes,
+    additional_notes: data?.data?.additional_notes,
+    production_notes: data?.data?.production_notes,
   };
-
   const handleEditCallSheet = async (formData: ShootFormType) => {
     const transformData = { ...formData, project: projectId };
     try {
@@ -55,6 +53,14 @@ const EditCallSheetContent = () => {
   };
   return (
     <>
+      {getDataIsError && (
+        <div className=" w-full p-4 mt-8 flex- justify-center">
+          <p className=" text-red-500">Failed to load Callsheet data</p>
+          <button onClick={() => refetch()} className=" text-blue-500">
+            Retry
+          </button>
+        </div>
+      )}
       <CallSheetForm
         submitHandler={handleEditCallSheet}
         isLoading={isPending}

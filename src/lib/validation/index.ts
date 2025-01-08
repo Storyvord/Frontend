@@ -171,10 +171,15 @@ export const uploadFileFormSchema = z.object({
           file.type === "application/pdf" ||
           file.type === "application/msword" || // For .doc files
           file.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || // For .docx files
+          file.type === "application/vnd.ms-powerpoint" || // For .ppt files
+          file.type === "application/vnd.openxmlformats-officedocument.presentationml.presentation" || // For .pptx files
+          file.type === "application/vnd.ms-excel" || // For .xls files
+          file.type === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" || // For .xlsx files
+          file.type === "image/svg+xml" || // For .svg files
           file.type === "text/plain") &&
         file.size <= 50 * 1024 * 1024, // Max size 50MB
       {
-        message: "Only .jpg, .png, .pdf, .doc, .docx, or .txt files under 50MB are accepted",
+        message: "Only .jpg, .png, .pdf, .doc, .docx, .ppt, .pptx, .xls, .xlsx, .svg or .txt files under 50MB are accepted",
       }
     ),
   ]),
