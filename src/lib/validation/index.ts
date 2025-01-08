@@ -172,9 +172,9 @@ export const uploadFileFormSchema = z.object({
           file.type === "application/msword" || // For .doc files
           file.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || // For .docx files
           file.type === "text/plain") &&
-        file.size <= 5 * 1024 * 1024, // Max size 5MB
+        file.size <= 50 * 1024 * 1024, // Max size 50MB
       {
-        message: "Only .jpg, .png, .pdf, .doc, .docx, or .txt files under 5MB are accepted",
+        message: "Only .jpg, .png, .pdf, .doc, .docx, or .txt files under 50MB are accepted",
       }
     ),
   ]),
