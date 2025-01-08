@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -31,6 +31,7 @@ type Props = {
   prevStep?: () => void;
   handleSkipOnBoard?: () => void;
 };
+
 const CreateProjectForm = ({
   isEdit,
   projectDetails,
@@ -45,6 +46,8 @@ const CreateProjectForm = ({
     resolver: zodResolver(projectFormSchema),
     defaultValues,
   });
+
+  const [activeAccordion, setActiveAccordion] = useState<number | null>(0);
 
   // useEffect to reset form values when data changes
   useEffect(() => {
@@ -67,18 +70,7 @@ const CreateProjectForm = ({
   const router = useRouter();
 
   const onSubmit = async (formData: ProjectFormFieldType) => {
-    const {
-      locationDetails,
-      crew,
-      equipment,
-      projectName,
-      description,
-      uploadedDocument,
-      budget,
-      contentType,
-    } = formData;
-
-    const base64Documents = uploadedDocument?.map(async (item) => {
+    const base64Documents = formData.uploadedDocument?.map(async (item) => {
       const base64 = await convertToBase64(item);
       return { document: base64 };
     });
@@ -86,18 +78,18 @@ const CreateProjectForm = ({
 
     const transformedFormData = {
       project_details: {
-        name: projectName,
-        content_type: contentType,
-        brief: description,
-        additional_details: description,
+        name: formData.projectName,
+        content_type: formData.contentType,
+        brief: formData.description,
+        additional_details: formData.description,
       },
       project_requirement: {
         budget_currency: "$",
-        budget: budget,
-        crew_requirements: crew,
-        equipment_requirements: equipment,
+        budget: formData.budget,
+        crew_requirements: formData.crew,
+        equipment_requirements: formData.equipment,
       },
-      shooting_details: locationDetails,
+      shooting_details: formData.locationDetails,
     };
     if (isEdit && handleEditProject) {
       handleEditProject(transformedFormData);
@@ -109,13 +101,28 @@ const CreateProjectForm = ({
           if (prevStep) {
             router.push("/dashboard");
           } else {
-            router.push(`/project-details/${project.data.project.project_id}`);
+            router.push(`/project-details/${project.data.project.project_id}/reports`);
           }
         }
       } catch (e) {
         toast({ title: "Failed to create Project", variant: "destructive" });
       }
     }
+  };
+
+  const handleAddLocation = () => {
+    append({
+      location: "",
+      start_date: "",
+      end_date: "",
+      permits: false,
+      mode_of_shooting: "both",
+    });
+    setActiveAccordion(fields.length); // Open the newly added accordion
+  };
+
+  const toggleAccordion = (index: number) => {
+    setActiveAccordion((prev) => (prev === index ? null : index));
   };
 
   return (
@@ -146,24 +153,40 @@ const CreateProjectForm = ({
             <RenderFormFields form={form} formFields={formFields.slice(0, 8)} />
 
             {/* Render locationDetails fields dynamically */}
-            <h3 className=" text-center font-semibold text-xl underline">Location Details</h3>
+            <h3 className="text-center font-semibold text-xl underline">Location Details</h3>
             {fields.map((field, index) => (
               <div key={field.id} className="border px-6 py-2 rounded-md mb-4 relative">
-                <RenderFormFields
-                  form={form}
-                  formFields={formFields.slice(8, 13).map((fieldConfig) => ({
-                    ...fieldConfig,
-                    name: `locationDetails.${index}.${fieldConfig.name.split(".")[2]}` as keyof ProjectFormFieldType,
-                  }))}
-                />
+                {/* Accordion Header */}
                 {fields.length > 1 && (
                   <button
                     type="button"
-                    className="absolute right-2 top-1 text-red-700 hover:text-red-500 mt-2"
-                    onClick={() => remove(index)}
+                    onClick={() => toggleAccordion(index)}
+                    className="w-full text-left font-poppins-semibold text-lg mb-2"
                   >
-                    <BsTrash className=" w-4 h-4" />
+                    {`Location ${index + 1}`}
                   </button>
+                )}
+
+                {/* Accordion Content */}
+                {(activeAccordion === index || fields.length === 1) && (
+                  <>
+                    <RenderFormFields
+                      form={form}
+                      formFields={formFields.slice(8, 13).map((fieldConfig) => ({
+                        ...fieldConfig,
+                        name: `locationDetails.${index}.${fieldConfig.name.split(".")[2]}` as keyof ProjectFormFieldType,
+                      }))}
+                    />
+                    {fields.length > 1 && (
+                      <button
+                        type="button"
+                        className="absolute right-2 top-1 text-red-700 hover:text-red-500 mt-2"
+                        onClick={() => remove(index)}
+                      >
+                        <BsTrash className="w-4 h-4" />
+                      </button>
+                    )}
+                  </>
                 )}
               </div>
             ))}
@@ -172,15 +195,7 @@ const CreateProjectForm = ({
               type="button"
               variant="outline"
               className="w-full mt-2 border-green-600"
-              onClick={() =>
-                append({
-                  location: "",
-                  start_date: "",
-                  end_date: "",
-                  permits: false,
-                  mode_of_shooting: "both",
-                })
-              }
+              onClick={handleAddLocation}
             >
               Add Location
             </Button>

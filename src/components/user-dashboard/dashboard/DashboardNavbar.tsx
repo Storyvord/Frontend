@@ -36,11 +36,14 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { getLocalizedString } from "@/i18n/utils";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
+import { useGetUserProfile } from "@/lib/react-query/queriesAndMutations/auth/auth";
 
 const DashboardNavbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const { data: projects, isPending, isError } = useGetProjects();
   const [onGoingProjects, setOngoingProjects] = useState<ProjectType[]>([]);
+
+  const { data: userProfile } = useGetUserProfile();
 
   const t = useTranslations("Dashboard");
 
@@ -151,7 +154,7 @@ const DashboardNavbar = () => {
             />
           </div> */}
         </section>
-        <section className=" flex items-center gap-3 sm:gap-10">
+        <section className=" flex items-center gap-3 sm:gap-5">
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem className=" hidden sm:block">
@@ -162,7 +165,7 @@ const DashboardNavbar = () => {
                   <ul className="w-[400px]">{projectList}</ul>
                 </NavigationMenuContent>
               </NavigationMenuItem>
-              <NavigationMenuItem>
+              <NavigationMenuItem className=" hidden sm:block">
                 <NavigationMenuTrigger className=" text-sm sm:text-base font-poppins-normal">
                   {t("org")}
                 </NavigationMenuTrigger>
@@ -177,7 +180,7 @@ const DashboardNavbar = () => {
             <Image
               width={20}
               height={20}
-              className="w-[20px] sm:w-[24px] cursor-pointer"
+              className="w-6 cursor-pointer"
               src={"/icons/message.svg"}
               alt="message"
             />
@@ -185,15 +188,24 @@ const DashboardNavbar = () => {
           <Image
             width={20}
             height={20}
-            className="w-[20px] sm:w-[24px] cursor-pointer"
+            className="w-6 cursor-pointer"
             src={"/icons/notification.svg"}
             alt="notification"
           />
           <div className=" hidden sm:flex">
             <DropdownMenu>
               <DropdownMenuTrigger className=" flex items-center gap-2 cursor-pointer">
-                {/* <Image width={40} height={40} src={"/profile.png"} alt="profile" /> */}
-                <CgProfile className=" w-10 h-10 text-gray-500" />
+                {userProfile?.data?.personal_info?.image ? (
+                  <Image
+                    src={userProfile?.data?.personal_info.image}
+                    alt="Profile"
+                    className="rounded-full w-12 h-12 border-4 border-white"
+                    width={96}
+                    height={96}
+                  />
+                ) : (
+                  <CgProfile className="rounded-full w-12 h-12 border-4 border-white text-gray-500" />
+                )}
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 {profile}
@@ -213,8 +225,17 @@ const DashboardNavbar = () => {
             onClick={() => setToggleMenu(!toggleMenu)}
             className=" flex sm:hidden cursor-pointer gap-1 sm:gap-3 items-center"
           >
-            {/* <Image width={30} height={30} src={"/profile.png"} alt="profile" /> */}
-            <CgProfile className=" w-8 h-8 text-gray-500" />
+            {userProfile?.data?.personal_info?.image ? (
+              <Image
+                src={userProfile?.data?.personal_info.image}
+                alt="Profile"
+                className="rounded-full w-12 h-12 border-4 border-white"
+                width={96}
+                height={96}
+              />
+            ) : (
+              <CgProfile className="rounded-full w-12 h-12 border-4 border-white text-gray-500" />
+            )}
             {toggleMenu ? (
               <Image
                 width={15}

@@ -70,15 +70,16 @@ const ProjectDetails: React.FC = () => {
 
   // Handle project deletion, redirect to home after successful deletion
   const handleDeleteProject = async () => {
-    if (projectId === "302e14ea-3fbd-413b-af5e-924f72a1b00a") {
+    const isConfirmed = window.confirm("Are you sure you want to delete this project?");
+    if (isConfirmed) {
+      await deleteProject(projectId);
+      router.replace("/dashboard");
+    } else {
       toast({
-        title: "You can't delete this project",
-        description: "as this is a Test project ",
+        title: "Deletion canceled",
+        description: "Your project was not deleted.",
       });
-      return;
     }
-    await deleteProject(projectId);
-    router.replace("/dashboard");
   };
 
   // Handle status change for the project

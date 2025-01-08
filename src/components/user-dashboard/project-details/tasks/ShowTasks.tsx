@@ -2,19 +2,18 @@
 import React from "react";
 import { useGetCompanyTasks } from "@/lib/react-query/queriesAndMutations/company/tasks";
 import { cn } from "@/lib/utils";
-import { useGetTasks } from "@/lib/react-query/queriesAndMutations/tasks";
+import { useGetProjectTasks, useGetTasks } from "@/lib/react-query/queriesAndMutations/tasks";
 import { useParams } from "next/navigation";
 
 const ShowTasks = () => {
   const { id: projectId }: { id: string } = useParams();
-  const { data: tasksList, isPending: isLoadingTask } = useGetTasks(projectId);
-
+  const { data: tasksList, isPending: isLoadingTask } = useGetProjectTasks(projectId);
   return (
     <div className=" bg-white rounded-xl mt-0 p-3">
-      {tasksList?.data?.tasks.length === 0 && (
+      {(tasksList?.data?.length === 0 || !tasksList) && (
         <p className=" text-center text-gray-500">No tasks found</p>
       )}
-      {tasksList?.data?.tasks.map((task: any) => (
+      {tasksList?.data?.map((task: any) => (
         <div
           key={task.id}
           className=" bg-gray-100 p-2 flex justify-between items-center mt-2 rounded-md"

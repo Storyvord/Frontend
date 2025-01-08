@@ -50,11 +50,25 @@ const FileManagement = () => {
 
   const { data: fileList, error } = useGetAllFiles(roomId);
   const { mutateAsync: deleteFile } = useDeleteFile();
-  const handleDeleteFile = (fileId: number) => {
-    deleteFile(fileId);
+  const handleDeleteFile = async (fileId: number) => {
+    if (window.confirm("Are you sure you want to delete this file?"))
+      try {
+        await deleteFile(fileId);
+        toast({
+          title: "Success",
+          description: "File deleted successfully!",
+        });
+      } catch (error) {
+        console.error(error);
+        toast({
+          title: "Error",
+          description: "Failed to delete the file. Please try again.",
+          variant: "destructive",
+        });
+      }
   };
   const { mutateAsync, isError, isPending, error: uploadError } = useUploadFile();
-  console.log(uploadError);
+
   const handleUploadFile = async (data: UploadFileFormData) => {
     const base64 = await convertToBase64(data.file);
     const transformData = { ...data, file: base64, allowed_users: [], project: projectId };
@@ -99,7 +113,7 @@ const FileManagement = () => {
         /> */}
       </div>
 
-      <div className="mt-8 grid gap-6 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+      <div className="mt-8 grid gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
         {fileList?.data.map((file: FileType, index: number) => (
           <FileCard
             key={index}

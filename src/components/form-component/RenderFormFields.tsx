@@ -20,6 +20,7 @@ import SelectInput from "@/components/form-component/SelectInput";
 import CustomFileInput from "./CustomFileInput";
 import PasswordInput from "./PasswordInput";
 import SliderInput from "./SliderInput";
+import { DatePicker } from "../ui/date-picker";
 
 // Define the configuration for each form field, specifying the field's type, label, and other properties
 export type FormFieldConfig<T extends FieldValues> = {
@@ -105,7 +106,6 @@ const RenderFormFields = <TFormValues extends FieldValues>({
                     {(type === "text" ||
                       type === "email" ||
                       type === "number" ||
-                      type === "date" ||
                       type === "time" ||
                       type === "datetime-local") && (
                       <Input
@@ -117,12 +117,17 @@ const RenderFormFields = <TFormValues extends FieldValues>({
                         disabled={fieldConfig.disabled}
                       />
                     )}
+                    {type === "date" && (
+                      <DatePicker value={field.value} onChange={(date) => field.onChange(date)} />
+                    )}
+
                     {type === "textarea" && (
                       <Textarea
                         placeholder={placeholder}
                         {...field}
                         value={field.value as string}
                         className="lg:text-base lg:font-normal font-poppins"
+                        rows={5}
                       />
                     )}
                     {type === "checkbox" && (

@@ -5,7 +5,7 @@ import CrewSearch from "@/components/user-dashboard/project-details/planning/cre
 import OpenPosition from "@/components/user-dashboard/project-details/planning/crew/OpenPosition";
 import React, { useState } from "react";
 
-const tabs = ["Crew Hire", "Open Position", "Crew Search"];
+const tabs = ["Crew Hire", "Open Position", "Crew Search", "Ai Response"];
 
 const Crew = () => {
   const [activeTab, setActiveTab] = useState(tabs[0]);
@@ -16,6 +16,7 @@ const Crew = () => {
         {activeTab === tabs[0] && <CrewHire />}
         {activeTab === tabs[1] && <OpenPosition />}
         {activeTab === tabs[2] && <CrewSearch />}
+        {activeTab === tabs[3] && <CrewSearch />}
       </section>
     </div>
   );

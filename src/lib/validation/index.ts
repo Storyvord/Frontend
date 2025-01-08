@@ -57,8 +57,12 @@ export const projectFormSchema = z.object({
     z
       .object({
         location: z.string().min(1, { message: "Location is required" }),
-        start_date: z.string().date(),
-        end_date: z.string().date(),
+        start_date: z.string().refine((date) => !isNaN(Date.parse(date)), {
+          message: "Invalid start date",
+        }),
+        end_date: z.string().refine((date) => !isNaN(Date.parse(date)), {
+          message: "Invalid end date",
+        }),
         mode_of_shooting: z.enum(["indoor", "outdoor", "both"], {
           errorMap: () => ({ message: "Select a mode of shooting" }),
         }),
@@ -168,9 +172,9 @@ export const uploadFileFormSchema = z.object({
           file.type === "application/msword" || // For .doc files
           file.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || // For .docx files
           file.type === "text/plain") &&
-        file.size <= 5 * 1024 * 1024, // Max size 5MB
+        file.size <= 50 * 1024 * 1024, // Max size 50MB
       {
-        message: "Only .jpg, .png, .pdf, .doc, .docx, or .txt files under 5MB are accepted",
+        message: "Only .jpg, .png, .pdf, .doc, .docx, or .txt files under 50MB are accepted",
       }
     ),
   ]),

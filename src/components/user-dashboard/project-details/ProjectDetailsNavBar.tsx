@@ -21,6 +21,7 @@ import { useSideBarControl } from "@/context/SideBarContext";
 import { Button } from "@/components/ui/button";
 import { CgProfile } from "react-icons/cg";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useGetUserProfile } from "@/lib/react-query/queriesAndMutations/auth/auth";
 
 const ProjectDetailsNavBar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -28,6 +29,7 @@ const ProjectDetailsNavBar = () => {
   const { id: projectId }: { id: string } = useParams();
 
   const { data: projects, isPending, isError } = useGetProjectDetails(projectId);
+  const { data: userProfile } = useGetUserProfile();
 
   const { project } = useProjectControl();
   const { toggle } = useSideBarControl();
@@ -73,12 +75,12 @@ const ProjectDetailsNavBar = () => {
           />
         </Link>
 
-        <section className=" flex items-center gap-3 sm:gap-10">
+        <section className=" flex items-center gap-3 sm:gap-5">
           <Link href="/dashboard/message">
             <Image
               width={20}
               height={20}
-              className="w-[20px] sm:w-[24px] cursor-pointer"
+              className="w-6 cursor-pointer"
               src={"/icons/message.svg"}
               alt="message"
             />
@@ -86,15 +88,24 @@ const ProjectDetailsNavBar = () => {
           <Image
             width={20}
             height={20}
-            className="w-[20px] sm:w-[24px] cursor-pointer"
+            className="w-6 cursor-pointer"
             src={"/icons/notification.svg"}
             alt="notification"
           />
           <div className=" hidden sm:flex">
             <DropdownMenu>
               <DropdownMenuTrigger className=" flex items-center gap-2 cursor-pointer">
-                {/* <Image width={40} height={40} src={"/profile.png"} alt="profile" /> */}
-                <CgProfile className=" w-10 h-10 text-gray-500" />
+                {userProfile?.data?.personal_info?.image ? (
+                  <Image
+                    src={userProfile?.data?.personal_info.image}
+                    alt="Profile"
+                    className="rounded-full w-12 h-12 border-4 border-white"
+                    width={96}
+                    height={96}
+                  />
+                ) : (
+                  <CgProfile className="rounded-full w-12 h-12 border-4 border-white text-gray-500" />
+                )}
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 {profile}
@@ -113,8 +124,17 @@ const ProjectDetailsNavBar = () => {
             onClick={() => setToggleMenu(!toggleMenu)}
             className=" flex sm:hidden cursor-pointer gap-3 items-center"
           >
-            {/* <Image width={30} height={30} src={"/profile.png"} alt="profile" /> */}
-            <CgProfile className=" w-8 h-8 text-gray-500" />
+            {userProfile?.data?.personal_info?.image ? (
+              <Image
+                src={userProfile?.data?.personal_info.image}
+                alt="Profile"
+                className="rounded-full w-12 h-12 border-4 border-white"
+                width={96}
+                height={96}
+              />
+            ) : (
+              <CgProfile className="rounded-full w-12 h-12 border-4 border-white text-gray-500" />
+            )}
             {toggleMenu ? (
               <Image
                 width={12}

@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Image from "next/image";
 import { BsFiletypePdf } from "react-icons/bs";
 import { MdDelete } from "react-icons/md";
 import { FaRegFileImage } from "react-icons/fa";
@@ -9,15 +10,35 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 const renderFilePreview = (fileUrl: string) => {
   if (!fileUrl) {
-    return <Skeleton className=" w-full h-full" />;
+    return <Skeleton className="w-full h-full" />;
   }
 
-  if (fileUrl.includes("png") || fileUrl.includes("jpg") || fileUrl.includes("jpeg"))
+  if (
+    fileUrl.includes("png") ||
+    fileUrl.includes("jpg") ||
+    fileUrl.includes("jpeg") ||
+    fileUrl.includes("svg")
+  ) {
+    return (
+      <div className="relative w-full h-full">
+        <Image
+          src={fileUrl}
+          alt="file preview"
+          fill
+          className="object-cover rounded-lg"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
+      </div>
+    );
+  } else if (fileUrl.includes("pdf")) {
+    return <BsFiletypePdf className="w-12 h-12" />;
+  } else if (fileUrl.includes("plain")) {
+    return <GrDocumentTxt className="w-12 h-12" />;
+  } else if (fileUrl.includes("msword") || fileUrl.includes("vnd")) {
+    return <BsFiletypeDocx className="w-12 h-12" />;
+  } else {
     return <FaRegFileImage className="w-12 h-12" />;
-  else if (fileUrl.includes("pdf")) return <BsFiletypePdf className=" w-12 h-12" />;
-  else if (fileUrl.includes("plain")) return <GrDocumentTxt className=" w-12 h-12" />;
-  else if (fileUrl.includes("msword") || fileUrl.includes("vnd"))
-    return <BsFiletypeDocx className=" w-12 h-12" />;
+  }
 };
 
 interface FileCardProps {
@@ -34,19 +55,19 @@ interface FileCardProps {
 const FileCard = ({ file, onDeleteFile, onPreview }: FileCardProps) => {
   return (
     <div
-      className="relative h-36 shadow-md rounded-lg bg-white border border-gray-200 hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+      className="relative h-36 md:h-48 shadow-md rounded-lg bg-white border border-gray-200 hover:shadow-lg transition-shadow duration-300 cursor-pointer"
       onClick={() => onPreview(file.file, file.name || "")}
     >
       <div className="h-[80%] flex items-center justify-center p-2">
         {renderFilePreview(file.file)}
       </div>
       <div className="absolute bottom-0 left-0 w-full bg-white flex items-center justify-between py-2 px-4 border-t border-gray-200">
-        <div className="flex-grow">
+        <div className="flex-grow whitespace-nowrap overflow-hidden text-ellipsis">
           <h3 className="text-black font-medium">{file.name}</h3>
         </div>
         {onDeleteFile && (
           <button
-            className="text-red-500"
+            className="text-red-500 ml-2"
             onClick={(e) => {
               e.stopPropagation();
               onDeleteFile(file.id);

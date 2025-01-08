@@ -11,15 +11,15 @@ import { useToast } from "@/components/ui/use-toast";
 import { useGetCrewList } from "@/lib/react-query/queriesAndMutations/crew";
 import {
   useCreateNewTask,
-  useGetTasks,
   useDeleteTask,
   useCompleteTask,
   useTaskCompletionApproval,
+  useGetProjectTasks,
 } from "@/lib/react-query/queriesAndMutations/tasks";
 import { useCrewOptions } from "@/hooks/useCrewOptions";
 
 const TaskPage = ({ params }: { params: { id: string } }) => {
-  const { data: tasksList, isPending: isLoadingTask } = useGetTasks(params.id);
+  const { data: tasksList, isPending: isLoadingTask } = useGetProjectTasks(params.id);
   const { mutateAsync: createNewTaskMutation } = useCreateNewTask();
   const { mutateAsync: deleteTaskMutation } = useDeleteTask();
   const { mutateAsync: completeTaskMutation } = useCompleteTask();
@@ -31,7 +31,7 @@ const TaskPage = ({ params }: { params: { id: string } }) => {
   const { toast } = useToast();
 
   useEffect(() => {
-    if (tasksList) setTasks([...tasksList.data.tasks]);
+    if (tasksList) setTasks([...tasksList.data]);
   }, [params.id, tasksList]);
 
   const completeTask = (task: taskType) => {
@@ -43,8 +43,16 @@ const TaskPage = ({ params }: { params: { id: string } }) => {
     if (window.confirm("Are you sure you want to delete this task?")) {
       try {
         await deleteTaskMutation(id);
+        toast({
+          title: "Task Deleted",
+          description: "The task has been successfully deleted.",
+        });
       } catch (error) {
-        console.log(error);
+        console.error(error);
+        toast({
+          title: "Deletion Failed",
+          description: "An error occurred while trying to delete the task.",
+        });
       }
     }
   };
