@@ -26,3 +26,6 @@
 .rbc-toolbar-label {
   font-size: 0.9rem !important;
 }
+.rbc-toolbar {
+  flex-wrap: nowrap !important;
+}
