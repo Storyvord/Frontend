@@ -35,8 +35,6 @@ const TaskCard: FC<TaskCardProps> = ({
   isLoading,
 }) => {
   const [formOpen, setFormOpen] = useState(false);
-  console.log(crewList);
-  console.log(task);
   // const assignedCrew = crewList?.find((crew) => {
   //   return crew.value == task?.assigned_to;
   // });

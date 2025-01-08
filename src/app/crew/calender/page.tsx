@@ -67,7 +67,6 @@ const CrewCalender = () => {
     }
   }, [allEvents]);
 
-  console.log(transformEvents);
   // Create calendar event mutation
   const {
     mutateAsync: createCalenderEvent,

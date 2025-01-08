@@ -58,7 +58,6 @@ const TaskPage = ({ params }: { params: { id: string } }) => {
   };
 
   const createTask = async (task: taskFormType) => {
-    console.log(task);
     const newTask = {
       project: params.id,
       title: task.title,
@@ -69,7 +68,6 @@ const TaskPage = ({ params }: { params: { id: string } }) => {
       // completion_requested: false,
       // requester: null,
     };
-    console.log(newTask);
     try {
       await createNewTaskMutation({ taskData: newTask, projectId: params.id });
     } catch (error) {

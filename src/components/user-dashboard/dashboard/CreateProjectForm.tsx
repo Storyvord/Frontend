@@ -155,7 +155,6 @@ const CreateProjectForm = ({
             {/* Render locationDetails fields dynamically */}
             <h3 className="text-center font-semibold text-xl underline">Location Details</h3>
             {fields.map((field, index) => {
-              console.log(field);
               return (
                 <div key={field.id} className="border px-6 py-2 rounded-md mb-4 relative">
                   {/* Accordion Header */}

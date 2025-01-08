@@ -78,7 +78,6 @@ const CalendarComponent: React.FC<CalendarComponentProps> = ({
   const [eventToDisplay, setEventToDisplay] = useState<CalenderEventType | null>(null);
   const [transformEvents, setTransformEvents] = useState<any>([]);
   const pathname = usePathname();
-  console.log(transformEvents);
 
   // Default form values
   const [formDefaultValue, setFormDefaultValue] = useState({

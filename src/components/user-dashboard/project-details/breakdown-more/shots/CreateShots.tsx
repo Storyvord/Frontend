@@ -37,7 +37,7 @@ const CreateShots = ({ openDialog, setOpenDialog }: Props) => {
   const isEdit = false;
 
   const onSubmit = (data: ShotsFormType) => {
-    console.log(data);
+    // console.log(data);
     //api call
     form.reset();
   };

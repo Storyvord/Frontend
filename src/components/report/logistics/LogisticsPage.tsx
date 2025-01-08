@@ -26,7 +26,6 @@ const LogisticsPage: React.FC<LogisticsPageProps> = ({ data, isPending, isError 
       </div>
     );
   }
-  console.log(isError);
   return (
     <div className="mt-6 space-y-4">
       <h2 className="text-2xl font-bold mb-4">Logistics Details</h2>
