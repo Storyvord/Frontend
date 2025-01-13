@@ -99,7 +99,7 @@ const Register = () => {
             completedSteps={completedSteps}
           />
         </div>
-        <>
+        <div className=" flex justify-center">
           {step === 1 && <SelectUserType userProfile={userProfile} onSuccessStep={onSuccessStep} />}
           {step === 2 && userType === 1 && (
             <ClientProfileForm prevStep={prevStep} onSuccessStep={onSuccessStep} />
@@ -116,7 +116,7 @@ const Register = () => {
           {step === 3 && userType === 2 && (
             <CrewPortfolio prevStep={prevStep} handleSkipOnBoard={handleSkipOnBoard} />
           )}
-        </>
+        </div>
       </div>
     </section>
   );

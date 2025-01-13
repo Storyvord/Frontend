@@ -15,7 +15,7 @@ export type Project = {
   project_name: string;
   project_status: string;
   id: string;
-  invites: { status: "PENDING" | "REJECTED" | "ACCEPTED"; id: string }[];
+  invites: { status: "PENDING" | "REJECTED" | "ACCEPTED"; invite_id: string }[];
   created_at: string;
   message: string;
 };
