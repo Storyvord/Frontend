@@ -9,7 +9,7 @@ export function HeroSection() {
   return (
     <section className="px-4 md:px-6 lg:px-10 xl:px-28 pb-16">
       <div className=" grid grid-cols-1 md:grid-cols-12 gap-y-6 items-center text-center relative">
-        <div className="gradient-03 z-50" />
+        <div className="gradient-03 z-[999]" />
 
         {/* Badge Section */}
         <div className="col-span-12 md:col-start-5 md:col-span-4">

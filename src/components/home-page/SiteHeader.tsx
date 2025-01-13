@@ -16,7 +16,7 @@ export function SiteHeader() {
     "text-sm md:text-base text-gray-600 hover:text-gray-900 relative transition-all duration-300 hover:border-b-2 hover:border-primary-green font-poppins-medium";
 
   return (
-    <header className="fixed top-0 left-0 w-[100%] bg-white/90 z-[999] transition-transform duration-300 px-6 lg:px-10 xl:px-28">
+    <header className="fixed top-0 left-0 w-[100%] bg-white/90 z-[900] transition-transform duration-300 px-6 lg:px-10 xl:px-28">
       <div className="flex items-center justify-between py-2 max-w-[2000px] mx-auto">
         <Link href="/" className="text-xl font-bold">
           <Image src="/logo.svg" width={130} height={50} alt="logo" className=" w-40" />
