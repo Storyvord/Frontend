@@ -20,7 +20,7 @@ const BrandSection = () => {
   return (
     <section
       id="clients"
-      className="flex flex-col gap-8 pb-12 lg:flex-row lg:items-end md:justify-between px-4 md:px-6 lg:px-10 xl:px-28 relative"
+      className="flex flex-col gap-8 py-16 lg:flex-row lg:items-end md:justify-between px-4 md:px-6 lg:px-10 xl:px-28 relative"
     >
       {/* Text Section */}
       <div className="lg:flex-[0.25] text-center md:text-left">
@@ -28,6 +28,7 @@ const BrandSection = () => {
           variant="secondary"
           className="bg-white text-[#1e1e1e] px-4 py-1 text-sm font-medium shadow-[0px_1px_15px_rgba(0,255,0,0.3)] border-2 border-primary-green inline-flex items-center gap-3 w-fit mx-auto md:mx-0"
         >
+          <Image src="/icons/handshake.svg" alt="ai" width={10} height={10} className="w-6 h-6" />
           {t("clients")}
         </Badge>
         <h2 className="text-2xl sm:text-3xl font-poppins-semibold mt-6 md:text-4xl">
@@ -54,7 +55,7 @@ const BrandSection = () => {
       </div>
       {/* right carve */}
       <Image
-        className=" hidden md:block -z-10 absolute top-14 right-0 w-64"
+        className=" hidden md:block -z-10 absolute top-24 right-0 w-64"
         src="/curve-image/img4.svg"
         alt=""
         width={100}

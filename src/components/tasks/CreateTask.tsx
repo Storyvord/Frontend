@@ -83,6 +83,7 @@ const CreateTask: FC<CreateTaskProps> = ({
       };
       handleSubmission(taskData);
       setFormOpen(!formOpen);
+      form.reset();
     } catch (e) {
       form.setError("root", {
         type: "manual",

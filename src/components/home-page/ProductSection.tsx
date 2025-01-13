@@ -103,8 +103,8 @@ export function ProductSection() {
   ];
 
   return (
-    <section className="px-4 md:px-6 lg:px-10 xl:px-28">
-      <div className="w-full pb-12 pt-10" id="product">
+    <section className="px-4 py-16 md:px-6 lg:px-10 xl:px-28 bg-gray-50">
+      <div className="w-full" id="product">
         <Timeline data={data} />
       </div>
     </section>
