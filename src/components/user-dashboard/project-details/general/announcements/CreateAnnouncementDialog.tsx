@@ -88,6 +88,7 @@ const CreateAnnouncementDialog = ({
 
   const onSubmit = (data: AnnouncementFormType) => {
     createAnnouncement(data);
+    form.reset();
   };
 
   return (

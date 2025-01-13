@@ -7,8 +7,8 @@ const AiSimplifies = () => {
   const t = useTranslations("HomePage.AiSimplifies");
 
   return (
-    <section className="px-4 md:px-6 lg:px-10 xl:px-28 relative pt-32">
-      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-12 gap-y-8 md:gap-y-12">
+    <section className="px-4 md:px-6 lg:px-10 xl:px-28 relative py-16">
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-12 gap-y-8 md:gap-y-12 z-10">
         <div className="gradient-02 z-50 rounded-full" />
         {/* Left Section: Badge, Title, Description */}
         <div className="flex flex-col gap-5 items-start col-span-12 md:col-start-1 md:col-span-7 px-4 sm:px-6 md:px-0">
@@ -51,7 +51,7 @@ const AiSimplifies = () => {
       </div>
       {/* left curve */}
       <Image
-        className=" hidden md:block absolute z-50 -bottom-12 left-0 rotate-12 w-48"
+        className=" hidden md:block absolute z-50 bottom-0 left-0 rotate-12 w-48"
         src="/curve-image/img1.svg"
         alt=""
         width={100}
@@ -60,7 +60,7 @@ const AiSimplifies = () => {
 
       {/* right carve */}
       <Image
-        className=" hidden md:block z-10 absolute top-16 right-12 w-48"
+        className=" hidden md:block -z-10 absolute top-0 right-12 w-48"
         src="/curve-image/img1.svg"
         alt=""
         width={100}

@@ -3,6 +3,7 @@ import { useMotionValueEvent, useScroll, useTransform, motion } from "framer-mot
 import React, { useEffect, useRef, useState } from "react";
 import { Badge } from "./badge";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 interface TimelineEntry {
   subTitle: string;
@@ -33,12 +34,13 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
   const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
 
   return (
-    <div className="w-full bg-white dark:bg-neutral-950 font-poppins" ref={containerRef}>
+    <div className="w-full bg-gray-50 dark:bg-neutral-950 font-poppins" ref={containerRef}>
       <div className="max-w-7xl mx-auto">
         <Badge
           variant="secondary"
-          className="bg-white text-[#1e1e1e] px-4 py-1 text-sm font-medium shadow-[0px_1px_15px_rgba(0,255,0,0.3)] border-2 border-primary-green flex items-center gap-3 w-fit "
+          className="bg-white hover:bg-white text-[#1e1e1e] px-4 py-1 text-sm font-medium shadow-[0px_1px_15px_rgba(0,255,0,0.3)] border-2 border-primary-green flex items-center gap-3 w-fit "
         >
+          <Image src="/icons/products.svg" alt="" width={10} height={10} className="w-6 h-6" />
           {t("badge")}
         </Badge>
         <h2 className="text-3xl md:text-5xl mb-4 text-background-2 dark:text-white max-w-4xl mt-10 font-bold">

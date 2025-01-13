@@ -24,8 +24,8 @@ export function Testimonials() {
     },
   ];
   return (
-    <section className=" pt-32">
-      <h2 className="text-5xl col-start-3 col-span-8 font-bold mb-12 text-center text-background-2">
+    <section className=" py-20">
+      <h2 className="text-5xl col-start-3 col-span-8 mb-4 font-poppins-bold text-center text-background-2">
         {t("heading")}
       </h2>
       <AnimatedTestimonials testimonials={testimonials} />

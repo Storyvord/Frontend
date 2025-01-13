@@ -47,7 +47,7 @@ const ProjectCard = ({
           <div className="mt-4">
             {handleAccept && (
               <Button
-                onClick={() => handleAccept(project?.invites?.at(0)?.id!)}
+                onClick={() => handleAccept(project?.invites?.at(0)?.invite_id!)}
                 className="mr-2 bg-green-500 hover:bg-green-400 text-white rounded-lg"
                 disabled={isAcceptLoading}
               >
@@ -56,7 +56,7 @@ const ProjectCard = ({
             )}
             {handleReject && (
               <Button
-                onClick={() => handleReject(project?.invites?.at(0)?.id!)}
+                onClick={() => handleReject(project?.invites?.at(0)?.invite_id!)}
                 variant="destructive"
                 disabled={isRejectLoading}
               >
