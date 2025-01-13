@@ -67,12 +67,13 @@ export function PricingSection() {
   ];
 
   return (
-    <section className="pt-24 px-4 md:px-6 lg:px-10 xl:px-28">
+    <section className="py-16 px-4 md:px-6 lg:px-10 xl:px-28 bg-gray-50">
       <div className="">
         <Badge
           variant="secondary"
           className="bg-white text-[#1e1e1e] px-4 py-1 text-sm font-medium shadow-[0px_1px_15px_rgba(0,255,0,0.3)] border-2 border-primary-green flex items-center gap-3 w-fit"
         >
+          <Image src="/icons/price2.svg" alt="ai" width={10} height={10} className="w-6 h-6" />
           {t("badgeText")}
         </Badge>
         <div className="grid gap-8 lg:grid-cols-3 grid-cols-1 md:grid-cols-2 mt-8 w-full">
@@ -121,7 +122,7 @@ export function PricingSection() {
                     }
                   }}
                   variant="outline"
-                  className="w-full"
+                  className="w-full hover:bg-[#0A0A41] hover:text-white"
                 >
                   {plan.buttonText}
                 </Button>

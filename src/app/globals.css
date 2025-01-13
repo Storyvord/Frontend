@@ -222,6 +222,8 @@ select:disabled {
 .animate-slide {
   animation: slide 2s infinite;
 }
+
+/* gradient-02 for AiSimplifies */
 .gradient-02 {
   position: absolute;
   width: 150px;
@@ -233,6 +235,8 @@ select:disabled {
   filter: blur(120px);
   transform: rotate(-114.2deg);
 }
+
+/* gradient-03 for hero section */
 .gradient-03 {
   position: absolute;
   width: 150px;
@@ -243,5 +247,18 @@ select:disabled {
 
   background: #22cb66e7;
   filter: blur(70px);
+  transform: rotate(-90deg);
+}
+/* gradient-03 for hero section */
+.gradient-01 {
+  position: absolute;
+  width: 150px;
+  height: 75px;
+  right: 1%;
+  top: 30%;
+  border-radius: 100% 100% 0 0;
+
+  background: #22cb66e7;
+  filter: blur(80px);
   transform: rotate(-90deg);
 }

@@ -53,8 +53,8 @@ const ToolsSection = () => {
   ];
 
   return (
-    <section className="px-4 md:px-6 relative">
-      <div className=" pt-16">
+    <section className="py-16 relative">
+      <div>
         <h1 className="text-2xl sm:text-3xl text-center font-poppins-semibold mt-6 md:text-4xl">
           {t("heading")}
         </h1>
@@ -83,6 +83,20 @@ const ToolsSection = () => {
           </CarouselContent>
         </Carousel>
       </div>
+      <Image
+        className=" hidden md:block -z-10 absolute top-28 left-0 w-64"
+        src="/curve-image/img3.svg"
+        alt=""
+        width={100}
+        height={100}
+      />
+      <Image
+        className=" hidden md:block -z-10 absolute bottom-10 right-0 w-64"
+        src="/curve-image/img2.svg"
+        alt=""
+        width={100}
+        height={100}
+      />
     </section>
   );
 };
