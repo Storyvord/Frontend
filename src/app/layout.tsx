@@ -26,7 +26,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <html lang={locale}>
           <head>
             {/* Google tag (gtag.js) */}
-            <Script
+            {/* <Script
               async
               src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
             ></Script>
@@ -37,7 +37,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 gtag('js', new Date());
                 gtag('config', '${googleAnalyticsId}');
                 `}
-            </Script>
+            </Script> */}
           </head>
 
           <body className=" font-poppins">
