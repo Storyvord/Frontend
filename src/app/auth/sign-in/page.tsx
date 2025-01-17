@@ -18,7 +18,7 @@ const SignInPage = () => {
     try {
       setIsLoading(true);
       const res = await loginUser(data);
-
+      console.log(res);
       if (res) {
         // user_type === 1  Represents a client
         // user_type === 2  Represents a crew member
@@ -27,14 +27,13 @@ const SignInPage = () => {
         // After the user selects a userType, set userStage to 1
         // Once the user updates their profile, set userStage to 2
 
-        const { user_type, steps } = res?.data?.user;
-        if (user_type === 1 && steps) {
+        if (res?.data?.user.user_type === 1 && res?.data?.user.steps) {
           Cookies.set("isClient", "true");
           router.push("/dashboard");
-        } else if (user_type === 2 && steps) {
+        } else if (res?.data?.user.user_type === 2 && res?.data?.user.steps) {
           Cookies.set("isClient", "false");
           router.push("/crew/home");
-        } else if (!steps) {
+        } else if (!res?.data?.user.steps) {
           router.push("/auth/onboard");
         }
       }
