@@ -9,6 +9,7 @@ import Chatbot from "@/components/chat/Chatbot";
 import { Toaster } from "@/components/ui/toaster";
 import Loading from "../loading";
 import { usePathname } from "next/navigation";
+import SideBarContextProvider from "@/context/SideBarContext";
 
 interface LayoutProps {
   children: ReactNode;
@@ -40,19 +41,21 @@ const Layout: FC<LayoutProps> = ({ children }) => {
 
   return (
     <UserContextProvider>
-      <div className="w-full min-h-screen bg-[#eceff180] relative">
-        {userDetails && token && !isPending ? (
-          <>
-            <div className="">
-              <Suspense fallback={<Loading />}>{children}</Suspense>
-            </div>
-            <Toaster />
-            <Chatbot />
-          </>
-        ) : (
-          <Loading />
-        )}
-      </div>
+      <SideBarContextProvider>
+        <div className="w-full min-h-screen bg-[#eceff180] relative">
+          {userDetails && token && !isPending ? (
+            <>
+              <div className="">
+                <Suspense fallback={<Loading />}>{children}</Suspense>
+              </div>
+              <Toaster />
+              <Chatbot />
+            </>
+          ) : (
+            <Loading />
+          )}
+        </div>
+      </SideBarContextProvider>
     </UserContextProvider>
   );
 };
