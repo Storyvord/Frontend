@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Roboto } from "next/font/google";
+// import { Inter, Roboto } from "next/font/google";
 import "./globals.css";
 import { ReactQueryClientProvider } from "@/lib/react-query/ReactQueryClientProvider";
 import UserContextProvider from "@/context/UserContext";
@@ -7,7 +7,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { NextIntlClientProvider } from "next-intl";
 import { cookies } from "next/headers";
 import { getMessages } from "next-intl/server";
-import Script from "next/script";
+// import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Storyvord",
@@ -18,7 +18,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const locale = cookies().get("locale")?.value || "en"; // Default to "en" if no locale cookie
   const messages = await getMessages({ locale });
 
-  const googleAnalyticsId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
+  // const googleAnalyticsId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
 
   return (
     <UserContextProvider>
