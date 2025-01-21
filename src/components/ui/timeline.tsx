@@ -30,8 +30,8 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
     offset: ["start 10%", "end 50%"],
   });
 
-  const heightTransform = useTransform(scrollYProgress, [0, 5], [0, height]);
-  const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
+  const heightTransform = useTransform(scrollYProgress, [0, 1], [0, height]);
+  const opacityTransform = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
     <div className="w-full bg-gray-50 dark:bg-neutral-950 font-poppins" ref={containerRef}>
