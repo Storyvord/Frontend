@@ -13,7 +13,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
     <UserContextProvider>
       <div className="w-full min-h-screen bg-[#eceff180] relative">
         <Navbar />
-        <div className="max-w-[2000px] mx-auto px-4 lg:px-8 py-4 pt-16">{children}</div>
+        <div className="max-w-[2000px] mx-auto py-4 pt-16">{children}</div>
         <Toaster />
       </div>
     </UserContextProvider>

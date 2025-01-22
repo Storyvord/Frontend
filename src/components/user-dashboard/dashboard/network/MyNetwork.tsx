@@ -11,9 +11,13 @@ const MyNetwork = () => {
       <header className=" flex justify-between items-center">
         <span className=" flex gap-2 items-center">
           <Image width={25} height={25} src="/icons/network.svg" alt="" />
-          <h1 className=" text-lg md:text-lg">{t("my-network")}</h1>
+          <h1 className=" text-xl font-poppins-medium md:text-lg">{t("my-network")}</h1>
         </span>
-        <Button className=" flex gap-2">
+        <Button
+          className=" flex gap-2 rounded-sm border border-gray-600"
+          size="sm"
+          variant="outline"
+        >
           <Image width={20} height={20} src="/icons/plus-2.svg" alt="" /> {t("button.add")}
         </Button>
       </header>
