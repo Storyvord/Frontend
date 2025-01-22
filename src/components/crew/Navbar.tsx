@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import React from "react";
 import logo from "@/assets/logo3.png";
@@ -13,6 +14,21 @@ import {
 } from "@/components/ui/dropdown-menu";
 import LogoutButton from "./LogoutButton";
 import { FaRegUser } from "react-icons/fa";
+import { CgProfile } from "react-icons/cg";
+import { userLogout } from "@/lib/api/auth/auth";
+import { useGetUserProfile } from "@/lib/react-query/queriesAndMutations/auth/auth";
+import { useGetInvitations } from "@/lib/react-query/queriesAndMutations/crew/invitations";
+
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+} from "@/components/ui/navigation-menu";
 
 const navLinks = [
   {
@@ -22,10 +38,6 @@ const navLinks = [
   {
     name: "Projects",
     link: "/crew/projects",
-  },
-  {
-    name: "Message",
-    link: "/crew/message",
   },
   {
     name: "Tasks",
@@ -38,77 +50,127 @@ const navLinks = [
 ];
 
 const Navbar = () => {
+  const { data: userProfile } = useGetUserProfile();
+  const { data: listOfProjects } = useGetInvitations();
+
+  const profile = ["profile", "settings", "subscriptions", "help & support"].map((item) => (
+    <Link
+      href={item === "help & support" ? "/help-support" : `/crew/${item}`}
+      key={item}
+      className=" text-gray-500 text-md flex items-center gap-2 cursor-pointer hover:bg-gray-100 rounded-md p-2 capitalize"
+    >
+      {item}
+    </Link>
+  ));
+
+  const projectList = (
+    <>
+      {listOfProjects?.data?.length === 0 && (
+        <p className=" text-center text-gray-600 mt-4">You are not on boarder in any project</p>
+      )}
+      {listOfProjects?.data?.map((item: any) => (
+        <Link
+          href="#"
+          key={item.project_id}
+          className=" text-gray-500 text-md flex items-center cursor-pointer hover:bg-gray-100 rounded-md p-2"
+        >
+          <Image
+            width={20}
+            height={20}
+            className="w-[20px]"
+            src={"/icons/camera.svg"}
+            alt="camera-icon"
+          />
+          <p className=" ml-4 line-clamp-1"> {item.project_name} </p>
+        </Link>
+      ))}
+    </>
+  );
   return (
-    <nav className="w-full flex justify-between items-center p-4 border bg-white z-50 font-sans">
-      <div className="flex items-center justify-between w-full">
-        <div className="flex items-center gap-8">
-          <Link href="/crew/home">
-            <Image src={logo} alt="logo" className="sm:h-10 h-8 w-auto cursor-pointer" />
-          </Link>
-          <div className="hidden md:flex md:items-center lg:gap-8 gap-4">
-            {navLinks.map((link) => (
-              <Link key={link.name} href={link.link}>
-                {link.name}
-              </Link>
-            ))}
+    <header className=" bg-white p-2 flex-col md:flex-row justify-between md:justify-end fixed w-screen  top-0 left-0 z-50 shadow-sm md:px-4">
+      <nav className="flex justify-between w-full mx-auto max-w-[2000]">
+        <div className="flex items-center justify-between w-full">
+          <div className="flex items-center gap-8">
+            <Link href="/crew/home">
+              <Image src={logo} alt="logo" className="sm:h-10 h-8 w-auto cursor-pointer" />
+            </Link>
+            <div className="hidden md:flex font-poppins-normal md:items-center lg:gap-8 gap-4">
+              {navLinks.map((link) => (
+                <Link key={link.name} href={link.link} className="hover:font-poppins-medium">
+                  {link.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+          <div className="flex items-center md:gap-6 gap-3">
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem className=" hidden sm:block">
+                  <NavigationMenuTrigger className=" text-sm sm:text-base font-poppins-normal">
+                    Projects
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <div className=" w-[300px]">{projectList}</div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+            <Link href="/crew/message">
+              <Image
+                width={20}
+                height={20}
+                className="w-6 cursor-pointer"
+                src={"/icons/message.svg"}
+                alt="message"
+              />
+            </Link>
+            <Image
+              width={20}
+              height={20}
+              className="w-6 cursor-pointer"
+              src={"/icons/notification.svg"}
+              alt="notification"
+            />
+
+            <DropdownMenu>
+              <DropdownMenuTrigger className=" flex items-center gap-2 cursor-pointer">
+                {userProfile?.data?.personal_info?.image ? (
+                  <Image
+                    src={userProfile?.data?.personal_info.image}
+                    alt="Profile"
+                    className="rounded-full w-12 h-12 border-4 border-white"
+                    width={96}
+                    height={96}
+                  />
+                ) : (
+                  <CgProfile className="rounded-full w-12 h-12 border-4 border-white text-gray-500" />
+                )}
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                {profile}
+                <div className=" block md:hidden">
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.name}
+                      href={link.link}
+                      className=" text-gray-500 text-md flex items-center gap-2 cursor-pointer hover:bg-gray-100 rounded-md p-2 w-full"
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                </div>
+                <button
+                  onClick={() => userLogout()}
+                  className=" text-gray-500 text-md flex items-center gap-2 cursor-pointer hover:bg-gray-100 rounded-md p-2 w-full"
+                >
+                  Logout
+                </button>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
-        <div className="md:flex items-center gap-6 hidden mr-4">
-          <Button variant="outline">Find Work</Button>
-          <MdNotificationsActive className="w-6 h-6" />
-
-          <DropdownMenu>
-            <DropdownMenuTrigger>
-              <FaRegUser className=" w-8 h-8" />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="mr-4">
-              <DropdownMenuItem>
-                <Link href={"/crew/profile"} className="py-2 w-full text-center">
-                  Profile
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link href={"/crew/settings"} className="py-2 w-full text-center">
-                  Settings
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <LogoutButton />
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      </div>
-      {/* Mobile Menu */}
-      <DropdownMenu>
-        <DropdownMenuTrigger>
-          <GiHamburgerMenu className=" w-6 h-6 cursor-pointer md:hidden block" />
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className=" mr-4">
-          {navLinks.map((link) => (
-            <DropdownMenuItem key={link.name}>
-              <Link href={link.link} className="w-full">
-                {link.name}
-              </Link>
-            </DropdownMenuItem>
-          ))}
-
-          <DropdownMenuItem>
-            <Link href={"/crew/find-work"} className="w-full">
-              Find Work
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Link href={"/crew/profile"} className="w-full">
-              Profile
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <LogoutButton />
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </nav>
+      </nav>
+    </header>
   );
 };
 
