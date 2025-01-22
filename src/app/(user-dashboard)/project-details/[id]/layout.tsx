@@ -19,7 +19,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
       <ProjectContextProvider>
         <main className="max-w-[2000px] mx-auto relative min-h-screen">
           <ProjectDetailsNavBar />
-          <div className={cn("md:pt-16 pt-40", isSidebarSmall ? "ml-20" : "md:ml-60 xl:ml-72 ")}>
+          <div className={cn("md:pt-16 pt-40", isSidebarSmall ? "md:ml-20" : "md:ml-60 xl:ml-72 ")}>
             <SideBar />
             {/* Fixed Center-Right Element */}
             <button
