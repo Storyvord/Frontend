@@ -29,3 +29,21 @@
 .rbc-toolbar {
   flex-wrap: nowrap !important;
 }
+
+@media screen and (max-width: 1100px) {
+  .rbc-btn-group > button {
+    padding: 0.2rem 0.3rem !important;
+  }
+}
+
+@media (width <= 767px) {
+  .rbc-toolbar {
+    flex-direction: row !important;
+  }
+}
+
+@media (width <= 500px) {
+  .rbc-btn-group:first-child {
+    display: none !important;
+  }
+}

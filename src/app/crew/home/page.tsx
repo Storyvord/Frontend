@@ -27,7 +27,7 @@ const CrewSection = () => {
             <Tasks />
           </div>
         </section>
-        <section className=" h-full px-4 space-y-6 bg-white">
+        <section className=" h-full xl:px-4 space-y-6 bg-white">
           <Notification />
           <Actions />
           <MyNetwork />
