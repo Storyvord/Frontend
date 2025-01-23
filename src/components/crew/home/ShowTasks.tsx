@@ -27,7 +27,7 @@ const ShowTasks = () => {
           </p>
         </div>
       ))}
-      <Link href="/dashboard/company-tasks" className=" grid place-content-end cursor-pointer">
+      <Link href="/crew/tasks" className=" grid place-content-end cursor-pointer">
         <Image height={30} width={30} src="/icons/right-arrow.svg" alt="arrow" className=" mt-3" />
       </Link>
     </div>

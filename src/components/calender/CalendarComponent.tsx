@@ -37,7 +37,7 @@ type CalendarComponentProps = {
   handleNavigate?: (date: Date) => void;
   currentDate?: Date;
   height?: string;
-  calendarId: number | null;
+  calendarId: number | null | undefined;
 };
 
 const locales = {

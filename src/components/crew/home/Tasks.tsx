@@ -38,24 +38,24 @@ const Tasks = () => {
       {/* Header */}
       <header className="flex justify-between items-center">
         <span className="flex gap-2 items-center">
-          <Image height={25} width={25} src="/icons/task.svg" alt="Task icon" />
+          <Image height={20} width={20} src="/icons/task.svg" alt="Task icon" />
           <h1 className="text-lg md:text-lg">{t("my-tasks")}</h1>
         </span>
         <Button
           onClick={() => setFormOpen(true)}
-          className="flex gap-2 rounded-sm border border-gray-600"
+          className="flex gap-2 rounded-sm border border-gray-600 bg-transparent"
           size="sm"
           variant="outline"
         >
-          <Image height={20} width={20} src="/icons/plus-2.svg" alt="Add icon" />
+          <Image height={20} width={20} src="/icons/plus.svg" alt="Add icon" />
           {t("button.task")}
         </Button>
       </header>
 
       {/* Content Section */}
-      <div className="border bg-white rounded-3xl h-full p-4 w-full mt-3">
+      <div className="border bg-white rounded-3xl p-4 w-full mt-3">
         {/* Scrollable section */}
-        <section className="overflow-y-auto max-h-96 p-2 space-y-4">
+        <section className="overflow-y-auto max-h-96 min-h-40 p-2 space-y-4">
           <ShowTasks />
         </section>
         {/* Create Task Modal */}

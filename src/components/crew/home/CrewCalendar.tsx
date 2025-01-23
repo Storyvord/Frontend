@@ -1,76 +1,37 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import {
   useCreateCompanyCalenderEvents,
   useDeleteCompanyCalenderEvent,
   useEditCompanyCalenderEvent,
-  useGetCompanyCalenderEvents,
 } from "@/lib/react-query/queriesAndMutations/company/calender";
-import {
-  useGetOnBoardedEmployeeList,
-  useGetSendInvitationsList,
-} from "@/lib/react-query/queriesAndMutations/company/employee";
 import CalendarComponent from "@/components/calender/CalendarComponent";
-import { CalenderFormFieldType } from "@/types";
-import { useGetAllCrewCalenderEvents } from "@/lib/react-query/queriesAndMutations/crew/calendar";
+import { CalenderEventType, CalenderFormFieldType } from "@/types";
 
-type CalendarEvent = {
-  id: number;
-  title: string;
-  description: string;
-  start: string;
-  end: string;
-  location?: string;
-  calendar: number;
-  participants?: number[];
-};
-
-type ProjectCalendar = {
-  id: number;
-  name: string;
-  project: string;
-  events: CalendarEvent[];
-};
 type Props = {
   openFormDialog: boolean;
   setOpenFormDialog: (value: boolean) => void;
   calendarType: "month" | "week" | "day" | "agenda";
   currentDate?: Date;
   height?: string;
+  events?: CalenderEventType[];
+  isPending?: boolean;
+  isError?: boolean;
+  userCalendarId?: number | null;
 };
-const CrewCalendar = ({ openFormDialog, setOpenFormDialog, calendarType, height }: Props) => {
+const CrewCalendar = ({
+  openFormDialog,
+  setOpenFormDialog,
+  calendarType,
+  height,
+  events,
+  isPending,
+  isError,
+  userCalendarId,
+}: Props) => {
   const [openEventDialog, setOpenEventDialog] = useState(false);
-  const [transformEvents, setTransformEvents] = useState<any[]>([]);
-  const [userCalendarId, setUserCalendarId] = useState<number | null>(null);
-
-  // Fetch all calendar events
-  const {
-    data: allEvents,
-    isPending: isEventsLoading,
-    isError: isEventsError,
-  } = useGetAllCrewCalenderEvents();
-
-  useEffect(() => {
-    if (allEvents) {
-      // Extracting user calendar events
-      const userEvents = allEvents?.data?.user_calendar?.user_calendar_events || [];
-
-      // Extracting project calendars and their events
-      const projectCalendars = allEvents?.data?.project_calendars || [];
-      const projectEvents = projectCalendars.flatMap(
-        (calendar: ProjectCalendar) => calendar.events || []
-      );
-
-      // Merging user and project events
-      const mergedEvents = [...userEvents, ...projectEvents];
-      setTransformEvents(mergedEvents);
-
-      // Setting user calendar ID
-      setUserCalendarId(allEvents?.data?.user_calendar?.id);
-    }
-  }, [allEvents]);
 
   // Create calendar event mutation
   const {
@@ -108,10 +69,10 @@ const CrewCalendar = ({ openFormDialog, setOpenFormDialog, calendarType, height 
 
   return (
     <div className="rounded-3xl">
-      {isEventsError && <p className="text-center my-1 text-red-500">Error loading data.</p>}
-      {isEventsLoading && <p className="text-center mt-10">Loading...</p>}
+      {isError && <p className="text-center my-1 text-red-500">Error loading data.</p>}
+      {isPending && <p className="text-center mt-10">Loading...</p>}
       <CalendarComponent
-        events={transformEvents || []}
+        events={events || []}
         calendarType={calendarType}
         // crewList={employeeList}
         isCreateLoading={isCreateLoading}

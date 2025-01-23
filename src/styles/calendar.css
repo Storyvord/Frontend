@@ -4,13 +4,9 @@
   border-radius: 4px !important;
 }
 
-.rbc-event:hover {
-  filter: brightness(85%) !important;
-}
-
 /* Selected event style */
 .rbc-selected {
-  filter: brightness(85%) !important;
+  border: 1px solid green !important;
 }
 
 /* Event time and title */

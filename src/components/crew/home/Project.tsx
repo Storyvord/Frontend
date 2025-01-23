@@ -6,21 +6,22 @@ import { useGetProjects } from "@/lib/react-query/queriesAndMutations/project";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import ProjectCard from "./ProjectCard";
+import ProjectCard, { ShimmerCard } from "./ProjectCard";
+import { useGetInvitations } from "@/lib/react-query/queriesAndMutations/crew/invitations";
 
-type Props = {
-  listOfProjects: {
-    project_name: string;
-    created_at: string;
-    project_status: string;
-    project_id: string;
-  }[];
+type Project = {
+  project_name: string;
+  created_at: string;
+  project_status: string;
+  project_id: string;
 };
 
-const Project = ({ listOfProjects }: Props) => {
+const Project = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null); // Main container reference
   const scrollContentRef = useRef<HTMLDivElement>(null); // Inner div reference for project cards
   const [showArrows, setShowArrows] = useState(false); // State to toggle arrows
+
+  const { data: listOfProjects, isPending, isError } = useGetInvitations();
 
   useEffect(() => {
     // Check if scrollable content is wider than the container
@@ -57,7 +58,7 @@ const Project = ({ listOfProjects }: Props) => {
           <h1 className=" text-lg md:text-xl">Your projects</h1>
         </span>
         <Link href="#">
-          <Button className="flex gap-2 rounded-sm border-gray-600" size="sm" variant="outline">
+          <Button className="flex gap-2 rounded-sm border-gray-600" size="sm">
             <Image height={20} width={20} src="/icons/plus-2.svg" alt="plus-icon" /> Manage Project
           </Button>
         </Link>
@@ -68,11 +69,21 @@ const Project = ({ listOfProjects }: Props) => {
         className="w-full overflow-x-auto"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
+        {listOfProjects?.data?.length === 0 && !isPending && (
+          <div className=" h-36 w-1/2 grid place-content-center mx-auto">
+            <p className="text-gray-500">No project found</p>
+            <Button
+              className=" flex gap-2 rounded-sm border border-gray-600 mt-4"
+              size="sm"
+              variant="outline"
+            >
+              <Image width={20} height={20} src="/icons/jobs.svg" alt="" /> View Jobs
+            </Button>
+          </div>
+        )}
         <div ref={scrollContentRef} className="flex gap-6 w-max scrollbar-hide">
-          {listOfProjects?.length === 0 && (
-            <p className=" my-auto md:pl-12 text-gray-500">No project found</p>
-          )}
-          {listOfProjects?.map((project) => (
+          {isPending && new Array(4).fill("").map((_, index) => <ShimmerCard key={index} />)}
+          {listOfProjects?.data?.map((project: Project) => (
             <Link key={project.project_id} href={`/project-details/${project.project_id}`}>
               <ProjectCard
                 key={project.project_id}

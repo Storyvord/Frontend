@@ -1,3 +1,4 @@
+import { Skeleton } from "@/components/ui/skeleton";
 import { format } from "date-fns/format";
 import Image from "next/image";
 import React from "react";
@@ -27,3 +28,23 @@ const ProjectCard = ({ name, status, date }: Props) => {
 };
 
 export default ProjectCard;
+
+export const ShimmerCard = () => {
+  return (
+    <div className="w-80 md:min-h-full border rounded-3xl p-4 bg-white flex flex-col gap-4 cursor-pointer">
+      <div className="flex justify-between">
+        <Skeleton className="h-6 w-6 rounded-full" />
+        <Skeleton className="h-6 w-20 rounded-md" />
+      </div>
+
+      <span>
+        <Skeleton className="h-6 w-32 mb-2" />
+        <Skeleton className="h-5 w-24" />
+      </span>
+
+      <div className="mt-auto">
+        <Skeleton className="h-5 w-28" />
+      </div>
+    </div>
+  );
+};

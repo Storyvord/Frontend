@@ -18,7 +18,7 @@ const MyNetwork = () => {
           size="sm"
           variant="outline"
         >
-          <Image width={20} height={20} src="/icons/plus-2.svg" alt="" /> {t("button.add")}
+          <Image width={20} height={20} src="/icons/plus.svg" alt="" /> {t("button.add")}
         </Button>
       </header>
       <main>
@@ -26,44 +26,64 @@ const MyNetwork = () => {
           {/* TODO: temporary code, this is only for demo. will change after apis will create */}
           <section className="space-y-3">
             <div className=" flex justify-between items-center ">
-              <Image
-                src="/profile-4.png"
-                alt="picture"
-                width={50}
-                height={50}
-                className=" rounded-full w-12 h-12"
-              />
-              <p className=" pr-6">Maria Rossi</p>
+              <div className=" flex gap-3 items-center">
+                <Image
+                  src="/profile-4.png"
+                  alt="picture"
+                  width={50}
+                  height={50}
+                  className=" rounded-full w-12 h-12"
+                />
+                <p className=" pr-6">Maria Rossi</p>
+              </div>
+              <button>
+                <Image src="/icons/send.svg" alt="" width={25} height={25} />
+              </button>
             </div>
-            <div className=" flex justify-between items-center">
-              <Image
-                src="/profile-5.png"
-                alt="picture"
-                width={50}
-                height={50}
-                className=" rounded-full w-12 h-12"
-              />
-              <p className=" pr-6">Lucas Fernandez</p>
+            <div className=" flex justify-between items-center ">
+              <div className=" flex gap-3 items-center">
+                <Image
+                  src="/profile-5.png"
+                  alt="picture"
+                  width={50}
+                  height={50}
+                  className=" rounded-full w-12 h-12"
+                />
+                <p className=" pr-6">Drew Cano</p>
+              </div>
+              <button>
+                <Image src="/icons/send.svg" alt="" width={25} height={25} />
+              </button>
             </div>
-            <div className=" flex justify-between items-center">
-              <Image
-                src="/profile-6.png"
-                alt="picture"
-                width={50}
-                height={50}
-                className=" rounded-full w-12 h-12"
-              />
-              <p className=" pr-6">Sarah Thompson</p>
+            <div className=" flex justify-between items-center ">
+              <div className=" flex gap-3 items-center">
+                <Image
+                  src="/profile-6.png"
+                  alt="picture"
+                  width={50}
+                  height={50}
+                  className=" rounded-full w-12 h-12"
+                />
+                <p className=" pr-6">Koray Okumus</p>
+              </div>
+              <button>
+                <Image src="/icons/send.svg" alt="" width={25} height={25} />
+              </button>
             </div>
-            <div className=" flex justify-between items-center">
-              <Image
-                src="/profile-7.png"
-                alt="picture"
-                width={50}
-                height={50}
-                className=" rounded-full w-12 h-12"
-              />
-              <p className=" pr-6">David Kim</p>
+            <div className=" flex justify-between items-center ">
+              <div className=" flex gap-3 items-center">
+                <Image
+                  src="/profile-7.png"
+                  alt="picture"
+                  width={50}
+                  height={50}
+                  className=" rounded-full w-12 h-12"
+                />
+                <p className=" pr-6">Kate Morrison</p>
+              </div>
+              <button>
+                <Image src="/icons/send.svg" alt="" width={25} height={25} />
+              </button>
             </div>
           </section>
           <Link href="/dashboard/employees" className=" grid place-content-end cursor-pointer">
