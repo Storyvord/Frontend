@@ -22,7 +22,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
           path === "/dashboard" || path.includes("message")
             ? ""
             : isSidebarSmall
-              ? "ml-20"
+              ? "md:ml-20"
               : "md:ml-60 xl:ml-72"
         )}
       >
