@@ -1,20 +1,21 @@
 "use client";
+import React, { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import { useParams, useSelectedLayoutSegments } from "next/navigation";
+
+import { cn } from "@/lib/utils";
+import { getLocalizedString } from "@/i18n/utils";
 import { projectdetailsItems } from "@/constant/constant";
 import { useProjectControl } from "@/context/ProjectContext";
 import { useSideBarControl } from "@/context/SideBarContext";
-import Image from "next/image";
-import Link from "next/link";
 import SideBarButton from "./components/SideBarButton";
 import SideBarCloseButton from "./components/SideBarCloseButton";
-import { useParams, useSelectedLayoutSegments } from "next/navigation";
-import { cn } from "@/lib/utils";
-import React, { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
-import { getLocalizedString } from "@/i18n/utils";
-import { useTranslations } from "next-intl";
 
 const SideBar = () => {
-  const { isSideBarOpen } = useSideBarControl();
+  const { isSideBarOpen, isSidebarSmall } = useSideBarControl();
   const { setProject } = useProjectControl();
   const { id: projectId } = useParams();
   const segment = useSelectedLayoutSegments();
@@ -30,7 +31,12 @@ const SideBar = () => {
 
   return (
     <aside
-      className={`${isSideBarOpen ? "translate-x-0" : "-translate-x-80"} overflow-y-auto bg-white shadow-sm fixed inset-0 z-50 h-100vh w-60 xl:w-72 transition-transform duration-300 md:translate-x-0 border border-blue-gray-100 font-poppins pb-8`}
+      className={cn(
+        "bg-white shadow-sm fixed inset-0 z-50 h-100vh transition-transform duration-300 md:translate-x-0 font-poppins pb-8",
+        isSidebarSmall ? "w-20" : "w-60 xl:w-72",
+        isSideBarOpen ? "translate-x-0" : "-translate-x-80",
+        "overflow-hidden hover:overflow-y-auto"
+      )}
     >
       <div className="relative">
         <SideBarCloseButton />
@@ -38,7 +44,7 @@ const SideBar = () => {
           <Image
             onClick={() => setProject({ id: "", name: "" })}
             className=" mx-auto w-[150px]"
-            src="/logo-a6299cea.png"
+            src={isSidebarSmall ? "/logo1.jpeg" : "/logo-a6299cea.png"}
             width={150}
             height={78}
             alt=""
@@ -51,7 +57,7 @@ const SideBar = () => {
           className=" flex items-center gap-4 py-3 hover:text-text-color-1 pl-4 w-full text-gray-500 font-semibold"
         >
           <Image src="/icons/left-arrow.svg" alt="" width={17} height={17} />
-          {t("dashboard")}
+          {!isSidebarSmall && t("dashboard")}
         </Link>
 
         <Link
@@ -76,7 +82,7 @@ const SideBar = () => {
                        flex justify-between items-center font-poppins-medium"
               onClick={() => toggleSection(details.title)}
             >
-              {getLocalizedString(`ProjectDetailsItems.${details.title}.title`)}
+              {!isSidebarSmall && getLocalizedString(`ProjectDetailsItems.${details.title}.title`)}
 
               <span className="text-gray-400">
                 {collapsedSections[details.title] ? (

@@ -32,8 +32,8 @@ const ReportDetails = ({ isPending, isError, report, refetch }: ReportDetailsPro
     );
   }
 
-  const filteredData = report.includes("```markdown\n")
-    ? report.replace("```markdown\n", "")
+  const filteredData = report?.includes("```markdown\n")
+    ? report?.replace("```markdown\n", "")
     : report;
 
   return (

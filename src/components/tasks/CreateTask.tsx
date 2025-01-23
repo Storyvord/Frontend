@@ -38,7 +38,7 @@ interface CreateTaskProps {
   formOpen: boolean;
   handleSubmission: (newTask: taskFormType) => void;
   setFormOpen: (value: boolean) => void;
-  crewList: { value: number; label: string }[];
+  crewList?: { value: number; label: string }[];
 }
 
 const CreateTask: FC<CreateTaskProps> = ({

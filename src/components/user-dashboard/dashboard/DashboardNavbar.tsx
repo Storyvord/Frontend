@@ -131,7 +131,7 @@ const DashboardNavbar = () => {
             <Image
               className={cn(
                 " w-[125px] md:w-[150px]",
-                path === "/dashboard" || path.includes("message") ? "" : "lg:hidden"
+                path === "/dashboard" || path.includes("message") ? "" : "sm:hidden"
               )}
               src={"/logo.svg"}
               width={50}
