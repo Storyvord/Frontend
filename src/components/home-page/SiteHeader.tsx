@@ -55,11 +55,12 @@ export function SiteHeader() {
             </Link>
           )}
           {!userDetails && (
-            <Link href="/auth/sign-in">
-              <Button className=" bg-background-2 hover:bg-background-2">
-                {t("button.getStarted")}
-              </Button>
-            </Link>
+            <Button
+              onClick={() => (window.location.pathname = "/auth/sign-in")}
+              className=" bg-background-2 hover:bg-background-2"
+            >
+              {t("button.getStarted")}
+            </Button>
           )}
         </div>
       </div>
