@@ -49,12 +49,24 @@ const Project = ({ onGoingProjects }: { onGoingProjects: any }) => {
           <Image height={27} width={27} src="/icons/project-2.svg" alt="plus-icon" />
           <h1 className=" text-lg md:text-xl">{t("your-ongoing-projects")}</h1>
         </span>
-        <Link href="/dashboard/new-project">
-          <Button className="md:hidden flex gap-2">
-            <Image height={20} width={20} src="/icons/plus-2.svg" alt="plus-icon" />{" "}
-            {t("button.new-project")}
-          </Button>
-        </Link>
+        <div className=" flex gap-3">
+          <Link href="/dashboard/new-project">
+            <Button
+              className="flex gap-2 bg-transparent border-gray-500 rounded-sm h-10 md:hidden"
+              variant="outline"
+              size="sm"
+            >
+              <Image height={20} width={20} src="/icons/plus-2.svg" alt="plus-icon" />{" "}
+              {t("button.new-project")}
+            </Button>
+          </Link>
+          <Link href="#">
+            <Button className="flex gap-2 rounded-sm border-gray-600 h-10" size="sm">
+              <Image height={20} width={20} src="/icons/plus-2.svg" alt="plus-icon" /> Manage
+              Project
+            </Button>
+          </Link>
+        </div>
       </header>
 
       <main
