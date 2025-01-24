@@ -48,7 +48,7 @@ const DashboardCalendar = ({ employeeList, height }: Props) => {
       </header>
       <main className="flex xl:flex-row flex-col md:items-start gap-3 mt-4">
         <DatePickerWithRange onSelectRange={handleSelectRange} />
-        <div className="md:px-4 py-2 rounded-xl flex-1 border bg-white">
+        <div className="md:px-4 py-2 rounded-xl flex-1 border bg-white w-full">
           <h2 className=" text-md md:text-lg pb-2 p-4 font-semibold text-gray-700 ">
             {t("my-schedule")}
           </h2>
