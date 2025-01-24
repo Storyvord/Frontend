@@ -76,22 +76,26 @@ const SideBar = () => {
 
         {projectdetailsItems.map((details) => (
           <div key={details.title} className="flex flex-col gap-1">
-            {/* Section Title (localized) */}
-            <h1
-              className="pl-2 text-sm text-gray-500 mt-4 uppercase cursor-pointer 
+            {/* Section Title*/}
+            {isSidebarSmall ? (
+              <span className="w-1/2 mx-auto border my-3"></span>
+            ) : (
+              <h1
+                className="pl-2 text-sm text-gray-500 mt-4 uppercase cursor-pointer 
                        flex justify-between items-center font-poppins-medium"
-              onClick={() => toggleSection(details.title)}
-            >
-              {!isSidebarSmall && getLocalizedString(`ProjectDetailsItems.${details.title}.title`)}
+                onClick={() => toggleSection(details.title)}
+              >
+                {getLocalizedString(`ProjectDetailsItems.${details.title}.title`)}
 
-              <span className="text-gray-400">
-                {collapsedSections[details.title] ? (
-                  <ChevronDown className="w-5 h-5" />
-                ) : (
-                  <ChevronUp className="w-5 h-5" />
-                )}
-              </span>
-            </h1>
+                <span className="text-gray-400">
+                  {collapsedSections[details.title] ? (
+                    <ChevronDown className="w-5 h-5" />
+                  ) : (
+                    <ChevronUp className="w-5 h-5" />
+                  )}
+                </span>
+              </h1>
+            )}
 
             {/* Section Items (collapsible with animation) */}
             <ul

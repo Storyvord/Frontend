@@ -21,18 +21,11 @@ export const useRegisterUser = () => {
 };
 
 export const useUserSignIn = () => {
-  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: userSignIn,
     onSuccess: (data) => {
       Cookies.set("accessToken", data?.data?.tokens?.access);
       Cookies.set("refreshToken", data?.data?.tokens?.refresh);
-      queryClient.invalidateQueries({
-        queryKey: ["getProjects"],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["userDetails"],
-      });
       return data;
     },
     onError: (error) => {

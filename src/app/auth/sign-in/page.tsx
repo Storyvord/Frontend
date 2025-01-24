@@ -18,24 +18,31 @@ const SignInPage = () => {
     try {
       setIsLoading(true);
       const res = await loginUser(data);
-      console.log(res);
-      if (res) {
-        // user_type === 1  Represents a client
-        // user_type === 2  Represents a crew member
 
-        // When the user registers, set userStage to 0
-        // After the user selects a userType, set userStage to 1
-        // Once the user updates their profile, set userStage to 2
+      if (!res || !res.data || !res.data.user) {
+        throw new Error("User data not found");
+      }
 
-        if (res?.data?.user.user_type === 1 && res?.data?.user.steps) {
-          Cookies.set("isClient", "true");
-          router.push("/dashboard");
-        } else if (res?.data?.user.user_type === 2 && res?.data?.user.steps) {
-          Cookies.set("isClient", "false");
-          router.push("/crew/home");
-        } else if (!res?.data?.user.steps) {
-          router.push("/auth/onboard");
-        }
+      // user_type === 1  Represents a client
+      // user_type === 2  Represents a crew member
+
+      // When the user registers, set userStage to 0
+      // After the user selects a userType, set userStage to 1
+      // Once the user updates their profile, set userStage to 2
+
+      // Handle userType and steps based on the response
+      const user = res?.data?.user;
+
+      if (user.user_type === 1 && user.steps) {
+        router.replace("/dashboard");
+        Cookies.set("isClient", "true");
+      } else if (user.user_type === 2 && user.steps) {
+        router.replace("/crew/home");
+        Cookies.set("isClient", "false");
+      } else if (!user.steps) {
+        router.replace("/auth/onboard");
+      } else {
+        throw new Error("Unexpected user state");
       }
     } catch (error) {
       const { title, description } = formatError(error);
