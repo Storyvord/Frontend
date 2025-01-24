@@ -23,6 +23,13 @@ const SignInPage = () => {
         throw new Error("User data not found");
       }
 
+      // user_type === 1  Represents a client
+      // user_type === 2  Represents a crew member
+
+      // When the user registers, set userStage to 0
+      // After the user selects a userType, set userStage to 1
+      // Once the user updates their profile, set userStage to 2
+
       // Handle userType and steps based on the response
       const user = res?.data?.user;
 
