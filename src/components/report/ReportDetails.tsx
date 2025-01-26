@@ -1,46 +1,34 @@
-import React, { ReactNode } from "react";
+import React, { useMemo } from "react";
 import LoadingUi from "./LoadingUi";
 import Markdown from "react-markdown";
 import { Button } from "../ui/button";
 import remarkGfm from "remark-gfm";
+import { ReportName, useGetSuggestions } from "@/lib/react-query/queriesAndMutations/aiSuggestions";
 
-interface ReportDetailsProps {
-  report: string;
-  isPending: boolean;
-  isError: boolean;
-  refetch: () => void;
-}
-interface ComponentProps {
-  children: ReactNode;
-}
+const ReportDetails = ({ report, projectId }: { report: ReportName; projectId: string }) => {
+  const { data, isPending, isError, refetch } = useGetSuggestions(projectId, report);
 
-const ReportDetails = ({ isPending, isError, report, refetch }: ReportDetailsProps) => {
+  // Render loading state
   if (isPending) {
-    return <LoadingUi isPending={isPending} text="Getting suggestions..." />;
+    return <LoadingUi isPending={isPending} text={`Getting ${report} suggestions...`} />;
   }
 
-  if (isError && !isPending) {
+  // Render error state
+  if (isError) {
     return (
       <div className="flex flex-col gap-6 justify-center items-center pt-8 md:p-6">
         <p className="text-xl font-poppins-semibold text-red-600">
           An error occurred while fetching data. Please try again.
         </p>
-        <Button variant="outline" onClick={() => refetch()}>
+        {/* <Button variant="outline" onClick={refetch}>
           Try again
-        </Button>
+        </Button> */}
       </div>
     );
   }
 
-  const filteredData = report?.includes("```markdown\n")
-    ? report?.replace("```markdown\n", "")
-    : report;
-
   return (
     <div className="mt-6 space-y-4 px-4 relative">
-      {/* <Button onClick={() => refetch()} className=" absolute right-0 -top-2">
-        Regenerate
-      </Button> */}
       <Markdown
         components={{
           a({ children, href }) {
@@ -93,7 +81,7 @@ const ReportDetails = ({ isPending, isError, report, refetch }: ReportDetailsPro
         }}
         remarkPlugins={[remarkGfm]}
       >
-        {filteredData}
+        {data && data}
       </Markdown>
     </div>
   );

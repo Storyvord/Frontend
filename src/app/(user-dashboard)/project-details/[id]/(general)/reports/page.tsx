@@ -4,37 +4,34 @@ import { useState } from "react";
 import { useParams } from "next/navigation";
 
 import Tabs from "@/components/Tabs";
-import EquipmentPage from "@/components/report/EquipmentPage";
 import { useGetProjectRequirements } from "@/lib/react-query/queriesAndMutations/project";
-import {
-  useGetRequirements,
-  useGetSuggestions,
-} from "@/lib/react-query/queriesAndMutations/aiSuggestions";
+import { useGetRequirements } from "@/lib/react-query/queriesAndMutations/aiSuggestions";
 import CrewPage from "@/components/report/CrewPage";
 import ReportDetails from "@/components/report/ReportDetails";
+import SuppliersPage from "@/components/report/SuppliersPage";
 
-const tabs = ["Crew", "Suppliers", "Logistics", "Compliance", "Culture", "Budget"];
+const tabs = [
+  "Crew",
+  "Suppliers",
+  "Logistics",
+  "Compliance",
+  "Culture",
+  "Budget",
+  "Sustainability",
+];
 
 const ReportsPage = () => {
   const [activeTab, setActiveTab] = useState("Crew");
+  const { id: projectId }: { id: string } = useParams();
+  const { data: projectRequirements } = useGetProjectRequirements(projectId);
 
-  const { id: project_id }: { id: string } = useParams();
-
-  const { data: projectRequirements } = useGetProjectRequirements(project_id);
-
-  // ai Requirements suggestions
+  // ai Requirements suggestions for crew & Suppliers
   const {
     data: getRequirementsSuggestions,
     isPending: isPendingRequirementsSuggestions,
     isError: isErrorRequirementsSuggestions,
     refetch: refetchRequirement,
   } = useGetRequirements(projectRequirements?.results[0]?.id);
-  const {
-    data: suggestions,
-    isPending: isPendingSuggestions,
-    isError: isErrorSuggestions,
-    refetch,
-  } = useGetSuggestions(project_id);
 
   return (
     <div className="container mx-auto p-4">
@@ -48,45 +45,13 @@ const ReportsPage = () => {
           refetch={refetchRequirement}
         />
       )}
-      {activeTab === "Suppliers" && (
-        <EquipmentPage
-          equipmentRequirements={getRequirementsSuggestions?.data.suggested_equipment}
-          isPending={isPendingRequirementsSuggestions}
-          isError={isErrorRequirementsSuggestions}
-          refetch={refetchRequirement}
-        />
-      )}
-      {activeTab === "Logistics" && (
-        <ReportDetails
-          report={suggestions?.data?.report.logistics}
-          isPending={isPendingSuggestions}
-          isError={isErrorSuggestions}
-          refetch={refetch}
-        />
-      )}
-      {activeTab === "Compliance" && (
-        <ReportDetails
-          report={suggestions?.data?.report.compliance}
-          isPending={isPendingSuggestions}
-          isError={isErrorSuggestions}
-          refetch={refetch}
-        />
-      )}
-      {activeTab === "Culture" && (
-        <ReportDetails
-          report={suggestions?.data?.report.culture}
-          isPending={isPendingSuggestions}
-          isError={isErrorSuggestions}
-          refetch={refetch}
-        />
-      )}
-      {activeTab === "Budget" && (
-        <ReportDetails
-          report={suggestions?.data?.report.budget}
-          isPending={isPendingSuggestions}
-          isError={isErrorSuggestions}
-          refetch={refetch}
-        />
+      {activeTab === "Suppliers" && <SuppliersPage report="suppliers" projectId={projectId} />}
+      {activeTab === "Logistics" && <ReportDetails report="logistics" projectId={projectId} />}
+      {activeTab === "Compliance" && <ReportDetails report="compliance" projectId={projectId} />}
+      {activeTab === "Culture" && <ReportDetails report="culture" projectId={projectId} />}
+      {activeTab === "Budget" && <ReportDetails report="budget" projectId={projectId} />}
+      {activeTab === "Sustainability" && (
+        <ReportDetails report="sustainability" projectId={projectId} />
       )}
     </div>
   );
