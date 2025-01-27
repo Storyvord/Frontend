@@ -27,19 +27,12 @@ const initialCategories = {
     { id: 2, description: "Subtitles and Translation", cost: 400 },
   ],
 };
-const tabs = ["Overview", "Ai Response"];
+const tabs = ["Overview"];
 
 const BudgetPage: React.FC = () => {
   const [budget, setBudget] = useState(initialCategories);
   const [activeTab, setActiveTab] = useState(tabs[0]);
   const { id: project_id }: { id: string } = useParams();
-
-  const {
-    data: suggestions,
-    isPending: isPendingSuggestions,
-    isError: isErrorSuggestions,
-    refetch,
-  } = useGetSuggestions(project_id);
 
   // Update budget based on category and updated items
   const handleUpdate = (category: string, updatedItems: BudgetItem[]) => {
@@ -83,15 +76,6 @@ const BudgetPage: React.FC = () => {
           </div>
           <Button className="mt-4">Save Budget</Button>
         </>
-      )}
-
-      {activeTab === tabs[1] && (
-        <ReportDetails
-          report={suggestions?.data?.report.budget}
-          isPending={isPendingSuggestions}
-          isError={isErrorSuggestions}
-          refetch={refetch}
-        />
       )}
     </div>
   );

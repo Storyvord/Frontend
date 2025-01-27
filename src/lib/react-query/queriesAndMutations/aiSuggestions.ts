@@ -1,42 +1,55 @@
-import { getRequirements, getSuggestions } from "@/lib/api/aiSuggestions";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import {
+  getAiWorkStatus,
+  getRequirements,
+  getSuggestions,
+  startAiWork,
+} from "@/lib/api/aiSuggestions";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { useEffect } from "react";
 
-export const useGetSuggestions = (project_id: string) => {
-  const [taskId, setTaskId] = useState<string | null>(null);
-  const [isFetching, setIsFetching] = useState(true);
+const status = ["pending", "success"] as const;
 
-  const fetchSuggestions = async () => {
-    const response = await getSuggestions(project_id);
-    if (response.status === 202) {
-      setTaskId(response.task_id);
-      throw new Error("Processing not completed yet.");
-    } else if (response.status === 200) {
-      setIsFetching(false);
-      return response.data;
-    } else {
-      throw new Error("Unexpected API response.");
-    }
-  };
+export type Status = (typeof status)[number];
 
-  const query = useQuery({
-    queryKey: ["getSuggestions", project_id],
-    queryFn: fetchSuggestions,
-    enabled: !!project_id, // Ensure query runs only if project_id is provided
-    refetchInterval: isFetching ? 20000 : false,
-    retry: false, // Prevent react-query from retrying immediately on errors
+export const useGetSuggestions = (projectId: string, status: Status) => {
+  return useQuery({
+    queryKey: ["getSuggestions", projectId, status],
+    queryFn: () => getSuggestions(projectId),
+    enabled: !!projectId, // Fetch only if projectId is available
+    refetchOnWindowFocus: false,
+  });
+};
+
+export const useStartAIWork = () => {
+  return useMutation({
+    mutationFn: startAiWork,
+    onSuccess: (data) => {
+      return data;
+    },
+  });
+};
+
+export const useGetAiWorkStatus = (taskId: string) => {
+  const { data, isFetching, isError, refetch } = useQuery({
+    queryKey: ["taskStatus", taskId],
+    queryFn: () => getAiWorkStatus(taskId),
+    refetchInterval: (data) => (data?.state?.data?.status === "pending" ? 30000 : false), // Poll every 30s if "pending"
+    enabled: !!taskId,
   });
 
+  // Ensure refetching continues if the taskId changes or the component is remounted
   useEffect(() => {
-    if (!isFetching) {
-      query.refetch(); // Stop polling when fetching is complete
+    if (taskId) {
+      refetch();
     }
-  }, [isFetching, query]);
+  }, [taskId, refetch]);
+
+  const isLoading = data?.status === "pending";
 
   return {
-    ...query,
-    taskId,
-    isPending: isFetching,
+    data,
+    isError,
+    isPending: isLoading || isFetching,
   };
 };
 
@@ -44,8 +57,8 @@ export const useGetRequirements = (reqId: string) => {
   return useQuery({
     queryKey: ["getRequirements", reqId],
     queryFn: () => getRequirements(reqId),
-    // The query will not execute until the reqId exists
     enabled: !!reqId,
-    staleTime: 60000, // 2 minutes (data stays fresh for this duration)
+    retry: false, // Disable retry since error handling is manual
+    refetchOnWindowFocus: false,
   });
 };
