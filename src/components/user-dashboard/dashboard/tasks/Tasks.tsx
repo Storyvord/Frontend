@@ -8,6 +8,7 @@ import { useCreateNewCompanyTask } from "@/lib/react-query/queriesAndMutations/c
 import { useToast } from "@/components/ui/use-toast";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { formatError } from "@/lib/utils";
 
 type Props = {
   employeeList: { value: number; label: string }[];
@@ -29,27 +30,36 @@ const Tasks = ({ employeeList }: Props) => {
       assigned_to: task.assigned_to,
     };
 
-    const res = await createTaskMutation(newTask);
-    if (res) {
+    try {
+      const res = await createTaskMutation(newTask);
       toast({ title: "Task created" });
-    } else {
-      toast({ title: "Failed to create new task", variant: "destructive" });
+    } catch (error) {
+      const { title, description } = formatError(error);
+      toast({
+        title,
+        description,
+        variant: "destructive",
+      });
     }
   };
   return (
-    <div className="p-2 h-64">
+    <div className="md:col-span-2 md:col-start-1 flex flex-col">
       <header className="flex justify-between items-center">
         <span className="flex gap-2 items-center">
           <Image height={20} width={20} src="/icons/task.svg" alt="plus-icon" />
-          <h1 className="text-lg md:text-lg">{t("my-tasks")}</h1>
+          <h1 className="text-lg md:text-xl">{t("my-tasks")}</h1>
         </span>
-        <Button onClick={() => setFormOpen(true)} className="flex gap-2">
-          <Image height={20} width={20} src="/icons/plus-2.svg" alt="plus-icon" />{" "}
-          {t("button.task")}
+        <Button
+          onClick={() => setFormOpen(true)}
+          className="flex gap-2 bg-transparent border-gray-500 rounded-sm h-10"
+          variant="outline"
+          size="sm"
+        >
+          <Image height={20} width={20} src="/icons/plus.svg" alt="plus-icon" /> {t("button.task")}
         </Button>
       </header>
       {/* Scrollable content */}
-      <div className="overflow-y-auto h-full">
+      <div className="overflow-y-auto mt-4 border flex-1 bg-white rounded-3xl">
         <ShowTasks />
         <CreateTask
           setFormOpen={setFormOpen}
