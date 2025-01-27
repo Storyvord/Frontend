@@ -54,7 +54,7 @@ const SuppliersPage = ({ report, isPending, isError }: Props) => {
             <h2 className="mb-4 font-poppins-semibold text-lg md:text-xl text-center text-gray-900 capitalize">
               Location: {location}
             </h2>
-            <main className="space-y-4">
+            <main className="grid grid-cols-1 lg:grid-cols-2 gap-3">
               {suppliersData[location].map((supplier, index) => (
                 <SupplierCard key={`${location}-${index}`} supplier={supplier} />
               ))}
