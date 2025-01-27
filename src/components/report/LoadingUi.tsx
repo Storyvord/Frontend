@@ -5,7 +5,7 @@ const LoadingUi = ({ isPending, text = "Loading..." }: { isPending: boolean; tex
     "Fetching best fit data, please wait.",
     "Hang tight! Gathering the latest information.",
     "Just a moment, we're almost there!",
-    "This might take 15-20 seconds.",
+    "This might take 30-60 seconds.",
   ];
 
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);

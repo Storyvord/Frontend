@@ -30,19 +30,12 @@ const initialCategories = {
     { id: 2, description: "Establish emergency contact protocols", completed: false },
   ],
 };
-const tabs = ["Overview", "Ai Response"];
+const tabs = ["Overview"];
 
 const CompliancePage: React.FC = () => {
   const [compliance, setCompliance] = useState(initialCategories);
   const [activeTab, setActiveTab] = useState(tabs[0]);
   const { id: project_id }: { id: string } = useParams();
-
-  const {
-    data: suggestions,
-    isPending: isPendingSuggestions,
-    isError: isErrorSuggestions,
-    refetch,
-  } = useGetSuggestions(project_id);
 
   const handleUpdate = (category: string, updatedTasks: ComplianceTask[]) => {
     setCompliance((prev) => ({ ...prev, [category]: updatedTasks }));
@@ -86,14 +79,6 @@ const CompliancePage: React.FC = () => {
           </div>
           <Button className="mt-4">Save Compliance Status</Button>
         </>
-      )}
-      {activeTab === tabs[1] && (
-        <ReportDetails
-          report={suggestions?.data?.report.compliance}
-          isPending={isPendingSuggestions}
-          isError={isErrorSuggestions}
-          refetch={refetch}
-        />
       )}
     </div>
   );

@@ -45,13 +45,13 @@ const CrewPage: React.FC<CrewPageClientProps> = ({
   }
 
   return (
-    <div className="p-4">
+    <div className="p-2 md:-p-4">
       <h1 className="mb-6 text-center font-poppins-semibold text-2xl text-gray-900">
         {crewRequirements?.message}
       </h1>
       <section className="space-y-8">
         {crewRequirements?.data.map((item) => (
-          <div key={item.id} className="p-6 border border-gray-200 rounded-lg shadow-md">
+          <div key={item.id} className="md:p-6 p-3 border border-gray-200 rounded-lg shadow-md">
             <h2 className="mb-4 font-poppins-semibold text-lg text-gray-900">
               Location: {item.location}
             </h2>

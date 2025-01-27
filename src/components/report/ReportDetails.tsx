@@ -1,16 +1,33 @@
-import React, { useMemo } from "react";
-import LoadingUi from "./LoadingUi";
+import React from "react";
 import Markdown from "react-markdown";
-import { Button } from "../ui/button";
 import remarkGfm from "remark-gfm";
-import { ReportName, useGetSuggestions } from "@/lib/react-query/queriesAndMutations/aiSuggestions";
+import { EllipsisVertical } from "lucide-react";
+import LoadingUi from "./LoadingUi";
+import { Button } from "../ui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
-const ReportDetails = ({ report, projectId }: { report: ReportName; projectId: string }) => {
-  const { data, isPending, isError, refetch } = useGetSuggestions(projectId, report);
+type Name = "logistics" | "budget" | "compliance" | "culture" | "sustainability";
 
+type Props = {
+  report: string;
+  isPending: boolean;
+  isError: boolean;
+  refetch: () => void;
+  handleRegenerateAiWork: () => Promise<void>;
+  name: Name;
+};
+
+const ReportDetails = ({
+  report,
+  isPending,
+  isError,
+  name,
+  refetch,
+  handleRegenerateAiWork,
+}: Props) => {
   // Render loading state
   if (isPending) {
-    return <LoadingUi isPending={isPending} text={`Getting ${report} suggestions...`} />;
+    return <LoadingUi isPending={isPending} text={`Getting ${name} suggestions...`} />;
   }
 
   // Render error state
@@ -20,15 +37,42 @@ const ReportDetails = ({ report, projectId }: { report: ReportName; projectId: s
         <p className="text-xl font-poppins-semibold text-red-600">
           An error occurred while fetching data. Please try again.
         </p>
-        {/* <Button variant="outline" onClick={refetch}>
+        <Button variant="outline" onClick={refetch}>
           Try again
-        </Button> */}
+        </Button>
       </div>
     );
   }
 
+  if (typeof report !== "string") {
+    return; // Exit if report is a string
+  }
+
+  const formatReport = (): string => {
+    if (report?.includes(":warning:")) {
+      // Replace ":warning:" with "⚠️warning:"
+      return report.replaceAll(":warning:", "⚠️warning:");
+    }
+    return report;
+  };
   return (
-    <div className="mt-6 space-y-4 px-4 relative">
+    <div className="space-y-4 p-2 md:-p-4 relative">
+      <Popover>
+        <PopoverTrigger className=" absolute right-0">
+          <EllipsisVertical />
+        </PopoverTrigger>
+        <PopoverContent className=" w-fit">
+          <Button
+            onClick={handleRegenerateAiWork}
+            className="font-poppins-medium text-sm"
+            size="sm"
+            variant="outline"
+          >
+            Re-Generate
+          </Button>
+        </PopoverContent>
+      </Popover>
+
       <Markdown
         components={{
           a({ children, href }) {
@@ -81,7 +125,7 @@ const ReportDetails = ({ report, projectId }: { report: ReportName; projectId: s
         }}
         remarkPlugins={[remarkGfm]}
       >
-        {data && data}
+        {formatReport()}
       </Markdown>
     </div>
   );

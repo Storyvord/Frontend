@@ -1,98 +1,58 @@
-import { getRequirements, getSuggestions, startAiWork } from "@/lib/api/aiSuggestions";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import {
+  getAiWorkStatus,
+  getRequirements,
+  getSuggestions,
+  startAiWork,
+} from "@/lib/api/aiSuggestions";
+import { useQuery, useMutation } from "@tanstack/react-query";
 
-const regenerate = [
-  "logistics",
-  "crew",
-  "budget",
-  "compliance",
-  "culture",
-  "sustainability",
-  "suppliers",
-] as const;
+const status = ["pending", "success"] as const;
 
-export type ReportName = (typeof regenerate)[number];
+export type Status = (typeof status)[number];
 
-export const useGetSuggestions = (project_id: string, report: ReportName) => {
-  const [loading, setLoading] = useState(true); // Initially set to true to handle loading state
-  const [reportValue, setReportValue] = useState(null);
-
-  // Utility function to check if a field is empty (null or {})
-  const isFieldEmpty = (field: any) => {
-    return field === null || (typeof field === "object" && Object.keys(field).length === 0);
-  };
-
-  const fetchSuggestions = async () => {
-    const response = await getSuggestions(project_id);
-    const data = response?.[0]; // API returns an array
-    if (!data) throw new Error("No data found.");
-
-    const reportField = Object.keys(data).find((key) => key.includes(report));
-    const newReportValue = reportField ? data[reportField] : null;
-
-    setReportValue(newReportValue);
-    return data;
-  };
-
-  const query = useQuery({
-    queryKey: ["getSuggestions", project_id, report],
-    queryFn: fetchSuggestions,
-    enabled: !!project_id, // Fetch only if project_id is available
-    refetchInterval: () => {
-      // Continue polling if the field is empty
-      if (isFieldEmpty(reportValue)) return 15000; // Poll every 15 seconds
-      return false; // Stop polling if data is available
-    },
-    retry: false, // Disable retry since error handling is manual
-    staleTime: 300000,
+export const useGetSuggestions = (projectId: string, status: Status) => {
+  return useQuery({
+    queryKey: ["getSuggestions", projectId, status],
+    queryFn: () => getSuggestions(projectId),
+    enabled: !!projectId, // Fetch only if projectId is available
+    refetchOnWindowFocus: false,
+    staleTime: 60000, // 1 minutes (data stays fresh for this duration)
   });
-
-  useEffect(() => {
-    if (query.isSuccess) {
-      const data = query.data;
-      const reportField = Object.keys(data || {}).find((key) => key.includes(report));
-      const fieldValue = reportField ? data[reportField] : null;
-
-      setReportValue(fieldValue);
-
-      if (isFieldEmpty(fieldValue)) {
-        setLoading(true); // Continue loading if field is empty
-      } else {
-        setLoading(false); // Stop loading if field is filled
-      }
-    }
-
-    if (query.isError) {
-      setLoading(false); // Stop loading on error
-    }
-
-    if (query.isFetching) {
-      setLoading(true); // Show loading while fetching
-    }
-  }, [query.data, query.isSuccess, query.isError, query.isFetching, report]);
-
-  return {
-    ...query,
-    data: reportValue,
-    isPending: loading,
-  };
 };
 
-export const useStartAIWork = (projectId: string) => {
-  return useQuery({
-    queryKey: ["startAiWork", projectId],
-    queryFn: () => startAiWork(projectId),
+export const useStartAIWork = () => {
+  return useMutation({
+    mutationFn: startAiWork,
+    onSuccess: (data) => {
+      return data;
+    },
   });
+};
+
+export const useGetAiWorkStatus = (taskId: string) => {
+  const { data, isFetching, isError } = useQuery({
+    queryKey: ["taskStatus", taskId],
+    queryFn: () => getAiWorkStatus(taskId),
+    refetchInterval: (data) => (data?.state?.data?.status === "pending" ? 30000 : false), // Poll every 30s if "pending"
+    enabled: !!taskId,
+  });
+
+  // Compute loading status based on the task status
+  const isLoading = data?.status === "pending";
+
+  return {
+    data,
+    isError,
+    isPending: isLoading || isFetching,
+  };
 };
 
 export const useGetRequirements = (reqId: string) => {
   return useQuery({
     queryKey: ["getRequirements", reqId],
     queryFn: () => getRequirements(reqId),
-    // The query will not execute until the reqId exists
     enabled: !!reqId,
     retry: false, // Disable retry since error handling is manual
-    staleTime: 60000, // 2 minutes (data stays fresh for this duration)
+    staleTime: 60000, // 1 minutes (data stays fresh for this duration)
   });
 };

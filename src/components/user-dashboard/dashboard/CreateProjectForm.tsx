@@ -19,6 +19,7 @@ import {
   defaultValues,
   CreateProjectFields as formFields,
 } from "@/constant/formFields/createProject";
+import { useStartAIWork } from "@/lib/react-query/queriesAndMutations/aiSuggestions";
 
 export type ProjectFormFieldType = z.infer<typeof projectFormSchema>;
 
@@ -67,6 +68,7 @@ const CreateProjectForm = ({
     isError: isErrorCreateProject,
     error,
   } = useCreateProject();
+  const { mutateAsync: startAiWork } = useStartAIWork();
   const router = useRouter();
 
   const onSubmit = async (formData: ProjectFormFieldType) => {
@@ -98,10 +100,13 @@ const CreateProjectForm = ({
         const project = await createProjectMutation(transformedFormData);
         if (project) {
           toast({ title: "Project has been successfully created" });
+          const aiTaskData = await startAiWork(project?.data?.project.project_id);
           if (prevStep) {
             router.push("/dashboard");
           } else {
-            router.push(`/project-details/${project.data.project.project_id}/reports`);
+            router.push(
+              `/project-details/${project.data.project.project_id}/reports?taskId=${aiTaskData?.task_id}`
+            );
           }
         }
       } catch (e) {

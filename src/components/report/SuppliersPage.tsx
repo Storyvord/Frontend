@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { ReportName, useGetSuggestions } from "@/lib/react-query/queriesAndMutations/aiSuggestions";
 import LoadingUi from "./LoadingUi";
 import { Button } from "../ui/button";
 import SupplierCard from "./SupplierCard";
@@ -24,11 +23,9 @@ type SuppliersData = {
   [location: string]: Supplier[];
 };
 
-type Props = { report: ReportName; projectId: string };
+type Props = { report: SuppliersData; isPending: boolean; isError: boolean };
 
-const SuppliersPage = ({ projectId, report }: Props) => {
-  const { data, isPending, isError, refetch } = useGetSuggestions(projectId, report);
-
+const SuppliersPage = ({ report, isPending, isError }: Props) => {
   if (isPending) {
     return <LoadingUi isPending={isPending} text="Fetching supplier data..." />;
   }
@@ -39,21 +36,21 @@ const SuppliersPage = ({ projectId, report }: Props) => {
         <p className="text-xl font-poppins-semibold text-red-600">
           An error occurred while fetching data. Please try again.
         </p>
-        <Button variant="outline" onClick={() => refetch()}>
+        {/* <Button variant="outline" onClick={() => refetch()}>
           Try again
-        </Button>
+        </Button> */}
       </div>
     );
   }
 
-  const suppliersData: SuppliersData = data || {};
+  const suppliersData: SuppliersData = report || {};
 
   return (
-    <div className="p-4">
+    <div className="p-2 md:-p-4 mt-3">
       <h1 className="mb-6 font-poppins-semibold text-2xl text-gray-900">Recommended Suppliers</h1>
       <section className="space-y-8">
         {Object.keys(suppliersData).map((location) => (
-          <div key={location} className="p-6 border border-gray-200 rounded-lg shadow-md">
+          <div key={location} className="p-3 md:p-6 border border-gray-200 rounded-lg shadow-md">
             <h2 className="mb-4 font-poppins-semibold text-lg md:text-xl text-center text-gray-900 capitalize">
               Location: {location}
             </h2>
