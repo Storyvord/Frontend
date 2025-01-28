@@ -13,7 +13,7 @@ type Props = {
   isPending: boolean;
   isError: boolean;
   refetch: () => void;
-  handleRegenerateAiWork: () => Promise<void>;
+  handleRegenerateAiWork: (reportName: Name) => Promise<void>;
   name: Name;
 };
 
@@ -51,7 +51,7 @@ const ReportDetails = ({
   const formatReport = (): string => {
     if (report?.includes(":warning:")) {
       // Replace ":warning:" with "⚠️warning:"
-      return report.replaceAll(":warning:", "⚠️warning:");
+      return report.replaceAll(":warning:", "⚠️");
     }
     return report;
   };
@@ -63,7 +63,7 @@ const ReportDetails = ({
         </PopoverTrigger>
         <PopoverContent className=" w-fit">
           <Button
-            onClick={handleRegenerateAiWork}
+            onClick={() => handleRegenerateAiWork(name)}
             className="font-poppins-medium text-sm"
             size="sm"
             variant="outline"

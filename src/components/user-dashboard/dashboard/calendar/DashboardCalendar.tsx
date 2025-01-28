@@ -51,7 +51,7 @@ const DashboardCalendar = ({ employeeList, height }: Props) => {
         </Button>
       </header>
       <main className="flex xl:flex-row flex-col md:items-start gap-3 mt-4">
-        <div className="md:px-4 py-2 rounded-xl flex-1 border bg-white w-full">
+        <div className="md:px-4 py-2 rounded-3xl flex-1 border bg-white w-full">
           <CompanyCalendar
             openFormDialog={openFormDialog}
             setOpenFormDialog={setOpenFormDialog}

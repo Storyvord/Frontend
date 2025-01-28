@@ -35,7 +35,7 @@ const ReportsPage = () => {
   );
 
   const searchParams = useSearchParams();
-  const task_Id = searchParams.get("taskId");
+  const task_Id = searchParams.get("taskId"); // after create a new project, taskId added to query params
   const { toast } = useToast();
   const { id: projectId }: { id: string } = useParams();
 
@@ -77,9 +77,9 @@ const ReportsPage = () => {
     if (data?.status === "success") localStorage.removeItem("taskId");
   }, [data]);
 
-  const handleRegenerateAiWork = async (reportName?: string) => {
+  const handleRegenerateAiWork = async (reportName: string) => {
     try {
-      const res = await regenerateAiWork(projectId);
+      const res = await regenerateAiWork({ projectId, reportName });
 
       if (res.success) {
         setTaskId(res?.task_id);

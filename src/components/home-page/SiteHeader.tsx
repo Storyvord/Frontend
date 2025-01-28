@@ -19,7 +19,13 @@ export function SiteHeader() {
     <header className="fixed top-0 left-0 w-[100%] bg-white/90 z-[900] transition-transform duration-300 px-6 lg:px-10 xl:px-28">
       <div className="flex items-center justify-between py-2 max-w-[2000px] mx-auto">
         <Link href="/" className="text-xl font-bold">
-          <Image src="/logo.svg" width={130} height={50} alt="logo" className=" w-40" />
+          <Image
+            src="/logo.svg"
+            width={130}
+            height={50}
+            alt="logo"
+            className="w-[125px] md:w-[150px]"
+          />
         </Link>
         <div className="flex justify-between items-center gap-6">
           <nav className="hidden md:flex items-center gap-8 ">

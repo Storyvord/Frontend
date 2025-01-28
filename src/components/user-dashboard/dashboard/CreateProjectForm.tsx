@@ -100,7 +100,7 @@ const CreateProjectForm = ({
         const project = await createProjectMutation(transformedFormData);
         if (project) {
           toast({ title: "Project has been successfully created" });
-          const aiTaskData = await startAiWork(project?.data?.project.project_id);
+          const aiTaskData = await startAiWork({ projectId: project.data.project.project_id });
           if (prevStep) {
             router.push("/dashboard");
           } else {
