@@ -1,7 +1,7 @@
 import { NEW_API_URL_V2 } from "@/constant/constant";
 import { customFetch } from "./api";
 
-const regenerate = [
+export const allReportName = [
   "logistics",
   "crew",
   "budget",
@@ -9,7 +9,7 @@ const regenerate = [
   "culture",
   "sustainability",
   "suppliers",
-];
+] as const;
 
 export const getSuggestions = async (projectId: string) => {
   return customFetch(`${NEW_API_URL_V2}/project/v2/get_suggestion/?project_id=${projectId}`, {
@@ -17,7 +17,14 @@ export const getSuggestions = async (projectId: string) => {
   });
 };
 
-export const startAiWork = async (projectId: string) => {
+export const startAiWork = async ({
+  projectId,
+  reportName,
+}: {
+  projectId: string;
+  reportName?: string;
+}) => {
+  const regenerate = reportName ? [reportName] : allReportName;
   return customFetch(
     `${NEW_API_URL_V2}/project/v2/ai_suggestion/?regenerate=${regenerate}&project_id=${projectId}`,
     {

@@ -44,12 +44,12 @@ const Project = ({ onGoingProjects }: { onGoingProjects: any }) => {
 
   return (
     <section className=" group">
-      <header className="flex justify-between mb-4">
+      <header className="flex flex-col sm:flex-row gap-4 justify-between mb-4">
         <span className="flex items-center gap-3">
           <Image height={27} width={27} src="/icons/project-2.svg" alt="plus-icon" />
           <h1 className=" text-lg md:text-xl">{t("your-ongoing-projects")}</h1>
         </span>
-        <div className=" flex gap-3">
+        <div className=" flex justify-between gap-3">
           <Link href="/dashboard/new-project">
             <Button
               className="flex gap-2 bg-transparent border-gray-500 rounded-sm h-10 md:hidden"

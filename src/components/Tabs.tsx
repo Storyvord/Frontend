@@ -16,9 +16,9 @@ const Tabs: FC<TabsProps> = ({ activeTab, setActiveTab, tabs, className }) => {
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`whitespace-nowrap  px-1 py-3 font-poppins-semibold ${
+            className={`whitespace-nowrap  px-1.5 py-2 font-poppins-semibold ${
               activeTab === tab
-                ? "from-gray-900 border-b-2 border-gray-700 "
+                ? "from-gray-900 border-b-2 border-gray-700 bg-gray-200 rounded-t-lg "
                 : " text-gray-500 hover:text-gray-700"
             }`}
           >

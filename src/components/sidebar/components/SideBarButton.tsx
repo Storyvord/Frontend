@@ -38,7 +38,7 @@ const SideBarButton = ({
           "w-full h-auto flex items-center py-3 capitalize justify-start rounded-lg ",
           isSidebarSmall ? "" : "gap-4 px-4",
           checkLink
-            ? "bg-gradient-to-tr from-gray-800 to-gray-600 text-white hover:text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 active:opacity-[0.85]"
+            ? "bg-[#607D8B]/10 shadow-gray-900/10 hover:shadow-sm hover:shadow-gray-900/20 active:opacity-[0.85]"
             : "text-[#607D8B] hover:bg-[#607D8B]/10 active:bg-[#607D8B]/30"
         )}
       >

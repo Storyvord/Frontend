@@ -54,5 +54,6 @@ export const useGetUserProfile = () => {
   return useQuery({
     queryKey: ["userProfile"],
     queryFn: getUserProfile,
+    staleTime: 1000 * 60 * 5,
   });
 };
