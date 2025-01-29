@@ -21,10 +21,10 @@ pipeline {
             steps {
                 script {
                     // Stop and remove existing containers
-                    sh "docker-compose -f ${COMPOSE_FILE} down || true"
+                    sh "docker compose -f ${COMPOSE_FILE} down || true"
                     
                     // Start new containers
-                    sh "docker-compose -f ${COMPOSE_FILE} up -d"
+                    sh "docker compose -f ${COMPOSE_FILE} up -d"
                 }
             }
         }
