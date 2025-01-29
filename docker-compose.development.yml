@@ -1,0 +1,15 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3001:3000"
+    environment:
+      - NODE_ENV=development
+    restart: unless-stopped
+    networks:
+      - storyvord-network
+
+networks:
+  storyvord-network:
+    name: storyvord-network
+    external: true

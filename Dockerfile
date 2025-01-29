@@ -1,23 +1,23 @@
-# Use the official Node.js image as the base
-FROM node:18-alpine
+# Use the official Bun image
+FROM oven/bun:latest
 
-# Set the working directory inside the container
+# Set the working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the working directory
-COPY package.json ./
+# Copy package.json to leverage Docker caching
+COPY package.json .
 
-# Install project dependencies
-RUN npm install
+# Install dependencies with Bun
+RUN bun install
 
-# Copy the entire project directory to the working directory
+# Copy the rest of the application code
 COPY . .
 
 # Build the Next.js application
-RUN npm run build
+RUN bun run build
 
-# Expose the port on which the Next.js application will run (default is 3000)
+# Expose the port your app will run on
 EXPOSE 3000
 
-# Set the command to start the Next.js application
-CMD ["npm", "start"]
+# Command to start the application
+CMD ["bun", "run", "start"]
