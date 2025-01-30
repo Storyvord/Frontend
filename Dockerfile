@@ -1,5 +1,5 @@
 # Use the official Bun image
-FROM oven/bun:latest
+FROM node:23
 
 # Set the working directory
 WORKDIR /app
@@ -8,16 +8,16 @@ WORKDIR /app
 COPY package.json .
 
 # Install dependencies with Bun
-RUN bun install
+RUN yarn install
 
 # Copy the rest of the application code
 COPY . .
 
 # Build the Next.js application
-RUN bun run build
+RUN yarn run build
 
 # Expose the port your app will run on
 EXPOSE 3000
 
 # Command to start the application
-CMD ["bun", "run", "start"]
+CMD ["yarn", "run", "start"]
