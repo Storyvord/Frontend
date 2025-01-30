@@ -1,23 +1,15 @@
-# Use the official Bun image
-FROM node:23
+FROM node:20
 
-# Set the working directory
+RUN corepack enable && corepack prepare yarn@4.3.1 --activate
+
 WORKDIR /app
 
-# Copy package.json to leverage Docker caching
-COPY package.json .
-
-# Install dependencies with Bun
-RUN yarn install
-
-# Copy the rest of the application code
 COPY . .
 
-# Build the Next.js application
-RUN yarn run build
+RUN yarn install
 
-# Expose the port your app will run on
+RUN yarn build
+
 EXPOSE 3000
 
-# Command to start the application
-CMD ["yarn", "run", "start"]
+CMD ["yarn", "start"]
