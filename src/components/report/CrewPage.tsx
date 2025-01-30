@@ -2,33 +2,36 @@
 
 import React from "react";
 import LoadingUi from "./LoadingUi";
-import CrewCard, { Crew } from "./CrewCard";
 import { Button } from "../ui/button";
+import CrewCard from "./CrewCard";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { EllipsisVertical } from "lucide-react";
 
-type CrewRequirements = {
-  message: string;
-  data: {
-    id: string;
-    location: string;
-    crew_suggestion: Crew[];
-  }[];
+export type CrewMember = {
+  name: string;
+  role: string;
+  location: string;
+  experience: string;
+  skills: string[];
+  standard_rate: string;
+  contact_number: string;
+  reasoning: string;
 };
 
-type CrewPageClientProps = {
-  crewRequirements: CrewRequirements;
+type CrewData = {
+  [role: string]: CrewMember[];
+};
+
+type Props = {
+  report: CrewData;
   isPending: boolean;
   isError: boolean;
-  refetch: () => void;
+  handleRegenerateAiWork: (reportName: "crew") => Promise<void>;
 };
 
-const CrewPage: React.FC<CrewPageClientProps> = ({
-  crewRequirements,
-  isPending,
-  isError,
-  refetch,
-}) => {
+const CrewPage = ({ report, isPending, isError, handleRegenerateAiWork }: Props) => {
   if (isPending) {
-    return <LoadingUi isPending={isPending} text="AI is matching best-fit crew..." />;
+    return <LoadingUi isPending={isPending} text="Fetching crew data..." />;
   }
 
   if (isError && !isPending) {
@@ -37,27 +40,49 @@ const CrewPage: React.FC<CrewPageClientProps> = ({
         <p className="text-xl font-poppins-semibold text-red-600">
           An error occurred while fetching data. Please try again.
         </p>
-        <Button variant="outline" onClick={() => refetch()}>
-          Try again
-        </Button>
+      </div>
+    );
+  }
+
+  if (typeof report === "string") {
+    return (
+      <div className="p-4 bg-yellow-50 border border-yellow-400 text-yellow-700 rounded-md mt-10 w-fit mx-auto">
+        <p className="text-center font-poppins-semibold w-fit">
+          Unable to display data. Please check the report format.
+        </p>
       </div>
     );
   }
 
   return (
-    <div className="p-2 md:-p-4">
-      <h1 className="mb-6 text-center font-poppins-semibold text-2xl text-gray-900">
-        {crewRequirements?.message}
+    <div className="p-2 md:-p-4 mt-3 relative">
+      <Popover>
+        <PopoverTrigger className=" absolute right-0">
+          <EllipsisVertical />
+        </PopoverTrigger>
+        <PopoverContent className=" w-fit">
+          <Button
+            onClick={() => handleRegenerateAiWork("crew")}
+            className="font-poppins-medium text-sm"
+            size="sm"
+            variant="outline"
+          >
+            Re-Generate
+          </Button>
+        </PopoverContent>
+      </Popover>
+      <h1 className="mb-6 font-poppins-semibold text-2xl text-gray-900">
+        Recommended Crew Members
       </h1>
       <section className="space-y-8">
-        {crewRequirements?.data.map((item) => (
-          <div key={item.id} className="md:p-6 p-3 border border-gray-200 rounded-lg shadow-md">
-            <h2 className="mb-4 font-poppins-semibold text-lg text-gray-900">
-              Location: {item.location}
+        {Object.keys(report).map((role) => (
+          <div key={role} className="p-3 md:p-6 border border-gray-200 rounded-lg shadow-md">
+            <h2 className="mb-4 font-poppins-semibold text-lg md:text-xl text-center text-gray-900 capitalize">
+              Role: {role}
             </h2>
-            <main className="space-y-4">
-              {item.crew_suggestion.map((crew) => (
-                <CrewCard key={crew.id} crew={crew} />
+            <main className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+              {report[role].map((member, index) => (
+                <CrewCard key={`${role}-${index}`} crewMember={member} />
               ))}
             </main>
           </div>

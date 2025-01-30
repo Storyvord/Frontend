@@ -26,7 +26,7 @@ export const startAiWork = async ({
 }) => {
   const regenerate = reportName ? [reportName] : allReportName;
   return customFetch(
-    `${NEW_API_URL_V2}/project/v2/ai_suggestion/?regenerate=${regenerate}&project_id=${projectId}`,
+    `${NEW_API_URL_V2}/project/v2/ai_suggestion/?regenerate=${encodeURIComponent(JSON.stringify(regenerate))}&project_id=${projectId}`,
     {
       method: "POST",
       headers: {
