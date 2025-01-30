@@ -29,7 +29,7 @@ const tabs = [
 
 const ReportsPage = () => {
   const [activeTab, setActiveTab] = useState("Crew");
-  const [aiWorkStatus, setAiWorkStatus] = useState<"pending" | "success">("success");
+  const [aiWorkStatus, setAiWorkStatus] = useState<"pending" | "success">("pending");
   const [taskId, setTaskId] = useState<string | null>(
     () => localStorage.getItem("taskId") // Load from localStorage on mount
   );
@@ -38,16 +38,6 @@ const ReportsPage = () => {
   const task_Id = searchParams.get("taskId"); // after create a new project, taskId added to query params
   const { toast } = useToast();
   const { id: projectId }: { id: string } = useParams();
-
-  const { data: projectRequirements } = useGetProjectRequirements(projectId);
-
-  // ai Requirements suggestions for crew & Suppliers
-  const {
-    data: getRequirementsSuggestions,
-    isPending: isPendingRequirementsSuggestions,
-    isError: isErrorRequirementsSuggestions,
-    refetch: refetchRequirement,
-  } = useGetRequirements(projectRequirements?.results[0]?.id);
 
   const {
     data,
@@ -76,12 +66,12 @@ const ReportsPage = () => {
     if (data?.status) setAiWorkStatus(data?.status);
     if (data?.status === "success") localStorage.removeItem("taskId");
   }, [data]);
-
+  console.log(aiWorkStatus);
   const handleRegenerateAiWork = async (reportName: string) => {
     try {
       const res = await regenerateAiWork({ projectId, reportName });
 
-      if (res.success) {
+      if (res?.task_id) {
         setTaskId(res?.task_id);
         localStorage.setItem("taskId", res?.task_id); // Update localStorage
       }
@@ -101,10 +91,10 @@ const ReportsPage = () => {
 
       {activeTab === "Crew" && (
         <CrewPage
-          crewRequirements={getRequirementsSuggestions?.data.suggested_crew}
-          isPending={isPendingRequirementsSuggestions}
-          isError={isErrorRequirementsSuggestions}
-          refetch={refetchRequirement}
+          report={allAiReports?.data.suggested_crew}
+          isPending={isPending || isPendingAiStatus}
+          isError={isError || isErrorAiStatus}
+          handleRegenerateAiWork={handleRegenerateAiWork}
         />
       )}
       {activeTab === "Suppliers" && (
@@ -112,6 +102,7 @@ const ReportsPage = () => {
           report={allAiReports?.data.suggested_suppliers}
           isPending={isPending || isPendingAiStatus}
           isError={isError || isErrorAiStatus}
+          handleRegenerateAiWork={handleRegenerateAiWork}
         />
       )}
       {activeTab === "Logistics" && (

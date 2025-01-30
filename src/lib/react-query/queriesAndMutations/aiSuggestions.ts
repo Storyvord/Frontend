@@ -33,7 +33,7 @@ export const useGetAiWorkStatus = (taskId: string) => {
   const { data, isFetching, isError, refetch } = useQuery({
     queryKey: ["taskStatus", taskId],
     queryFn: () => getAiWorkStatus(taskId),
-    refetchInterval: (data) => (data?.state?.data?.status === "pending" ? 30000 : false), // Poll every 30s if "pending"
+    refetchInterval: (data) => (data?.state?.data?.status === "pending" ? 20000 : false), // Poll every 20s if "pending"
     enabled: !!taskId,
   });
 
