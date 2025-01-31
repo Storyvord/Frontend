@@ -12,4 +12,4 @@ services:
 networks:
   storyvord-network:
     name: storyvord-network
-    external: true
+    driver: bridge
