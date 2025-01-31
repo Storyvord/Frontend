@@ -31,33 +31,35 @@ export default function TaskDetailDialog({ isDialogOpen, setIsDialogOpen }: Prop
           </DialogHeader>
 
           <div className="overflow-y-auto h-[70vh] space-y-4 p-4">
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-16">
               <span className="font-medium">Status:</span>
               <Badge className="bg-blue-500 text-white">In Progress</Badge>
             </div>
 
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-10">
               <span className="font-medium">Due Date:</span>
               <span>5 March 2025</span>
             </div>
 
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-6">
               <span className="font-medium">Created By:</span>
-              <Avatar>
-                <AvatarImage src="/path-to-image" alt="Created By" />
-                <AvatarFallback>JJ</AvatarFallback>
-              </Avatar>
-              <span>Jimmy John</span>
+              <div className=" flex items-center gap-2">
+                <Avatar>
+                  <AvatarImage src="/path-to-image" alt="Created By" />
+                  <AvatarFallback>JJ</AvatarFallback>
+                </Avatar>
+                <span>Jimmy John</span>
+              </div>
             </div>
 
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-5">
               <span className="font-medium">Assigned To:</span>
               <div className="flex space-x-2">
                 <AnimatedTooltipPreview />
               </div>
             </div>
 
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-20">
               <span className="font-medium">Tags:</span>
               <Badge className="bg-purple-500 text-white">Medium</Badge>
             </div>
