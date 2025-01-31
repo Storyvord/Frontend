@@ -1,23 +1,15 @@
-# Use the official Node.js image as the base
-FROM node:18-alpine
+FROM node:20
 
-# Set the working directory inside the container
+RUN corepack enable && corepack prepare yarn@4.3.1 --activate
+
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the working directory
-COPY package.json ./
-
-# Install project dependencies
-RUN npm install
-
-# Copy the entire project directory to the working directory
 COPY . .
 
-# Build the Next.js application
-RUN npm run build
+RUN yarn install
 
-# Expose the port on which the Next.js application will run (default is 3000)
+RUN yarn build
+
 EXPOSE 3000
 
-# Set the command to start the Next.js application
-CMD ["npm", "start"]
+CMD ["yarn", "start"]
