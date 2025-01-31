@@ -1,30 +1,27 @@
 "use client";
-import { FC, useState } from "react";
-import NavbarItem from "./NavbarItem";
+import { FC } from "react";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const taskNavbarMenu = [
   {
-    name: "All Tasks",
-    type: "all",
-    link: "/task",
+    name: "All Task",
+    type: "all-task",
   },
   {
-    name: "Pending",
-    type: "pending",
-    link: "/report",
+    name: "My Task",
+    type: "my-task",
   },
   {
-    name: "Completed",
-    type: "completed",
-    link: "/report",
+    name: "Pending Task",
+    type: "pending-task",
   },
   {
     name: "Request Approval",
     type: "requested-approval",
   },
   {
-    name: "Assign Task",
-    type: "assign-task",
+    name: "Completed Task",
+    type: "completed-task",
   },
 ];
 
@@ -36,19 +33,23 @@ interface TaskNavbarProps {
 const TaskNavbar: FC<TaskNavbarProps> = ({ taskFilter, setTaskFilter }) => {
   return (
     //code a for a navbar
-    <div className="w-full flex flex-wrap gap-2 mt-7">
-      {taskNavbarMenu.map((item) => {
-        return (
-          <div
-            key={item.name}
-            onClick={() => setTaskFilter(item.type)}
-            className={`${taskFilter == item.type ? "active" : ""}`}
-          >
-            <NavbarItem text={item.name} isActive={taskFilter == item.type} />
-          </div>
-        );
-      })}
-    </div>
+    <Tabs defaultValue="all-task" className="w-full">
+      <TabsList>
+        {taskNavbarMenu.map((item) => {
+          return (
+            <TabsTrigger
+              key={item.name}
+              onClick={() => setTaskFilter(item.type)}
+              className={`${taskFilter == item.type ? "active" : ""}`}
+              value={item.type}
+            >
+              <h1>{item.name}</h1>
+            </TabsTrigger>
+          );
+        })}
+      </TabsList>
+      <hr className=" my-2" />
+    </Tabs>
   );
 };
 

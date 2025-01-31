@@ -17,6 +17,7 @@ import {
   useGetProjectTasks,
 } from "@/lib/react-query/queriesAndMutations/tasks";
 import { useCrewOptions } from "@/hooks/useCrewOptions";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const TaskPage = ({ params }: { params: { id: string } }) => {
   const { data: tasksList, isPending: isLoadingTask } = useGetProjectTasks(params.id);
@@ -97,7 +98,7 @@ const TaskPage = ({ params }: { params: { id: string } }) => {
   };
 
   const [sortBy, setSortBy] = useState<"id" | "due_date" | "title" | "completed">("id");
-  const [taskFilter, setTaskFilter] = useState("all");
+  const [taskFilter, setTaskFilter] = useState("all-task");
   const [searchFilter, setSearchFilter] = useState("");
 
   const getSortTasks = useCallback(() => {
@@ -106,7 +107,7 @@ const TaskPage = ({ params }: { params: { id: string } }) => {
     });
     if (taskFilter === "pending") {
       filteredTasks = [...filteredTasks].filter((task) => !task.completed);
-    } else if (taskFilter === "completed") {
+    } else if (taskFilter === "completed-task") {
       filteredTasks = [...filteredTasks].filter((task) => task.completed);
     } else if (taskFilter === "requested-approval") {
       filteredTasks = [...filteredTasks].filter((task) => task.completion_requested);
@@ -131,9 +132,10 @@ const TaskPage = ({ params }: { params: { id: string } }) => {
   const [formOpen, setFormOpen] = useState(false);
 
   return (
-    <div className="px-4">
+    <div className="p-4">
+      <h1 className=" text-xl md:text-2xl font-poppins-semibold my-4">Task</h1>
+
       <TaskNavbar taskFilter={taskFilter} setTaskFilter={setTaskFilter} />
-      <hr></hr>
       <ToolBar
         searchFilter={searchFilter}
         setSearchFilter={setSearchFilter}
