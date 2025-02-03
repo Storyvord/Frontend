@@ -48,11 +48,11 @@ const SelectInput = <T extends FieldValues>({
           styles={{
             control: (baseStyles, state) => ({
               ...baseStyles,
-              borderRadius: "1rem",
+              borderRadius: "0.4rem",
               borderColor: state.isFocused ? "black" : "#D1D5DB",
               borderWidth: state.isFocused ? "2px" : "1px",
               fontFamily: "'Poppins', sans-serif",
-              minHeight: "3rem",
+              minHeight: "2.8rem",
               boxShadow: state.isFocused ? "0 0 0 2px transparent" : baseStyles.boxShadow,
               ":hover": {
                 borderColor: "black",

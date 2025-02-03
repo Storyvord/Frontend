@@ -136,15 +136,18 @@ export type taskType = {
   id: number;
   project: string;
   title: string;
-  description: string;
+  status: string;
   due_date: string;
+  tags: string;
+  created_by: number;
+  assigned_to: number[];
+  description: string;
+  attachment?: (string | ArrayBuffer | File)[] | undefined;
   completed: boolean;
   is_completed?: boolean;
   completion_requested: boolean;
   // project?: { name: string };
-  assigned_to: number[];
   requester: number | null;
-  created_by: number;
 };
 
 export type taskFormType = z.infer<typeof taskFormSchema>;

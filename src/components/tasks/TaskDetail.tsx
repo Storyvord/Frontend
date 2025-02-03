@@ -15,6 +15,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { AnimatedTooltipPreview } from "../AnimatedTooltipPreview";
 import CommentsSection from "./CommentsSection";
+import Image from "next/image";
 
 type Props = {
   isDialogOpen: boolean;
@@ -25,12 +26,22 @@ export default function TaskDetailDialog({ isDialogOpen, setIsDialogOpen }: Prop
   return (
     <div>
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden">
-          <DialogHeader className="sticky top-0 z-10 border-b">
-            <DialogTitle className="text-2xl font-bold">Task Name</DialogTitle>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden p-0">
+          <DialogHeader className="sticky top-0 z-10 border-b border p-4 bg-gray-100">
+            <DialogTitle className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold">Task Name</h2>
+              <div className=" flex items-center gap-3">
+                <button>
+                  <Image src="/icons/edit.svg" alt="edit" width={15} height={15} />
+                </button>
+                <button>
+                  <Image src="/icons/share.svg" alt="edit" width={15} height={15} />
+                </button>
+              </div>
+            </DialogTitle>
           </DialogHeader>
 
-          <div className="overflow-y-auto h-[70vh] space-y-4 p-4">
+          <div className="overflow-y-auto h-[70vh] space-y-4 p-4 md:p-6 lg:p-8">
             <div className="flex items-center space-x-16">
               <span className="font-medium">Status:</span>
               <Badge className="bg-blue-500 text-white">In Progress</Badge>

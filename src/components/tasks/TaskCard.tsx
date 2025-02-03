@@ -82,7 +82,7 @@ const TaskCard: FC<TaskCardProps> = ({
                   {format(task.due_date, "MM/dd/yy")}
                 </p>
               </div>
-              <div className=" mr-2 flex flex-col justify-center items-center">
+              <div className=" mr-2 flex flex-col justify-center items-center hidden sm:block">
                 <p className="text-black text-xs font-poppins-semibold">Assign to</p>
                 <AnimatedTooltipPreview />
               </div>

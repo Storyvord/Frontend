@@ -33,8 +33,8 @@ interface TaskNavbarProps {
 const TaskNavbar: FC<TaskNavbarProps> = ({ taskFilter, setTaskFilter }) => {
   return (
     //code a for a navbar
-    <Tabs defaultValue="all-task" className="w-full">
-      <TabsList>
+    <Tabs defaultValue="all-task" className="w-full hover:overflow-x-scroll">
+      <TabsList className=" bg-transparent">
         {taskNavbarMenu.map((item) => {
           return (
             <TabsTrigger
@@ -48,7 +48,7 @@ const TaskNavbar: FC<TaskNavbarProps> = ({ taskFilter, setTaskFilter }) => {
           );
         })}
       </TabsList>
-      <hr className=" my-2" />
+      <hr className=" hidden md:block my-2" />
     </Tabs>
   );
 };

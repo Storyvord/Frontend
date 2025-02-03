@@ -85,9 +85,37 @@ export const projectFormSchema = z.object({
 
 export const taskFormSchema = z.object({
   title: z.string().min(1, { message: "Task title is required" }),
-  description: z.string().min(1, { message: "Description is required" }),
+  status: z.string().min(1, { message: "Status is required" }),
   due_date: z.string().date(),
+  tags: z.string().min(1, { message: "Tags is required" }),
+  created_by: z.number().min(1, { message: "Created by is required" }),
   assigned_to: z.array(z.number()).min(1, "Minimum 1 required"),
+  description: z.string().min(1, { message: "Description is required" }),
+  attachment: z
+    .array(
+      z.union([
+        z.string(),
+        z.instanceof(ArrayBuffer).refine((buffer) => buffer.byteLength > 0, {
+          message: "Document cannot be an empty ArrayBuffer",
+        }),
+        z.instanceof(File).refine(
+          (file) =>
+            (file.type === "image/jpeg" ||
+              file.type === "image/png" ||
+              file.type === "application/pdf" ||
+              file.type === "application/msword" || // For .doc files
+              file.type ===
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || // For .docx files
+              file.type === "text/plain") && // For .txt files
+            file.size > 0, // Ensure the file is not empty
+          {
+            message:
+              "Only .jpg, .png, .pdf, .doc, .docx, or .txt files are accepted and must not be empty",
+          }
+        ),
+      ])
+    )
+    .optional(),
 });
 
 export const ClientProfileUpdateSchema = z.object({
@@ -172,14 +200,16 @@ export const uploadFileFormSchema = z.object({
           file.type === "application/msword" || // For .doc files
           file.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || // For .docx files
           file.type === "application/vnd.ms-powerpoint" || // For .ppt files
-          file.type === "application/vnd.openxmlformats-officedocument.presentationml.presentation" || // For .pptx files
+          file.type ===
+            "application/vnd.openxmlformats-officedocument.presentationml.presentation" || // For .pptx files
           file.type === "application/vnd.ms-excel" || // For .xls files
           file.type === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" || // For .xlsx files
           file.type === "image/svg+xml" || // For .svg files
           file.type === "text/plain") &&
         file.size <= 50 * 1024 * 1024, // Max size 50MB
       {
-        message: "Only .jpg, .png, .pdf, .doc, .docx, .ppt, .pptx, .xls, .xlsx, .svg or .txt files under 50MB are accepted",
+        message:
+          "Only .jpg, .png, .pdf, .doc, .docx, .ppt, .pptx, .xls, .xlsx, .svg or .txt files under 50MB are accepted",
       }
     ),
   ]),

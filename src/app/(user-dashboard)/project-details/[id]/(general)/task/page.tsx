@@ -62,10 +62,13 @@ const TaskPage = ({ params }: { params: { id: string } }) => {
     const newTask = {
       project: params.id,
       title: task.title,
+      tags: task.status,
+      created_by: task.created_by,
+      attachment: task.attachment,
       description: task.description,
       assigned_to: task.assigned_to,
       due_date: task.due_date,
-      status: "in progress",
+      status: task.status || "in-progress",
       // completion_requested: false,
       // requester: null,
     };

@@ -43,7 +43,7 @@ export function DatePicker({ onChange, value }: DatePickerProps) {
         <Button
           variant={"outline"}
           className={cn(
-            "w-full mt-1 h-14 rounded-xl justify-between font-poppins font-normal text-[#333333] text-base border-[#66666659] hover:bg-[transparent]",
+            "w-full mt-1 h-11 rounded-md justify-between font-poppins font-normal text-[#333333] text-base border-[#66666659] hover:bg-[transparent]",
             !date && "text-muted-foreground"
           )}
           onClick={() => setIsPopoverOpen(!isPopoverOpen)} // Toggle popover visibility
@@ -57,7 +57,13 @@ export function DatePicker({ onChange, value }: DatePickerProps) {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">
-        <Calendar mode="single" selected={date} onSelect={handleDateSelect} initialFocus />
+        <Calendar
+          mode="single"
+          selected={date}
+          onSelect={handleDateSelect}
+          initialFocus
+          className=" z-50"
+        />
       </PopoverContent>
     </Popover>
   );
