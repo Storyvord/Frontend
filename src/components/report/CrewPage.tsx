@@ -46,10 +46,18 @@ const CrewPage = ({ report, isPending, isError, handleRegenerateAiWork }: Props)
 
   if (typeof report === "string") {
     return (
-      <div className="p-4 bg-yellow-50 border border-yellow-400 text-yellow-700 rounded-md mt-10 w-fit mx-auto">
+      <div className="p-4 bg-yellow-50 border grid place-content-center gap-4 border-yellow-400 text-yellow-700 rounded-md mt-10 w-fit mx-auto">
         <p className="text-center font-poppins-semibold w-fit">
           Unable to display data. Please check the report format.
         </p>
+        <Button
+          onClick={() => handleRegenerateAiWork("crew")}
+          className="font-poppins-medium text-sm"
+          size="sm"
+          variant="outline"
+        >
+          Re-Generate
+        </Button>
       </div>
     );
   }
