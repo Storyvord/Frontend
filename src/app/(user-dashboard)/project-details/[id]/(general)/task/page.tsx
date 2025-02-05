@@ -1,14 +1,7 @@
 "use client";
 
-import CreateTask from "@/components/tasks/CreateTask";
-import TaskCard from "@/components/tasks/TaskCard";
-import TaskNavbar from "@/components/tasks/TaskNavbar";
-import ToolBar from "@/components/tasks/ToolBar";
-import { taskFormType, taskType } from "@/types";
 import React, { useCallback, useEffect, useState } from "react";
-import TaskSkeleton from "@/components/TaskSkeleton";
-import { useToast } from "@/components/ui/use-toast";
-import { useGetCrewList } from "@/lib/react-query/queriesAndMutations/crew";
+import { useCrewOptions } from "@/hooks/useCrewOptions";
 import {
   useCreateNewTask,
   useDeleteTask,
@@ -16,8 +9,14 @@ import {
   useTaskCompletionApproval,
   useGetProjectTasks,
 } from "@/lib/react-query/queriesAndMutations/tasks";
-import { useCrewOptions } from "@/hooks/useCrewOptions";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+import CreateTask from "@/components/tasks/CreateTask";
+import TaskCard from "@/components/tasks/TaskCard";
+import TaskNavbar from "@/components/tasks/TaskNavbar";
+import ToolBar from "@/components/tasks/ToolBar";
+import { taskFormType, taskType } from "@/types";
+import TaskSkeleton from "@/components/TaskSkeleton";
+import { useToast } from "@/components/ui/use-toast";
 
 const TaskPage = ({ params }: { params: { id: string } }) => {
   const { data: tasksList, isPending: isLoadingTask } = useGetProjectTasks(params.id);

@@ -33,7 +33,7 @@ interface TaskNavbarProps {
 const TaskNavbar: FC<TaskNavbarProps> = ({ taskFilter, setTaskFilter }) => {
   return (
     //code a for a navbar
-    <Tabs defaultValue="all-task" className="w-full hover:overflow-x-scroll">
+    <Tabs defaultValue="all-task" className="w-full overflow-x-scroll lg:overflow-hidden">
       <TabsList className=" bg-transparent">
         {taskNavbarMenu.map((item) => {
           return (
