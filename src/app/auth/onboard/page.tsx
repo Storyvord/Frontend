@@ -102,14 +102,16 @@ const Register = () => {
         <div className=" flex justify-center">
           {step === 1 && <SelectUserType userProfile={userProfile} onSuccessStep={onSuccessStep} />}
           {step === 2 && userType === 1 && (
-            <ClientProfileForm prevStep={prevStep} onSuccessStep={onSuccessStep} />
+            <div className="w-full lg:w-4/5">
+              <ClientProfileForm prevStep={prevStep} onSuccessStep={onSuccessStep} />
+            </div>
           )}
           {step === 3 && userType === 1 && (
             <CreateProjectForm prevStep={prevStep} handleSkipOnBoard={handleSkipOnBoard} />
           )}
 
           {step === 2 && userType === 2 && (
-            <div className="w-full lg:w-3/5">
+            <div className="w-full lg:w-2/4">
               <CrewProfileForm prevStep={prevStep} onSuccessStep={onSuccessStep} />
             </div>
           )}
